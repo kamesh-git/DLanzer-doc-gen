@@ -63,6 +63,12 @@ function inputEventListner() {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
     })
+    $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function(){
+        $(this).on("input", function () {
+            this.value = this.value.toUpperCase()
+            $(`#${this.getAttribute("deed_id")}`).html(this.value)
+        })
+    })
     $("select").on("change", function () {
         $(`#${this.getAttribute("deed_id")}`).html(this.options[this.selectedIndex].innerHTML)
     })
@@ -393,6 +399,7 @@ function clickEventListner() {
                 <option value="#inputVendorTitle">Title</option>
                             ${mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")}
                         </select>
+                        <label for="inputVendorTitle">Title</label>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -413,7 +420,7 @@ function clickEventListner() {
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input deed_id="documentFirstPersonAge_${vendorIterationCount}" type="text"
+                        <input deed_id="documentFirstPersonAge_${vendorIterationCount}" type="number"
                             class="form-control" name="" id="inputVendorAge"
                             placeholder="Enter Age" />
                         <label for="inputVendorAge">Age</label>
@@ -452,7 +459,7 @@ function clickEventListner() {
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" deed_id="documentFirstPersonAadhar_${vendorIterationCount}"
+                        <input type="number" deed_id="documentFirstPersonAadhar_${vendorIterationCount}"
                             class="form-control" name="" id="inputVendorAadhar"
                             placeholder="Aadhar No" />
                         <label for="inputVendorAadhar">Aadhar No</label>
@@ -460,7 +467,7 @@ function clickEventListner() {
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="" deed_id="documentFirstPersonPhone_${vendorIterationCount}"
+                        <input type="number" class="form-control" name="" deed_id="documentFirstPersonPhone_${vendorIterationCount}"
                             id="inputVendorPhone" placeholder="Phone No" />
                         <label for="inputVendorPhone">Phone No</label>
                     </div>
@@ -517,7 +524,7 @@ function clickEventListner() {
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" name=""
+                        <input type="number" class="form-control" name=""
                             id="inputVendorPincode"
                             deed_id="documentFirstPersonPincode_${vendorIterationCount}"
                             placeholder="Pincode" />
@@ -606,7 +613,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input deed_id="documentSecondPersonAge_${purchaserIterationCount}" type="text"
+                    <input deed_id="documentSecondPersonAge_${purchaserIterationCount}" type="number"
                         class="form-control" name="" id="inputPurchaserAge"
                         placeholder="Enter Age" />
                     <label for="inputPurchaserAge">Age</label>
@@ -645,7 +652,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" deed_id="documentSecondPersonAadhar_${purchaserIterationCount}"
+                    <input type="number" deed_id="documentSecondPersonAadhar_${purchaserIterationCount}"
                         class="form-control" name="" id="inputPurchaserAadhar"
                         placeholder="Aadhar No" />
                     <label for="inputPurchaserAadhar">Aadhar No</label>
@@ -653,7 +660,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="" deed_id="documentSecondPersonPhone_${purchaserIterationCount}"
+                    <input type="number" class="form-control" name="" deed_id="documentSecondPersonPhone_${purchaserIterationCount}"
                         id="inputPurchaserPhone" placeholder="Phone No" />
                     <label for="inputPurchaserPhone">Phone No</label>
                 </div>
@@ -710,7 +717,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name=""
+                    <input type="number" class="form-control" name=""
                         id="inputPurchaserPincode"
                         deed_id="documentSecondPersonPincode_${purchaserIterationCount}"
                         placeholder="Pincode" />
@@ -779,7 +786,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input deed_id="documentWitnessPersonAge_${witnessIterationCount}" type="text"
+                    <input deed_id="documentWitnessPersonAge_${witnessIterationCount}" type="number"
                         class="form-control" name="" id="inputWitnessAge"
                         placeholder="Enter Age" />
                     <label for="inputWitnessAge">Age</label>
@@ -801,8 +808,8 @@ function clickEventListner() {
                         <option value="#inputWitnessRelationship">RelationShip
                         </option>
                         ${mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")}
+                        </select>
                         <label for="inputWitnessRelationship">RelationShip</label>
-                    </select>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -815,7 +822,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonAadhar_${witnessIterationCount}"
+                    <input type="number" deed_id="documentWitnessPersonAadhar_${witnessIterationCount}"
                         class="form-control" name="" id="inputWitnessAadhar"
                         placeholder="Aadhar No" />
                     <label for="inputWitnessAadhar">Aadhar No</label>
@@ -823,7 +830,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonPhone_${witnessIterationCount}" class="form-control" name=""
+                    <input type="number" deed_id="documentWitnessPersonPhone_${witnessIterationCount}" class="form-control" name=""
                         id="inputWitnessPhone" placeholder="Phone No" />
                     <label for="inputWitnessPhone">Phone No</label>
                 </div>
@@ -880,7 +887,7 @@ function clickEventListner() {
             </div>
             <div class="col-md-4 mb-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name=""
+                    <input type="number" class="form-control" name=""
                         id="inputWitnessPincode"
                         deed_id="documentWitnessPersonPincode_${witnessIterationCount}"
                         placeholder="Pincode" />

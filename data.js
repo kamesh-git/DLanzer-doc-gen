@@ -2,6 +2,7 @@ import { show_popup_alert, hide_popup_alert } from "./popup_alert.js"
 
 $("#username").html(sessionStorage.getItem('UserName'))
 $("#useremail").html(sessionStorage.getItem('UserEmail'))
+$("#hello_username").html('Hello '+sessionStorage.getItem('UserName'))
 $("#logout_user").click(function () {
     sessionStorage.clear()
     location.reload()

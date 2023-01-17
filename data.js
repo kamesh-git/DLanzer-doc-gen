@@ -35,7 +35,7 @@ const base_url = 'https://doc.dlanzer.com/laravel/public/'
 const authToken = sessionStorage.getItem('token')
 console.log(authToken)
 if (authToken === null || authToken === 'undefined' || authToken == "") {
-    window.location.href = "/sign-in.html"
+    window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + "/sign-in.html"
 }
 function apirequest(method, endpoint, Body = {}) {
     return new Promise(function (resolve, reject) {

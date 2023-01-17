@@ -17,8 +17,8 @@ $("#change_password").submit(function (e) {
         const error_handler = `<div id="error_handler" class="mb-3">
             <p class="text-danger">Passwords did not match</p>
         </div>`
-        $(this).find("error_handler").remove()
-        $(error_handler).appendTo($(this).find("modal-body"))
+        $(this).find("#error_handler").remove()
+        $(error_handler).appendTo($(this).find(".modal-body"))
         throw new Error("passwords mismatch")
     }
     show_popup_alert()

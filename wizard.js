@@ -59,7 +59,7 @@ function setdocFields() {
 
 
 function inputEventListner() {
-    $("input").on("input", function () {
+    $("#new_document_entry input").on("input", function () {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
     })

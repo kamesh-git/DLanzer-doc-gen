@@ -1,4 +1,4 @@
-import { mastersData, apirequestPUT, apirequestPOST, apirequestDELETE, storeInput, apirequest } from "./data.js"
+import { mastersData, storeInput, apirequest } from "./data.js"
 import { hide_popup_alert, show_popup_alert } from "./popup_alert.js";
 
 let putData, putID, putAPI, postData, postAPI;

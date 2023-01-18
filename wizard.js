@@ -11,48 +11,48 @@ function setdocFields() {
     let text;
 
     // set Doc types
-    text = `<option value="#Document_Type">Document Type</option>` + mastersData.DocumentTypes.map(item => (`<option value=${item.DocumentTypeID} data-token=${item.DocumentTypeTitle}>${item.DocumentTypeTitle}</option>`))
+    text = `<option value="">Document Type</option>` + mastersData.DocumentTypes.map(item => (`<option value=${item.DocumentTypeID} data-token=${item.DocumentTypeTitle}>${item.DocumentTypeTitle}</option>`))
     $("#inputDoucumentType").html(text)
 
 
     // set vendor types
-    text = `<option value="#inputVendorType">Vendor type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
+    text = `<option value="">Vendor type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputVendorType").html(text)
 
 
-    text = `<option value="#inputVendorTitle">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputVendorTitle").html(text)
 
-    text = `<option value="#inputVendorRelationship">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
     $("#inputVendorRelationship").html(text)
 
 
 
     // set purchaser type
 
-    text = `<option value="#inputPurchaserType">Purchaser type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
+    text = `<option value="">Purchaser type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputPurchaserType").html(text)
 
-    text = `<option value="#inputPurchaserTitle">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputPurchaserTitle").html(text)
 
-    text = `<option value="#inputPurchaserRelationship">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
     $("#inputPurchaserRelationship").html(text)
 
     // set witness type
 
-    text = `<option value="#inputWitnessType">Witness type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
+    text = `<option value="">Witness type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputWitnessType").html(text)
 
-    text = `<option value="#inputWitnessTitle">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputWitnessTitle").html(text)
 
-    text = `<option value="#inputWitnesselationship">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
     $("#inputWitnessRelationship").html(text)
 
 
     // set property type
-    text = `<option value=" ">Property Type</option>` + mastersData.PropertyTypes.map(item => (`<option value=${item.PropertyTypeID} data-token=${item.PropertyTypeTitle}>${item.PropertyTypeTitle}</option>`))
+    text = `<option value="">Property Type</option>` + mastersData.PropertyTypes.map(item => (`<option value=${item.PropertyTypeID} data-token=${item.PropertyTypeTitle}>${item.PropertyTypeTitle}</option>`))
     $("#inputPropertyType").html(text)
 }
 
@@ -63,7 +63,7 @@ function inputEventListner() {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
     })
-    $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function(){
+    $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function () {
         $(this).on("input", function () {
             this.value = this.value.toUpperCase()
             $(`#${this.getAttribute("deed_id")}`).html(this.value)
@@ -120,11 +120,11 @@ function selectEventListner() {
                 }
             })
         })
-        const text = `<option value="#Document_Language">Document Language</option>` + langLists.map(item => (`<option value="${item[1]}" data-token=${item[0]}>${item[0]}</option>`))
+        const text = `<option value="">Document Language</option>` + langLists.map(item => (`<option value="${item[1]}" data-token=${item[0]}>${item[0]}</option>`))
         $("#inputDoucumentLanguage").html(text)
     })
     document.getElementById("inputVendorType").addEventListener("change", function () {
-        let text = `<option value="#inputVendorCategory">Category</option>` + mastersData.CustomerCategory.map(item => {
+        let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
             }
@@ -135,7 +135,7 @@ function selectEventListner() {
 
     })
     document.getElementById("inputPurchaserType").addEventListener("change", function () {
-        let text = `<option value="#inputPurchaserCategory">Category</option>` + mastersData.CustomerCategory.map(item => {
+        let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
             }
@@ -370,169 +370,14 @@ function clickEventListner() {
     $("#vendorInfoClone").click(
         function () {
             vendorIterationCount += 1;
-
-            let text = `
-            <div class="row" id="inputVendorInfo">
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" id="inputVendorCategoryDiv">
-                    <select class="form-select"
-                        name=""
-                        deed_id="documentVendorCategory_${vendorIterationCount}"
-                        id="inputVendorCategory">
-                        <option value="#inputVendorCategory">Category</option>
-                            ${mastersData.CustomerCategory.map(item => {
-                if (item.CustomerTypeID == document.getElementById("inputVendorType").value) {
-                    return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
-                }
-                else { return "" }
-            }).join("")}
-            </select>
-            <label for="inputVendorCategory">Category</label>
-        </div>
-    </div>
-    
-    <div class="col-md-4 mb-3">
-        <div class="form-floating" id="inputVendorTitleDiv">
-            <select deed_id="documentFirstPersonTitle_${vendorIterationCount}"
-                class="form-select"
-                name="" id="inputVendorTitle">
-                <option value="#inputVendorTitle">Title</option>
-                            ${mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")}
-                        </select>
-                        <label for="inputVendorTitle">Title</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input deed_id="documentFirstPersonName_${vendorIterationCount}" type="text"
-                            class="form-control" name="" id="inputVendorName"
-                            placeholder="Enter Name" />
-                        <label for="inputVendorName">Name</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input deed_id="documentFirstPersonDOB_${vendorIterationCount}" type="date"
-                            class="form-control" name="" id="inputVendorDOB"
-                            placeholder="Enter D.O.B" />
-                        <label for="inputVendorDOB">D.O.B</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input deed_id="documentFirstPersonAge_${vendorIterationCount}" type="number"
-                            class="form-control" name="" id="inputVendorAge"
-                            placeholder="Enter Age" />
-                        <label for="inputVendorAge">Age</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input deed_id="documentFirstPersonPAN_${vendorIterationCount}" type="text"
-                            class="form-control" name="" id="inputVendorPan"
-                            placeholder="Enter Pan" />
-                        <label for="inputVendorPan">Pan</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating" id="inputVendorRelationshipDiv">
-                        <select deed_id="documentFirstPersonRelationshipTitle_${vendorIterationCount}"
-                            class="form-select"
-                             name=""
-                            id="inputVendorRelationship">
-                            <option value="#inputVendorRelationship">RelationShip
-                            </option>
-                            ${mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")}
-                        </select>
-                        <label for="inputVendorRelationship">RelationShip</label>
-    
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input deed_id="documentFirstPersonRelationshipName_${vendorIterationCount}"
-                            type="text" class="form-control" name=""
-                            id="inputVendorRelationName"
-                            placeholder="Relation Name" />
-                        <label for="inputVendorRelationName">Relation Name</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="number" deed_id="documentFirstPersonAadhar_${vendorIterationCount}"
-                            class="form-control" name="" id="inputVendorAadhar"
-                            placeholder="Aadhar No" />
-                        <label for="inputVendorAadhar">Aadhar No</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" name="" deed_id="documentFirstPersonPhone_${vendorIterationCount}"
-                            id="inputVendorPhone" placeholder="Phone No" />
-                        <label for="inputVendorPhone">Phone No</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name=""
-                            id="inputVendorDoorNo"
-                            deed_id="documentFirstPersonDoorNo_${vendorIterationCount}"
-                            placeholder="Door No" />
-                        <label for="inputVendorDoorNo">Door No</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name=""
-                            id="inputVendorStreet"
-                            deed_id="documentFirstPersonStreet_${vendorIterationCount}"
-                            placeholder="Street" />
-                        <label for="inputVendorStreet">Street</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" deed_id="documentFirstPersonDistrict_${vendorIterationCount}"
-                            class="form-control" name="" id="inputVendorDistrict"
-                            placeholder="District" />
-                        <label for="inputVendorDistrict">District</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" deed_id="documentFirstPersonTaluk_${vendorIterationCount}"
-                            class="form-control" name="" id="inputVendorTaluk"
-                            placeholder="Taluk" />
-                        <label for="inputVendorTaluk">Taluk</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" deed_id="documentFirstPersonCity_${vendorIterationCount}"
-                            class="form-control" name="" id="inputVendorCity"
-                            placeholder="City" />
-                        <label for="inputVendorCity">City</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="text" deed_id="documentFirstPersonState_${vendorIterationCount}"
-                            class="form-control" name="" id="inputVendorState"
-                            placeholder="State" />
-                        <label for="inputVendorState">State</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" name=""
-                            id="inputVendorPincode"
-                            deed_id="documentFirstPersonPincode_${vendorIterationCount}"
-                            placeholder="Pincode" />
-                        <label for="inputVendorPincode">Pincode</label>
-                    </div>
-                </div>
-            </div>`
-            $(text).insertAfter($('[id=inputVendorInfo]').eq($('[id=inputVendorInfo]').length - 1))
+            $('#hidden_use_element').html($($(".inputVendorInfo")[0]).clone())
+            $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
+                this.value = ""
+                let deed_id = this.getAttribute('deed_id')
+                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
+                this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + vendorIterationCount)
+            })
+            $($("#hidden_use_element .inputVendorInfo")).appendTo('#append_vendor_clone')
 
 
             $('#hidden_use_element').html(deed_content)
@@ -542,7 +387,7 @@ function clickEventListner() {
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
                 this.setAttribute('id', changeid)
             })
-            text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
             $(text).appendTo('#deed_body #first_person_details')
             inputEventListner()
             conjuctionRefresh()
@@ -553,12 +398,10 @@ function clickEventListner() {
 
     $("#vendorInfoRemoveClone").click(
         function () {
-            let count = $('[id="inputVendorInfo"]').length
-            console.log($('[id="inputVendorInfo"]').length)
-            if (count > 1) {
-                $('[id="inputVendorInfo"]').eq(count - 1).remove();
-                $(`span#first_person_details_${count - 1}`).remove()
-                vendorIterationCount -= 1
+            if (vendorIterationCount > 0) {
+                $('.inputVendorInfo').eq(vendorIterationCount).remove();
+                $(`span#first_person_details_${vendorIterationCount}`).remove()
+                vendorIterationCount--;
                 conjuctionRefresh()
             }
         }
@@ -566,166 +409,16 @@ function clickEventListner() {
     $("#purchaserInfoClone").click(
         function () {
             purchaserIterationCount += 1
-            let text = `<div class="row" id="inputPurchaserInfo">
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" deed_id="documentSecondPersonCategory_${purchaserIterationCount}" id="inputPurchaserCategoryDiv">
-                    <select class="form-select"
-                         name=""
-                        id="inputPurchaserCategory">
-                        <option value="#inputPurchaserType">Category</option>
-                        ${mastersData.CustomerCategory.map(item => {
-                if (item.CustomerTypeID == document.getElementById("inputPurchaserType").value) {
-                    return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
-                }
-                else { return "" }
-            }).join("")}
-                        </select>
-                        <label for="inputPurchaserCategory">Category</label>
-                        </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" id="inputPurchaserTitleDiv">
-                    <select deed_id="documentSecondPersonTitle_${purchaserIterationCount}"
-                        class="form-select"
-                         name=""
-                        id="inputPurchaserTitle">
-                        <option value="#inputPurchaserType">Title</option>
-                        ${mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")}
-                    </select>
-                    <label for="inputPurchaserTitle">Title</label>
-                    </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentSecondPersonName_${purchaserIterationCount}" type="text"
-                     class="form-control" name=""
-                        id="inputPurchaserName" placeholder="Enter Name" />
-                    <label for="inputPurchaserName">Name</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentSecondPersonDOB_${purchaserIterationCount}" type="date"
-                        class="form-control" name="" id="inputPurchaserDOB"
-                        placeholder="Enter D.O.B" />
-                    <label for="inputPurchaserDOB">D.O.B</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentSecondPersonAge_${purchaserIterationCount}" type="number"
-                        class="form-control" name="" id="inputPurchaserAge"
-                        placeholder="Enter Age" />
-                    <label for="inputPurchaserAge">Age</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentSecondPersonPAN_${purchaserIterationCount}" type="text"
-                        class="form-control" name="" id="inputPurchaserPan"
-                        placeholder="Enter Pan" />
-                    <label for="inputPurchaserPan">Pan</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" id="inputPurchaserRelationshipDiv">
-                    <select deed_id="documentSecondPersonRelationshipTitle_${purchaserIterationCount}"
-                        class="form-select"
-                         name=""
-                        id="inputPurchaserRelationship">
-                        <option value="#inputPurchaserRelationship">RelationShip
-                        </option>
-                        ${mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")}
-                    </select>
-                    <label for="inputPurchaserRelationship">RelationShip</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentSecondPersonRelationshipName_${purchaserIterationCount}"
-                        type="text" class="form-control" name=""
-                        id="inputPurchaserRelationName"
-                        placeholder="Relation Name" />
-                    <label for="inputPurchaserRelationName">Relation
-                        Name</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" deed_id="documentSecondPersonAadhar_${purchaserIterationCount}"
-                        class="form-control" name="" id="inputPurchaserAadhar"
-                        placeholder="Aadhar No" />
-                    <label for="inputPurchaserAadhar">Aadhar No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" class="form-control" name="" deed_id="documentSecondPersonPhone_${purchaserIterationCount}"
-                        id="inputPurchaserPhone" placeholder="Phone No" />
-                    <label for="inputPurchaserPhone">Phone No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name=""
-                        id="inputPurchaserDoorNo"
-                        deed_id="documentSecondPersonDoorNo_${purchaserIterationCount}"
-                        placeholder="Door No" />
-                    <label for="inputPurchaserDoorNo">Door No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name=""
-                        id="inputPurchaserStreet"
-                        deed_id="documentSecondPersonStreet_${purchaserIterationCount}"
-                        placeholder="Street" />
-                    <label for="inputPurchaserStreet">Street</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentSecondPersonDistrict_${purchaserIterationCount}"
-                        class="form-control" name="" id="inputPurchaserDistrict"
-                        placeholder="District" />
-                    <label for="inputPurchaserDistrict">District</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentSecondPersonTaluk_${purchaserIterationCount}"
-                        class="form-control" name="" id="inputPurchaserTaluk"
-                        placeholder="Taluk" />
-                    <label for="inputPurchaserTaluk">Taluk</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentSecondPersonCity_${purchaserIterationCount}"
-                        class="form-control" name="" id="inputPurchaserCity"
-                        placeholder="City" />
-                    <label for="inputPurchaserCity">City</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentSecondPersonState_${purchaserIterationCount}"
-                        class="form-control" name="" id="inputPurchaserState"
-                        placeholder="State" />
-                    <label for="inputPurchaserState">State</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" class="form-control" name=""
-                        id="inputPurchaserPincode"
-                        deed_id="documentSecondPersonPincode_${purchaserIterationCount}"
-                        placeholder="Pincode" />
-                    <label for="inputPurchaserPincode">Pincode</label>
-                </div>
-            </div>
-        </div>`
-            $(text).insertAfter($('[id=inputPurchaserInfo]').eq($('[id=inputPurchaserInfo]').length - 1))
+
+            $('#hidden_use_element').html($($(".inputPurchaserInfo")[0]).clone())
+            $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
+                this.value = ""
+                let deed_id = this.getAttribute('deed_id')
+                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
+                this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + purchaserIterationCount)
+            })
+            $($("#hidden_use_element .inputPurchaserInfo")).appendTo('#append_purchaser_clone')
+
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #Second_person_details').html())
             $("#hidden_use_element span").each(function () {
@@ -733,7 +426,7 @@ function clickEventListner() {
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
                 this.setAttribute('id', changeid)
             })
-            text = `<span id='Second_person_details_${purchaserIterationCount}'><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='Second_person_details_${purchaserIterationCount}'><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
             $(text).appendTo('#deed_body #Second_person_details')
             inputEventListner()
             conjuctionRefresh()
@@ -741,11 +434,9 @@ function clickEventListner() {
     )
     $("#purchaserInfoRemoveClone").click(
         function () {
-            let count = $('[id="inputPurchaserInfo"]').length
-            console.log($('[id="inputPurchaserInfo"]').length)
-            if (count > 1) {
-                $('[id="inputPurchaserInfo"]').eq(count - 1).remove();
-                $(`span#Second_person_details_${count - 1}`).remove()
+            if (purchaserIterationCount > 0) {
+                $('.inputPurchaserInfo').eq(purchaserIterationCount).remove();
+                $(`span#Second_person_details_${purchaserIterationCount}`).remove()
                 purchaserIterationCount -= 1
                 conjuctionRefresh()
             }
@@ -756,147 +447,15 @@ function clickEventListner() {
         function () {
             witnessIterationCount += 1;
 
-            let text = `<div class="row" id="inputWitnessInfo">
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" id="inputWitnessTitleDiv">
-                    <select deed_id="documentWitnessPersonTitle_${witnessIterationCount}"
-                        class="form-select"
-                        name="" id="inputWitnessTitle">
-                        <option value="#inputWitnessType">Title</option>
-                        ${mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")}
-                    </select>
-                    <label for="inputWitnessTitle">Witness title</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentWitnessPersonName_${witnessIterationCount}" type="text"
-                        class="form-control" name=""
-                        id="inputWitnessName" placeholder="Enter Name" />
-                    <label for="inputWitnessName">Name</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentWitnessPersonDOB_${witnessIterationCount}" type="date"
-                        class="form-control" name="" id="inputWitnessDOB"
-                        placeholder="Enter D.O.B" />
-                    <label for="inputWitnessDOB">D.O.B</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentWitnessPersonAge_${witnessIterationCount}" type="number"
-                        class="form-control" name="" id="inputWitnessAge"
-                        placeholder="Enter Age" />
-                    <label for="inputWitnessAge">Age</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentWitnessPersonPAN_${witnessIterationCount}" type="text"
-                        class="form-control" name="" id="inputWitnessPan"
-                        placeholder="Enter Pan" />
-                    <label for="inputWitnessPan">Pan</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating" id="inputWitnessRelationshipDiv">
-                    <select deed_id="documentWitnessPersonRelationshipTitle_${witnessIterationCount}"
-                        class="form-select"
-                        name="" id="inputWitnessRelationship">
-                        <option value="#inputWitnessRelationship">RelationShip
-                        </option>
-                        ${mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")}
-                        </select>
-                        <label for="inputWitnessRelationship">RelationShip</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input deed_id="documentWitnessPersonRelationshipName_${witnessIterationCount}"
-                        type="text" class="form-control" name=""
-                        id="inputWitnessRelationName" placeholder="Relation Name" />
-                    <label for="inputWitnessRelationName">Relation Name</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" deed_id="documentWitnessPersonAadhar_${witnessIterationCount}"
-                        class="form-control" name="" id="inputWitnessAadhar"
-                        placeholder="Aadhar No" />
-                    <label for="inputWitnessAadhar">Aadhar No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" deed_id="documentWitnessPersonPhone_${witnessIterationCount}" class="form-control" name=""
-                        id="inputWitnessPhone" placeholder="Phone No" />
-                    <label for="inputWitnessPhone">Phone No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name=""
-                        id="inputWitnessDoorNo"
-                        deed_id="documentWitnessPersonDoorNo_${witnessIterationCount}"
-                        placeholder="Door No" />
-                    <label for="inputWitnessDoorNo">Door No</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name=""
-                        id="inputWitnessStreet"
-                        deed_id="documentWitnessPersonStreet_${witnessIterationCount}"
-                        placeholder="Street" />
-                    <label for="inputWitnessStreet">Street</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonDistrict_${witnessIterationCount}"
-                        class="form-control" name="" id="inputWitnessDistrict"
-                        placeholder="District" />
-                    <label for="inputWitnessDistrict">District</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonTaluk_${witnessIterationCount}"
-                        class="form-control" name="" id="inputWitnessTaluk"
-                        placeholder="Taluk" />
-                    <label for="inputWitnessTaluk">Taluk</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonCity_${witnessIterationCount}"
-                        class="form-control" name="" id="inputWitnessCity"
-                        placeholder="City" />
-                    <label for="inputWitnessCity">City</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="text" deed_id="documentWitnessPersonState_${witnessIterationCount}"
-                        class="form-control" name="" id="inputWitnessState"
-                        placeholder="State" />
-                    <label for="inputWitnessState">State</label>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-floating">
-                    <input type="number" class="form-control" name=""
-                        id="inputWitnessPincode"
-                        deed_id="documentWitnessPersonPincode_${witnessIterationCount}"
-                        placeholder="Pincode" />
-                    <label for="inputWitnessPincode">Pincode</label>
-                </div>
-            </div>
-        </div>`
-            $(text).insertAfter($('[id=inputWitnessInfo]').eq($('[id=inputWitnessInfo]').length - 1))
-
+            $('#hidden_use_element').html($($(".inputWitnessInfo")[0]).clone())
+            $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
+                this.value = ""
+                let deed_id = this.getAttribute('deed_id')
+                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
+                this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + witnessIterationCount)
+            })
+            console.log($('.inputWitnessInfo').last()[0])
+            $($("#hidden_use_element .inputWitnessInfo")).insertAfter($('.inputWitnessInfo').eq(witnessIterationCount-1))
 
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details').html())
@@ -905,7 +464,7 @@ function clickEventListner() {
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
                 this.setAttribute('id', changeid)
             })
-            text = `<span id='Witness_person_details_${witnessIterationCount}'><span class="witnessConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='Witness_person_details_${witnessIterationCount}'><span class="witnessConjuction"></span>${$("#hidden_use_element").html()}</span>`
             $(text).appendTo('#deed_body #Witness_person_details')
             inputEventListner()
             conjuctionRefresh()
@@ -913,11 +472,9 @@ function clickEventListner() {
     )
     $("#witnessInfoRemoveClone").click(
         function () {
-            let count = $('[id="inputWitnessInfo"]').length
-            console.log($(`span#Witness_person_details_${count - 1}`))
-            if (count > 1) {
-                $('[id="inputWitnessInfo"]').eq(count - 1).remove();
-                $(`span#Witness_person_details_${count - 1}`).remove()
+            if (witnessIterationCount > 0) {
+                $('.inputWitnessInfo').eq(witnessIterationCount).remove();
+                $(`span#Witness_person_details_${witnessIterationCount}`).remove()
                 witnessIterationCount -= 1
                 conjuctionRefresh()
             }

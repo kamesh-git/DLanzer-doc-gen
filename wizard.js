@@ -1,10 +1,287 @@
-import { mastersData, storeInput, apirequest } from './data.js'
+import { mastersData, storeInput, apirequest, document_details } from './data.js'
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
 const base_url = "https://doc.dlanzer.com/laravel/public/";
 const authToken = "2|J8MC9BBpBHdX1ZbLXprO3gWoXlbrsWfWHQXuMqqm"
 // const base_url = "http://localhost/dlanzer/document-generator/public/";
 // const authToken = "4|QscZTGUbbOMbB7izc8tg8i4tz35cQM4Z44ih5vaK"
 
+
+// main function starts
+
+storeInput().then(resp => {
+    console.log(resp)
+    setdocFields();
+    inputEventListner();
+    selectEventListner();
+    clickEventListner();
+    setTable()
+})
+
+// table js starts
+
+Date.prototype.toShortFormat = function () {
+
+    const monthNames = ["January", "February", "March", "April",
+        "May", "June", "July", "August",
+        "September", "October", "November", "December"];
+
+    const day = this.getDate();
+
+    const monthIndex = this.getMonth();
+    const monthName = monthNames[monthIndex];
+
+    const year = this.getFullYear();
+
+    if (day == 1) { return `${day}st ${monthName} ${year}`; }
+    else if (day == 2) { return `${day}nd ${monthName} ${year}`; }
+    else if (day == 3) { return `${day}rd ${monthName} ${year}`; }
+    else { return `${day}th ${monthName} ${year}`; }
+}
+
+
+let table = $("table#document_details_tableBody").DataTable({
+    "language": {
+        "zeroRecords": "Loading..."
+    }
+});
+
+
+async function setTable() {
+
+    await storeInput()
+
+    $('table').each(function () { $(this).DataTable().clear().draw() })
+    const data = document_details.Documents.map(item => {
+
+        const application_no = item.DocumentApplicationNo.replace("Application No. ", "")
+        const new_date = new Date(item.DocumentExecutionDate)
+
+        return [application_no, item.DocumentExecutionPlace, new_date.toShortFormat(), `<button value=${item.DocumentID} class="document_view btn btn-primary">View</button><button style="margin: 0 20px ;" value=${item.DocumentID} class="document_edit btn btn-warning">Edit</button><button class="document_delete btn btn-danger" value=${item.DocumentID}>Delete</button>`]
+    })
+    if (data.length) {
+        table.rows.add(data).draw()
+    }
+    else {
+        table.clear().draw()
+        hide_popup_alert("No Data in the table", 1, 5000)
+    }
+    // table.draw()
+    $(".document_view").each(function () {
+        $(this).addClass('document_display_toggle')
+        $(this).click(function () {
+            document_details.Documents.forEach(item => {
+                if (item.DocumentID == this.value) {
+                    document.getElementById("deed_body_view").innerHTML = item.DocumentTemplateHTML
+                }
+            })
+        })
+    })
+    $(".document_delete").each(function () {
+        $(this).click(function () {
+            show_popup_alert()
+            apirequest("DELETE", `api/Document/${this.value}`).then(resp => {
+                console.log(resp);
+                setTable()
+                hide_popup_alert(resp.message, 0, 5000)
+            })
+        })
+    })
+
+    $(".download_DOC").each(function () {
+        $(this).click(function () {
+            const jsPDF = window.jspdf;
+            var doc = new jsPDF({ lineHeight: 2 });
+            var source = $("#deed_body_view").text()
+            console.log(source, typeof source)
+            source = doc.splitTextToSize(source, 240)
+            doc.setFontSize(12)
+            doc.text(source, 10, 10)
+            // doc.save()
+            var o = {
+                filename: 'test.doc'
+            };
+            $(document).googoose(o);
+        })
+    })
+    $(".download_PDF").each(function () {
+        $(this).click(function () {
+            const jsPDF = window.jspdf;
+            const html2pdf = window.html2pdf
+            var doc = new jsPDF();
+            $("#hidden_use_element").html("")
+            $("#deed_body_view").clone().appendTo('#hidden_use_element');
+            $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black'); console.log(this) })
+            var source = $("#hidden_use_element #deed_body_view")[0]
+            console.log(source, typeof source)
+            doc.fromHTML(source,
+                15,
+                15,
+                {
+                    'width': 180,
+                })
+            doc.save()
+        })
+    })
+    tableEventListeners()
+
+}
+
+
+function tableReset() {
+    for (let i = vendorIterationCount; i > 0; i--) {
+        $("#vendorInfoRemoveClone").trigger("click")
+    }
+    for (let i = purchaserIterationCount; i > 0; i--) {
+        $("#purchaserInfoRemoveClone").trigger("click")
+    }
+    for (let i = witnessIterationCount; i > 0; i--) {
+        $("#witnessInfoRemoveClone").trigger("click")
+    }
+
+    $("#new_document_entry input").each(function () {
+        this.value = ""
+    })
+    $("#new_document_entry select").each(function () {
+        $(this).val("").change()
+    })
+    $("#new_document_entry textarea").each(function () {
+        $(this).val("")
+    })
+    $(".PropertyDetailsFormClone").each(() => { $(this).remove() })
+    $(".TransferDetailsFormClone").each(() => { $(this).remove() })
+    $(".PaymentDetailsFormClone").each(() => { $(this).remove() })
+
+    $("#deed_body").html("")
+    $("#save_button").text("Add").attr('api', "POST")
+
+
+
+}
+
+function tableEventListeners() {
+
+    $(".table_display_toggle").each(function () {
+        $(this).click(function () {
+            $("#table_display").removeClass("d-none")
+            $("#document_display").addClass("d-none")
+            $("#new_document_entry").addClass("d-none")
+        })
+
+    })
+    $(".document_display_toggle").each(function () {
+        $(this).click(function () {
+            $("#table_display").addClass("d-none")
+            $("#document_display").removeClass("d-none")
+            $("#new_document_entry").addClass("d-none")
+        })
+
+    })
+    $("#new_document_entry_toggle").click(function () {
+        tableReset()
+        $("#table_display").addClass("d-none")
+        $("#document_display").addClass("d-none")
+        $("#new_document_entry").removeClass("d-none")
+    })
+
+
+    $(".document_edit").each(function () {
+        $(this).click(function () {
+            const document = document_details.Documents.filter(item => (item.DocumentID == this.value))[0]
+
+            // cloning 
+            for (let i = 1; i < document.document_vendor.length; i++) {
+                $("#vendorInfoClone").trigger("click")
+            }
+            for (let i = 1; i < document.document_purchaser.length; i++) {
+                $("#purchaserInfoClone").trigger("click")
+            }
+            for (let i = 1; i < document.document_witness.length; i++) {
+                $("#witnessInfoClone").trigger("click")
+            }
+
+            // setting input fields
+            $("#hidden_use_element").html(document.DocumentTemplateHTML)
+            $("#hidden_use_element span").each(function () {
+                try {
+                    $(`input[deed_id=${this.getAttribute('id')}`)[0].value = this.innerHTML
+                }
+                catch { }
+            })
+
+
+            // setting select fields
+            $("#inputDoucumentType").val(document.DocumentTypeID).trigger("change")
+            $("#inputDoucumentLanguage").val(document.DocumentLanguageID).trigger("change")
+            $("#inputApplicationNo").val(document.DocumentApplicationNo)
+            $("#inputSaleDeedExecution").val(document.DocumentExecutionDate)
+            $("#inputVendorType").val(document.DocumentVendorTypeID).trigger("change")
+            $("#inputPurchaserType").val(document.DocumentPurchaserTypeID).trigger("change")
+            $("#inputPropertyType").val(document.DocumentPropertyTypeID).trigger("change")
+
+            document.document_vendor.forEach((item, index) => {
+                $(`select[deed_id=documentVendorCategory_${index}]`).val(item.DocumentVendorCategoryID)
+                $(`select[deed_id=documentFirstPersonTitle_${index}]`).val(item.DocumentVendorGenderID)
+                $(`select[deed_id=documentFirstPersonRelationshipTitle_${index}]`).val(item.DocumentVendorRelationshipID)
+                $(`input[deed_id=documentFirstPersonDOB_${index}]`).val(item.DocumentVendorDateOfBirth)
+            })
+            document.document_purchaser.forEach((item, index) => {
+                $(`select[deed_id=documentSecondPersonCategory_${index}]`).val(item.DocumentPurchaserCategoryID)
+                $(`select[deed_id=documentSecondPersonTitle_${index}]`).val(item.DocumentPurchaserGenderID)
+                $(`select[deed_id=documentSecondPersonRelationshipTitle_${index}]`).val(item.DocumentPurchaserRelationshipID)
+                $(`input[deed_id=documentSecondPersonDOB_${index}]`).val(item.DocumentPurchaserDateOfBirth)
+            })
+            document.document_witness.forEach((item, index) => {
+                $(`select[deed_id=documentWitnessPersonTitle_${index}]`).val(item.DocumentWitnessGenderID)
+                $(`select[deed_id=documentWitnessPersonRelationshipTitle_${index}]`).val(item.DocumentWitnessRelationshipID)
+                $(`input[deed_id=documentWitnessPersonDOB_${index}]`).val(item.DocumentWitnessDateOfBirth)
+            })
+
+
+            // clone textarea fields
+            for (let i = 1; i < document.property_detail.length; i++) {
+                $("#clonePropertyDetailsFormInput").trigger('click')
+            }
+            for (let i = 1; i < document.transfer_detail.length; i++) {
+                $("#cloneTransferDetailsFormInput").trigger('click')
+            }
+            for (let i = 1; i < document.payment_detail.length; i++) {
+                $("#clonePaymentDetailsFormInput").trigger('click')
+            }
+
+            // set textarea fields
+            document.property_detail.forEach((item, index) => {
+                $(".property_details").eq(index).val(item.PropertyDetailContent)
+            })
+            document.transfer_detail.forEach((item, index) => {
+                $(".transfer_details").eq(index).val(item.TransferDetailContent)
+            })
+            document.payment_detail.forEach((item, index) => {
+                $(".payment_details").eq(index).val(item.PaymentDetailContent)
+            })
+
+            $('textarea').each(function () {
+                this.style.height = 0;
+                this.style.height = (this.scrollHeight) + "px";
+            });
+
+            $("#deed_body").html(document.DocumentTemplateHTML)
+
+            $("#save_button").text("Update").attr('api', `${document.DocumentID}`)
+
+            $("#table_display").addClass("d-none")
+            $("#document_display").addClass("d-none")
+            $("#new_document_entry").removeClass("d-none")
+        })
+    })
+}
+
+
+// table js ends
+
+// document js starts
+let vendorIterationCount = 0
+let purchaserIterationCount = 0
+let witnessIterationCount = 0
 let deed_documentTemplateid, deed_content;
 
 function setdocFields() {
@@ -65,9 +342,9 @@ function inputEventListner() {
     })
 
     console.log('this')
-    $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function(){
+    $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function () {
         $(this).on("input", function () {
-            this.value = this.value.slice(0,this.getAttribute('maxlength'))
+            this.value = this.value.slice(0, this.getAttribute('maxlength'))
         })
     })
 
@@ -98,19 +375,11 @@ function inputEventListner() {
 
 
 
-storeInput().then(resp => {
-    console.log(resp)
-    setdocFields();
-    inputEventListner();
-    selectEventListner();
-    clickEventListner();
-})
-
-
 
 function selectEventListner() {
 
-    document.getElementById("inputDoucumentType").addEventListener("change", function () {
+    $("#inputDoucumentType").change(function () {
+        console.log('triggered')
         const docTypeSelected = document.getElementById("inputDoucumentType").value
         const docLanguageIDs = []
         mastersData.DocumentTemplates.map(item => {
@@ -132,7 +401,7 @@ function selectEventListner() {
         const text = `<option value="">Document Language</option>` + langLists.map(item => (`<option value="${item[1]}" data-token=${item[0]}>${item[0]}</option>`))
         $("#inputDoucumentLanguage").html(text)
     })
-    document.getElementById("inputVendorType").addEventListener("change", function () {
+    $("#inputVendorType").change(function () {
         let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
@@ -143,7 +412,7 @@ function selectEventListner() {
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
 
     })
-    document.getElementById("inputPurchaserType").addEventListener("change", function () {
+    $("#inputPurchaserType").change(function () {
         let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
@@ -152,7 +421,7 @@ function selectEventListner() {
         }).join("")
         $("[id=inputPurchaserCategory]").each(function () { $(this).html(text) })
     })
-    document.getElementById("inputDoucumentLanguage").addEventListener("change", function () {
+    $("#inputDoucumentLanguage").change(function () {
         const docTypeSelected = document.getElementById("inputDoucumentType").value
         const langTypeSelected = document.getElementById("inputDoucumentLanguage").value
         mastersData.DocumentTemplates.forEach(item => {
@@ -194,9 +463,7 @@ function selectEventListner() {
         })
     })
 }
-let vendorIterationCount = 0
-let purchaserIterationCount = 0
-let witnessIterationCount = 0
+
 
 
 
@@ -229,7 +496,7 @@ function conjuctionRefresh() {
 }
 function clickEventListner() {
 
-    document.getElementById("save_button").addEventListener("click", async function () {
+    $("#save_button").click(async function () {
         const document_vendor = []
         for (let i = 0; i <= vendorIterationCount; i++) {
             document_vendor.push({
@@ -366,15 +633,30 @@ function clickEventListner() {
 
 
         show_popup_alert()
-        apirequest("POST", "api/Document", details).then(resp => {
-            hide_popup_alert(resp.message)
-            setTimeout(() => {
-                location.reload()
-            }, 2000);
-        }).catch(error => {
-            console.log(error)
-            hide_popup_alert(error.message)
-        })
+        if (this.getAttribute('api') == 'POST') {
+            apirequest("POST", "api/Document", details).then(resp => {
+                hide_popup_alert(resp.message)
+                setTimeout(() => {
+                    location.reload()
+                }, 2000);
+            }).catch(error => {
+                console.log(error)
+                hide_popup_alert(error.message)
+            })
+        }
+        else {
+            details.DocumentID = this.getAttribute('api')
+            console.log(details)
+            apirequest("PUT", `api/Document/${this.getAttribute('api')}`, details).then(resp => {
+                hide_popup_alert(resp.message)
+                setTimeout(() => {
+                    location.reload()
+                }, 2000);
+            }).catch(error => {
+                console.log(error)
+                hide_popup_alert(error.message)
+            })
+        }
     })
     $("#vendorInfoClone").click(
         function () {
@@ -383,7 +665,6 @@ function clickEventListner() {
             $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
                 this.value = ""
                 let deed_id = this.getAttribute('deed_id')
-                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
                 this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + vendorIterationCount)
             })
             $($("#hidden_use_element .inputVendorInfo")).appendTo('#append_vendor_clone')
@@ -423,7 +704,6 @@ function clickEventListner() {
             $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
                 this.value = ""
                 let deed_id = this.getAttribute('deed_id')
-                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
                 this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + purchaserIterationCount)
             })
             $($("#hidden_use_element .inputPurchaserInfo")).appendTo('#append_purchaser_clone')
@@ -460,11 +740,10 @@ function clickEventListner() {
             $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
                 this.value = ""
                 let deed_id = this.getAttribute('deed_id')
-                console.log(deed_id.slice(0, deed_id.indexOf('_') + 1))
                 this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + witnessIterationCount)
             })
             console.log($('.inputWitnessInfo').last()[0])
-            $($("#hidden_use_element .inputWitnessInfo")).insertAfter($('.inputWitnessInfo').eq(witnessIterationCount-1))
+            $($("#hidden_use_element .inputWitnessInfo")).insertAfter($('.inputWitnessInfo').eq(witnessIterationCount - 1))
 
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details').html())

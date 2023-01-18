@@ -354,7 +354,7 @@
                                 <h4 class="card-title">Document</h4>
                             </div>
                             <div class="col-sm-3">
-                                <button class="btn btn-primary new_document_entry_toggle float-end"> New Document </button>
+                                <button id="new_document_entry_toggle" class="btn btn-primary float-end"> New Document </button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -1101,10 +1101,10 @@
                                                             <button type="button"
                                                                 onclick="removecloneform('PropertyDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
-                                                            <button type="button"
+                                                            <button id="clonePropertyDetailsFormInput" type="button"
                                                                 onclick="cloneform('PropertyDetailsFormInput','PropertyDetailsFormClone')"
                                                                 class="btn btn-primary float-md-end">Add</button>
-                                                            <button type="button"
+                                                            <button id="removeClonePropertyDetailsFormInput" type="button"
                                                                 onclick="removecloneform('PropertyDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
                                                         </div>
@@ -1133,10 +1133,10 @@
                                                             <button type="button"
                                                                 onclick="removecloneform('TransferDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
-                                                            <button type="button"
+                                                            <button id="cloneTransferDetailsFormInput" type="button"
                                                                 onclick="cloneform('TransferDetailsFormInput','TransferDetailsFormClone')"
                                                                 class="btn btn-primary float-md-end">Add</button>
-                                                            <button type="button"
+                                                            <button id="removeCloneTransferDetailsFormInput" type="button"
                                                                 onclick="removecloneform('TransferDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
                                                         </div>
@@ -1165,10 +1165,10 @@
                                                             <button type="button"
                                                                 onclick="removecloneform('PaymentDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
-                                                            <button type="button"
+                                                            <button id="clonePaymentDetailsFormInput" type="button"
                                                                 onclick="cloneform('PaymentDetailsFormInput','PaymentDetailsFormClone')"
                                                                 class="btn btn-primary float-md-end">Add</button>
-                                                            <button type="button"
+                                                            <button id="removeClonePaymentDetailsFormInput" type="button"
                                                                 onclick="removecloneform('PaymentDetailsFormInputClone')"
                                                                 class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
                                                         </div>
@@ -1647,7 +1647,6 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/aadel112/googoose@master/jquery.googoose.js"></script>
     <script type="module" src="wizard.js"></script>
-    <script type="module" src="table.js"></script>
     
 
 </body>

@@ -1,5 +1,10 @@
 import { show_popup_alert, hide_popup_alert } from './popup_alert.js'
 const base_url = 'https://doc.dlanzer.com/laravel/public/'
+
+if (sessionStorage.getItem("token")) {
+    window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + '/document.html'
+}
+
 function apirequest(method, endpoint, authToken, Body = {}) {
     return new Promise(function (resolve, reject) {
         if (method === "GET" || method === "DELETE") {
@@ -58,7 +63,7 @@ $("form#user_signIn").submit(function (e) {
 
         hide_popup_alert(resp.message)
         setTimeout(() => {
-            window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + '/document.html'
+            location.reload()
         }, 2000);
     }, (err) => {
         hide_popup_alert(err.message, 1, 5000)
@@ -67,3 +72,5 @@ $("form#user_signIn").submit(function (e) {
     })
     show_popup_alert()
 })
+
+export { apirequest }

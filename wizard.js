@@ -126,6 +126,10 @@ async function setTable() {
 
 function tableReset() {
 
+        $("button[name=previous]").trigger("click")
+
+
+
     for (let i = vendorIterationCount; i > 0; i--) {
         $("#vendorInfoRemoveClone").trigger("click")
     }

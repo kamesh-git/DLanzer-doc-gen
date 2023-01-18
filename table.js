@@ -81,7 +81,7 @@ async function setTable() {
             doc.text(source, 10, 10)
             // doc.save()
             var o = {
-                filename: 'test.docx'
+                filename: 'test.doc'
             };
             $(document).googoose(o);
         })

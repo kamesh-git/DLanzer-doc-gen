@@ -68,6 +68,7 @@ async function setTable() {
     // table.draw()
     $(".document_view").each(function () {
         $(this).addClass('document_display_toggle')
+        $("#document_display .document_edit").val(this.value)
         $(this).click(function () {
             document_details.Documents.forEach(item => {
                 if (item.DocumentID == this.value) {
@@ -128,6 +129,7 @@ async function setTable() {
 
 
 function tableReset() {
+
     for (let i = vendorIterationCount; i > 0; i--) {
         $("#vendorInfoRemoveClone").trigger("click")
     }
@@ -142,7 +144,10 @@ function tableReset() {
         this.value = ""
     })
     $("#new_document_entry select").each(function () {
-        $(this).val("").change()
+        try{
+            $(this).val("").change()
+        }
+        catch{}
     })
     $("#new_document_entry textarea").each(function () {
         $(this).val("")
@@ -186,6 +191,7 @@ function tableEventListeners() {
 
     $(".document_edit").each(function () {
         $(this).click(function () {
+            tableReset()
             const document = document_details.Documents.filter(item => (item.DocumentID == this.value))[0]
 
             // cloning 
@@ -356,6 +362,7 @@ function inputEventListner() {
         })
     })
     $("select").on("change", function () {
+        console.log(this,this.options)
         $(`#${this.getAttribute("deed_id")}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $("input[type='date']").on("input", function () {
@@ -430,6 +437,7 @@ function selectEventListner() {
             }
         })
         let deed_doucument_Type = $("#inputDoucumentType option:selected").text()
+        console.log(deed_content)
         deed_content = deed_content.replace("#Doucument_Type", deed_doucument_Type)
         deed_content = deed_content.replace("Apllication Number", "")
         $("#deed_body").html(deed_content)
@@ -645,16 +653,17 @@ function clickEventListner() {
             })
         }
         else {
-            details.DocumentID = this.getAttribute('api')
             console.log(details)
-            apirequest("PUT", `api/Document/${this.getAttribute('api')}`, details).then(resp => {
-                hide_popup_alert(resp.message)
-                setTimeout(() => {
-                    location.reload()
-                }, 2000);
-            }).catch(error => {
-                console.log(error)
-                hide_popup_alert(error.message)
+            apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {   
+                apirequest("POST","api/Document",details).then(resp => {
+                    hide_popup_alert("Document updated successfully")
+                    setTimeout(() => {
+                        location.reload()
+                    }, 2000);
+                })
+                
+            },err => {
+                hide_popup_alert(err.message)
             })
         }
     })

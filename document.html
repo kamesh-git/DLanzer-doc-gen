@@ -518,7 +518,7 @@
 
                                                         <select class="form-select" ata-show-subtext="true" name=""
                                                             id="inputDoucumentLanguage">
-                                                            <option value="#Document_Language">Document Language
+                                                            <option value="">Document Language
                                                             </option>
                                                         </select>
                                                         <label for="inputDoucumentLanguage">Document Language</label>
@@ -575,19 +575,19 @@
                                                 <div class="col-md-12 mb-4">
                                                     <div class="form-floating" id="inputVendorTypeDiv">
                                                         <select class="form-select" name="" id="inputVendorType">
-                                                            <option value="#inputVendorType">Vendor Type</option>
+                                                            <option value="">Vendor Type</option>
                                                         </select>
                                                         <label for="inputVendorType">Vendor Type</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 mb-4">
-                                                    <div class="row" id="inputVendorInfo">
+                                                <div id="append_vendor_clone" class="col-md-12 mb-4">
+                                                    <div class="row inputVendorInfo">
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputVendorCategoryDiv">
                                                                 <select deed_id="documentVendorCategory_0"
                                                                     class="form-select" name=""
                                                                     id="inputVendorCategory">
-                                                                    <option value="#inputVendorCategory">Category
+                                                                    <option value="">Category
                                                                     </option>
                                                                 </select>
                                                                 <label for="inputVendorCategory">Category</label>
@@ -598,7 +598,7 @@
                                                             <div class="form-floating" id="inputVendorTitleDiv">
                                                                 <select deed_id="documentFirstPersonTitle_0"
                                                                     class="form-select" name="" id="inputVendorTitle">
-                                                                    <option value="#inputVendorTitle">Title</option>
+                                                                    <option value="">Title</option>
                                                                 </select>
                                                                 <label for="inputVendorTitle">Title</label>
                                                             </div>
@@ -622,7 +622,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentFirstPersonAge_0" type="number"
-                                                                    class="form-control" name="" id="inputVendorAge"
+                                                                    class="form-control" maxlength="3" name="" id="inputVendorAge"
                                                                     placeholder="Enter Age" />
                                                                 <label for="inputVendorAge">Age</label>
                                                             </div>
@@ -640,7 +640,7 @@
                                                                 <select deed_id="documentFirstPersonRelationshipTitle_0"
                                                                     class="form-select" name=""
                                                                     id="inputVendorRelationship">
-                                                                    <option value="#inputVendorRelationship">
+                                                                    <option value="">
                                                                         RelationShip
                                                                     </option>
                                                                 </select>
@@ -668,7 +668,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="number" class="form-control" name=""
+                                                                <input type="number" class="form-control" name="" maxlength="10"
                                                                     deed_id="documentFirstPersonPhone_0"
                                                                     id="inputVendorPhone" placeholder="Phone No" />
                                                                 <label for="inputVendorPhone">Phone No</label>
@@ -764,159 +764,161 @@
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-floating" id="inputPurchaserTypeDiv">
                                                         <select class="form-select" name="" id="inputPurchaserType">
-                                                            <option value="#inputPurchaserType">Purchaser Type</option>
+                                                            <option value="">Purchaser Type</option>
                                                         </select>
                                                         <label for="inputPurchaserType">Purchaser Type</label>
                                                     </div>
                                                 </div>
-                                                <div class="row" id="inputPurchaserInfo">
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating" id="inputPurchaserCategoryDiv">
-                                                            <select class="form-select"
-                                                                deed_id="documentSecondPersonCategory_0" name=""
-                                                                id="inputPurchaserCategory">
-                                                                <option value="#inputPurchaserCategory">Category
-                                                                </option>
-                                                            </select>
-                                                            <label for="inputPurchaserCategory">Category</label>
+                                                <div id="append_purchaser_clone" class="col-md-12 mb-3">
+                                                    <div class="row inputPurchaserInfo">
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating" id="inputPurchaserCategoryDiv">
+                                                                <select class="form-select"
+                                                                    deed_id="documentSecondPersonCategory_0" name=""
+                                                                    id="inputPurchaserCategory">
+                                                                    <option value="">Category
+                                                                    </option>
+                                                                </select>
+                                                                <label for="inputPurchaserCategory">Category</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating" id="inputPurchaserTitleDiv">
-                                                            <select deed_id="documentSecondPersonTitle_0"
-                                                                class="form-select" name="" id="inputPurchaserTitle">
-                                                                <option value="#inputPurchaserType">Title</option>
-                                                            </select>
-                                                            <label for="inputPurchaserTitle">Title</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating" id="inputPurchaserTitleDiv">
+                                                                <select deed_id="documentSecondPersonTitle_0"
+                                                                    class="form-select" name="" id="inputPurchaserTitle">
+                                                                    <option value="">Title</option>
+                                                                </select>
+                                                                <label for="inputPurchaserTitle">Title</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonName_0" type="text"
-                                                                class="form-control" name="" id="inputPurchaserName"
-                                                                placeholder="Enter Name" />
-                                                            <label for="inputPurchaserName">Name</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonName_0" type="text"
+                                                                    class="form-control" name="" id="inputPurchaserName"
+                                                                    placeholder="Enter Name" />
+                                                                <label for="inputPurchaserName">Name</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonDOB_0" type="date"
-                                                                class="form-control" name="" id="inputPurchaserDOB"
-                                                                placeholder="Enter D.O.B" />
-                                                            <label for="inputPurchaserDOB">D.O.B</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonDOB_0" type="date"
+                                                                    class="form-control" name="" id="inputPurchaserDOB"
+                                                                    placeholder="Enter D.O.B" />
+                                                                <label for="inputPurchaserDOB">D.O.B</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonAge_0" type="number"
-                                                                class="form-control" name="" id="inputPurchaserAge"
-                                                                placeholder="Enter Age" />
-                                                            <label for="inputPurchaserAge">Age</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonAge_0" type="number"
+                                                                    class="form-control" maxlength="3" name="" id="inputPurchaserAge"
+                                                                    placeholder="Enter Age" />
+                                                                <label for="inputPurchaserAge">Age</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonPAN_0" type="text"
-                                                                class="form-control" name="" id="inputPurchaserPan"
-                                                                placeholder="Enter Pan" />
-                                                            <label for="inputPurchaserPan">Pan</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonPAN_0" type="text"
+                                                                    class="form-control" name="" id="inputPurchaserPan"
+                                                                    placeholder="Enter Pan" />
+                                                                <label for="inputPurchaserPan">Pan</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating" id="inputPurchaserRelationshipDiv">
-                                                            <select deed_id="documentSecondPersonRelationshipTitle_0"
-                                                                class="form-select" name=""
-                                                                id="inputPurchaserRelationship">
-                                                                <option value="#inputPurchaserRelationship">RelationShip
-                                                                </option>
-                                                            </select>
-                                                            <label
-                                                                for="inputPurchaserRelationship">RelationShip</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating" id="inputPurchaserRelationshipDiv">
+                                                                <select deed_id="documentSecondPersonRelationshipTitle_0"
+                                                                    class="form-select" name=""
+                                                                    id="inputPurchaserRelationship">
+                                                                    <option value="">RelationShip
+                                                                    </option>
+                                                                </select>
+                                                                <label
+                                                                    for="inputPurchaserRelationship">RelationShip</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonRelationshipName_0"
-                                                                type="text" class="form-control" name=""
-                                                                id="inputPurchaserRelationName"
-                                                                placeholder="Relation Name" />
-                                                            <label for="inputPurchaserRelationName">Relation
-                                                                Name</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonRelationshipName_0"
+                                                                    type="text" class="form-control" name=""
+                                                                    id="inputPurchaserRelationName"
+                                                                    placeholder="Relation Name" />
+                                                                <label for="inputPurchaserRelationName">Relation
+                                                                    Name</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="number" deed_id="documentSecondPersonAadhar_0"
-                                                                class="form-control" name="" id="inputPurchaserAadhar"
-                                                                placeholder="Aadhar No" />
-                                                            <label for="inputPurchaserAadhar">Aadhar No</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="number" deed_id="documentSecondPersonAadhar_0"
+                                                                    class="form-control" name="" id="inputPurchaserAadhar"
+                                                                    placeholder="Aadhar No" />
+                                                                <label for="inputPurchaserAadhar">Aadhar No</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input deed_id="documentSecondPersonPhone_0" type="number"
-                                                                class="form-control" name="" id="inputPurchaserPhone"
-                                                                placeholder="Phone No" />
-                                                            <label for="inputPurchaserPhone">Phone No</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input deed_id="documentSecondPersonPhone_0" type="number" maxlength="10"
+                                                                    class="form-control" name="" id="inputPurchaserPhone"
+                                                                    placeholder="Phone No" />
+                                                                <label for="inputPurchaserPhone">Phone No</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control" name=""
-                                                                id="inputPurchaserDoorNo"
-                                                                deed_id="documentSecondPersonDoorNo_0"
-                                                                placeholder="Door No" />
-                                                            <label for="inputPurchaserDoorNo">Door No</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name=""
+                                                                    id="inputPurchaserDoorNo"
+                                                                    deed_id="documentSecondPersonDoorNo_0"
+                                                                    placeholder="Door No" />
+                                                                <label for="inputPurchaserDoorNo">Door No</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control" name=""
-                                                                id="inputPurchaserStreet"
-                                                                deed_id="documentSecondPersonStreet_0"
-                                                                placeholder="Street" />
-                                                            <label for="inputPurchaserStreet">Street</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control" name=""
+                                                                    id="inputPurchaserStreet"
+                                                                    deed_id="documentSecondPersonStreet_0"
+                                                                    placeholder="Street" />
+                                                                <label for="inputPurchaserStreet">Street</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" deed_id="documentSecondPersonDistrict_0"
-                                                                class="form-control" name="" id="inputPurchaserDistrict"
-                                                                placeholder="District" />
-                                                            <label for="inputPurchaserDistrict">District</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" deed_id="documentSecondPersonDistrict_0"
+                                                                    class="form-control" name="" id="inputPurchaserDistrict"
+                                                                    placeholder="District" />
+                                                                <label for="inputPurchaserDistrict">District</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" deed_id="documentSecondPersonTaluk_0"
-                                                                class="form-control" name="" id="inputPurchaserTaluk"
-                                                                placeholder="Taluk" />
-                                                            <label for="inputPurchaserTaluk">Taluk</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" deed_id="documentSecondPersonTaluk_0"
+                                                                    class="form-control" name="" id="inputPurchaserTaluk"
+                                                                    placeholder="Taluk" />
+                                                                <label for="inputPurchaserTaluk">Taluk</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" deed_id="documentSecondPersonCity_0"
-                                                                class="form-control" name="" id="inputPurchaserCity"
-                                                                placeholder="City" />
-                                                            <label for="inputPurchaserCity">City</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" deed_id="documentSecondPersonCity_0"
+                                                                    class="form-control" name="" id="inputPurchaserCity"
+                                                                    placeholder="City" />
+                                                                <label for="inputPurchaserCity">City</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" deed_id="documentSecondPersonState_0"
-                                                                class="form-control" name="" id="inputPurchaserState"
-                                                                placeholder="State" />
-                                                            <label for="inputPurchaserState">State</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" deed_id="documentSecondPersonState_0"
+                                                                    class="form-control" name="" id="inputPurchaserState"
+                                                                    placeholder="State" />
+                                                                <label for="inputPurchaserState">State</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="number" class="form-control" name=""
-                                                                id="inputPurchaserPincode"
-                                                                deed_id="documentSecondPersonPincode_0"
-                                                                placeholder="Pincode" />
-                                                            <label for="inputPurchaserPincode">Pincode</label>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating">
+                                                                <input type="number" class="form-control" name=""
+                                                                    id="inputPurchaserPincode"
+                                                                    deed_id="documentSecondPersonPincode_0"
+                                                                    placeholder="Pincode" />
+                                                                <label for="inputPurchaserPincode">Pincode</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -942,12 +944,12 @@
                                                         class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
                                                 </div>
                                             </div>
-                                            <div class="row" id="inputWitnessInfo">
+                                            <div class="row inputWitnessInfo">
                                                 <div class="col-md-4 mb-3">
                                                     <div class="form-floating" id="inputWitnessTitleDiv">
                                                         <select deed_id="documentWitnessPersonTitle_0"
                                                             class="form-select" name="" id="inputWitnessTitle">
-                                                            <option value="#inputWitnessType">Title</option>
+                                                            <option value="">Title</option>
                                                         </select>
                                                         <label for="inputWitnessTitle">Witness title</label>
                                                     </div>
@@ -971,7 +973,7 @@
                                                 <div class="col-md-4 mb-3">
                                                     <div class="form-floating">
                                                         <input deed_id="documentWitnessPersonAge_0" type="number"
-                                                            class="form-control" name="" id="inputWitnessAge"
+                                                            class="form-control" name="" maxlength="3" id="inputWitnessAge"
                                                             placeholder="Enter Age"  />
                                                         <label for="inputWitnessAge">Age</label>
                                                     </div>
@@ -988,7 +990,7 @@
                                                     <div class="form-floating" id="inputWitnessRelationshipDiv">
                                                         <select deed_id="documentWitnessPersonRelationshipTitle_0"
                                                             class="form-select" name="" id="inputWitnessRelationship">
-                                                            <option value="#inputWitnessRelationship">RelationShip
+                                                            <option value="">RelationShip
                                                             </option>
                                                         </select>
                                                         <label for="inputWitnessRelationship">RelationShip</label>
@@ -1012,7 +1014,7 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <div class="form-floating">
-                                                        <input deed_id="documentWitnessPersonPhone_0" type="number"
+                                                        <input deed_id="documentWitnessPersonPhone_0" maxlength="10" type="number"
                                                             deed_id="documentWitnessPersonPhone" class="form-control"
                                                             name="" id="inputWitnessPhone" placeholder="Phone No" />
                                                         <label for="inputWitnessPhone">Phone No</label>
@@ -1083,7 +1085,7 @@
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-floating" id="inputPropertyTypeDiv">
                                                         <select class="form-select" name="" id="inputPropertyType">
-                                                            <option value="#inputPropertyType">Property Type</option>
+                                                            <option value="">Property Type</option>
                                                         </select>
                                                         <label for="inputPropertyType">Property</label>
                                                     </div>

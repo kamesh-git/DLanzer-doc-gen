@@ -66,7 +66,9 @@ const prebtn= document.querySelectorAll('.previous')
     Array.from(prebtn, (pbtn) => {
     pbtn.addEventListener('click',function()
     {
-        nextBtnFunction(-1);
+        if(currentTab > 0){
+            nextBtnFunction(-1);
+        }
     })
 });
     

@@ -63,7 +63,6 @@ function eventListeners() {
                 const text = `<input type="text" dataKey="CustomerGenderValue" class="putData form-control" name="" id=""
                 placeholder="Gender Value" value="${this.getAttribute('itemValue')}" /><input value="${this.getAttribute('itemTitle')}" dataKey="CustomerGenderTitle" type="text" class="putData form-control" name="" id=""
                 placeholder="Gender Title" />`
-                console.log(text)
                 $(".update_fields_CustomerGenders").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerGenders")
 
@@ -74,7 +73,6 @@ function eventListeners() {
                 const text = `<input type="text" value="${this.getAttribute('itemTitle')}" dataKey="CustomerRelationshipTitle" class="putData form-control" name="" id=""
                 placeholder="Relationship Title" /><input dataKey="CustomerRelationshipValue" type="text" class="putData form-control" name="" id=""
                 placeholder="Relationship Value" value="${this.getAttribute('itemValue')}" />`
-                console.log(text)
                 $(".update_fields_CustomerRelationships").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerRelationships")
 
@@ -84,7 +82,6 @@ function eventListeners() {
                 putAPI = "CustomerTypes"
                 const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerTypeTitle" class="putData form-control" name="" id=""
                 placeholder="Customer Type Title" />`
-                console.log(text)
                 $(".update_fields_CustomerType").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerType")
             }
@@ -97,7 +94,6 @@ function eventListeners() {
                 ${mastersData.CustomerType.map(item => (`<option value="${item.CustomerTypeID}" ${item.CustomerTypeID == customerTypeID ? "selected" : ""}>${item.CustomerTypeTitle}</option>`))}
                 </select><input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerCategoryTitle" class="putData form-control" name="" id=""
                 placeholder="Customer Type Title" />`
-                console.log(text)
                 $(".update_fields_CustomerCategory").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerCategory")
             }
@@ -111,7 +107,6 @@ function eventListeners() {
                     const data = JSON.parse(`{"${attr}":"${this.value}"}`)
                     putData = { ...putData, ...data }
                 })
-                console.log(putData, putID, putAPI)
                 apirequest('PUT', `api/${putAPI}/${putID}`, putData).then(resp => {
                     hide_popup_alert(resp.message)
                     set_document_details_tableBody()
@@ -158,7 +153,6 @@ $(".addData").each(function () {
             postData = { ...postData, ...data }
         })
 
-        console.log(postData, postAPI)
         show_popup_alert()
         apirequest('POST', `api/${postAPI}`, postData).then(resp => {
             set_document_details_tableBody()

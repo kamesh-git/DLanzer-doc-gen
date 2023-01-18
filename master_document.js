@@ -60,7 +60,6 @@ function eventListeners() {
                 putAPI = "DocumentLanguage"
                 const text = `<input type="text" dataKey="DocumentLanguageTitle" class="putData form-control" name="" id=""
                 placeholder="Document Language" value="${this.getAttribute('itemValue')}" />`
-                console.log(text)
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentLanguage")
 
@@ -81,7 +80,6 @@ function eventListeners() {
                 </select>
                 <input dataKey="DocumentTemplateHTML" type="text" class="putData form-control" name="" id=""
                 placeholder="Template HTML" value="${this.getAttribute('itemHTML')}" />`
-                console.log(text)
                 $(".update_fields").html(text)
             }
             if (this.getAttribute("masterType") == 'DocumentTypes') {
@@ -89,7 +87,6 @@ function eventListeners() {
                 putAPI = "DocumentType"
                 const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="DocumentTypeTitle" class="putData form-control" name="" id=""
                 placeholder="Document Type" />`
-                console.log(text)
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentType")
 
@@ -99,7 +96,6 @@ function eventListeners() {
                 putAPI = "PropertyType"
                 const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control" name="" id=""
                 placeholder="Customer Type Title" />`
-                console.log(text)
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_PropertyType")
 
@@ -114,7 +110,6 @@ function eventListeners() {
                     const data = JSON.parse(`{"${attr}":"${this.value}"}`)
                     putData = { ...putData, ...data }
                 })
-                console.log(putData, putID, putAPI)
                 apirequest('PUT', `api/${putAPI}/${putID}`, putData).then(resp => {
                     hide_popup_alert(resp.message)
                     set_document_details_tableBody()
@@ -150,7 +145,6 @@ function eventListeners() {
     })
 }
 $(".addData").each(function () {
-    console.log(this)
     $(this).click(function () {
         postAPI = this.getAttribute('postAPI')
         postData = {} //put
@@ -159,7 +153,6 @@ $(".addData").each(function () {
             const data = JSON.parse(`{"${attr}":"${this.value}"}`)
             postData = { ...postData, ...data }
         })
-        console.log(postData, postAPI)
         show_popup_alert()
         apirequest('POST', `api/${postAPI}`, postData).then(resp => {
             set_document_details_tableBody()

@@ -34,13 +34,11 @@ $("#change_password").submit(function (e) {
 
 const base_url = 'https://doc.dlanzer.com/laravel/public/'
 const authToken = sessionStorage.getItem('token')
-console.log(authToken)
 if (authToken === null || authToken === 'undefined' || authToken == "") {
     window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + "/sign-in.html";
 }
 function apirequest(method, endpoint, Body = {}) {
     return new Promise(function (resolve, reject) {
-        console.log(base_url + endpoint, 'Bearer ' + authToken)
         if (method === "GET" || method === "DELETE") {
             fetch(base_url + endpoint, {
                 method: method,
@@ -51,10 +49,10 @@ function apirequest(method, endpoint, Body = {}) {
                 }
             }).then(resp => {
                 if (resp.ok) {
-                    resp.json().then(data => { console.log(data); resolve(data) })
+                    resp.json().then(data => { resolve(data) })
                 }
                 else {
-                    resp.json().then(data => { console.log(data); reject(data) })
+                    resp.json().then(data => { reject(data) })
                 }
             }).catch(err => { reject(err) })
         }
@@ -70,10 +68,10 @@ function apirequest(method, endpoint, Body = {}) {
                 }
             }).then(resp => {
                 if (resp.ok) {
-                    resp.json().then(data => { console.log(data); resolve(data) })
+                    resp.json().then(data => { resolve(data) })
                 }
                 else {
-                    resp.json().then(data => { console.log(data); reject(data) })
+                    resp.json().then(data => { reject(data) })
                 }
             }).catch(err => { reject(err) })
         }

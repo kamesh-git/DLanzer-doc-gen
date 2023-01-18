@@ -9,7 +9,6 @@ const authToken = "2|J8MC9BBpBHdX1ZbLXprO3gWoXlbrsWfWHQXuMqqm"
 // main function starts
 
 storeInput().then(resp => {
-    console.log(resp)
     setdocFields();
     inputEventListner();
     selectEventListner();
@@ -81,7 +80,6 @@ async function setTable() {
         $(this).click(function () {
             show_popup_alert()
             apirequest("DELETE", `api/Document/${this.value}`).then(resp => {
-                console.log(resp);
                 setTable()
                 hide_popup_alert(resp.message, 0, 5000)
             })
@@ -93,7 +91,6 @@ async function setTable() {
             const jsPDF = window.jspdf;
             var doc = new jsPDF({ lineHeight: 2 });
             var source = $("#deed_body_view").text()
-            console.log(source, typeof source)
             source = doc.splitTextToSize(source, 240)
             doc.setFontSize(12)
             doc.text(source, 10, 10)
@@ -111,9 +108,8 @@ async function setTable() {
             var doc = new jsPDF();
             $("#hidden_use_element").html("")
             $("#deed_body_view").clone().appendTo('#hidden_use_element');
-            $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black'); console.log(this) })
+            $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black') })
             var source = $("#hidden_use_element #deed_body_view")[0]
-            console.log(source, typeof source)
             doc.fromHTML(source,
                 15,
                 15,
@@ -347,7 +343,6 @@ function inputEventListner() {
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
     })
 
-    console.log('this')
     $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function () {
         $(this).on("input", function () {
             this.value = this.value.slice(0, this.getAttribute('maxlength'))
@@ -362,12 +357,11 @@ function inputEventListner() {
         })
     })
     $("select").on("change", function () {
-        console.log(this,this.options)
+
         $(`#${this.getAttribute("deed_id")}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $("input[type='date']").on("input", function () {
         let new_date = new Date(this.value)
-        console.log(new_date.toShortFormat())
         $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
 
     })
@@ -386,12 +380,10 @@ function inputEventListner() {
 function selectEventListner() {
 
     $("#inputDoucumentType").change(function () {
-        console.log('triggered')
         const docTypeSelected = document.getElementById("inputDoucumentType").value
         const docLanguageIDs = []
         mastersData.DocumentTemplates.map(item => {
             if (item.DocumentTypeID == docTypeSelected) {
-                console.log(item)
                 deed_documentTemplateid = item.DocumentTemplateID
                 docLanguageIDs.push(item.DocumentLanguageID)
             }
@@ -400,7 +392,6 @@ function selectEventListner() {
         docLanguageIDs.forEach(langID => {
             return mastersData.DocumentLanguages.forEach(item => {
                 if (langID == item.DocumentLanguageID) {
-                    console.log(item)
                     langLists.push([item.DocumentLanguageTitle, item.DocumentLanguageID])
                 }
             })
@@ -415,7 +406,6 @@ function selectEventListner() {
             }
             else { return "" }
         }).join("")
-        console.log(text)
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
 
     })
@@ -437,7 +427,6 @@ function selectEventListner() {
             }
         })
         let deed_doucument_Type = $("#inputDoucumentType option:selected").text()
-        console.log(deed_content)
         deed_content = deed_content.replace("#Doucument_Type", deed_doucument_Type)
         deed_content = deed_content.replace("Apllication Number", "")
         $("#deed_body").html(deed_content)
@@ -447,7 +436,6 @@ function selectEventListner() {
                 $(".property_details").each(function () {
                     text.push(this.value)
                 })
-                console.log(text)
                 document.getElementById("Property_Details").innerHTML = "<p><b>Property Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
             })
         })
@@ -615,18 +603,17 @@ function clickEventListner() {
             property_details: property_detai,
             transfer_details: transfer_detail
         }
-        console.log(details)
         function validateObject(obj) {
             if (obj instanceof Array) {
                 obj.forEach(item => {
                     if (item instanceof Array || item instanceof Object) { validateObject(item) }
-                    else if (item === undefined || item === null || item === NaN || item === "") { console.log(obj); hide_popup_alert('property details has null values', 1, 5000); throw new Error("Null values are present") }
+                    else if (item === undefined || item === null || item === NaN || item === "") { hide_popup_alert('property details has null values', 1, 5000); throw new Error("Null values are present") }
                 })
             }
             else if (obj instanceof Object) {
                 for (let key in obj) {
                     if (obj[key] instanceof Array || obj[key] instanceof Object) { validateObject(obj[key]) }
-                    else if (obj[key] === undefined || obj[key] === null || obj[key] === NaN || obj[key] === "") { console.log(key); hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
+                    else if (obj[key] === undefined || obj[key] === null || obj[key] === NaN || obj[key] === "") { hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
                 }
             }
         }
@@ -635,7 +622,7 @@ function clickEventListner() {
             if (details[key] instanceof Array || details[key] instanceof Object) {
                 validateObject(details[key])
             }
-            else if (details[key] === undefined || details[key] === null || details[key] === NaN || details[key] === "") { console.log(key); hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
+            else if (details[key] === undefined || details[key] === null || details[key] === NaN || details[key] === "") { hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
         }
 
 
@@ -648,12 +635,10 @@ function clickEventListner() {
                     location.reload()
                 }, 2000);
             }).catch(error => {
-                console.log(error)
                 hide_popup_alert(error.message)
             })
         }
         else {
-            console.log(details)
             apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {   
                 apirequest("POST","api/Document",details).then(resp => {
                     hide_popup_alert("Document updated successfully")
@@ -751,7 +736,6 @@ function clickEventListner() {
                 let deed_id = this.getAttribute('deed_id')
                 this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + witnessIterationCount)
             })
-            console.log($('.inputWitnessInfo').last()[0])
             $($("#hidden_use_element .inputWitnessInfo")).insertAfter($('.inputWitnessInfo').eq(witnessIterationCount - 1))
 
             $('#hidden_use_element').html(deed_content)

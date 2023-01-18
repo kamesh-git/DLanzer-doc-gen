@@ -2,7 +2,6 @@ import { show_popup_alert, hide_popup_alert } from './popup_alert.js'
 const base_url = 'https://doc.dlanzer.com/laravel/public/'
 function apirequest(method, endpoint, authToken, Body = {}) {
     return new Promise(function (resolve, reject) {
-        console.log(base_url + endpoint, 'Bearer ' + authToken)
         if (method === "GET" || method === "DELETE") {
             fetch(base_url + endpoint, {
                 method: method,
@@ -13,10 +12,10 @@ function apirequest(method, endpoint, authToken, Body = {}) {
                 }
             }).then(resp => {
                 if (resp.ok) {
-                    resp.json().then(data => { console.log(data); resolve(data) })
+                    resp.json().then(data => { resolve(data) })
                 }
                 else {
-                    resp.json().then(data => { console.log(data); reject(data) })
+                    resp.json().then(data => { reject(data) })
                 }
             }).catch(err => { reject(err) })
         }
@@ -31,10 +30,10 @@ function apirequest(method, endpoint, authToken, Body = {}) {
                 }
             }).then(resp => {
                 if (resp.ok) {
-                    resp.json().then(data => { console.log(data); resolve(data) })
+                    resp.json().then(data => { resolve(data) })
                 }
                 else {
-                    resp.json().then(data => { console.log(data); reject(data) })
+                    resp.json().then(data => { reject(data) })
                 }
             }).catch(err => { reject(err) })
         }
@@ -64,7 +63,6 @@ $("form#user_signIn").submit(function (e) {
     }, (err) => {
         hide_popup_alert(err.message, 1, 5000)
     }).catch(err => {
-        console.log(err)
         hide_popup_alert(err.message, 1)
     })
     show_popup_alert()

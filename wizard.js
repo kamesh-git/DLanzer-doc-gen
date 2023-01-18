@@ -63,6 +63,15 @@ function inputEventListner() {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
     })
+
+    console.log('this')
+    $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function(){
+        $(this).on("input", function () {
+            this.value = this.value.slice(0,this.getAttribute('maxlength'))
+        })
+    })
+
+
     $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function () {
         $(this).on("input", function () {
             this.value = this.value.toUpperCase()

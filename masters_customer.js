@@ -2,7 +2,7 @@ import { mastersData, storeInput, apirequest } from "./data.js"
 import { hide_popup_alert, show_popup_alert } from "./popup_alert.js";
 
 let putData, putID, putAPI, postData, postAPI;
-const updateDataButton = `<button id="updateData" class="btn btn-md btn-primary ms-2">Update</button>`
+const updateDataButton = `<button id="updateData" class="btn btn-md btn-primary mt-2 mt-sm-0 ms-0 ms-sm-2 col-md-4 col-sm-3">Update</button>`
 
 let table;
 async function set_document_details_tableBody() {
@@ -56,12 +56,11 @@ function eventListeners() {
         $(this).click(function () {
             $(".add_fields").each(function () { $(this).addClass('d-none') })
             $(".update_fields").each(function () { $(this).removeClass('d-none') })
-            $(".update_fields").each(function () { $(this).addClass('d-flex') })
             if (this.getAttribute("masterType") == 'CustomerGenders') {
                 putID = this.value
                 putAPI = "CustomerGenders"
-                const text = `<input type="text" dataKey="CustomerGenderValue" class="putData form-control" name="" id=""
-                placeholder="Gender Value" value="${this.getAttribute('itemValue')}" /><input value="${this.getAttribute('itemTitle')}" dataKey="CustomerGenderTitle" type="text" class="putData form-control" name="" id=""
+                const text = `<input type="text" dataKey="CustomerGenderValue" class="putData form-control col-sm" name="" id=""
+                placeholder="Gender Value" value="${this.getAttribute('itemValue')}" /><input value="${this.getAttribute('itemTitle')}" dataKey="CustomerGenderTitle" type="text" class="putData form-control col-sm" name="" id=""
                 placeholder="Gender Title" />`
                 $(".update_fields_CustomerGenders").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerGenders")
@@ -70,8 +69,8 @@ function eventListeners() {
             if (this.getAttribute("masterType") == 'CustomerRelationships') {
                 putID = this.value
                 putAPI = "CustomerRelationships"
-                const text = `<input type="text" value="${this.getAttribute('itemTitle')}" dataKey="CustomerRelationshipTitle" class="putData form-control" name="" id=""
-                placeholder="Relationship Title" /><input dataKey="CustomerRelationshipValue" type="text" class="putData form-control" name="" id=""
+                const text = `<input type="text" value="${this.getAttribute('itemTitle')}" dataKey="CustomerRelationshipTitle" class="putData form-control col-sm" name="" id=""
+                placeholder="Relationship Title" /><input dataKey="CustomerRelationshipValue" type="text" class="putData form-control col-sm" name="" id=""
                 placeholder="Relationship Value" value="${this.getAttribute('itemValue')}" />`
                 $(".update_fields_CustomerRelationships").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerRelationships")
@@ -80,7 +79,7 @@ function eventListeners() {
             if (this.getAttribute("masterType") == 'CustomerType') {
                 putID = this.value
                 putAPI = "CustomerTypes"
-                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerTypeTitle" class="putData form-control" name="" id=""
+                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Customer Type Title" />`
                 $(".update_fields_CustomerType").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerType")
@@ -89,10 +88,10 @@ function eventListeners() {
                 putID = this.value
                 putAPI = "CustomerCategory"
                 const customerTypeID = this.getAttribute('itemValue')
-                const text = `<select value="${this.getAttribute('itemValue')}" type="text" dataKey="CustomerTypeID" class="putData form-select" name="" id=""
+                const text = `<select value="${this.getAttribute('itemValue')}" type="text" dataKey="CustomerTypeID" class="putData form-select col-sm" name="" id=""
                 placeholder="Customer Category"><option value="">Select</option>
                 ${mastersData.CustomerType.map(item => (`<option value="${item.CustomerTypeID}" ${item.CustomerTypeID == customerTypeID ? "selected" : ""}>${item.CustomerTypeTitle}</option>`))}
-                </select><input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerCategoryTitle" class="putData form-control" name="" id=""
+                </select><input value="${this.getAttribute('itemTitle')}" type="text" dataKey="CustomerCategoryTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Customer Type Title" />`
                 $(".update_fields_CustomerCategory").html(text)
                 $(updateDataButton).appendTo(".update_fields_CustomerCategory")

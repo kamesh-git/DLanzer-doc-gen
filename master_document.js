@@ -2,7 +2,7 @@ import { mastersData, apirequest, storeInput } from "./data.js"
 import { show_popup_alert, hide_popup_alert } from "./popup_alert.js";
 
 let putData, putID, putAPI, postData, postAPI;
-const updateDataButton = `<button id="updateData" class="btn btn-md btn-primary ms-2">Update</button>`
+const updateDataButton = `<button id="updateData" class="btn btn-md btn-primary mt-2 mt-sm-0 ms-0 ms-sm-2 col-md-4 col-sm-3">Update</button>`
 
 async function set_document_details_tableBody() {
     show_popup_alert()
@@ -54,11 +54,10 @@ function eventListeners() {
         $(this).click(function () {
             $(".add_fields").each(function () { $(this).addClass('d-none') })
             $(".update_fields").each(function () { $(this).removeClass('d-none') })
-            $(".update_fields").each(function () { $(this).addClass('d-flex') })
             if (this.getAttribute("masterType") == 'DocumentLanguages') {
                 putID = this.value
                 putAPI = "DocumentLanguage"
-                const text = `<input type="text" dataKey="DocumentLanguageTitle" class="putData form-control" name="" id=""
+                const text = `<input type="text" dataKey="DocumentLanguageTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Document Language" value="${this.getAttribute('itemValue')}" />`
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentLanguage")
@@ -78,14 +77,14 @@ function eventListeners() {
                 placeholder="Document Language"><option value="">Select</option>
                 ${mastersData.DocumentLanguages.map(item => (`<option value="${item.DocumentLanguageID}" ${item.DocumentLanguageID == DocumentLanguageID ? "selected" : ""}>${item.DocumentLanguageTitle}</option>`))}
                 </select>
-                <input dataKey="DocumentTemplateHTML" type="text" class="putData form-control" name="" id=""
+                <input dataKey="DocumentTemplateHTML" type="text" class="putData form-control col-sm" name="" id=""
                 placeholder="Template HTML" value="${this.getAttribute('itemHTML')}" />`
                 $(".update_fields").html(text)
             }
             if (this.getAttribute("masterType") == 'DocumentTypes') {
                 putID = this.value
                 putAPI = "DocumentType"
-                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="DocumentTypeTitle" class="putData form-control" name="" id=""
+                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="DocumentTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Document Type" />`
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentType")
@@ -94,7 +93,7 @@ function eventListeners() {
             if (this.getAttribute("masterType") == 'PropertyTypes') {
                 putID = this.value
                 putAPI = "PropertyType"
-                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control" name="" id=""
+                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Customer Type Title" />`
                 $(".update_fields").html(text)
                 $(updateDataButton).appendTo(".update_fields_PropertyType")

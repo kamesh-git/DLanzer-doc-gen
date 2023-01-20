@@ -83,13 +83,6 @@ async function setTable() {
 
     $(".download_DOC").each(function () {
         $(this).click(function () {
-            const jsPDF = window.jspdf;
-            var doc = new jsPDF({ lineHeight: 2 });
-            var source = $("#deed_body_view").text()
-            source = doc.splitTextToSize(source, 240)
-            doc.setFontSize(12)
-            doc.text(source, 10, 10)
-            // doc.save()
             var o = {
                 filename: 'test.doc'
             };

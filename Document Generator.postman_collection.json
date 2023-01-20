@@ -1,0 +1,3433 @@
+{
+	"info": {
+		"_postman_id": "2572ed08-9dfa-465e-ac1e-f80356f7afeb",
+		"name": "Document Generator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24973878"
+	},
+	"item": [
+		{
+			"name": "Masters",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Customer Types",
+							"item": [
+								{
+									"name": "Customer Types GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerTypes",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerTypes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Types POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerTypeTitle\":\"Individual\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerTypes",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerTypes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Types PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerTypeTitle\":\"Individual\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerTypes/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerTypes",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Types DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerTypes/2",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerTypes",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Customer Gender",
+							"item": [
+								{
+									"name": "Customer Gender GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerGenders/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerGenders",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Gender POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerGenderTitle\":\"Company\",\r\n    \"CustomerGenderValue\":\"Company\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerGenders",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerGenders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Gender PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerGenderTitle\":\"Company\",\r\n    \"CustomerGenderValue\":\"Company\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerGenders/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerGenders",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Gender DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerGenders/5",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerGenders",
+												"5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Customer Relationship",
+							"item": [
+								{
+									"name": "Customer Relationship GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerRelationships/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerRelationships",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Relationship POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerRelationshipTitle\":\"D/O\",\r\n    \"CustomerRelationshipValue\":\"Daughter of\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerRelationships",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerRelationships"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Relationship PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerRelationshipTitle\":\"S/O\",\r\n    \"CustomerRelationshipValue\":\"Son of\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerRelationships/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerRelationships",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Relationship DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerRelationships/2",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerRelationships",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Customer Category",
+							"item": [
+								{
+									"name": "Customer Category GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerCategory/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerCategory",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Category POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerTypeID\": 2,\r\n    \"CustomerCategoryTitle\": \"Authorized Person\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerCategory",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerCategory"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Category PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CustomerTypeID\": 3,\r\n    \"CustomerCategoryTitle\": \"Authorized Person\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/CustomerCategory/1",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerCategory",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Category DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/CustomerCategory/8",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"CustomerCategory",
+												"8"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Document",
+					"item": [
+						{
+							"name": "Document Type",
+							"item": [
+								{
+									"name": "Document Type GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentType/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentType",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Type POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentTypeTitle\":\"Rental Deed\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentType",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentType"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Type PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentTypeTitle\":\"Settelment Deed\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentType/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentType",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Type DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentType/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentType",
+												"3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Document Language",
+							"item": [
+								{
+									"name": "Document Language GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentLanguage/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentLanguage",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Language POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentLanguageTitle\": \"Tamil\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentLanguage",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentLanguage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Language PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentLanguageTitle\": \"Tamil\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentLanguage/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentLanguage",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Language DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentLanguage/6",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentLanguage",
+												"6"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Document Template",
+							"item": [
+								{
+									"name": "Document Template GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentTemplate/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentTemplate",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Template POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentTypeID\": 2,\r\n    \"DocumentLanguageID\": 2,\r\n    \"DocumentTemplateHTML\": \"<p class='p-2 pb-2 pt-3 mb-0 '><b>THIS DEED OF <span id='documentDoucumentType'>#Doucument_Type</span></b> executed at <span id='execution_place'>execution_place</span> on this <span id='deed_execution'>deed execution</span> ,by Vendor <span id='first_person_details'><span id='documentFirstPersonTitle_0'>#First_Person_Title</span><span id='documentFirstPersonName_0'>#First_Person_Name</span> born on <span id='documentFirstPersonDOB_0'>#First_Person_DOB</span> aged about <span id='documentFirstPersonAge_0'>#First_Person_Age</span>-Years, <span id='documentFirstPersonRelationshipTitle_0'>#First_Person_Relationship_Title</span> <span id='documentFirstPersonRelationshipName_0'>#First_Person_Relationship_Name</span><b> (PAN:<span id='documentFirstPersonPAN_0'>#First_Person_PAN</span>, Aadhar:<span id='documentFirstPersonAadhar_0'>#First_Person_Aadhar</span>)</b> residing at <span id='documentFirstPersonAddress_0'>#First_Person_Address</span> <span id='documentFirstPersonDistrict_0'>#First_Person_District</span> district <span id='documentFirstPersonTaluk_0'>#First_Person_Taluk</span> taluk <span id='documentFirstPersonState_0'>#First_Person_State</span> <span id='documentFirstPersonCity_0'>#First_Person_City</span>-<span id='documentFirstPersonPincode_0'>#First_Person_Pincode</span></span></span> and hereinafter called and referred as the <b>'VENDOR'</b> of one Part;</p><h5 class='p-3 pt-0 pb-0 d-flex align-items-center justify-content-center'>TO AND IN FAVOUR OF</h5><p class='p-2 pt-0 pb-2 mb-0 '><b><span id=''>Purchaser </span></b><span id='Second_person_details'><span id='documentSecondPersonTitle_0'>#Second_Person_Title</span><span id='documentSecondPersonName_0'>#Second_Person_Name</span> born on <span id='documentSecondPersonDOB_0'>#Second_Person_DOB</span> aged about <span id='documentSecondPersonAge_0'>#Second_Person_Age</span>-Years, <span id='documentSecondPersonRelationshipTitle_0'>#Second_Person_Relationship_Title</span> <span id='documentSecondPersonRelationshipName_0'>#Second_Person_Relationship_Name</span><b> (PAN:<span id='documentSecondPersonPAN_0'>#Second_Person_PAN</span>, Aadhar:<span id='documentSecondPersonAadhar_0'>#Second_Person_Aadhar</span>)</b> residing at <span id='documentSecondPersonAddress_0'>#Second_Person_Address</span> <span id='documentSecondPersonDistrict_0'>#Second_Person_District</span> district <span id='documentSecondPersonTaluk_0'>#Second_Person_Taluk</span> taluk <span id='documentSecondPersonState_0'>#Second_Person_State</span> <span id='documentSecondPersonCity_0'>#Second_Person_City</span>-<span id='documentSecondPersonPincode_0'>#Second_Person_Pincode</span></span> and hereinafter called and referred as the <b>'PURCHASER'</b> of the another part;</p><p>Witness <span id='Witness_person_details'><span id='documentWitnessPersonTitle_0'>#Witness_Person_Title</span><span id='documentWitnessPersonName_0'>#Witness_Person_Name</span> born on <span id='documentWitnessPersonDOB_0'>#Witness_Person_DOB</span> aged about <span id='documentWitnessPersonAge_0'>#Witness_Person_Age</span>-Years, <span id='documentWitnessPersonRelationshipTitle_0'>#Witness_Person_Relationship_Title</span> <span id='documentWitnessPersonRelationshipName_0'>#Witness_Person_Relationship_Name</span><b> (PAN:<span id='documentWitnessPersonPAN_0'>#Witness_Person_PAN</span>, Aadhar:<span id='documentWitnessPersonAadhar_0'>#Witness_Person_Aadhar</span>)</b> residing at <span id='documentWitnessPersonAddress_0'>#Witness_Person_Address</span> <span id='documentWitnessPersonDistrict_0'>#Witness_Person_District</span> district <span id='documentWitnessPersonTaluk_0'>#Witness_Person_Taluk</span> taluk <span id='documentWitnessPersonState_0'>#Witness_Person_State</span> <span id='documentWitnessPersonCity_0'>#Witness_Person_City</span>-<span id='documentWitnessPersonPincode_0'>#Witness_Person_Pincode</span></span> and hereinafter called and referred as the <b>Witness</b> of one Part;</p><p class='p-2 pt-0 pb-2 mb-0 '>The expressions of the terms the 'VENDOR' and 'PURCHASER' wherever they occur in the body of this Sale Deed,shall mean and include them,their legal heirs,successors,executors,administrators,legal representatives,transferee,beneficiary,nominees and assignee etc.,</p> <p class='p-2 pt-0 pb-2 mb-0 '><br><span id='Property_Details'></span><br><span id='transfer_details'></span><br><span id='payment_Details'></span></p>\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentTemplate",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentTemplate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Template PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DocumentTypeID\": 1,\r\n    \"DocumentLanguageID\": 1,\r\n    \"DocumentTemplateHTML\": \"<p class='p-2 pb-2 pt-3 mb-0 '><b>THIS DEED OF <span id='documentDoucumentType'>#Doucument_Type</span></b> executed at <span id='execution_place'>execution_place</span> on this <span id='deed_execution'>deed execution</span> ,by Vendor <span id='first_person_details'><span id='documentFirstPersonTitle_0'>#First_Person_Title</span><span id='documentFirstPersonName_0'>#First_Person_Name</span> born on <span id='documentFirstPersonDOB_0'>#First_Person_DOB</span> aged about <span id='documentFirstPersonAge_0'>#First_Person_Age</span>-Years, <span id='documentFirstPersonRelationshipTitle_0'>#First_Person_Relationship_Title</span> <span id='documentFirstPersonRelationshipName_0'>#First_Person_Relationship_Name</span><b> (Phone:<span id='documentFirstPersonPhone_0'>#First_Person_Phone</span>, PAN:<span id='documentFirstPersonPAN_0'>#First_Person_PAN</span>, Aadhar:<span id='documentFirstPersonAadhar_0'>#First_Person_Aadhar</span>)</b> residing at <span id='documentFirstPersonDoorNo_0'>#First_Person_DoorNo</span>, <span id='documentFirstPersonStreet_0'>#First_Person_Street</span> <span id='documentFirstPersonDistrict_0'>#First_Person_District</span> district <span id='documentFirstPersonTaluk_0'>#First_Person_Taluk</span> taluk <span id='documentFirstPersonState_0'>#First_Person_State</span> <span id='documentFirstPersonCity_0'>#First_Person_City</span>-<span id='documentFirstPersonPincode_0'>#First_Person_Pincode</span></span></span> and hereinafter called and referred as the <b>'VENDOR'</b> of one Part;</p><h5 class='p-3 pt-0 pb-0 d-flex align-items-center justify-content-center'>TO AND IN FAVOUR OF</h5><p class='p-2 pt-0 pb-2 mb-0 '><b><span id=''>Purchaser </span></b><span id='Second_person_details'><span id='documentSecondPersonTitle_0'>#Second_Person_Title</span><span id='documentSecondPersonName_0'>#Second_Person_Name</span> born on <span id='documentSecondPersonDOB_0'>#Second_Person_DOB</span> aged about <span id='documentSecondPersonAge_0'>#Second_Person_Age</span>-Years, <span id='documentSecondPersonRelationshipTitle_0'>#Second_Person_Relationship_Title</span> <span id='documentSecondPersonRelationshipName_0'>#Second_Person_Relationship_Name</span><b> (Phone:<span id='documentSecondPersonPhone_0'>#Second_Person_Phone</span>, PAN:<span id='documentSecondPersonPAN_0'>#Second_Person_PAN</span>, Aadhar:<span id='documentSecondPersonAadhar_0'>#Second_Person_Aadhar</span>)</b> residing at <span id='documentSecondPersonDoorNo_0'>#Second_Person_DoorNo</span>, <span id='documentSecondPersonStreet_0'>#Second_Person_Street</span> <span id='documentSecondPersonDistrict_0'>#Second_Person_District</span> district <span id='documentSecondPersonTaluk_0'>#Second_Person_Taluk</span> taluk <span id='documentSecondPersonState_0'>#Second_Person_State</span> <span id='documentSecondPersonCity_0'>#Second_Person_City</span>-<span id='documentSecondPersonPincode_0'>#Second_Person_Pincode</span></span> and hereinafter called and referred as the <b>'PURCHASER'</b> of the another part;</p><p class='p-2 pt-0 pb-2 mb-0'>Witness <span id='Witness_person_details'><span id='documentWitnessPersonTitle_0'>#Witness_Person_Title</span><span id='documentWitnessPersonName_0'>#Witness_Person_Name</span> born on <span id='documentWitnessPersonDOB_0'>#Witness_Person_DOB</span> aged about <span id='documentWitnessPersonAge_0'>#Witness_Person_Age</span>-Years, <span id='documentWitnessPersonRelationshipTitle_0'>#Witness_Person_Relationship_Title</span> <span id='documentWitnessPersonRelationshipName_0'>#Witness_Person_Relationship_Name</span><b> (Phone:<span id='documentWitnessPersonPhone_0'>#Witness_Person_Phone</span>, PAN:<span id='documentWitnessPersonPAN_0'>#Witness_Person_PAN</span>, Aadhar:<span id='documentWitnessPersonAadhar_0'>#Witness_Person_Aadhar</span>)</b> residing at <span id='documentWitnessPersonDoorNo_0'>#Witness_Person_DoorNo</span>, <span id='documentWitnessPersonStreet_0'>#Witness_Person_Street</span> <span id='documentWitnessPersonDistrict_0'>#Witness_Person_District</span> district <span id='documentWitnessPersonTaluk_0'>#Witness_Person_Taluk</span> taluk <span id='documentWitnessPersonState_0'>#Witness_Person_State</span> <span id='documentWitnessPersonCity_0'>#Witness_Person_City</span>-<span id='documentWitnessPersonPincode_0'>#Witness_Person_Pincode</span></span> and hereinafter called and referred as the <b>Witness</b> of one Part;</p><p class='p-2 pt-0 pb-2 mb-0 '>The expressions of the terms the 'VENDOR' and 'PURCHASER' wherever they occur in the body of this Sale Deed,shall mean and include them,their legal heirs,successors,executors,administrators,legal representatives,transferee,beneficiary,nominees and assignee etc.,</p> <p class='p-2 pt-0 pb-2 mb-0 '><br><span id='Property_Details'></span><br><span id='transfer_details'></span><br><span id='payment_Details'></span></p>\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/DocumentTemplate/1",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentTemplate",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Document Template DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/DocumentTemplate/3",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"DocumentTemplate",
+												"3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Property Type",
+							"item": [
+								{
+									"name": "Property Type GET",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/PropertyType/",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"PropertyType",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property Type POST",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"PropertyTypeTitle\":\"Agriculture land\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/PropertyType",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"PropertyType"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property Type PUT",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"PropertyTypeTitle\":\"Land And Bulding\"\r\n}"
+										},
+										"url": {
+											"raw": "{{baseURL}}api/PropertyType/2",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"PropertyType",
+												"2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property Type DEL",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURL}}api/PropertyType/4",
+											"host": [
+												"{{baseURL}}api"
+											],
+											"path": [
+												"PropertyType",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "masters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/master",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"master"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/Auth/User",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Auth",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\":\"Dinesh\",\r\n    \"UserEmail\":\"dinesh@dlanzer.com\",\r\n    \"UserPassword\":\"12345\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/auth/register",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserEmail\":\"dinesh@dlanzer.com\",\r\n    \"UserPassword\":\"12345\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/auth/login",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserEmail\":\"dinesh@dlanzer.com\",\r\n    \"OTP\":\"5501\",\r\n    \"NewPassword\":\"Hi!Dinesh@2002\",\r\n    \"ConfirmPassword\":\"Hi!Dinesh@2002\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Auth/ForgotPassword",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Auth",
+								"ForgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Forgot Password Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserEmail\":\"dinesh@dlanzer.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Auth/ForgotPassword/SendOTP",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Auth",
+								"ForgotPassword",
+								"SendOTP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OldPassword\":\"123456\",\r\n    \"NewPassword\":\"12345\",\r\n    \"ConfirmPassword\":\"12345\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Auth/ChangePassword",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Auth",
+								"ChangePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Customer Details",
+					"item": [
+						{
+							"name": "Customer Details GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/CustomerDetails/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer Details GET ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/CustomerDetails/1",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerDetails",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer Detail POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerID\": 4,\r\n    \"CustomerDetailGenderID\": 2,\r\n    \"CustomerDetailRelationshipID\": 2,\r\n    \"CustomerDetailCategoryID\": 2,\r\n    \"CustomerDetailAge\": 45,\r\n    \"CustomerDetailDateOfBirth\": \"1978/07/29\",\r\n    \"CustomerDetailName\": \"Kamesh\",\r\n    \"CustomerDetailRelationName\": \"ArulArasan\",\r\n    \"CustomerDetailPAN\": \"CATPV2244J\",\r\n    \"CustomerDetailAadharNumber\": \"700594260363\",\r\n    \"CustomerDetailPhoneNumber\": \"9840194432\",\r\n    \"CustomerDetailDoorNo\": \"11\",\r\n    \"CustomerDetailStreet\": \"Ramar Street\",\r\n    \"CustomerDetailDistrict\": \"Thiruvallur\",\r\n    \"CustomerDetailTaluk\": \"Avadi\",\r\n    \"CustomerDetailState\": \"Tamil Nadu\",\r\n    \"CustomerDetailPinCode\": \"600062\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/CustomerDetails/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer Details PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerID\": 4,\r\n    \"CustomerDetailGenderID\": 2,\r\n    \"CustomerDetailRelationshipID\": 2,\r\n    \"CustomerDetailCategoryID\": 2,\r\n    \"CustomerDetailAge\": 45,\r\n    \"CustomerDetailDateOfBirth\": \"1978/07/29\",\r\n    \"CustomerDetailName\": \"Vimala\",\r\n    \"CustomerDetailRelationName\": \"ArulArasan\",\r\n    \"CustomerDetailPAN\": \"CATPV2244J\",\r\n    \"CustomerDetailAadharNumber\": \"700594260363\",\r\n    \"CustomerDetailPhoneNumber\": \"9840194432\",\r\n    \"CustomerDetailDoorNo\": \"11\",\r\n    \"CustomerDetailStreet\": \"Ramar Street\",\r\n    \"CustomerDetailDistrict\": \"Thiruvallur\",\r\n    \"CustomerDetailTaluk\": \"Avadi\",\r\n    \"CustomerDetailState\": \"Tamil Nadu\",\r\n    \"CustomerDetailPinCode\": \"600062\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/CustomerDetails/5",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerDetails",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer Details DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseURL}}api/CustomerDetails/4",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerDetails",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customers Get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Customers/",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers Get ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/Customers/1",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CustomerGenderID\": 1,\r\n    \"CustomerTypeID\": 2,\r\n    \"CustomerName\": \"Kamesh\",\r\n    \"CustomerPhoneNumber\": \"8610769361\",\r\n    \"CustomerDoorNo\": \"11\",\r\n    \"CustomerStreet\": \"Ramar Street, Avadi\",\r\n    \"CustomerDistrict\": \"Thiruvallur\",\r\n    \"CustomerTaluk\": \"Avadi\",\r\n    \"CustomerState\": \"Tamil Nadu\",\r\n    \"CustomerPinCode\": \"600062\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Customers",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CustomerGenderID\": 4,\r\n    \"CustomerTypeID\": 3,\r\n    \"CustomerName\": \"Hamsa\",\r\n    \"CustomerPhoneNumber\": \"8124308141\",\r\n    \"CustomerDoorNo\": \"59\",\r\n    \"CustomerStreet\": \"Devarajan Street\",\r\n    \"CustomerDistrict\": \"Thiruvallur\",\r\n    \"CustomerTaluk\": \"Madhavaram\",\r\n    \"CustomerState\": \"Tamil Nadu\",\r\n    \"CustomerPinCode\": \"600068\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Customers/3",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Customers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers  DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/Customers/4",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Customers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document",
+			"item": [
+				{
+					"name": "Payment Details",
+					"item": [
+						{
+							"name": "Payment Details GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/PaymentDetails/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PaymentDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Payment Details POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"PaymentDetailContent\":\"The payment details content field is required.\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/PaymentDetails",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PaymentDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Payment Details PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"PaymentDetailContent\":\"The payment details content field is required. 2\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/PaymentDetails/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PaymentDetails",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Payment Details DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/PaymentDetails/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PaymentDetails",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Property Details",
+					"item": [
+						{
+							"name": "Property Details GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/CustomerTypes/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"CustomerTypes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Property Details POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"PropertyDetailContent\":\"The Property Details Content field is required.\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/PropertyDetails",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PropertyDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Property Details PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"PropertyDetailContent\":\"The Property Details Content field is required. 2\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/PropertyDetails/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PropertyDetails",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Property Details DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/PropertyDetails/3",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"PropertyDetails",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transfer Details",
+					"item": [
+						{
+							"name": "Transfer Details GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/TransferDetails/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"TransferDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer Details POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"TransferDetailContent\":\"The transfer detail content field is required.\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/TransferDetails",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"TransferDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer Details PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DocumentID\":1,\r\n    \"TransferDetailContent\":\"The transfer detail content field is required. 2\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/TransferDetails/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"TransferDetails",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transfer Details DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/TransferDetails/3",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"TransferDetails",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Document Purchaser",
+					"item": [
+						{
+							"name": "Document Purchaser GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentPurchaser/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentPurchaser",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Purchaser POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentPurchaser",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentPurchaser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Purchaser PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company1\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentPurchaser/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentPurchaser",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Purchaser DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentPurchaser/4",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentPurchaser",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Document Vendor",
+					"item": [
+						{
+							"name": "Document Vendor GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentVendor/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentVendor",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Vendor POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentVendor",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentVendor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Vendor PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company1\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentVendor/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentVendor",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Vendor DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentVendor/4",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentVendor",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Document Witness",
+					"item": [
+						{
+							"name": "Document Witness GET",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentWitness/",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentWitness",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Witness POST",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentWitness",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentWitness"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Witness PUT",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CustomerTypeTitle\":\"Company1\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}api/DocumentWitness/2",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentWitness",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Document Witness DEL",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}api/DocumentWitness/4",
+									"host": [
+										"{{baseURL}}api"
+									],
+									"path": [
+										"DocumentWitness",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Document GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/Document/",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"DocumentTypeID\": \"1\",\r\n    \"DocumentLanguageID\": \"2\",\r\n    \"DocumentTemplateID\": \"1\",\r\n    \"DocumentApplicationNo\": \"Application No. 113496443164\",\r\n    \"DocumentExecutionDate\": \"2022/12/17\",\r\n    \"DocumentExecutionPlace\": \"Chennai\",\r\n    \"DocumentPropertyTypeID\": 1,\r\n    \"DocumentVendorTypeID\": 1,\r\n    \"DocumentPurchaserTypeID\": 2,\r\n    \"DocumentTemplateHTML\": \"<p class='Title'> Hello </p>\",\r\n    \"document_vendor\": [\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        },\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_purchaser\": [\r\n        {\r\n            \"DocumentPurchaserCategoryID\": 1,\r\n            \"DocumentPurchaserGenderID\": 1,\r\n            \"DocumentPurchaserTypeID\": 2,\r\n            \"DocumentPurchaserRelationshipID\": 1,\r\n            \"DocumentPurchaserName\": \"Kamesh\",\r\n            \"DocumentPurchaserAge\": 20,\r\n            \"DocumentPurchaserDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentPurchaserRelationName\": \"Veeran N\",\r\n            \"DocumentPurchaserPAN\": \"CATPV2244J\",\r\n            \"DocumentPurchaserAadharNumber\": \"700594260363\",\r\n            \"DocumentPurchaserPhoneNumber\": \"8610769361\",\r\n            \"DocumentPurchaserDoorNo\": \"11\",\r\n            \"DocumentPurchaserStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentPurchaserDistrict\": \"Thiruvallur\",\r\n            \"DocumentPurchaserTaluk\": \"Avadi\",\r\n            \"DocumentPurchaserState\": \"Tamil Nadu\",\r\n            \"DocumentPurchaserPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_witness\": [\r\n        {\r\n            \"DocumentWitnessGenderID\": 1,\r\n            \"DocumentWitnessTypeID\": 2,\r\n            \"DocumentWitnessRelationshipID\": 1,\r\n            \"DocumentWitnessName\": \"Kamesh\",\r\n            \"DocumentWitnessAge\": 20,\r\n            \"DocumentWitnessDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentWitnessRelationName\": \"Veeran N\",\r\n            \"DocumentWitnessPAN\": \"CATPV2244J\",\r\n            \"DocumentWitnessAadharNumber\": \"700594260363\",\r\n            \"DocumentWitnessPhoneNumber\": \"8610769361\",\r\n            \"DocumentWitnessDoorNo\": \"11\",\r\n            \"DocumentWitnessStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentWitnessDistrict\": \"Thiruvallur\",\r\n            \"DocumentWitnessTaluk\": \"Avadi\",\r\n            \"DocumentWitnessState\": \"Tamil Nadu\",\r\n            \"DocumentWitnessPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"payment_details\": [\r\n        {\r\n            \"PaymentDetailContent\": \"The payment details content field is required.\"\r\n        }\r\n    ],\r\n    \"property_details\": [\r\n        {\r\n            \"PropertyDetailContent\": \"The Property Details Content field is required.\"\r\n        }\r\n    ],\r\n    \"transfer_details\": [\r\n        {\r\n            \"TransferDetailContent\": \"The transfer detail content field is required.\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Document",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document POST Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"DocumentTypeID\": \"1\",\r\n    \"DocumentLanguageID\": \"2\",\r\n    \"DocumentTemplateID\": \"1\",\r\n    \"DocumentApplicationNo\": \"Application No. 113496443164\",\r\n    \"DocumentExecutionDate\": \"2022/12/17\",\r\n    \"DocumentExecutionPlace\": \"Chennai\",\r\n    \"DocumentPropertyTypeID\": 1,\r\n    \"DocumentVendorTypeID\": 1,\r\n    \"DocumentPurchaserTypeID\": 2,\r\n    \"DocumentTemplateHTML\": \"<p class='Title'> Hello </p>\",\r\n    \"document_vendor\": [\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        },\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_purchaser\": [\r\n        {\r\n            \"DocumentPurchaserCategoryID\": 1,\r\n            \"DocumentPurchaserGenderID\": 1,\r\n            \"DocumentPurchaserTypeID\": 2,\r\n            \"DocumentPurchaserRelationshipID\": 1,\r\n            \"DocumentPurchaserName\": \"Kamesh\",\r\n            \"DocumentPurchaserAge\": 20,\r\n            \"DocumentPurchaserDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentPurchaserRelationName\": \"Veeran N\",\r\n            \"DocumentPurchaserPAN\": \"CATPV2244J\",\r\n            \"DocumentPurchaserAadharNumber\": \"700594260363\",\r\n            \"DocumentPurchaserPhoneNumber\": \"8610769361\",\r\n            \"DocumentPurchaserDoorNo\": \"11\",\r\n            \"DocumentPurchaserStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentPurchaserDistrict\": \"Thiruvallur\",\r\n            \"DocumentPurchaserTaluk\": \"Avadi\",\r\n            \"DocumentPurchaserState\": \"Tamil Nadu\",\r\n            \"DocumentPurchaserPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_witness\": [\r\n        {\r\n            \"DocumentWitnessGenderID\": 1,\r\n            \"DocumentWitnessTypeID\": 2,\r\n            \"DocumentWitnessRelationshipID\": 1,\r\n            \"DocumentWitnessName\": \"Kamesh\",\r\n            \"DocumentWitnessAge\": 20,\r\n            \"DocumentWitnessDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentWitnessRelationName\": \"Veeran N\",\r\n            \"DocumentWitnessPAN\": \"CATPV2244J\",\r\n            \"DocumentWitnessAadharNumber\": \"700594260363\",\r\n            \"DocumentWitnessPhoneNumber\": \"8610769361\",\r\n            \"DocumentWitnessDoorNo\": \"11\",\r\n            \"DocumentWitnessStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentWitnessDistrict\": \"Thiruvallur\",\r\n            \"DocumentWitnessTaluk\": \"Avadi\",\r\n            \"DocumentWitnessState\": \"Tamil Nadu\",\r\n            \"DocumentWitnessPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"payment_details\": [\r\n        {\r\n            \"PaymentDetailContent\": \"The payment details content field is required.\"\r\n        }\r\n    ],\r\n    \"property_details\": [\r\n        {\r\n            \"PropertyDetailContent\": \"The Property Details Content field is required.\"\r\n        }\r\n    ],\r\n    \"transfer_details\": [\r\n        {\r\n            \"TransferDetailContent\": \"The transfer detail content field is required.\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Document",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"DocumentID\": 51,\r\n            \"DocumentTypeID\": 1,\r\n            \"DocumentLanguageID\": 1,\r\n            \"DocumentTemplateID\": 1,\r\n            \"DocumentVendorTypeID\": 1,\r\n            \"DocumentPurchaserTypeID\": 1,\r\n            \"DocumentPropertyTypeID\": 1,\r\n            \"DocumentApplicationNo\": \"Application10219012023\",\r\n            \"DocumentExecutionPlace\": \"Chennai\",\r\n            \"DocumentExecutionDate\": \"2023-01-19\",\r\n            \"DocumentTemplateHTML\": \"<p class=\\\"p-2 pb-2 pt-3 mb-0 \\\"><b>THIS DEED OF <span id=\\\"documentDoucumentType\\\">Sales Deed</span></b> executed at <span id=\\\"execution_place\\\">Chennai</span> on this <span id=\\\"deed_execution\\\">19th January 2023</span> ,by Vendor <span id=\\\"first_person_details\\\"><span id=\\\"documentFirstPersonTitle_0\\\">Mr.</span><span id=\\\"documentFirstPersonName_0\\\">S. Arunachalam</span> born on <span id=\\\"documentFirstPersonDOB_0\\\">5th December 1972</span> aged about <span id=\\\"documentFirstPersonAge_0\\\">45</span>-Years, <span id=\\\"documentFirstPersonRelationshipTitle_0\\\">S/O</span> <span id=\\\"documentFirstPersonRelationshipName_0\\\">Shanmugam</span><b> (Phone:<span id=\\\"documentFirstPersonPhone_0\\\">8124308141</span>, PAN:<span id=\\\"documentFirstPersonPAN_0\\\">UUHGF7444V</span>, Aadhar:<span id=\\\"documentFirstPersonAadhar_0\\\">778844551122</span>)</b> residing at <span id=\\\"documentFirstPersonDoorNo_0\\\">59</span>, <span id=\\\"documentFirstPersonStreet_0\\\">Devarajan Street</span> <span id=\\\"documentFirstPersonDistrict_0\\\">Thiruvallur</span> district <span id=\\\"documentFirstPersonTaluk_0\\\">Madhavaram</span> taluk <span id=\\\"documentFirstPersonState_0\\\">Tamil Nadu</span> <span id=\\\"documentFirstPersonCity_0\\\">Chennai</span>-<span id=\\\"documentFirstPersonPincode_0\\\">600068</span><span id=\\\"first_person_details_1\\\"><span class=\\\"vendorConjuction\\\"> and </span><span id=\\\"documentFirstPersonTitle_1\\\">Mr.</span><span id=\\\"documentFirstPersonName_1\\\">Dinesh</span> born on <span id=\\\"documentFirstPersonDOB_1\\\">5th July 2002</span> aged about <span id=\\\"documentFirstPersonAge_1\\\">20</span>-Years, <span id=\\\"documentFirstPersonRelationshipTitle_1\\\">S/O</span> <span id=\\\"documentFirstPersonRelationshipName_1\\\">Veeran</span><b> (Phone:<span id=\\\"documentFirstPersonPhone_1\\\">8124308141</span>, PAN:<span id=\\\"documentFirstPersonPAN_1\\\">CATPV2244J</span>, Aadhar:<span id=\\\"documentFirstPersonAadhar_1\\\">778844551122</span>)</b> residing at <span id=\\\"documentFirstPersonDoorNo_1\\\">59</span>, <span id=\\\"documentFirstPersonStreet_1\\\">Devarajan Street</span> <span id=\\\"documentFirstPersonDistrict_1\\\">Thiruvallur</span> district <span id=\\\"documentFirstPersonTaluk_1\\\">Madhavaram</span> taluk <span id=\\\"documentFirstPersonState_1\\\">Tamil Nadu</span> <span id=\\\"documentFirstPersonCity_1\\\">Tiruvallur</span>-<span id=\\\"documentFirstPersonPincode_1\\\">600068</span></span></span> and hereinafter called and referred as the <b>'VENDOR'</b> of one Part;</p><h5 class=\\\"p-3 pt-0 pb-0 d-flex align-items-center justify-content-center\\\">TO AND IN FAVOUR OF</h5><p class=\\\"p-2 pt-0 pb-2 mb-0 \\\"><b><span id=\\\"\\\">Purchaser </span></b><span id=\\\"Second_person_details\\\"><span id=\\\"documentSecondPersonTitle_0\\\">Mr.</span><span id=\\\"documentSecondPersonName_0\\\">Vishnu Dharshan</span> born on <span id=\\\"documentSecondPersonDOB_0\\\">6th December 2002</span> aged about <span id=\\\"documentSecondPersonAge_0\\\">20</span>-Years, <span id=\\\"documentSecondPersonRelationshipTitle_0\\\">S/O</span> <span id=\\\"documentSecondPersonRelationshipName_0\\\">Ramakrishnan</span><b> (Phone:<span id=\\\"documentSecondPersonPhone_0\\\">8124308141</span>, PAN:<span id=\\\"documentSecondPersonPAN_0\\\">CATPV5244J</span>, Aadhar:<span id=\\\"documentSecondPersonAadhar_0\\\">889955662233</span>)</b> residing at <span id=\\\"documentSecondPersonDoorNo_0\\\">59</span>, <span id=\\\"documentSecondPersonStreet_0\\\">Devarajan Street</span> <span id=\\\"documentSecondPersonDistrict_0\\\">Thiruvallur</span> district <span id=\\\"documentSecondPersonTaluk_0\\\">Madhavaram</span> taluk <span id=\\\"documentSecondPersonState_0\\\">Tamil Nadu</span> <span id=\\\"documentSecondPersonCity_0\\\">Manali, Chennai</span>-<span id=\\\"documentSecondPersonPincode_0\\\">600068</span></span> and hereinafter called and referred as the <b>'PURCHASER'</b> of the another part;</p><p class='p-2 pt-0 pb-2 mb-0'>Witness <span id=\\\"Witness_person_details\\\"><span id=\\\"documentWitnessPersonTitle_0\\\">Mr.</span><span id=\\\"documentWitnessPersonName_0\\\">Vinoth Kumar</span> born on <span id=\\\"documentWitnessPersonDOB_0\\\">12th December 1996</span> aged about <span id=\\\"documentWitnessPersonAge_0\\\">28</span>-Years, <span id=\\\"documentWitnessPersonRelationshipTitle_0\\\">S/O</span> <span id=\\\"documentWitnessPersonRelationshipName_0\\\">Sampath</span><b> (Phone:<span id=\\\"documentWitnessPersonPhone_0\\\">8939551292</span>, PAN:<span id=\\\"documentWitnessPersonPAN_0\\\">AMGPV0890B</span>, Aadhar:<span id=\\\"documentWitnessPersonAadhar_0\\\">325645219854</span>)</b> residing at <span id=\\\"documentWitnessPersonDoorNo_0\\\">61</span>, <span id=\\\"documentWitnessPersonStreet_0\\\">Kamaraj Salai, Chinnasekkadu</span> <span id=\\\"documentWitnessPersonDistrict_0\\\">Thiruvallur</span> district <span id=\\\"documentWitnessPersonTaluk_0\\\">Madhavaram</span> taluk <span id=\\\"documentWitnessPersonState_0\\\">Manali. Chennai</span> <span id=\\\"documentWitnessPersonCity_0\\\">Tiruvallur</span>-<span id=\\\"documentWitnessPersonPincode_0\\\">600051</span></span> and hereinafter called and referred as the <b>Witness</b> of one Part;</p><p class=\\\"p-2 pt-0 pb-2 mb-0 \\\">The expressions of the terms the 'VENDOR' and 'PURCHASER' wherever they occur in the body of this Sale Deed,shall mean and include them,their legal heirs,successors,executors,administrators,legal representatives,transferee,beneficiary,nominees and assignee etc.,</p> <p class=\\\"p-2 pt-0 pb-2 mb-0 \\\"><br><span id=\\\"Property_Details\\\"><p><b>Property Details:</b></p><p>Flat S3 in the Second Floor having the Front Door Facing Eastern side flat buildup area is 906 Sq. Ft , land measuring an extent 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft , Comprised in New Survey Nos.13/4A1C1A1A-1A1A1A1A2, 13/4A1C1A1A-1A1A1A1A3 under Patta Nos.2124 &amp;2125 of Old No.160 and New No.127, Hastinapuram Village Tambaram Taluk Kancheepuram District. Presently pallavaram taluk &amp; Chengalpattu District, The Layout was approved by District Board, Chengalpet in Sanction No.93 dated 17.12.1951</p></span></p><p><b>Property Details:</b></p><p>Flat S3 in the Second Floor having the Front Door Facing Eastern side   flat buildup area is 906 Sq. Ft , land measuring an extent 469 Sq. Ft of Undivided Share,  out of  10,620 Sq. ft , Comprised in New Survey Nos.13/4A1C1A1A-1A1A1A1A2, 13/4A1C1A1A-1A1A1A1A3 under Patta Nos.2124 &amp;2125 of Old No.160 and New No.127, Hastinapuram Village Tambaram Taluk Kancheepuram District. Presently pallavaram taluk &amp; Chengalpattu District,  The Layout was approved by District Board, Chengalpet  in Sanction No.93 dated 17.12.1951</p><br><span id=\\\"transfer_details\\\"><p><b>Transfer Details:</b></p><p>WHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\\nWHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.<br><br>WHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\\nWHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.</p></span><br><span id=\\\"payment_Details\\\"><p><b>Payment Details:</b></p><p>payment Details here</p></span><p></p>\",\r\n            \"DocumentIsActive\": 1,\r\n            \"DocumentCreatedAt\": \"2023-01-20 07:54:17\",\r\n            \"DocumentUpdatedAt\": \"2023-01-20 07:54:17\",\r\n            \"document_vendor\": [\r\n                {\r\n                    \"DocumentVendorID\": 51,\r\n                    \"DocumentID\": 51,\r\n                    \"DocumentVendorGenderID\": 1,\r\n                    \"DocumentVendorCategoryID\": 2,\r\n                    \"DocumentVendorRelationshipID\": 3,\r\n                    \"DocumentVendorAge\": 45,\r\n                    \"DocumentVendorDateOfBirth\": \"1972-12-05\",\r\n                    \"DocumentVendorRelationName\": \"Shanmugam\",\r\n                    \"DocumentVendorName\": \"S. Arunachalam\",\r\n                    \"DocumentVendorPAN\": \"UUHGF7444V\",\r\n                    \"DocumentVendorAadharNumber\": \"778844551122\",\r\n                    \"DocumentVendorPhoneNumber\": \"8124308141\",\r\n                    \"DocumentVendorDoorNo\": \"59\",\r\n                    \"DocumentVendorStreet\": \"Devarajan Street\",\r\n                    \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n                    \"DocumentVendorTaluk\": \"Madhavaram\",\r\n                    \"DocumentVendorState\": \"Tamil Nadu\",\r\n                    \"DocumentVendorPinCode\": \"600068\",\r\n                    \"DocumentVendorIsActive\": 1,\r\n                    \"DocumentVendorCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"DocumentVendorUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                },\r\n                {\r\n                    \"DocumentVendorID\": 52,\r\n                    \"DocumentID\": 51,\r\n                    \"DocumentVendorGenderID\": 1,\r\n                    \"DocumentVendorCategoryID\": 2,\r\n                    \"DocumentVendorRelationshipID\": 3,\r\n                    \"DocumentVendorAge\": 20,\r\n                    \"DocumentVendorDateOfBirth\": \"2002-07-05\",\r\n                    \"DocumentVendorRelationName\": \"Veeran\",\r\n                    \"DocumentVendorName\": \"Dinesh\",\r\n                    \"DocumentVendorPAN\": \"CATPV2244J\",\r\n                    \"DocumentVendorAadharNumber\": \"778844551122\",\r\n                    \"DocumentVendorPhoneNumber\": \"8124308141\",\r\n                    \"DocumentVendorDoorNo\": \"59\",\r\n                    \"DocumentVendorStreet\": \"Devarajan Street\",\r\n                    \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n                    \"DocumentVendorTaluk\": \"Madhavaram\",\r\n                    \"DocumentVendorState\": \"Tamil Nadu\",\r\n                    \"DocumentVendorPinCode\": \"600068\",\r\n                    \"DocumentVendorIsActive\": 1,\r\n                    \"DocumentVendorCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"DocumentVendorUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ],\r\n            \"document_purchaser\": [\r\n                {\r\n                    \"DocumentPurchaserID\": 32,\r\n                    \"DocumentID\": 51,\r\n                    \"DocumentPurchaserGenderID\": 1,\r\n                    \"DocumentPurchaserCategoryID\": 1,\r\n                    \"DocumentPurchaserRelationshipID\": 3,\r\n                    \"DocumentPurchaserAge\": 20,\r\n                    \"DocumentPurchaserDateOfBirth\": \"2002-12-06\",\r\n                    \"DocumentPurchaserRelationName\": \"Ramakrishnan\",\r\n                    \"DocumentPurchaserName\": \"Vishnu Dharshan\",\r\n                    \"DocumentPurchaserPAN\": \"CATPV5244J\",\r\n                    \"DocumentPurchaserAadharNumber\": \"889955662233\",\r\n                    \"DocumentPurchaserPhoneNumber\": \"8124308141\",\r\n                    \"DocumentPurchaserDoorNo\": \"59\",\r\n                    \"DocumentPurchaserStreet\": \"Devarajan Street\",\r\n                    \"DocumentPurchaserDistrict\": \"Thiruvallur\",\r\n                    \"DocumentPurchaserTaluk\": \"Madhavaram\",\r\n                    \"DocumentPurchaserState\": \"Tamil Nadu\",\r\n                    \"DocumentPurchaserPinCode\": \"600068\",\r\n                    \"DocumentPurchaserIsActive\": 1,\r\n                    \"DocumentPurchaserCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"DocumentPurchaserUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ],\r\n            \"document_witness\": [\r\n                {\r\n                    \"DocumentWitnessID\": 29,\r\n                    \"DocumentID\": 51,\r\n                    \"DocumentWitnessGenderID\": 1,\r\n                    \"DocumentWitnessRelationshipID\": 3,\r\n                    \"DocumentWitnessAge\": 28,\r\n                    \"DocumentWitnessDateOfBirth\": \"1996-12-12\",\r\n                    \"DocumentWitnessRelationName\": \"Sampath\",\r\n                    \"DocumentWitnessName\": \"Vinoth Kumar\",\r\n                    \"DocumentWitnessPAN\": \"AMGPV0890B\",\r\n                    \"DocumentWitnessAadharNumber\": \"325645219854\",\r\n                    \"DocumentWitnessPhoneNumber\": \"8939551292\",\r\n                    \"DocumentWitnessDoorNo\": \"61\",\r\n                    \"DocumentWitnessStreet\": \"Kamaraj Salai, Chinnasekkadu\",\r\n                    \"DocumentWitnessDistrict\": \"Thiruvallur\",\r\n                    \"DocumentWitnessTaluk\": \"Madhavaram\",\r\n                    \"DocumentWitnessState\": \"Manali. Chennai\",\r\n                    \"DocumentWitnessPinCode\": \"600051\",\r\n                    \"DocumentWitnessIsActive\": 1,\r\n                    \"DocumentWitnessCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"DocumentWitnessUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ],\r\n            \"payment_detail\": [\r\n                {\r\n                    \"PaymentDetailID\": 22,\r\n                    \"DocumentID\": 51,\r\n                    \"PaymentDetailContent\": \"payment Details here\",\r\n                    \"PaymentDetailIsActive\": 1,\r\n                    \"PaymentDetailCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"PaymentDetailUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ],\r\n            \"property_detail\": [\r\n                {\r\n                    \"PropertyDetailID\": 20,\r\n                    \"DocumentID\": 51,\r\n                    \"PropertyDetailContent\": \"Flat S3 in the Second Floor having the Front Door Facing Eastern side flat buildup area is 906 Sq. Ft , land measuring an extent 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft , Comprised in New Survey Nos.13/4A1C1A1A-1A1A1A1A2, 13/4A1C1A1A-1A1A1A1A3 under Patta Nos.2124 &2125 of Old No.160 and New No.127, Hastinapuram Village Tambaram Taluk Kancheepuram District. Presently pallavaram taluk & Chengalpattu District, The Layout was approved by District Board, Chengalpet in Sanction No.93 dated 17.12.1951\",\r\n                    \"PropertyDetailIsActive\": 1,\r\n                    \"PropertyDetailCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"PropertyDetailUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ],\r\n            \"transfer_detail\": [\r\n                {\r\n                    \"TransferDetailID\": 17,\r\n                    \"DocumentID\": 51,\r\n                    \"TransferDetailContent\": \"WHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\\nWHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\",\r\n                    \"TransferDetailIsActive\": 1,\r\n                    \"TransferDetailCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"TransferDetailUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                },\r\n                {\r\n                    \"TransferDetailID\": 18,\r\n                    \"DocumentID\": 51,\r\n                    \"TransferDetailContent\": \"WHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\\nWHEREAS the vendor Purchased an land extent of 469 Sq. Ft of Undivided Share, out of 10,620 Sq. ft, from Mr N Dhanancheyan , and Mrs Sangareswari , Represented by Power agent Mr Manoharan under the sale deed on 18.11.2005 registered as Document No 5629/2005 Book I on the file of SRO pallavaram.\",\r\n                    \"TransferDetailIsActive\": 1,\r\n                    \"TransferDetailCreatedAt\": \"2023-01-20 07:54:17\",\r\n                    \"TransferDetailUpdatedAt\": \"2023-01-20 07:54:17\"\r\n                }\r\n            ]\r\n        }"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Document/51",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document",
+								"51"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document PUT Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"DocumentTypeID\": 1,\r\n            \"DocumentLanguageID\": 2,\r\n            \"DocumentTemplateID\": 1,\r\n            \"DocumentVendorTypeID\": 1,\r\n            \"DocumentPurchaserTypeID\": 2,\r\n            \"DocumentPropertyTypeID\": 1,\r\n            \"DocumentApplicationNo\": \"Application No. 113496443164\",\r\n            \"DocumentExecutionPlace\": \"Chennai\",\r\n            \"DocumentExecutionDate\": \"2022-12-17\",\r\n            \"DocumentTemplateHTML\": \"<p class='Title'> Hello </p>\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Document/29",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document PUT Copy 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"DocumentTypeID\": \"1\",\r\n    \"DocumentLanguageID\": \"2\",\r\n    \"DocumentTemplateID\": \"1\",\r\n    \"DocumentApplicationNo\": \"Application No. 113496443164\",\r\n    \"DocumentExecutionDate\": \"2022/12/17\",\r\n    \"DocumentExecutionPlace\": \"Chennai\",\r\n    \"DocumentPropertyTypeID\": 1,\r\n    \"DocumentVendorTypeID\": 1,\r\n    \"DocumentPurchaserTypeID\": 2,\r\n    \"DocumentTemplateHTML\": \"<p class='Title'> Hello </p>\",\r\n    \"document_vendor\": [\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        },\r\n        {\r\n            \"DocumentVendorCategoryID\": 1,\r\n            \"DocumentVendorGenderID\": 1,\r\n            \"DocumentVendorTypeID\": 2,\r\n            \"DocumentVendorRelationshipID\": 1,\r\n            \"DocumentVendorName\": \"Kamesh\",\r\n            \"DocumentVendorAge\": 20,\r\n            \"DocumentVendorDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentVendorRelationName\": \"Veeran N\",\r\n            \"DocumentVendorPAN\": \"CATPV2244J\",\r\n            \"DocumentVendorAadharNumber\": \"700594260363\",\r\n            \"DocumentVendorPhoneNumber\": \"8610769361\",\r\n            \"DocumentVendorDoorNo\": \"11\",\r\n            \"DocumentVendorStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentVendorDistrict\": \"Thiruvallur\",\r\n            \"DocumentVendorTaluk\": \"Avadi\",\r\n            \"DocumentVendorState\": \"Tamil Nadu\",\r\n            \"DocumentVendorPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_purchaser\": [\r\n        {\r\n            \"DocumentPurchaserCategoryID\": 1,\r\n            \"DocumentPurchaserGenderID\": 1,\r\n            \"DocumentPurchaserTypeID\": 2,\r\n            \"DocumentPurchaserRelationshipID\": 1,\r\n            \"DocumentPurchaserName\": \"Kamesh\",\r\n            \"DocumentPurchaserAge\": 20,\r\n            \"DocumentPurchaserDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentPurchaserRelationName\": \"Veeran N\",\r\n            \"DocumentPurchaserPAN\": \"CATPV2244J\",\r\n            \"DocumentPurchaserAadharNumber\": \"700594260363\",\r\n            \"DocumentPurchaserPhoneNumber\": \"8610769361\",\r\n            \"DocumentPurchaserDoorNo\": \"11\",\r\n            \"DocumentPurchaserStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentPurchaserDistrict\": \"Thiruvallur\",\r\n            \"DocumentPurchaserTaluk\": \"Avadi\",\r\n            \"DocumentPurchaserState\": \"Tamil Nadu\",\r\n            \"DocumentPurchaserPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"document_witness\": [\r\n        {\r\n            \"DocumentWitnessGenderID\": 1,\r\n            \"DocumentWitnessTypeID\": 2,\r\n            \"DocumentWitnessRelationshipID\": 1,\r\n            \"DocumentWitnessName\": \"Kamesh\",\r\n            \"DocumentWitnessAge\": 20,\r\n            \"DocumentWitnessDateOfBirth\": \"2002/05/07\",\r\n            \"DocumentWitnessRelationName\": \"Veeran N\",\r\n            \"DocumentWitnessPAN\": \"CATPV2244J\",\r\n            \"DocumentWitnessAadharNumber\": \"700594260363\",\r\n            \"DocumentWitnessPhoneNumber\": \"8610769361\",\r\n            \"DocumentWitnessDoorNo\": \"11\",\r\n            \"DocumentWitnessStreet\": \"Ramar Street, Avadi\",\r\n            \"DocumentWitnessDistrict\": \"Thiruvallur\",\r\n            \"DocumentWitnessTaluk\": \"Avadi\",\r\n            \"DocumentWitnessState\": \"Tamil Nadu\",\r\n            \"DocumentWitnessPinCode\": \"600062\"\r\n        }\r\n    ],\r\n    \"payment_details\": [\r\n        {\r\n            \"PaymentDetailContent\": \"The payment details content field is required.\"\r\n        }\r\n    ],\r\n    \"property_details\": [\r\n        {\r\n            \"PropertyDetailContent\": \"The Property Details Content field is required.\"\r\n        }\r\n    ],\r\n    \"transfer_details\": [\r\n        {\r\n            \"TransferDetailContent\": \"The transfer detail content field is required.\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}api/Document/29",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Document DEL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}api/Document/8",
+							"host": [
+								"{{baseURL}}api"
+							],
+							"path": [
+								"Document",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Translate",
+			"item": [
+				{
+					"name": "gtranslate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "translate.google.com/translate_a/element.js?cb=googleTranslateElementInit",
+							"host": [
+								"translate",
+								"google",
+								"com"
+							],
+							"path": [
+								"translate_a",
+								"element.js"
+							],
+							"query": [
+								{
+									"key": "cb",
+									"value": "googleTranslateElementInit"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"q\":\"hello how are you\",\r\n    \"target\":\"tamil\",\r\n    \"key\":\"AIzaSyBivBBLXvbnhSdccyAdfe6sexiirxjB1IY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://translation.googleapis.com/language/translate/v2",
+							"protocol": "https",
+							"host": [
+								"translation",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"language",
+								"translate",
+								"v2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

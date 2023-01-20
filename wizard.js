@@ -1,10 +1,5 @@
 import { mastersData, storeInput, apirequest, document_details } from './data.js'
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
-const base_url = "https://doc.dlanzer.com/laravel/public/";
-const authToken = "2|J8MC9BBpBHdX1ZbLXprO3gWoXlbrsWfWHQXuMqqm"
-// const base_url = "http://localhost/dlanzer/document-generator/public/";
-// const authToken = "4|QscZTGUbbOMbB7izc8tg8i4tz35cQM4Z44ih5vaK"
-
 
 // main function starts
 
@@ -103,20 +98,23 @@ async function setTable() {
     })
     $(".download_PDF").each(function () {
         $(this).click(function () {
-            const jsPDF = window.jspdf;
-            const html2pdf = window.html2pdf
+            const {jsPDF} = window.jspdf;
             var doc = new jsPDF();
             $("#hidden_use_element").html("")
-            $("#deed_body_view").clone().appendTo('#hidden_use_element');
-            $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black') })
-            var source = $("#hidden_use_element #deed_body_view")[0]
-            doc.fromHTML(source,
-                15,
-                15,
-                {
-                    'width': 180,
-                })
-            doc.save()
+            $("#deed_body_view").clone().css('width','600px').appendTo('#hidden_use_element');
+            // $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black') })
+            var source = $("#hidden_use_element").html()
+            console.log(source)
+            doc.html(source, {
+                callback: function (doc) {
+                  doc.save();
+                },
+                autoPaging: 'text',
+                margin: [12, 8, 15, 8],
+                html2canvas: {
+                    scale: 0.3
+                }
+             });
         })
     })
     tableEventListeners()
@@ -152,9 +150,9 @@ function tableReset() {
     $("#new_document_entry textarea").each(function () {
         $(this).val("")
     })
-    $(".PropertyDetailsFormClone").each(() => { $(this).remove() })
-    $(".TransferDetailsFormClone").each(() => { $(this).remove() })
-    $(".PaymentDetailsFormClone").each(() => { $(this).remove() })
+    $(".PropertyDetailsFormClone").empty()
+    $(".TransferDetailsFormClone").empty()
+    $(".PaymentDetailsFormClone").empty()
 
     $("#deed_body").html("")
     $("#save_button").text("Add").attr('api', "POST")
@@ -611,13 +609,13 @@ function clickEventListner() {
             if (obj instanceof Array) {
                 obj.forEach(item => {
                     if (item instanceof Array || item instanceof Object) { validateObject(item) }
-                    else if (item === undefined || item === null || item === NaN || item === "") { hide_popup_alert('property details has null values', 1, 5000); throw new Error("Null values are present") }
+                    else if (item === undefined || item === null || item === NaN || item === "") { hide_popup_alert('property details field is required', 1, 5000); throw new Error("Null values are present") }
                 })
             }
             else if (obj instanceof Object) {
                 for (let key in obj) {
                     if (obj[key] instanceof Array || obj[key] instanceof Object) { validateObject(obj[key]) }
-                    else if (obj[key] === undefined || obj[key] === null || obj[key] === NaN || obj[key] === "") { hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
+                    else if (obj[key] === undefined || obj[key] === null || obj[key] === NaN || obj[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
                 }
             }
         }
@@ -626,7 +624,7 @@ function clickEventListner() {
             if (details[key] instanceof Array || details[key] instanceof Object) {
                 validateObject(details[key])
             }
-            else if (details[key] === undefined || details[key] === null || details[key] === NaN || details[key] === "") { hide_popup_alert(`${key} has null values`, 1, 5000); throw new Error("Null values are present") }
+            else if (details[key] === undefined || details[key] === null || details[key] === NaN || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
         }
 
 

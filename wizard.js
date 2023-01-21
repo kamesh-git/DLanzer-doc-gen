@@ -91,23 +91,23 @@ async function setTable() {
     })
     $(".download_PDF").each(function () {
         $(this).click(function () {
-            const {jsPDF} = window.jspdf;
+            const { jsPDF } = window.jspdf;
             var doc = new jsPDF();
             $("#hidden_use_element").html("")
-            $("#deed_body_view").clone().css('width','600px').appendTo('#hidden_use_element');
+            $("#deed_body_view").clone().css('width', '600px').appendTo('#hidden_use_element');
             // $('#hidden_use_element #deed_body_view *').each(function () { $(this).css('color', 'black') })
             var source = $("#hidden_use_element").html()
             console.log(source)
             doc.html(source, {
                 callback: function (doc) {
-                  doc.save();
+                    doc.save();
                 },
                 autoPaging: 'text',
                 margin: [12, 8, 15, 8],
                 html2canvas: {
                     scale: 0.3
                 }
-             });
+            });
         })
     })
     tableEventListeners()
@@ -117,7 +117,7 @@ async function setTable() {
 
 function tableReset() {
 
-        $("button[name=previous]").trigger("click")
+    $("button[name=previous]").trigger("click")
 
 
 
@@ -135,10 +135,10 @@ function tableReset() {
         this.value = ""
     })
     $("#new_document_entry select").each(function () {
-        try{
+        try {
             $(this).val("").change()
         }
-        catch{}
+        catch { }
     })
     $("#new_document_entry textarea").each(function () {
         $(this).val("")
@@ -355,8 +355,21 @@ function inputEventListner() {
 
         $(`#${this.getAttribute("deed_id")}`).html(this.options[this.selectedIndex].innerHTML)
     })
+
+
+
+
+    function diff_years(dt2, dt1) {
+
+        var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= (60 * 60 * 24);
+        return Math.abs(Math.round(diff / 365.25));
+
+    }
     $("input[type='date']").on("input", function () {
         let new_date = new Date(this.value)
+        const age = diff_years(new_date,new Date())
+        $(this).parent().parent().next().find('[deed_id*=Age]').val(age)
         $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
 
     })
@@ -634,15 +647,15 @@ function clickEventListner() {
             })
         }
         else {
-            apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {   
-                apirequest("POST","api/Document",details).then(resp => {
+            apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {
+                apirequest("POST", "api/Document", details).then(resp => {
                     hide_popup_alert("Document updated successfully")
                     setTimeout(() => {
                         location.reload()
                     }, 2000);
                 })
-                
-            },err => {
+
+            }, err => {
                 hide_popup_alert(err.message)
             })
         }

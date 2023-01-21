@@ -297,7 +297,7 @@ function setdocFields() {
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputVendorTitle").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputVendorRelationship").html(text)
 
 
@@ -310,7 +310,7 @@ function setdocFields() {
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputPurchaserTitle").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputPurchaserRelationship").html(text)
 
     // set witness type
@@ -321,7 +321,7 @@ function setdocFields() {
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
     $("#inputWitnessTitle").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipTitle}>${item.CustomerRelationshipTitle}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputWitnessRelationship").html(text)
 
 
@@ -368,7 +368,7 @@ function inputEventListner() {
     }
     $("input[type='date']").on("input", function () {
         let new_date = new Date(this.value)
-        const age = diff_years(new_date,new Date())
+        const age = diff_years(new_date, new Date())
         $(this).parent().parent().next().find('[deed_id*=Age]').val(age).trigger('input')
         $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
 
@@ -611,17 +611,19 @@ function clickEventListner() {
             property_details: property_detai,
             transfer_details: transfer_detail
         }
+        console.log(details)
+
         function validateObject(obj) {
             if (obj instanceof Array) {
                 obj.forEach(item => {
                     if (item instanceof Array || item instanceof Object) { validateObject(item) }
-                    else if (item === undefined || item === null || item === NaN || item === "") { hide_popup_alert('property details field is required', 1, 5000); throw new Error("Null values are present") }
+                    else if (item === undefined || item === null || !(typeof item === 'string' || isNaN(item)) || item === "") { hide_popup_alert('property details field is required', 1, 5000); throw new Error("Null values are present") }
                 })
             }
             else if (obj instanceof Object) {
                 for (let key in obj) {
                     if (obj[key] instanceof Array || obj[key] instanceof Object) { validateObject(obj[key]) }
-                    else if (obj[key] === undefined || obj[key] === null || obj[key] === NaN || obj[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
+                    else if (obj[key] === undefined || obj[key] === null || !(typeof obj[key] === 'string' || isNaN(obj[key])) || obj[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
                 }
             }
         }
@@ -630,10 +632,10 @@ function clickEventListner() {
             if (details[key] instanceof Array || details[key] instanceof Object) {
                 validateObject(details[key])
             }
-            else if (details[key] === undefined || details[key] === null || details[key] === NaN || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
+            else if (details[key] === undefined || details[key] === null || !(typeof details[key] === 'string' || isNaN(details[key])) || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
         }
 
-
+        console.log(details)
 
         show_popup_alert()
         if (this.getAttribute('api') == 'POST') {

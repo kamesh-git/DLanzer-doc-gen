@@ -369,11 +369,7 @@ function inputEventListner() {
     $("input[type='date']").on("input", function () {
         let new_date = new Date(this.value)
         const age = diff_years(new_date,new Date())
-<<<<<<< HEAD
         $(this).parent().parent().next().find('[deed_id*=Age]').val(age).trigger('input')
-=======
-        $(this).parent().parent().next().find('[deed_id*=Age]').val(age)
->>>>>>> 40b544d516ff70edb1a1a139df2bae2162dfdc63
         $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
 
     })

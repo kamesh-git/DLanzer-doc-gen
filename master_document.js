@@ -59,7 +59,7 @@ function eventListeners() {
                 putAPI = "DocumentLanguage"
                 const text = `<input type="text" dataKey="DocumentLanguageTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Document Language" value="${this.getAttribute('itemValue')}" />`
-                $(".update_fields").html(text)
+                $(".update_fields_DocumentLanguage").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentLanguage")
 
             }
@@ -86,7 +86,7 @@ function eventListeners() {
                 putAPI = "DocumentType"
                 const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="DocumentTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Document Type" />`
-                $(".update_fields").html(text)
+                $(".update_fields_DocumentType").html(text)
                 $(updateDataButton).appendTo(".update_fields_DocumentType")
 
             }
@@ -95,7 +95,7 @@ function eventListeners() {
                 putAPI = "PropertyType"
                 const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Customer Type Title" />`
-                $(".update_fields").html(text)
+                $(".update_fields_PropertyType").html(text)
                 $(updateDataButton).appendTo(".update_fields_PropertyType")
 
             }
@@ -105,6 +105,7 @@ function eventListeners() {
                 show_popup_alert()
                 putData = {}
                 $(".putData").each(function () {
+                    console.log(this)
                     const attr = this.getAttribute('dataKey')
                     const data = JSON.parse(`{"${attr}":"${this.value}"}`)
                     putData = { ...putData, ...data }

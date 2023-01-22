@@ -102,6 +102,7 @@ function eventListeners() {
                 show_popup_alert()
                 putData = {}
                 $(".putData").each(function () {
+                    console.log(this)
                     const attr = this.getAttribute('dataKey')
                     const data = JSON.parse(`{"${attr}":"${this.value}"}`)
                     putData = { ...putData, ...data }

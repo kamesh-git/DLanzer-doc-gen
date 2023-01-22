@@ -611,19 +611,18 @@ function clickEventListner() {
             property_details: property_detai,
             transfer_details: transfer_detail
         }
-        console.log(details)
 
         function validateObject(obj) {
             if (obj instanceof Array) {
                 obj.forEach(item => {
                     if (item instanceof Array || item instanceof Object) { validateObject(item) }
-                    else if (item === undefined || item === null || !(typeof item === 'string' || isNaN(item)) || item === "") { hide_popup_alert('property details field is required', 1, 5000); throw new Error("Null values are present") }
+                    else if (item === undefined || item === null || !(!isNaN(item) || typeof item === 'string') || item === "") { hide_popup_alert('property details field is required', 1, 5000); throw new Error("Null values are present") }
                 })
             }
             else if (obj instanceof Object) {
                 for (let key in obj) {
                     if (obj[key] instanceof Array || obj[key] instanceof Object) { validateObject(obj[key]) }
-                    else if (obj[key] === undefined || obj[key] === null || !(typeof obj[key] === 'string' || isNaN(obj[key])) || obj[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
+                    else if (obj[key] === undefined || obj[key] === null || !(!isNaN(obj[key]) || typeof obj[key] === 'string') || obj[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
                 }
             }
         }
@@ -632,10 +631,9 @@ function clickEventListner() {
             if (details[key] instanceof Array || details[key] instanceof Object) {
                 validateObject(details[key])
             }
-            else if (details[key] === undefined || details[key] === null || !(typeof details[key] === 'string' || isNaN(details[key])) || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
+            else if (details[key] === undefined || details[key] === null || !(!isNaN(details[key]) || typeof details[key] === 'string') || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
         }
 
-        console.log(details)
 
         show_popup_alert()
         if (this.getAttribute('api') == 'POST') {
@@ -644,19 +642,20 @@ function clickEventListner() {
                 setTimeout(() => {
                     location.reload()
                 }, 2000);
-            }).catch(error => {
+            }, error => {
                 hide_popup_alert(error.message)
             })
         }
         else {
-            apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {
-                apirequest("POST", "api/Document", details).then(resp => {
+            apirequest("POST", "api/Document", details).then(resp => {
+                apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {
                     hide_popup_alert("Document updated successfully")
                     setTimeout(() => {
                         location.reload()
                     }, 2000);
+                }, error => {
+                    hide_popup_alert(error.message)
                 })
-
             }, err => {
                 hide_popup_alert(err.message)
             })

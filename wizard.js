@@ -10,6 +10,21 @@ storeInput().then(resp => {
     clickEventListner();
     setTable()
     setVendorTable()
+    setPurchaserTable()
+
+    // select picker styles
+    $("[data-id='inputVendorMultiCompany'],[data-id='inputPurchaserMultiCompany']").each(function(){
+        $(this).css({
+            'background-color':'transparent',
+            'height':"60px",
+            'padding-top':'20px'
+        })
+    })
+    $(".bootstrap-select").each(function(){
+        $(this).css({
+            'padding':'0',
+        })
+    })
 
 })
 
@@ -409,6 +424,8 @@ function selectEventListner() {
         $("#inputDoucumentLanguage").html(text)
     })
     $("#inputVendorType").change(function () {
+        // vendorTable = []
+        setVendorTable()
         let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
@@ -418,17 +435,20 @@ function selectEventListner() {
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
         if (this.value == 2) {
             console.log($(".inputVendorInfo input[id*='Company'],.inputVendorInfo select[id*='Company']"))
-            $(".inputVendorInfo input[id*='Company']").each(function () { $(this).parent().parent().addClass('d-none') })
+            $("#company_info_vendor").addClass('d-none')
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
             console.log($(".inputVendorInfo input[id*='Company'],.inputVendorInfo select[id*='Company']"))
-            $(".inputVendorInfo input[id*='Company']").each(function () { $(this).parent().parent().removeClass('d-none') })
+            // $(".inputVendorInfo input[id*='Company']").each(function () { $(this).parent().parent().removeClass('d-none') })
+            $("#company_info_vendor").removeClass('d-none')
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().removeClass('d-none') })
         }
 
     })
     $("#inputPurchaserType").change(function () {
+        // purchaserTable = []
+        setPurchaserTable()
         let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
@@ -436,6 +456,17 @@ function selectEventListner() {
             else { return "" }
         }).join("")
         $("[id=inputPurchaserCategory]").each(function () { $(this).html(text) })
+        if (this.value == 2) {
+            console.log($(".inputPurchaserInfo input[id*='Company'],.inputPurchaserInfo select[id*='Company']"))
+            $("#company_info_purchaser").addClass('d-none')
+            $(".inputPurchaserInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
+        }
+        else if (this.value == 1) {
+            console.log($(".inputPurchaserInfo input[id*='Company'],.inputPurchaserInfo select[id*='Company']"))
+            // $(".inputPurchaserInfo input[id*='Company']").each(function () { $(this).parent().parent().removeClass('d-none') })
+            $("#company_info_purchaser").removeClass('d-none')
+            $(".inputPurchaserInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().removeClass('d-none') })
+        }
     })
     $("#inputDoucumentLanguage").change(function () {
         const docTypeSelected = document.getElementById("inputDoucumentType").value
@@ -511,226 +542,133 @@ function conjuctionRefresh() {
 }
 
 
-let vendorTable = {
-    "Dlanzer": {
-        "DocumentVendorCompanyName": "Dlanzer",
-        "DocumentVendorCompanyRegNo": "2020108011",
-        "DocumentVendorCompanyAddress": "Madhavaram",
-        "DocumentVendors": [
+let vendorTable = [
+    {
+        "DocumentVendorCompany": [
             {
-                "DocumentVendorMultiCompany": [
-                    "Dlanzer"
-                ],
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Dinesh V",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "CATPV2244J",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Veeran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Devarajan Street",
-                "DocumentVendorDistrict": "Thiruvallur",
-                "DocumentVendorTaluk": "Madhavaram",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
-            },
-            {
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Santosh",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "UUHGF7444V",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Saran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Kamaraj street",
-                "DocumentVendorDistrict": "Vellore",
-                "DocumentVendorTaluk": "Chennai",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
-            },
-            {
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Santosh",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "UUHGF7444V",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Saran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Kamaraj street",
-                "DocumentVendorDistrict": "Vellore",
-                "DocumentVendorTaluk": "Chennai",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
-            }
-        ]
-    },
-    "Radicals": {
-        "DocumentVendorCompanyName": "Radicals",
-        "DocumentVendorCompanyRegNo": "2020108011",
-        "DocumentVendorCompanyAddress": "Madhavaram",
-        "DocumentVendors": [
-            {
-                "DocumentVendorMultiCompany": [
-                    "Radicals"
-                ],
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Kamesh A",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "CATPV2244J",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Veeran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Devarajan Street",
-                "DocumentVendorDistrict": "Thiruvallur",
-                "DocumentVendorTaluk": "Madhavaram",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
-            },
-            {
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Santosh",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "UUHGF7444V",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Saran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Kamaraj street",
-                "DocumentVendorDistrict": "Vellore",
-                "DocumentVendorTaluk": "Chennai",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
-            }
-        ]
-    },
-    "New company": {
-        "DocumentVendors": [
-            {
-                "DocumentVendorMultiCompany": "",
-                "DocumentVendorGenderID": "1",
-                "DocumentVendorCategoryID": "1",
-                "DocumentVendorName": "Santosh",
-                "DocumentVendorDateOfBirth": "2002-09-28",
-                "DocumentVendorAge": "20",
-                "DocumentVendorPAN": "UUHGF7444V",
-                "DocumentVendorRelationshipID": "3",
-                "DocumentVendorRelationName": "Saran",
-                "DocumentVendorAadharNumber": "768768756876",
-                "DocumentVendorPhoneNumber": "8610769361",
-                "DocumentVendorDoorNo": "11",
-                "DocumentVendorStreet": "Kamaraj street",
-                "DocumentVendorDistrict": "Vellore",
-                "DocumentVendorTaluk": "Chennai",
-                "DocumentVendorCity": "Chennai",
-                "DocumentVendorState": "Tamil Nadu",
-                "DocumentVendorPinCode": "600062"
+                "DocumentVendorCompanyName": "Dlanzer",
+                "DocumentVendorCompanyRegNo": "2020108011",
+                "DocumentVendorCompanyAddress": "No:11 Ramar Street Ashok Nagar Avadi"
             }
         ],
-        "DocumentVendorCompanyName": "New company",
-        "DocumentVendorCompanyRegNo": "2020108011",
-        "DocumentVendorCompanyAddress": "Cuddalore"
+        "DocumentVendorGenderID": "1",
+        "DocumentVendorCategoryID": "1",
+        "DocumentVendorName": "KAMESH A",
+        "DocumentVendorDateOfBirth": "2002-09-28",
+        "DocumentVendorAge": "20",
+        "DocumentVendorPAN": "UUHGF7444V",
+        "DocumentVendorRelationshipID": "3",
+        "DocumentVendorRelationName": "Vimala",
+        "DocumentVendorAadharNumber": "768768756876",
+        "DocumentVendorPhoneNumber": "8610769361",
+        "DocumentVendorDoorNo": "11",
+        "DocumentVendorStreet": "No:11 Ramar Street Ashok Nagar Avadi",
+        "DocumentVendorDistrict": "Vellore",
+        "DocumentVendorTaluk": "Chennai",
+        "DocumentVendorCity": "Chennai",
+        "DocumentVendorState": "Tamil Nadu",
+        "DocumentVendorPinCode": "600062"
     }
-}
+]
+let companyTableVendor = []
+let purchaserTable = [
+    {
+        "DocumentPurchaserCompany": [
+            {
+                "DocumentPurchaserCompanyName": "Purchaser dlanzer",
+                "DocumentPurchaserCompanyRegNo": "2020108011",
+                "DocumentPurchaserCompanyAddress": "No:11 Ramar Street Ashok Nagar Avadi"
+            }
+        ],
+        "DocumentPurchaserCategoryID": "2",
+        "DocumentPurchaserGenderID": "1",
+        "DocumentPurchaserName": "Dinesh V",
+        "DocumentPurchaserDateOfBirth": "2002-09-28",
+        "DocumentPurchaserAge": "20",
+        "DocumentPurchaserPAN": "CATPV2244J",
+        "DocumentPurchaserRelationshipID": "3",
+        "DocumentPurchaserRelationName": "Veeran",
+        "DocumentPurchaserAadharNumber": "123456789456",
+        "DocumentPurchaserPhoneNumber": "8610769361",
+        "DocumentPurchaserDoorNo": "59",
+        "DocumentPurchaserStreet": "Devarajan Street",
+        "DocumentPurchaserDistrict": "Thiruvallur",
+        "DocumentPurchaserTaluk": "Madhavaram",
+        "DocumentPurchaserCity": "Tiruvallur",
+        "DocumentPurchaserState": "Tamil Nadu",
+        "DocumentPurchaserPinCode": "600081"
+    }
+]
+let companyTablePurchaser = []
+
 function setVendorTable() {
     $("#vendorInfoTable h5,#vendorInfoTable table,#inputVendorMultiCompany option").each(function () { $(this).remove() })
     if ('vendortype == 1') {
-        for (let key in vendorTable) {
-            const text = `<h5> ${key} </h5> <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            ${vendorTable[key]['DocumentVendors'].map((item, index) => (
+            const text = vendorTable.map((item,index) => (
                 `<tr>
                 <th scope="row">${index + 1}</th>
                 <td>${item.DocumentVendorName}</td>
                 <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == item.DocumentVendorCategoryID)[0].CustomerCategoryTitle}</td>
                 <td>
-                    <button type="button" class="edit_vendor_table btn btn-warning" value="${key}/${index}">Edit</button>
-                    <button type="button" class="delete_vendor_table btn btn-danger" value="${key}/${index}">Delete</button>
+                    <button type="button" class="edit_vendor_table btn btn-warning" value="${index}">Edit</button>
+                    <button type="button" class="delete_vendor_table btn btn-danger" value="${index}">Delete</button>
                 </td>
-              </tr>`
-            )).join("")}
-            </tbody>
-          </table> `
-            $(text).appendTo("#vendorInfoTable")
+              </tr>
+             `
+            )).join("")
+            $("#vendorInfoTable").html(text)
 
             $(".delete_vendor_table").each(function () {
                 $(this).click(function () {
-                    const location = this.value.split('/')
-                    vendorTable[location[0]]['DocumentVendors'].splice(location[1], 1)
-                    console.log(vendorTable,this)
+                    vendorTable = vendorTable.filter((item,index) => (index != this.value))
+                    console.log(vendorTable, this)
                     setVendorTable()
                 })
             })
             $(".edit_vendor_table").each(function () {
+                // $(this).click(function () {
+                //     vendorTable[this.value]
+                //     vendorTable[location[0]]['DocumentVendors'].splice(location[1], 1)
+                //     console.log(vendorTable)
+                //     setVendorTable()
+                // })
+            })
+
+    }
+}
+function setPurchaserTable() {
+    $("#purchaserInfoTable h5,#purchaserInfoTable table,#inputpurchaserMultiCompany option").each(function () { $(this).remove() })
+    if ('purchasertype == 1') {
+            const text = purchaserTable.map((item,index) => (
+                `<tr>
+                <th scope="row">${index + 1}</th>
+                <td>${item.DocumentPurchaserName}</td>
+                <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == item.DocumentPurchaserCategoryID)[0].CustomerCategoryTitle}</td>
+                <td>
+                    <button type="button" class="edit_purchaser_table btn btn-warning" value="${index}">Edit</button>
+                    <button type="button" class="delete_purchaser_table btn btn-danger" value="${index}">Delete</button>
+                </td>
+              </tr>
+             `
+            )).join("")
+            $("#purchaserInfoTable").html(text)
+
+            $(".delete_purchaser_table").each(function () {
                 $(this).click(function () {
-                    const location = this.value.split('/')
-                    let vendor_info = vendorTable[location[0]]
-                    for(let key1 in vendor_info){
-                        $(`#append_vendor_clone [save_id=${key1}]`).val(vendor_info[key1])
-                        $(`#append_vendor_clone select[save_id=${key1}]`).val(vendor_info[key1]).trigger('change')
-                    }
-                    vendor_info = vendorTable[location[0]]['DocumentVendors'][location[1]]
-                    for(let key1 in vendor_info){
-                        $(`#append_vendor_clone [save_id=${key1}]`).val(vendor_info[key1])
-                        $(`#append_vendor_clone select[save_id=${key1}]`).val(vendor_info[key1]).trigger('change')
-                    }
-                    vendorTable[location[0]]['DocumentVendors'].splice(location[1], 1)
-                    console.log(vendorTable)
-                    setVendorTable()
+                    purchaserTable = purchaserTable.filter((item,index) => (index != this.value))
+                    console.log(purchaserTable, this)
+                    setPurchaserTable()
                 })
             })
-
-
-            $(`<option value="${key}">${key}</option>`).appendTo("#inputVendorMultiCompany")
-            $("#inputVendorMultiCompany").change(function () {
-                if ($(this).val().length) {
-                    $("#inputVendorCompanyName").parent().parent().addClass('d-none')
-                    $("#inputVendorCompanyRegNo").parent().parent().addClass('d-none')
-                    $("#inputVendorCompanyAddress").parent().parent().addClass('d-none')
-                }
-                else {
-                    $("#inputVendorCompanyName").parent().parent().removeClass('d-none')
-                    $("#inputVendorCompanyRegNo").parent().parent().removeClass('d-none')
-                    $("#inputVendorCompanyAddress").parent().parent().removeClass('d-none')
-
-                }
+            $(".edit_purchaser_table").each(function () {
+                // $(this).click(function () {
+                //     purchaserTable[this.value]
+                //     purchaserTable[location[0]]['Documentpurchasers'].splice(location[1], 1)
+                //     console.log(purchaserTable)
+                //     setPurchaserTable()
+                // })
             })
-            $("#inputVendorMultiCompany").selectpicker('refresh')
 
-
-
-        }
     }
 }
 
@@ -897,47 +835,49 @@ function clickEventListner() {
             })
         }
     })
+
+    $("#DocumentVendorAddCompany").click(function () {
+        let companyTableVendorTemp = {}
+        $("#company_info_vendor input").each(function () {
+            companyTableVendorTemp[this.getAttribute('save_id')] = this.value
+        })
+        companyTableVendor.push(companyTableVendorTemp)
+        $("#inputVendorMultiCompany").html(companyTableVendor.map((item,index) => (`<option value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
+        $("#inputVendorMultiCompany").selectpicker('refresh')
+        console.log(companyTableVendor)
+    })
     $("#vendorInfoClone").click(function () {
         vendorIterationCount += 1;
         const vendorTableTemp = {}
 
-        // multi company
-        if ($('#inputVendorMultiCompany').val().length) {
-            $("#append_vendor_clone input[save_id],#append_vendor_clone select[save_id]").each(function () {
-                if (!this.getAttribute('save_id').includes('Company') || this.getAttribute('save_id').includes('MultiCompany')) {
-                    if (!$(this).val().length) {
-                        hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
-                        throw new Error(`${this.getAttribute('save_id')} field is required`)
-                    }
-                    else {
-                        vendorTableTemp[this.getAttribute('save_id')] = $(this).val()
-                    }
-                }
-            })
-            $('#inputVendorMultiCompany').val().forEach(item => {
-                vendorTable[item]['DocumentVendors'].push(vendorTableTemp)
-            })
-        }
 
-        // new company
-        else {
-            vendorTableTemp['DocumentVendors'] = [{}]
-            $("#append_vendor_clone input[save_id],#append_vendor_clone select[save_id]").each(function () {
-                if ($(this).val() === '') {
-                    hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
-                    throw new Error(`${this.getAttribute('save_id')} field is required`)
+        
+        $(".inputVendorInfo select,.inputVendorInfo input").each(function(){
+            if($(this).val() === ""){
+                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            }
+            else{
+                if(this.getAttribute("id") !== 'inputVendorMultiCompany'){
+                    vendorTableTemp[this.getAttribute('save_id')]=$(this).val()
                 }
-                else {
-                    if (this.getAttribute('save_id').includes('Company') && !this.getAttribute('save_id').includes('MultiCompany')) {
-                        vendorTableTemp[this.getAttribute('save_id')] = this.value
-                    }
-                    else {
-                        vendorTableTemp['DocumentVendors'][0][this.getAttribute('save_id')] = this.value
+                else{
+                    if($("#inputVendorType").val() == 1){
+                        if(!$(this).val().length){hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);throw new Error(`${this.getAttribute('save_id')} field is required`)}
+                        vendorTableTemp['DocumentVendorCompany'] = []
+                        $(this).val().forEach(item => {
+                            console.log(companyTableVendor[parseInt(item)])
+                            vendorTableTemp['DocumentVendorCompany'].push(companyTableVendor[parseInt(item)])
+                        })
                     }
                 }
-            })
-            vendorTable[vendorTableTemp.DocumentVendorCompanyName] = vendorTableTemp
-        }
+            }
+        })
+
+
+        vendorTable.push(vendorTableTemp)
+        
+
         console.log(vendorTable)
 
         setVendorTable()
@@ -960,43 +900,72 @@ function clickEventListner() {
 
     }
     )
+    $("#DocumentPurchaserAddCompany").click(function () {
+        let companyTablePurchaserTemp = {}
+        $("#company_info_purchaser input").each(function () {
+            companyTablePurchaserTemp[this.getAttribute('save_id')] = this.value
+        })
+        companyTablePurchaser.push(companyTablePurchaserTemp)
+        $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item,index) => (`<option value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
+        $("#inputPurchaserMultiCompany").selectpicker('refresh')
+        console.log(companyTablePurchaser)
+    })
+    $("#purchaserInfoClone").click(function () {
+        purchaserIterationCount += 1;
+        const purchaserTableTemp = {}
 
 
-    $("#vendorInfoRemoveClone").click(
-        function () {
-            if (vendorIterationCount > 0) {
-                $('.inputVendorInfo').eq(vendorIterationCount).remove();
-                $(`span#first_person_details_${vendorIterationCount}`).remove()
-                vendorIterationCount--;
-                conjuctionRefresh()
+        
+        $(".inputPurchaserInfo select,.inputPurchaserInfo input").each(function(){
+            if($(this).val() === ""){
+                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                throw new Error(`${this.getAttribute('save_id')} field is required`)
             }
-        }
-    )
-    $("#purchaserInfoClone").click(
-        function () {
-            purchaserIterationCount += 1
+            else{
+                if(this.getAttribute("id") !== 'inputPurchaserMultiCompany'){
+                    purchaserTableTemp[this.getAttribute('save_id')]=$(this).val()
+                }
+                else{
+                    if($("#inputPurchaserType").val() == 1){
+                        if(!$(this).val().length){hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);throw new Error(`${this.getAttribute('save_id')} field is required`)}
+                        purchaserTableTemp['DocumentPurchaserCompany'] = []
+                        $(this).val().forEach(item => {
+                            console.log(companyTablePurchaser[parseInt(item)])
+                            purchaserTableTemp['DocumentPurchaserCompany'].push(companyTablePurchaser[parseInt(item)])
+                        })
+                    }
+                }
+            }
+        })
 
-            $('#hidden_use_element').html($($(".inputPurchaserInfo")[0]).clone())
-            $('#hidden_use_element input[deed_id],#hidden_use_element select[deed_id]').each(function () {
-                this.value = ""
-                let deed_id = this.getAttribute('deed_id')
-                this.setAttribute('deed_id', deed_id.slice(0, deed_id.indexOf('_') + 1) + purchaserIterationCount)
-            })
-            $($("#hidden_use_element .inputPurchaserInfo")).appendTo('#append_purchaser_clone')
 
-            $('#hidden_use_element').html(deed_content)
-            $('#hidden_use_element').html($('#hidden_use_element #Second_person_details').html())
-            $("#hidden_use_element span").each(function () {
-                let changeid = this.getAttribute('id')
-                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
-                this.setAttribute('id', changeid)
-            })
-            let text = `<span id='Second_person_details_${purchaserIterationCount}'><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
-            $(text).appendTo('#deed_body #Second_person_details')
-            inputEventListner()
-            conjuctionRefresh()
-        }
+        purchaserTable.push(purchaserTableTemp)
+        
+
+        console.log(purchaserTable)
+
+        setPurchaserTable()
+
+
+
+
+
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #first_person_details').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        let text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
+        $(text).appendTo('#deed_body #first_person_details')
+        inputEventListner()
+        conjuctionRefresh()
+
+    }
     )
+
+
     $("#purchaserInfoRemoveClone").click(
         function () {
             if (purchaserIterationCount > 0) {
@@ -1045,4 +1014,3 @@ function clickEventListner() {
     )
 
 }
-

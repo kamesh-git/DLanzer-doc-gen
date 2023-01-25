@@ -350,9 +350,51 @@ function setdocFields() {
 
 
 function inputEventListner() {
+    function diff_years(dt2, dt1) {
+
+        var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= (60 * 60 * 24);
+        return Math.abs(Math.round(diff / 365.25));
+
+    }
     $("#new_document_entry input").on("input", function () {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
+        if(this.getAttribute('type') == 'date'){
+            let new_date = new Date(this.value)
+            const age = diff_years(new_date, new Date())
+            $(this).parent().parent().next().find('[deed_id*=Age]').val(age).trigger('input')
+            $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
+    
+        }
+    })
+
+    // vendor
+    $("#new_document_entry .inputVendorInfo input").on("input", function () {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.value)
+        if(this.getAttribute('type') == 'date'){
+            let new_date = new Date(this.value)
+            $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(new_date.toShortFormat())          
+        }
+    })
+
+    $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
+    })
+
+    // purchaser
+    $("#new_document_entry .inputPurchaserInfo input").on("input", function () {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.value)
+        if(this.getAttribute('type') == 'date'){
+            let new_date = new Date(this.value)
+            $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(new_date.toShortFormat())          
+        }
+    })
+
+    $(".inputPurchaserInfo select[id!=inputPurchaserMultiCompany]").on("change", function () {
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
 
     $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function () {
@@ -368,27 +410,12 @@ function inputEventListner() {
             $(`#${this.getAttribute("deed_id")}`).html(this.value)
         })
     })
-    // $("select").on("change", function () {
-    //     $(`#${this.getAttribute("deed_id")}`).html(this.options[this.selectedIndex].innerHTML)
-    // })
+    
 
 
 
 
-    function diff_years(dt2, dt1) {
-
-        var diff = (dt2.getTime() - dt1.getTime()) / 1000;
-        diff /= (60 * 60 * 24);
-        return Math.abs(Math.round(diff / 365.25));
-
-    }
-    $("input[type='date']").on("input", function () {
-        let new_date = new Date(this.value)
-        const age = diff_years(new_date, new Date())
-        $(this).parent().parent().next().find('[deed_id*=Age]').val(age).trigger('input')
-        $(`#${this.getAttribute("deed_id")}`).html(new_date.toShortFormat())
-
-    })
+    
     $('textarea').each(function () {
         $(this).on('input', function () {
             this.style.height = 0;
@@ -542,67 +569,13 @@ function conjuctionRefresh() {
 }
 
 
-let vendorTable = [
-    {
-        "DocumentVendorCompany": [
-            {
-                "DocumentVendorCompanyName": "Dlanzer",
-                "DocumentVendorCompanyRegNo": "2020108011",
-                "DocumentVendorCompanyAddress": "No:11 Ramar Street Ashok Nagar Avadi"
-            }
-        ],
-        "DocumentVendorGenderID": "1",
-        "DocumentVendorCategoryID": "1",
-        "DocumentVendorName": "KAMESH A",
-        "DocumentVendorDateOfBirth": "2002-09-28",
-        "DocumentVendorAge": "20",
-        "DocumentVendorPAN": "UUHGF7444V",
-        "DocumentVendorRelationshipID": "3",
-        "DocumentVendorRelationName": "Vimala",
-        "DocumentVendorAadharNumber": "768768756876",
-        "DocumentVendorPhoneNumber": "8610769361",
-        "DocumentVendorDoorNo": "11",
-        "DocumentVendorStreet": "No:11 Ramar Street Ashok Nagar Avadi",
-        "DocumentVendorDistrict": "Vellore",
-        "DocumentVendorTaluk": "Chennai",
-        "DocumentVendorCity": "Chennai",
-        "DocumentVendorState": "Tamil Nadu",
-        "DocumentVendorPinCode": "600062"
-    }
-]
+let vendorTable = []
 let companyTableVendor = []
-let purchaserTable = [
-    {
-        "DocumentPurchaserCompany": [
-            {
-                "DocumentPurchaserCompanyName": "Purchaser dlanzer",
-                "DocumentPurchaserCompanyRegNo": "2020108011",
-                "DocumentPurchaserCompanyAddress": "No:11 Ramar Street Ashok Nagar Avadi"
-            }
-        ],
-        "DocumentPurchaserCategoryID": "2",
-        "DocumentPurchaserGenderID": "1",
-        "DocumentPurchaserName": "Dinesh V",
-        "DocumentPurchaserDateOfBirth": "2002-09-28",
-        "DocumentPurchaserAge": "20",
-        "DocumentPurchaserPAN": "CATPV2244J",
-        "DocumentPurchaserRelationshipID": "3",
-        "DocumentPurchaserRelationName": "Veeran",
-        "DocumentPurchaserAadharNumber": "123456789456",
-        "DocumentPurchaserPhoneNumber": "8610769361",
-        "DocumentPurchaserDoorNo": "59",
-        "DocumentPurchaserStreet": "Devarajan Street",
-        "DocumentPurchaserDistrict": "Thiruvallur",
-        "DocumentPurchaserTaluk": "Madhavaram",
-        "DocumentPurchaserCity": "Tiruvallur",
-        "DocumentPurchaserState": "Tamil Nadu",
-        "DocumentPurchaserPinCode": "600081"
-    }
-]
+let purchaserTable = []
 let companyTablePurchaser = []
 
 function setVendorTable() {
-    $("#vendorInfoTable h5,#vendorInfoTable table,#inputVendorMultiCompany option").each(function () { $(this).remove() })
+    $("#vendorInfoTable h5,#vendorInfoTable table").each(function () { $(this).remove() })
     if ('vendortype == 1') {
             const text = vendorTable.map((item,index) => (
                 `<tr>
@@ -637,7 +610,7 @@ function setVendorTable() {
     }
 }
 function setPurchaserTable() {
-    $("#purchaserInfoTable h5,#purchaserInfoTable table,#inputpurchaserMultiCompany option").each(function () { $(this).remove() })
+    $("#purchaserInfoTable h5,#purchaserInfoTable table").each(function () { $(this).remove() })
     if ('purchasertype == 1') {
             const text = purchaserTable.map((item,index) => (
                 `<tr>
@@ -675,52 +648,6 @@ function setPurchaserTable() {
 function clickEventListner() {
 
     $("#save_button").click(async function () {
-        const document_vendor = []
-        for (let i = 0; i <= vendorIterationCount; i++) {
-            document_vendor.push({
-                DocumentVendorID: i + 1,
-                DocumentVendorGenderID: parseInt($(`[deed_id=documentFirstPersonTitle_${i}]`).val()),
-                DocumentVendorCategoryID: parseInt($(`[deed_id=documentVendorCategory_${i}]`).val()),
-                DocumentVendorRelationshipID: parseInt($(`[deed_id=documentFirstPersonRelationshipTitle_${i}]`).val()),
-                DocumentVendorAge: $(`[deed_id=documentFirstPersonAge_${i}]`).val(),
-                DocumentVendorDateOfBirth: $(`[deed_id=documentFirstPersonDOB_${i}]`).val(),
-                DocumentVendorRelationName: $(`[deed_id=documentFirstPersonRelationshipName_${i}]`).val(),
-                DocumentVendorName: $(`[deed_id=documentFirstPersonName_${i}]`).val(),
-                DocumentVendorPAN: $(`[deed_id=documentFirstPersonPAN_${i}]`).val(),
-                DocumentVendorAadharNumber: $(`[deed_id=documentFirstPersonAadhar_${i}]`).val(),
-                DocumentVendorPhoneNumber: $(`[deed_id=documentFirstPersonPhone_${i}]`).val(),
-                DocumentVendorDoorNo: $(`[deed_id=documentFirstPersonDoorNo_${i}]`).val(),
-                DocumentVendorStreet: $(`[deed_id=documentFirstPersonStreet_${i}]`).val(),
-                DocumentVendorDistrict: $(`[deed_id=documentFirstPersonDistrict_${i}]`).val(),
-                DocumentVendorTaluk: $(`[deed_id=documentFirstPersonTaluk_${i}]`).val(),
-                DocumentVendorState: $(`[deed_id=documentFirstPersonState_${i}]`).val(),
-                DocumentVendorPinCode: $(`[deed_id=documentFirstPersonPincode_${i}]`).val(),
-
-            })
-        }
-        const document_purchaser = []
-        for (let i = 0; i <= purchaserIterationCount; i++) {
-            document_purchaser.push({
-
-                DocumentPurchaserID: i + 1,
-                DocumentPurchaserGenderID: parseInt($(`[deed_id=documentSecondPersonTitle_${i}]`).val()),
-                DocumentPurchaserCategoryID: parseInt($(`[deed_id=documentSecondPersonTitle_${i}]`).val()),
-                DocumentPurchaserRelationshipID: parseInt($(`[deed_id=documentSecondPersonRelationshipTitle_${i}]`).val()),
-                DocumentPurchaserAge: $(`[deed_id=documentSecondPersonAge_${i}]`).val(),
-                DocumentPurchaserDateOfBirth: $(`[deed_id=documentSecondPersonDOB_${i}]`).val(),
-                DocumentPurchaserRelationName: $(`[deed_id=documentSecondPersonRelationshipName_${i}]`).val(),
-                DocumentPurchaserName: $(`[deed_id=documentSecondPersonName_${i}]`).val(),
-                DocumentPurchaserPAN: $(`[deed_id=documentSecondPersonPAN_${i}]`).val(),
-                DocumentPurchaserAadharNumber: $(`[deed_id=documentSecondPersonAadhar_${i}]`).val(),
-                DocumentPurchaserPhoneNumber: $(`[deed_id=documentSecondPersonPhone_${i}]`).val(),
-                DocumentPurchaserDoorNo: $(`[deed_id=documentSecondPersonDoorNo_${i}]`).val(),
-                DocumentPurchaserStreet: $(`[deed_id=documentSecondPersonStreet_${i}]`).val(),
-                DocumentPurchaserDistrict: $(`[deed_id=documentSecondPersonDistrict_${i}]`).val(),
-                DocumentPurchaserTaluk: $(`[deed_id=documentSecondPersonTaluk_${i}]`).val(),
-                DocumentPurchaserState: $(`[deed_id=documentSecondPersonState_${i}]`).val(),
-                DocumentPurchaserPinCode: $(`[deed_id=documentSecondPersonPincode_${i}]`).val(),
-            })
-        }
         const document_witness = []
         for (let i = 0; i <= witnessIterationCount; i++) {
             document_witness.push({
@@ -778,8 +705,8 @@ function clickEventListner() {
             DocumentExecutionPlace: document.getElementById("inputExcutionPlace").value,
             DocumentExecutionDate: document.getElementById("inputSaleDeedExecution").value,
             DocumentTemplateHTML: document.getElementById("deed_body").innerHTML,
-            document_vendor: document_vendor,
-            document_purchaser: document_purchaser,
+            document_vendor: vendorTable,
+            document_purchaser: purchaserTable,
             document_witness: document_witness,
             payment_details: payment_detail,
             property_details: property_detai,
@@ -883,20 +810,25 @@ function clickEventListner() {
         setVendorTable()
 
 
-
-
-
-        $('#hidden_use_element').html(deed_content)
-        $('#hidden_use_element').html($('#hidden_use_element #first_person_details').html())
-        $("#hidden_use_element span").each(function () {
-            let changeid = this.getAttribute('id')
-            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
-            this.setAttribute('id', changeid)
+        $("#vendorInfoClone").addClass('d-none')
+        $("#vendorInfoCloneTrigger").removeClass('d-none').click(function(){
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #first_person_details').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            let text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            $(text).appendTo('#deed_body #first_person_details')
+            $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function(){ console.log(this);this.value = "" })
+            inputEventListner()
+            conjuctionRefresh()
+            $("#vendorInfoClone").removeClass('d-none')
+            $("#vendorInfoCloneTrigger").addClass('d-none')
         })
-        let text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
-        $(text).appendTo('#deed_body #first_person_details')
-        inputEventListner()
-        conjuctionRefresh()
+
+
 
     }
     )
@@ -948,19 +880,23 @@ function clickEventListner() {
 
 
 
-
-
-        $('#hidden_use_element').html(deed_content)
-        $('#hidden_use_element').html($('#hidden_use_element #first_person_details').html())
-        $("#hidden_use_element span").each(function () {
-            let changeid = this.getAttribute('id')
-            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
-            this.setAttribute('id', changeid)
+        $("#purchaserInfoClone").addClass('d-none')
+        $("#purchaserInfoCloneTrigger").removeClass('d-none').click(function(){
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #second_person_details').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            let text = `<span id='second_person_details_${purchaserIterationCount}'><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            $(text).appendTo('#deed_body #second_person_details')
+            $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function(){ console.log(this);this.value = "" })
+            inputEventListner()
+            conjuctionRefresh()
+            $("#purchaserInfoClone").removeClass('d-none')
+            $("#purchaserInfoCloneTrigger").addClass('d-none')
         })
-        let text = `<span id='first_person_details_${vendorIterationCount}'><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
-        $(text).appendTo('#deed_body #first_person_details')
-        inputEventListner()
-        conjuctionRefresh()
 
     }
     )

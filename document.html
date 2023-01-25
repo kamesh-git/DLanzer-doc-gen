@@ -32,6 +32,8 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+    <link rel="stylesheet" href="styles.css">
+
 
 
 
@@ -82,45 +84,38 @@
         </div>
     </div>
 
-    <aside class="sidebar sidebar-default navs-rounded-all sidebar-mini">
-        <div class="sidebar-header d-flex align-items-center justify-content-start">
-            <a href="./index.html" class="navbar-brand">
-                <!--Logo start-->
-                <svg width="30" class="" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
-                        fill="currentColor" />
-                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)"
-                        fill="currentColor" />
-                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                </svg>
-                <!--logo End-->
-                <h4 class="logo-title">Hope UI</h4>
-            </a>
-            <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-                <i class="icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </i>
-            </div>
-        </div>
-        <div class="sidebar-body pt-0 data-scrollbar">
-            <div class="sidebar-list">
-                <!-- Sidebar Menu Start -->
-                <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
-                    <li class="nav-item static-item">
-                        <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                            <span class="default-icon">Home</span>
-                            <span class="mini-icon">-</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
+
+
+
+
+
+    <main class="main-content">
+        <div class="position-relative iq-banner">
+            <!--Nav Start-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <a href="./index.html" class="navbar-brand">
+                        <!--Logo start-->
+                        <svg width="30" class="text-primary" viewBox="0 0 30 30" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
+                            <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
+                            <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
+                            <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
+                        </svg>
+                        <!--logo End-->
+                        <h4 class="logo-title">Hope UI</h4>
+                    </a>                  
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="./index.html">
                             <i class="icon">
                                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,15 +142,6 @@
                             <span class="item-name">Document</span>
                         </a>
                     </li>
-                    <li>
-                        <hr class="hr-horizontal">
-                    </li>
-                    <li class="nav-item static-item">
-                        <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                            <span class="default-icon">Masters</span>
-                            <span class="mini-icon">-</span>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./masters_customer.html">
                             <i class="icon">
@@ -180,137 +166,59 @@
                             <span class="item-name">Document</span>
                         </a>
                     </li>
-                    <li>
-                        <hr class="hr-horizontal">
-                    </li>
-                </ul>
-                <!-- Sidebar Menu End -->
-            </div>
-        </div>
-        <div class="sidebar-footer"></div>
-    </aside>
-
-
-
-
-
-    <main class="main-content">
-        <div class="position-relative iq-banner">
-            <!--Nav Start-->
-            <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
-                <div class="container-fluid navbar-inner">
-                    <a href="./index.html" class="navbar-brand">
-                        <!--Logo start-->
-                        <svg width="30" class="text-primary" viewBox="0 0 30 30" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                                transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                            <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                                transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
-                            <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                                transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
-                            <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                                transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                        </svg>
-                        <!--logo End-->
-                        <h4 class="logo-title">Hope UI</h4>
-                    </a>
-                    <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-                        <i class="icon">
-                            <svg width="20px" height="20px" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
-                            </svg>
-                        </i>
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon">
-                            <span class="mt-2 navbar-toggler-bar bar1"></span>
-                            <span class="navbar-toggler-bar bar2"></span>
-                            <span class="navbar-toggler-bar bar3"></span>
-                        </span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="./assets/images/Flag/flag001.png" class="img-fluid rounded-circle"
-                                        alt="user" style="height: 30px; min-width: 30px; width: 30px;">
-                                    <span class="bg-primary"></span>
-                                </a>
-                                <div class="p-0 sub-drop dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="dropdownMenuButton2">
-                                    <div class="m-0 border-0 shadow-none card">
-                                        <div class="p-0 ">
-                                            <ul class="p-0 list-group list-group-flush">
-                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                            src="./assets/images/Flag/flag-03.png" alt="img-flaf"
-                                                            class="img-fluid me-2"
-                                                            style="width: 15px;height: 15px;min-width: 15px;" />Spanish</a>
-                                                </li>
-                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                            src="./assets/images/Flag/flag-04.png" alt="img-flaf"
-                                                            class="img-fluid me-2"
-                                                            style="width: 15px;height: 15px;min-width: 15px;" />Italian</a>
-                                                </li>
-                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                            src="./assets/images/Flag/flag-02.png" alt="img-flaf"
-                                                            class="img-fluid me-2"
-                                                            style="width: 15px;height: 15px;min-width: 15px;" />French</a>
-                                                </li>
-                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                            src="./assets/images/Flag/flag-05.png" alt="img-flaf"
-                                                            class="img-fluid me-2"
-                                                            style="width: 15px;height: 15px;min-width: 15px;" />German</a>
-                                                </li>
-                                                <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                            src="./assets/images/Flag/flag-06.png" alt="img-flaf"
-                                                            class="img-fluid me-2"
-                                                            style="width: 15px;height: 15px;min-width: 15px;" />Japanese</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="./assets/images/Flag/flag001.png" class="img-fluid rounded-circle"
+                            alt="user" style="height: 30px; min-width: 30px; width: 30px;">
+                        <span class="bg-primary"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#"><img
+                            src="./assets/images/Flag/flag-03.png" alt="img-flaf"
+                            class="img-fluid me-2"
+                            style="width: 15px;height: 15px;min-width: 15px;" />English</a></li>
+                          <li><a class="dropdown-item" href="#"><img
+                            src="./assets/images/Flag/flag-03.png" alt="img-flaf"
+                            class="img-fluid me-2"
+                            style="width: 15px;height: 15px;min-width: 15px;" />Tamil</a></li>
+                        </ul>
+                      </li>
+                    <li class="nav-item dropdown">
+                        <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="./assets/images/avatars/01.png" alt="User-Profile"
+                                class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
+                            <img src="./assets/images/avatars/avtar_1.png" alt="User-Profile"
+                                class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
+                            <img src="./assets/images/avatars/avtar_2.png" alt="User-Profile"
+                                class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
+                            <img src="./assets/images/avatars/avtar_4.png" alt="User-Profile"
+                                class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
+                            <img src="./assets/images/avatars/avtar_5.png" alt="User-Profile"
+                                class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
+                            <img src="./assets/images/avatars/avtar_3.png" alt="User-Profile"
+                                class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
+                            <div class="caption ms-3 d-none d-md-block ">
+                                <h6 id="username" class="mb-0 caption-title">Austin Robertson</h6>
+                                <p id="useremail" class="mb-0 caption-sub-title">Marketing Administrator</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    href="#">Change Password</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./assets/images/avatars/01.png" alt="User-Profile"
-                                        class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <img src="./assets/images/avatars/avtar_1.png" alt="User-Profile"
-                                        class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <img src="./assets/images/avatars/avtar_2.png" alt="User-Profile"
-                                        class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <img src="./assets/images/avatars/avtar_4.png" alt="User-Profile"
-                                        class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <img src="./assets/images/avatars/avtar_5.png" alt="User-Profile"
-                                        class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <img src="./assets/images/avatars/avtar_3.png" alt="User-Profile"
-                                        class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
-                                    <div class="caption ms-3 d-none d-md-block ">
-                                        <h6 id="username" class="mb-0 caption-title">Austin Robertson</h6>
-                                        <p id="useremail" class="mb-0 caption-sub-title">Marketing Administrator</p>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            href="#">Change Password</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" id="logout_user" href="#">Logout</a>
-                                    </li>
-                                </ul>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" id="logout_user" href="#">Logout</a>
                             </li>
                         </ul>
-                    </div>
+                    </li>
+                    </ul>
+                  </div>
                 </div>
-            </nav> <!-- Nav Header Component Start -->
+              </nav>
+               <!-- Nav Header Component Start -->
             <div class="iq-navbar-header" style="height: 215px;">
                 <div class="container-fluid iq-container">
                     <div class="row">
@@ -583,7 +491,7 @@
                                                         <h3>Company Information</h3>
                                                         <div class="col-md-3 mb-3">
                                                             <div class="form-floating" id="inputVendorCompanyNameDiv">
-                                                                <input deed_id="documentFirstPersonName_0" type="text"
+                                                                <input  type="text"
                                                                     save_id="DocumentVendorCompanyName"
                                                                     class="form-control" id="inputVendorCompanyName"
                                                                     placeholder="Enter Name" required />
@@ -592,7 +500,7 @@
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <div class="form-floating" id="inputVendorCompanyRegNoDiv">
-                                                                <input deed_id="documentFirstPersonName_0" type="text"
+                                                                <input  type="text"
                                                                     save_id="DocumentVendorCompanyRegNo"
                                                                     class="form-control" name=""
                                                                     id="inputVendorCompanyRegNo"
@@ -604,7 +512,7 @@
                                                         <div class="col-md-3 mb-3">
                                                             <div class="form-floating"
                                                                 id="inputVendorCompanyAddressDiv">
-                                                                <input deed_id="documentFirstPersonName_0" type="text"
+                                                                <input  type="text"
                                                                     save_id="DocumentVendorCompanyAddress"
                                                                     class="form-control" name=""
                                                                     id="inputVendorCompanyAddress"
@@ -635,7 +543,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputVendorTitleDiv">
-                                                                <select deed_id="documentFirstPersonTitle_0"
+                                                                <select deed_id="documentFirstPersonTitle"
                                                                     save_id="DocumentVendorGenderID" class="form-select"
                                                                     name="" id="inputVendorTitle">
                                                                     <option value="">Title</option>
@@ -645,7 +553,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputVendorCategoryDiv">
-                                                                <select deed_id="documentVendorCategory_0"
+                                                                <select deed_id="documentVendorCategory"
                                                                     save_id="DocumentVendorCategoryID"
                                                                     class="form-select" name=""
                                                                     id="inputVendorCategory">
@@ -657,7 +565,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentFirstPersonName_0" type="text"
+                                                                <input deed_id="documentFirstPersonName" type="text"
                                                                     save_id="DocumentVendorName" class="form-control"
                                                                     name="" id="inputVendorName"
                                                                     placeholder="Enter Name" />
@@ -666,7 +574,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentFirstPersonDOB_0" type="date"
+                                                                <input deed_id="documentFirstPersonDOB" type="date"
                                                                     save_id="DocumentVendorDateOfBirth"
                                                                     class="form-control" name="" id="inputVendorDOB"
                                                                     placeholder="Enter D.O.B" />
@@ -675,7 +583,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentFirstPersonAge_0" type="number"
+                                                                <input deed_id="documentFirstPersonAge" type="number"
                                                                     save_id="DocumentVendorAge" class="form-control"
                                                                     maxlength="3" name="" id="inputVendorAge"
                                                                     placeholder="Enter Age" disabled />
@@ -684,7 +592,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentFirstPersonPAN_0" type="text"
+                                                                <input deed_id="documentFirstPersonPAN" type="text"
                                                                     save_id="DocumentVendorPAN" class="form-control"
                                                                     name="" id="inputVendorPan"
                                                                     placeholder="Enter Pan" />
@@ -693,7 +601,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputVendorRelationshipDiv">
-                                                                <select deed_id="documentFirstPersonRelationshipTitle_0"
+                                                                <select deed_id="documentFirstPersonRelationshipTitle"
                                                                     save_id="DocumentVendorRelationshipID"
                                                                     class="form-select" name=""
                                                                     id="inputVendorRelationship">
@@ -707,7 +615,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentFirstPersonRelationshipName_0"
+                                                                <input deed_id="documentFirstPersonRelationshipName"
                                                                     type="text" class="form-control" name=""
                                                                     save_id="DocumentVendorRelationName"
                                                                     id="inputVendorRelationName"
@@ -719,7 +627,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number"
-                                                                    deed_id="documentFirstPersonAadhar_0"
+                                                                    deed_id="documentFirstPersonAadhar"
                                                                     save_id="DocumentVendorAadharNumber"
                                                                     class="form-control" name="" id="inputVendorAadhar"
                                                                     placeholder="Aadhar No" />
@@ -730,7 +638,7 @@
                                                             <div class="form-floating">
                                                                 <input type="number" class="form-control" name=""
                                                                     save_id="DocumentVendorPhoneNumber" maxlength="10"
-                                                                    deed_id="documentFirstPersonPhone_0"
+                                                                    deed_id="documentFirstPersonPhone"
                                                                     id="inputVendorPhone" placeholder="Phone No" />
                                                                 <label for="inputVendorPhone">Phone No</label>
                                                             </div>
@@ -740,7 +648,7 @@
                                                                 <input type="text" class="form-control" name=""
                                                                     save_id="DocumentVendorDoorNo"
                                                                     id="inputVendorDoorNo"
-                                                                    deed_id="documentFirstPersonDoorNo_0"
+                                                                    deed_id="documentFirstPersonDoorNo"
                                                                     placeholder="Door No" />
                                                                 <label for="inputVendorDoorNo">Door No</label>
                                                             </div>
@@ -750,7 +658,7 @@
                                                                 <input type="text" class="form-control" name=""
                                                                     save_id="DocumentVendorStreet"
                                                                     id="inputVendorStreet"
-                                                                    deed_id="documentFirstPersonStreet_0"
+                                                                    deed_id="documentFirstPersonStreet"
                                                                     placeholder="Street" />
                                                                 <label for="inputVendorStreet">Street</label>
                                                             </div>
@@ -758,7 +666,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="text"
-                                                                    deed_id="documentFirstPersonDistrict_0"
+                                                                    deed_id="documentFirstPersonDistrict"
                                                                     save_id="DocumentVendorDistrict"
                                                                     class="form-control" name=""
                                                                     id="inputVendorDistrict" placeholder="District" />
@@ -767,7 +675,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentFirstPersonTaluk_0"
+                                                                <input type="text" deed_id="documentFirstPersonTaluk"
                                                                     class="form-control" name="" id="inputVendorTaluk"
                                                                     save_id="DocumentVendorTaluk" placeholder="Taluk" />
                                                                 <label for="inputVendorTaluk">Taluk</label>
@@ -775,7 +683,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentFirstPersonCity_0"
+                                                                <input type="text" deed_id="documentFirstPersonCity"
                                                                     save_id="DocumentVendorCity" class="form-control"
                                                                     name="" id="inputVendorCity" placeholder="City" />
                                                                 <label for="inputVendorCity">City</label>
@@ -783,7 +691,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentFirstPersonState_0"
+                                                                <input type="text" deed_id="documentFirstPersonState"
                                                                     save_id="DocumentVendorState" class="form-control"
                                                                     name="" id="inputVendorState" placeholder="State" />
                                                                 <label for="inputVendorState">State</label>
@@ -794,7 +702,7 @@
                                                                 <input type="number" class="form-control" name=""
                                                                     save_id="DocumentVendorPinCode"
                                                                     id="inputVendorPincode"
-                                                                    deed_id="documentFirstPersonPincode_0"
+                                                                    deed_id="documentFirstPersonPincode"
                                                                     placeholder="Pincode" />
                                                                 <label for="inputVendorPincode">Pincode</label>
                                                             </div>
@@ -803,6 +711,8 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end">
+                                                <button type="button" id="vendorInfoCloneTrigger"
+                                                    class="btn btn-primary float-end me-1 d-none">Add Another</button>
                                                 <button type="button" id="vendorInfoClone"
                                                     class="btn btn-primary float-end me-1">Add</button>
                                                 <button type="button" name="previous"
@@ -903,7 +813,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputPurchaserCategoryDiv">
                                                                 <select class="form-select" save_id="DocumentPurchaserCategoryID"
-                                                                    deed_id="documentSecondPersonCategory_0" name=""
+                                                                    deed_id="documentSecondPersonCategory" name=""
                                                                     id="inputPurchaserCategory">
                                                                     <option value="">Category
                                                                     </option>
@@ -913,7 +823,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputPurchaserTitleDiv">
-                                                                <select deed_id="documentSecondPersonTitle_0"
+                                                                <select deed_id="documentSecondPersonTitle"
                                                                     class="form-select" name="" save_id="DocumentPurchaserGenderID"
                                                                     id="inputPurchaserTitle">
                                                                     <option value="">Title</option>
@@ -923,7 +833,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonName_0" type="text" save_id="DocumentPurchaserName"
+                                                                <input deed_id="documentSecondPersonName" type="text" save_id="DocumentPurchaserName"
                                                                     class="form-control" name="" id="inputPurchaserName"
                                                                     placeholder="Enter Name" />
                                                                 <label for="inputPurchaserName">Name</label>
@@ -931,7 +841,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonDOB_0" type="date" save_id="DocumentPurchaserDateOfBirth"
+                                                                <input deed_id="documentSecondPersonDOB" type="date" save_id="DocumentPurchaserDateOfBirth"
                                                                     class="form-control" name="" id="inputPurchaserDOB"
                                                                     placeholder="Enter D.O.B" />
                                                                 <label for="inputPurchaserDOB">D.O.B</label>
@@ -939,7 +849,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonAge_0" type="number" save_id="DocumentPurchaserAge"
+                                                                <input deed_id="documentSecondPersonAge" type="number" save_id="DocumentPurchaserAge"
                                                                     class="form-control" maxlength="3" name=""
                                                                     id="inputPurchaserAge" placeholder="Enter Age"
                                                                     disabled />
@@ -948,7 +858,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonPAN_0" type="text" save_id="DocumentPurchaserPAN"
+                                                                <input deed_id="documentSecondPersonPAN" type="text" save_id="DocumentPurchaserPAN"
                                                                     class="form-control" name="" id="inputPurchaserPan"
                                                                     placeholder="Enter Pan" />
                                                                 <label for="inputPurchaserPan">Pan</label>
@@ -958,7 +868,7 @@
                                                             <div class="form-floating"
                                                                 id="inputPurchaserRelationshipDiv">
                                                                 <select
-                                                                    deed_id="documentSecondPersonRelationshipTitle_0" save_id="DocumentPurchaserRelationshipID"
+                                                                    deed_id="documentSecondPersonRelationshipTitle" save_id="DocumentPurchaserRelationshipID"
                                                                     class="form-select" name=""
                                                                     id="inputPurchaserRelationship">
                                                                     <option value="">RelationShip
@@ -970,7 +880,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonRelationshipName_0"
+                                                                <input deed_id="documentSecondPersonRelationshipName"
                                                                     type="text" class="form-control" name="" save_id="DocumentPurchaserRelationName"
                                                                     id="inputPurchaserRelationName"
                                                                     placeholder="Relation Name" />
@@ -981,7 +891,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number" save_id="DocumentPurchaserAadharNumber"
-                                                                    deed_id="documentSecondPersonAadhar_0"
+                                                                    deed_id="documentSecondPersonAadhar"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserAadhar" placeholder="Aadhar No" />
                                                                 <label for="inputPurchaserAadhar">Aadhar No</label>
@@ -989,7 +899,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input deed_id="documentSecondPersonPhone_0" save_id="DocumentPurchaserPhoneNumber"
+                                                                <input deed_id="documentSecondPersonPhone" save_id="DocumentPurchaserPhoneNumber"
                                                                     type="number" maxlength="10" class="form-control"
                                                                     name="" id="inputPurchaserPhone"
                                                                     placeholder="Phone No" />
@@ -1000,7 +910,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text" class="form-control" name="" save_id="DocumentPurchaserDoorNo"
                                                                     id="inputPurchaserDoorNo"
-                                                                    deed_id="documentSecondPersonDoorNo_0"
+                                                                    deed_id="documentSecondPersonDoorNo"
                                                                     placeholder="Door No" />
                                                                 <label for="inputPurchaserDoorNo">Door No</label>
                                                             </div>
@@ -1009,7 +919,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text" class="form-control" name="" save_id="DocumentPurchaserStreet"
                                                                     id="inputPurchaserStreet"
-                                                                    deed_id="documentSecondPersonStreet_0"
+                                                                    deed_id="documentSecondPersonStreet"
                                                                     placeholder="Street" />
                                                                 <label for="inputPurchaserStreet">Street</label>
                                                             </div>
@@ -1017,7 +927,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="text" save_id="DocumentPurchaserDistrict"
-                                                                    deed_id="documentSecondPersonDistrict_0"
+                                                                    deed_id="documentSecondPersonDistrict"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserDistrict"
                                                                     placeholder="District" />
@@ -1026,7 +936,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentSecondPersonTaluk_0" save_id="DocumentPurchaserTaluk"
+                                                                <input type="text" deed_id="documentSecondPersonTaluk" save_id="DocumentPurchaserTaluk"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserTaluk" placeholder="Taluk" />
                                                                 <label for="inputPurchaserTaluk">Taluk</label>
@@ -1034,7 +944,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentSecondPersonCity_0" save_id="DocumentPurchaserCity"
+                                                                <input type="text" deed_id="documentSecondPersonCity" save_id="DocumentPurchaserCity"
                                                                     class="form-control" name="" id="inputPurchaserCity"
                                                                     placeholder="City" />
                                                                 <label for="inputPurchaserCity">City</label>
@@ -1042,7 +952,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" deed_id="documentSecondPersonState_0" save_id="DocumentPurchaserState"
+                                                                <input type="text" deed_id="documentSecondPersonState" save_id="DocumentPurchaserState"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserState" placeholder="State" />
                                                                 <label for="inputPurchaserState">State</label>
@@ -1052,7 +962,7 @@
                                                             <div class="form-floating">
                                                                 <input type="number" class="form-control" name="" save_id="DocumentPurchaserPinCode"
                                                                     id="inputPurchaserPincode"
-                                                                    deed_id="documentSecondPersonPincode_0"
+                                                                    deed_id="documentSecondPersonPincode"
                                                                     placeholder="Pincode" />
                                                                 <label for="inputPurchaserPincode">Pincode</label>
                                                             </div>
@@ -1061,6 +971,8 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end">
+                                                <button type="button" id="purchaserInfoCloneTrigger"
+                                                class="btn btn-primary float-end me-1 d-none">Add Another</button>
                                                 <button type="button" class="btn btn-primary float-end me-1"
                                                     id="purchaserInfoClone">Add</button>
                                                 <button type="button" name="previous"

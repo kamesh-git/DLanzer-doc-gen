@@ -410,6 +410,37 @@ function inputEventListner() {
             $(`#${this.getAttribute("deed_id")}`).html(this.value)
         })
     })
+
+    $("#inputVendorTitle").change(function(){
+        if(this.value == 2){
+            $("#inputVendorRelationship option[data-token]:odd").each(function(){ $(this).removeClass('d-none') })
+            $("#inputVendorRelationship option[data-token]:even").each(function(){ $(this).addClass('d-none') })
+        }
+        if(this.value == 1){
+            $("#inputVendorRelationship option[data-token]:odd").each(function(){ $(this).addClass('d-none') })
+            $("#inputVendorRelationship option[data-token]:even").each(function(){ $(this).removeClass('d-none') })
+        }
+    })
+    $("#inputPurchaserTitle").change(function(){
+        if(this.value == 2){
+            $("#inputPurchaserRelationship option[data-token]:odd").each(function(){ $(this).removeClass('d-none') })
+            $("#inputPurchaserRelationship option[data-token]:even").each(function(){ $(this).addClass('d-none') })
+        }
+        if(this.value == 1){
+            $("#inputPurchaserRelationship option[data-token]:odd").each(function(){ $(this).addClass('d-none') })
+            $("#inputPurchaserRelationship option[data-token]:even").each(function(){ $(this).removeClass('d-none') })
+        }
+    })
+    $("#inputWitnessTitle").change(function(){
+        if(this.value == 2){
+            $("#inputWitnessRelationship option[data-token]:odd").each(function(){ $(this).removeClass('d-none') })
+            $("#inputWitnessRelationship option[data-token]:even").each(function(){ $(this).addClass('d-none') })
+        }
+        if(this.value == 1){
+            $("#inputWitnessRelationship option[data-token]:odd").each(function(){ $(this).addClass('d-none') })
+            $("#inputWitnessRelationship option[data-token]:even").each(function(){ $(this).removeClass('d-none') })
+        }
+    })
     
 
 

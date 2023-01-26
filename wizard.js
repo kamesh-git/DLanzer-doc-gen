@@ -736,17 +736,22 @@ function setPurchaserTable(type){
 
 function setWitnessTable() {
     if ('purchasertype == 1') {
-        const text = witnessTable.map((item, index) => (
-            `<tr>
-                <th scope="row">${index + 1}</th>
-                <td>${item.DocumentWitnessName}</td>
-                <td>
-                    <button type="button" class="edit_witness_table btn btn-warning" value="${index}">Edit</button>
-                    <button type="button" class="delete_witness_table btn btn-danger" value="${index}">Delete</button>
-                </td>
-              </tr>
-             `
-        )).join("")
+        const text = witnessTable.map((item, index) => {
+            if(item == 'undefined'){return ""}
+            else{
+                return(
+                    `<tr>
+                        <th scope="row">${index + 1}</th>
+                        <td>${item.DocumentWitnessName}</td>
+                        <td>
+                            <button type="button" class="edit_witness_table btn btn-warning" value="${index}">Edit</button>
+                            <button type="button" class="delete_witness_table btn btn-danger" value="${index}">Delete</button>
+                        </td>
+                      </tr>
+                     `
+                )
+            }
+        }).join("")
         $("#witnessInfoTable").html(text)
 
         $(".delete_witness_table").each(function () {
@@ -796,6 +801,7 @@ function clickEventListner() {
 
         vendorTable = vendorTable.filter(item => item!='undefined')
         purchaserTable = purchaserTable.filter(item => item!='undefined')
+        witnessTable = witnessTable.filter(item => item!='undefined')
 
         const details = {
             DocumentTypeID: parseInt(document.getElementById("inputDoucumentType").value),
@@ -1074,24 +1080,47 @@ function clickEventListner() {
                 }
             })
 
-
-            witnessTable.push(witnessTableTemp)
+            witnessTable[witnessIterationCount-1]=witnessTableTemp
 
 
             console.log(witnessTable)
 
             setWitnessTable()
+            $(".edit_witness_table").each(function(){ $(this).click(function(){
+                const witnessIterationCounttemp = witnessIterationCount
+                for(let key in witnessTable[this.value]){
+                    $(`input[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('input')
+                    $(`select[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('change')
+                }
+                witnessIterationCount = parseInt(this.value)
+                $(`#Witness_person_details_${this.value}`).remove()
+                witnessTable = witnessTable.map((item,index) => {if(index == this.value){return 'undefined'}else{return item}})
+                setWitnessTable($("#inputWitnessType").val())
+                console.log(witnessTable)
+                inputEventListner()
+                conjuctionRefresh()
+                witnessIterationCount = witnessIterationCounttemp
+            }) })
+            $(".delete_witness_table").each(function(){ $(this).click(function(){
+                witnessTable = witnessTable.map((item,index) => {if(index == this.value){return "undefined"}else{return item}})
+                $(`#Witness_person_details_${this.value}`).remove()
+                setWitnessTable($("#inputWitnessType").val())
+                console.log(witnessTable)
+            }) })
+    
+    
+            console.log(witnessTable)
 
 
             $('#hidden_use_element').html(deed_content)
-            $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details').html())
+            $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details_0').html())
             $("#hidden_use_element span").each(function () {
                 let changeid = this.getAttribute('id')
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
                 this.setAttribute('id', changeid)
             })
             let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'><span class="witnessConjuction"></span>${$("#hidden_use_element").html()}</span>`
-            $(text).appendTo('#deed_body #Witness_person_details')
+            $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount-1}`)
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()
             conjuctionRefresh()

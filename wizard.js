@@ -16,7 +16,7 @@ storeInput().then(resp => {
             'background-color': 'transparent',
             'height': "58px",
             'padding-top': '20px',
-            'border-radius':'0.5rem'
+            'border-radius': '0.5rem'
         })
     })
     $(".bootstrap-select").each(function () {
@@ -370,6 +370,7 @@ function inputEventListner() {
     })
 
     // vendor
+    console.log(vendorIterationCount)
     $("#new_document_entry .inputVendorInfo input").on("input", function () {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.value)
@@ -642,6 +643,51 @@ let companyTablePurchaser = []
 let witnessTable = []
 
 
+function setVendorTable(type){
+    console.log(vendorTable)
+    let i=0
+    if(type == 1){
+        $("#vendorInfoTable_company tbody").html(
+            vendorTable.map((item,index) => {
+                if(item != 'undefined'){
+                    return(
+                        `<tr>
+                            <td> ${++i} </td>
+                            <td>${item.DocumentVendorName}</td>
+                            <td>${item.DocumentVendorCompany.map(item1 => item1.DocumentVendorCompanyName).join(',')}</td>
+                            <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == item.DocumentVendorCategoryID)[0].CustomerCategoryTitle}</td>
+                            <td>
+                            <button type="button" class="edit_vendor_table btn btn-warning" value="${index}">Edit</button>
+                            <button type="button" class="delete_vendor_table btn btn-danger" value="${index}">Delete</button>
+                            </td>
+                        </tr>`
+                    )
+                }
+                else{return ""}
+            }).join('')
+        )
+        
+    }
+    else if(type == 2){
+        $("#vendorInfoTable_individual tbody").html(
+        vendorTable.map((item,index) => {
+            if(item != undefined){
+                return(
+                    `<tr>
+                        <td> ${i++} </td>
+                        <td>${item.DocumentVendorName}</td>
+                        <td>
+                        <button type="button" class="edit_vendor_table btn btn-warning" value="${index}">Edit</button>
+                        <button type="button" class="delete_vendor_table btn btn-danger" value="${index}">Delete</button>
+                        </td>
+                    </tr>`
+                )
+            }
+            else{return ""}
+        }).join("")
+        )
+    }
+}
 function setWitnessTable() {
     if ('purchasertype == 1') {
         const text = witnessTable.map((item, index) => (
@@ -775,7 +821,7 @@ function clickEventListner() {
     $("#DocumentVendorAddCompany").click(function () {
         let companyTableVendorTemp = {}
         $("#company_info_vendor input").each(function () {
-            if(this.value == ""){
+            if (this.value == "") {
                 hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                 throw new Error(`${this.getAttribute('save_id')} field is required`)
             }
@@ -784,21 +830,6 @@ function clickEventListner() {
         companyTableVendor.push(companyTableVendorTemp)
         $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
         $("#inputVendorMultiCompany").selectpicker('refresh')
-        $(`<h4 class="text-center">${companyTableVendorTemp.DocumentVendorCompanyName}</h4>
-            <table id="${companyTableVendorTemp.DocumentVendorCompanyName.replace(" ","")}_vendor_company_table" class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody id="">
-            </tbody>
-        </table>`).appendTo("#vendorInfoTable_company")
-
         $("#company_info_vendor input").each(function () { this.value = "" })
         console.log(companyTableVendor)
     })
@@ -810,7 +841,7 @@ function clickEventListner() {
 
         $(".inputVendorInfo select,.inputVendorInfo input").each(function () {
             if ($(this).val() === "") {
-                if(!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')){
+                if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
                 }
@@ -822,47 +853,37 @@ function clickEventListner() {
                 if ($("#inputVendorType").val() == 1) {
                     if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
                     vendorTableTemp['DocumentVendorCompany'] = []
-                    $(this).val().forEach((item,index) => {
+                    $(this).val().forEach((item, index) => {
                         vendorTableTemp['DocumentVendorCompany'].push(companyTableVendor[parseInt(item)])
                     })
                 }
             }
         })
-        vendorTable.push(vendorTableTemp)
+        vendorTable[vendorIterationCount-1]=vendorTableTemp
 
+        setVendorTable($("#inputVendorType").val())
 
-        if ($("#inputVendorType").val() == 1) {
-            $('#inputVendorMultiCompany').val().forEach((item,index) => {
-                const text = `<tr>
-                <th scope="row">${index + 1}</th>
-                <td>${vendorTableTemp['DocumentVendorName']}</td>
-                <td>${companyTableVendor[parseInt(item)]['DocumentVendorCompanyName']}</td>
-                <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == vendorTableTemp.DocumentVendorCategoryID)[0].CustomerCategoryTitle}</td>
-                <td>
-                    <button type="button" class="edit_vendor_table btn btn-warning" value="vendor/${index}">Edit</button>
-                    <button type="button" class="delete_vendor_table btn btn-danger" value="vendor/${index}">Delete</button>
-                </td>
-                </tr>
-                `
-                $(text).appendTo(`#${companyTableVendor[parseInt(item)]['DocumentVendorCompanyName'].replace(" ","")}_vendor_company_table tbody`)
-            })
-        }
-        else{
-            const text = `
-            <tr>
-                <th scope="row">${vendorIterationCount}</th>
-                <td>${vendorTableTemp['DocumentVendorName']}</td>
-                <td>
-                    <button type="button" class="edit_vendor_table btn btn-warning" value="${vendorIterationCount}">Edit</button>
-                    <button type="button" class="delete_vendor_table btn btn-danger" value="${vendorIterationCount}">Delete</button>
-                </td>
-                </tr>
-            `
-            $(text).appendTo(`#vendorInfoTable_individual tbody`)
-
-        }
-
-        $("#edit_vendor_table").click(edit)
+        $(".edit_vendor_table").each(function(){ $(this).click(function(){
+            const vendorIterationCounttemp = vendorIterationCount
+            for(let key in vendorTable[this.value]){
+                $(`input[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('input')
+                $(`select[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('change')
+            }
+            vendorIterationCount = parseInt(this.value)
+            $(`#first_person_details_${this.value}`).remove()
+            vendorTable = vendorTable.map((item,index) => {if(index == this.value){return 'undefined'}else{return item}})
+            setVendorTable($("#inputVendorType").val())
+            console.log(vendorTable)
+            inputEventListner()
+            conjuctionRefresh()
+            vendorIterationCount = vendorIterationCounttemp
+        }) })
+        $(".delete_vendor_table").each(function(){ $(this).click(function(){
+            vendorTable = vendorTable.map((item,index) => {if(index == this.value){return "undefined"}else{return item}})
+            $(`#first_person_details_${this.value}`).remove()
+            setVendorTable($("#inputVendorType").val())
+            console.log(vendorTable)
+        }) })
 
 
         console.log(vendorTable)
@@ -870,18 +891,18 @@ function clickEventListner() {
 
 
         $('#hidden_use_element').html(deed_content)
-        $('#hidden_use_element').html($('#hidden_use_element #first_person_details').html())
+        $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
         $("#hidden_use_element span").each(function () {
             let changeid = this.getAttribute('id')
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
             this.setAttribute('id', changeid)
         })
         let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;"><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
-        $(text).appendTo('#deed_body #first_person_details')
-        $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () { console.log(this); this.value = "" })
+        $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount-1}`)
+        $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () {  this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputVendorTitle").change(function(){ $(`#first_person_details_${vendorIterationCount}`).css("display","") })
+        $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", "") })
 
 
 
@@ -891,6 +912,10 @@ function clickEventListner() {
     $("#DocumentPurchaserAddCompany").click(function () {
         let companyTablePurchaserTemp = {}
         $("#company_info_purchaser input").each(function () {
+            if (this.value == "") {
+                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            }
             companyTablePurchaserTemp[this.getAttribute('save_id')] = this.value
         })
         companyTablePurchaser.push(companyTablePurchaserTemp)
@@ -921,23 +946,23 @@ function clickEventListner() {
 
         $(".inputPurchaserInfo select,.inputPurchaserInfo input").each(function () {
             if ($(this).val() === "") {
-                if(!($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')){
+                if (!($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
                 }
             }
             else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany') {
-                    purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()
+                purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()
+            }
+            else {
+                if ($("#inputPurchaserType").val() == 1) {
+                    if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
+                    purchaserTableTemp['DocumentPurchaserCompany'] = []
+                    $(this).val().forEach(item => {
+                        purchaserTableTemp['DocumentPurchaserCompany'].push(companyTablePurchaser[parseInt(item)])
+                    })
                 }
-                else {
-                    if ($("#inputPurchaserType").val() == 1) {
-                        if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
-                        purchaserTableTemp['DocumentPurchaserCompany'] = []
-                        $(this).val().forEach(item => {
-                            purchaserTableTemp['DocumentPurchaserCompany'].push(companyTablePurchaser[parseInt(item)])
-                        })
-                    }
-                }
+            }
         })
 
 
@@ -947,7 +972,7 @@ function clickEventListner() {
         console.log(purchaserTable)
 
         if ($("#inputPurchaserType").val() == 1) {
-            $('#inputPurchaserMultiCompany').val().forEach((item,index) => {
+            $('#inputPurchaserMultiCompany').val().forEach((item, index) => {
                 const text = `<tr>
                 <th scope="row">${index + 1}</th>
                 <td>${purchaserTableTemp['DocumentPurchaserName']}</td>
@@ -959,10 +984,10 @@ function clickEventListner() {
                 </td>
                 </tr>
                 `
-                $(text).appendTo(`#${companyTablePurchaser[parseInt(item)]['DocumentPurchaserCompanyName'].replace(" ","")}_purchaser_company_table tbody`)
+                $(text).appendTo(`#${companyTablePurchaser[parseInt(item)]['DocumentPurchaserCompanyName'].replace(" ", "")}_purchaser_company_table tbody`)
             })
         }
-        else{
+        else {
             const text = `
             <tr>
                 <th scope="row">${purchaserIterationCount}</th>
@@ -989,8 +1014,8 @@ function clickEventListner() {
         $(text).appendTo('#deed_body #second_person_details')
         $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { console.log(this); this.value = "" })
         inputEventListner()
-        conjuctionRefresh()        
-        $("#inputPurchaserTitle").change(function(){ $(`#second_person_details_${purchaserIterationCount}`).css("display","") })
+        conjuctionRefresh()
+        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", "") })
 
     }
     )
@@ -1041,7 +1066,7 @@ function clickEventListner() {
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()
             conjuctionRefresh()
-            $("#inputWitnessTitle").change(function(){ $(`#Witness_person_details_${witnessIterationCount}`).css("display","") })
+            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", "") })
         }
     )
     $("#witnessInfoRemoveClone").click(

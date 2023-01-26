@@ -1,10 +1,10 @@
 import { show_popup_alert, hide_popup_alert } from "./popup_alert.js"
 
-$("#username").html(sessionStorage.getItem('UserName'))
-$("#useremail").html(sessionStorage.getItem('UserEmail'))
-$("#hello_username").html('Hello '+sessionStorage.getItem('UserName'))
+$("#username").html(localStorage.getItem('UserName'))
+$("#useremail").html(localStorage.getItem('UserEmail'))
+$("#hello_username").html('Hello '+localStorage.getItem('UserName'))
 $("#logout_user").click(function () {
-    sessionStorage.clear()
+    localStorage.clear()
     location.reload()
 })
 $("#change_password").submit(function (e) {
@@ -33,7 +33,7 @@ $("#change_password").submit(function (e) {
 })
 
 const base_url = 'https://doc.dlanzer.com/laravel/public/'
-const authToken = sessionStorage.getItem('token')
+const authToken = localStorage.getItem('token')
 if (authToken === null || authToken === 'undefined' || authToken == "") {
     window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + "/sign-in.html";
 }

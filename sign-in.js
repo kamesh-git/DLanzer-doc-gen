@@ -1,7 +1,7 @@
 import { show_popup_alert, hide_popup_alert } from './popup_alert.js'
 const base_url = 'https://doc.dlanzer.com/laravel/public/'
 
-if (sessionStorage.getItem("token")) {
+if (localStorage.getItem("token")) {
     window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + '/document.html'
 }
 
@@ -52,12 +52,12 @@ $("form#user_signIn").submit(function (e) {
         UserEmail: email,
         UserPassword: password
     }).then(async (resp) => {
-        sessionStorage.setItem("token", resp.token)
+        localStorage.setItem("token", resp.token)
 
         //   save username and email
         await apirequest("GET", "api/Auth/User", resp.token).then((resp) => {
-            sessionStorage.setItem('UserName', resp.UserName)
-            sessionStorage.setItem('UserEmail', resp.UserEmail)
+            localStorage.setItem('UserName', resp.UserName)
+            localStorage.setItem('UserEmail', resp.UserEmail)
         })
 
 

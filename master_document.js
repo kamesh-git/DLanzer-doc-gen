@@ -2,7 +2,7 @@ import { mastersData, apirequest, storeInput } from "./data.js"
 import { show_popup_alert, hide_popup_alert } from "./popup_alert.js";
 
 let putData, putID, putAPI, postData, postAPI;
-const updateDataButton = `<button id="updateData" class="btn btn-md btn-primary mt-2 mt-sm-0 ms-0 ms-sm-2 col-md-4 col-sm-3">Update</button>`
+const updateDataButton = `<button id="updateData" style="width: 106px;" class="btn btn-md btn-primary mt-2 mt-sm-0 ms-0 ms-sm-2 col-md-4 col-sm-3">Update</button>`
 
 async function set_document_details_tableBody() {
     show_popup_alert()

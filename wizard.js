@@ -688,7 +688,6 @@ function setVendorTable(type){
         )
     }
 }
-<<<<<<< HEAD
 function setPurchaserTable(type){
     console.log(purchaserTable)
     let i=0
@@ -735,8 +734,6 @@ function setPurchaserTable(type){
     }
 }
 
-=======
->>>>>>> cdd2ce490fc6238d8ea31447789f5c4cb16f50e0
 function setWitnessTable() {
     if ('purchasertype == 1') {
         const text = witnessTable.map((item, index) => (
@@ -1007,38 +1004,7 @@ function clickEventListner() {
 
         console.log(purchaserTable)
 
-<<<<<<< HEAD
         setPurchaserTable($("#inputPurchaserType").val())
-=======
-        if ($("#inputPurchaserType").val() == 1) {
-            $('#inputPurchaserMultiCompany').val().forEach((item, index) => {
-                const text = `<tr>
-                <th scope="row">${index + 1}</th>
-                <td>${purchaserTableTemp['DocumentPurchaserName']}</td>
-                <td>${companyTablePurchaser[parseInt(item)]['DocumentPurchaserCompanyName']}</td>
-                <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == purchaserTableTemp.DocumentPurchaserCategoryID)[0].CustomerCategoryTitle}</td>
-                <td>
-                    <button type="button" class="edit_purchaser_table btn btn-warning" value="${index}">Edit</button>
-                    <button type="button" class="delete_purchaser_table btn btn-danger" value="${index}">Delete</button>
-                </td>
-                </tr>
-                `
-                $(text).appendTo(`#${companyTablePurchaser[parseInt(item)]['DocumentPurchaserCompanyName'].replace(" ", "")}_purchaser_company_table tbody`)
-            })
-        }
-        else {
-            const text = `
-            <tr>
-                <th scope="row">${purchaserIterationCount}</th>
-                <td>${purchaserTableTemp['DocumentPurchaserName']}</td>
-                <td>
-                    <button type="button" class="edit_purchaser_table btn btn-warning" value="${purchaserIterationCount}">Edit</button>
-                    <button type="button" class="delete_purchaser_table btn btn-danger" value="${purchaserIterationCount}">Delete</button>
-                </td>
-                </tr>
-            `
-            $(text).appendTo(`#purchaserInfoTable_individual tbody`)
->>>>>>> cdd2ce490fc6238d8ea31447789f5c4cb16f50e0
 
         $(".edit_purchaser_table").each(function(){ $(this).click(function(){
             const purchaserIterationCounttemp = purchaserIterationCount

@@ -749,27 +749,6 @@ function setWitnessTable() {
 function clickEventListner() {
 
     $("#save_button").click(async function () {
-        const document_witness = []
-        for (let i = 0; i <= witnessIterationCount; i++) {
-            document_witness.push({
-                DocumentWitnessID: i + 1,
-                DocumentWitnessGenderID: parseInt($(`[deed_id=documentWitnessPersonTitle_${i}]`).val()),
-                DocumentWitnessRelationshipID: parseInt($(`[deed_id=documentWitnessPersonRelationshipTitle_${i}]`).val()),
-                DocumentWitnessAge: $(`[deed_id=documentWitnessPersonAge_${i}]`).val(),
-                DocumentWitnessDateOfBirth: $(`[deed_id=documentWitnessPersonDOB_${i}]`).val(),
-                DocumentWitnessRelationName: $(`[deed_id=documentWitnessPersonRelationshipName_${i}]`).val(),
-                DocumentWitnessName: $(`[deed_id=documentWitnessPersonName_${i}]`).val(),
-                DocumentWitnessPAN: $(`[deed_id=documentWitnessPersonPAN_${i}]`).val(),
-                DocumentWitnessAadharNumber: $(`[deed_id=documentWitnessPersonAadhar_${i}]`).val(),
-                DocumentWitnessPhoneNumber: $(`[deed_id=documentWitnessPersonPhone_${i}]`).val(),
-                DocumentWitnessDoorNo: $(`[deed_id=documentWitnessPersonDoorNo_${i}]`).val(),
-                DocumentWitnessStreet: $(`[deed_id=documentWitnessPersonStreet_${i}]`).val(),
-                DocumentWitnessDistrict: $(`[deed_id=documentWitnessPersonDistrict_${i}]`).val(),
-                DocumentWitnessTaluk: $(`[deed_id=documentWitnessPersonTaluk_${i}]`).val(),
-                DocumentWitnessState: $(`[deed_id=documentWitnessPersonState_${i}]`).val(),
-                DocumentWitnessPinCode: $(`[deed_id=documentWitnessPersonPincode_${i}]`).val(),
-            })
-        }
 
         const payment_detail = []
         $(".payment_details").each(async function () {
@@ -808,11 +787,12 @@ function clickEventListner() {
             DocumentTemplateHTML: document.getElementById("deed_body").innerHTML,
             document_vendor: vendorTable,
             document_purchaser: purchaserTable,
-            document_witness: document_witness,
+            document_witness: witnessTable,
             payment_details: payment_detail,
             property_details: property_detai,
             transfer_details: transfer_detail
         }
+        console.log(details)
 
         function validateObject(obj) {
             if (obj instanceof Array) {
@@ -897,9 +877,11 @@ function clickEventListner() {
 
 
         $(".inputVendorInfo select,.inputVendorInfo input").each(function () {
-            if ($(this).val() === "" && !($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
-                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
-                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            if ($(this).val() === "") {
+                if(!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')){
+                    hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                    throw new Error(`${this.getAttribute('save_id')} field is required`)
+                }
             }
             else if (this.getAttribute("id") !== 'inputVendorMultiCompany') {
                 vendorTableTemp[this.getAttribute('save_id')] = $(this).val()
@@ -995,9 +977,11 @@ function clickEventListner() {
 
 
         $(".inputPurchaserInfo select,.inputPurchaserInfo input").each(function () {
-            if ($(this).val() === "" && !($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')) {
-                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
-                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            if ($(this).val() === "") {
+                if(!($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')){
+                    hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                    throw new Error(`${this.getAttribute('save_id')} field is required`)
+                }
             }
             else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany') {
                     purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()

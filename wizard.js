@@ -775,6 +775,10 @@ function clickEventListner() {
     $("#DocumentVendorAddCompany").click(function () {
         let companyTableVendorTemp = {}
         $("#company_info_vendor input").each(function () {
+            if(this.value == ""){
+                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            }
             companyTableVendorTemp[this.getAttribute('save_id')] = this.value
         })
         companyTableVendor.push(companyTableVendorTemp)
@@ -835,8 +839,8 @@ function clickEventListner() {
                 <td>${companyTableVendor[parseInt(item)]['DocumentVendorCompanyName']}</td>
                 <td>${mastersData.CustomerCategory.filter(item1 => item1.CustomerCategoryID == vendorTableTemp.DocumentVendorCategoryID)[0].CustomerCategoryTitle}</td>
                 <td>
-                    <button type="button" class="edit_vendor_table btn btn-warning" value="${index}">Edit</button>
-                    <button type="button" class="delete_vendor_table btn btn-danger" value="${index}">Delete</button>
+                    <button type="button" class="edit_vendor_table btn btn-warning" value="vendor/${index}">Edit</button>
+                    <button type="button" class="delete_vendor_table btn btn-danger" value="vendor/${index}">Delete</button>
                 </td>
                 </tr>
                 `
@@ -858,6 +862,7 @@ function clickEventListner() {
 
         }
 
+        $("#edit_vendor_table").click(edit)
 
 
         console.log(vendorTable)

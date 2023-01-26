@@ -353,7 +353,7 @@ function inputEventListner() {
         var diff = (dt1.getTime() - dt2.getTime()) / 1000;
         diff /= (60 * 60 * 24);
         console.log(diff)
-        return Math.round(Math.abs(diff / 365.25));
+        return Math.floor(Math.abs(diff / 365.25));
 
     }
     $("#new_document_entry input").on("input", function () {

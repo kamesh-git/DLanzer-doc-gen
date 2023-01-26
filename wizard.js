@@ -14,8 +14,9 @@ storeInput().then(resp => {
     $("[data-id='inputVendorMultiCompany'],[data-id='inputPurchaserMultiCompany']").each(function () {
         $(this).css({
             'background-color': 'transparent',
-            'height': "60px",
-            'padding-top': '20px'
+            'height': "58px",
+            'padding-top': '20px',
+            'border-radius':'0.5rem'
         })
     })
     $(".bootstrap-select").each(function () {

@@ -643,14 +643,14 @@ let companyTablePurchaser = []
 let witnessTable = []
 
 
-function setVendorTable(type){
+function setVendorTable(type) {
     console.log(vendorTable)
-    let i=0
-    if(type == 1){
+    let i = 0
+    if (type == 1) {
         $("#vendorInfoTable_company tbody").html(
-            vendorTable.map((item,index) => {
-                if(item != 'undefined'){
-                    return(
+            vendorTable.map((item, index) => {
+                if (item != 'undefined') {
+                    return (
                         `<tr>
                             <td> ${++i} </td>
                             <td>${item.DocumentVendorName}</td>
@@ -663,39 +663,59 @@ function setVendorTable(type){
                         </tr>`
                     )
                 }
-                else{return ""}
+                else { return "" }
             }).join('')
         )
-        
+
     }
-    else if(type == 2){
+    else if (type == 2) {
         $("#vendorInfoTable_individual tbody").html(
-        vendorTable.map((item,index) => {
-            if(item != undefined){
-                return(
-                    `<tr>
-                        <td> ${i++} </td>
+            vendorTable.map((item, index) => {
+                if (item != 'undefined') {
+                    return (
+                        `<tr>
+                        <td> ${++i} </td>
                         <td>${item.DocumentVendorName}</td>
                         <td>
                         <button type="button" class="edit_vendor_table btn btn-warning" value="${index}">Edit</button>
                         <button type="button" class="delete_vendor_table btn btn-danger" value="${index}">Delete</button>
                         </td>
                     </tr>`
-                )
-            }
-            else{return ""}
-        }).join("")
+                    )
+                }
+                else { return "" }
+            }).join("")
         )
     }
+    $(".edit_vendor_table").each(function () {
+        $(this).click(function () {
+            for (let key in vendorTable[this.value]) {
+                $(`input[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('input')
+                $(`select[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('change')
+            }
+            $(`#first_person_details_${this.value}`).remove()
+            vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
+            setVendorTable($("#inputVendorType").val())
+            console.log(vendorTable)
+        })
+    })
+    $(".delete_vendor_table").each(function () {
+        $(this).click(function () {
+            vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
+            $(`#first_person_details_${this.value}`).remove()
+            setVendorTable($("#inputVendorType").val())
+            console.log(vendorTable)
+        })
+    })
 }
-function setPurchaserTable(type){
+function setPurchaserTable(type) {
     console.log(purchaserTable)
-    let i=0
-    if(type == 1){
+    let i = 0
+    if (type == 1) {
         $("#purchaserInfoTable_company tbody").html(
-            purchaserTable.map((item,index) => {
-                if(item != 'undefined'){
-                    return(
+            purchaserTable.map((item, index) => {
+                if (item != 'undefined') {
+                    return (
                         `<tr>
                             <td> ${++i} </td>
                             <td>${item.DocumentPurchaserName}</td>
@@ -708,39 +728,59 @@ function setPurchaserTable(type){
                         </tr>`
                     )
                 }
-                else{return ""}
+                else { return "" }
             }).join('')
         )
-        
+
     }
-    else if(type == 2){
+    else if (type == 2) {
         $("#purchaserInfoTable_individual tbody").html(
-        purchaserTable.map((item,index) => {
-            if(item != undefined){
-                return(
-                    `<tr>
-                        <td> ${i++} </td>
+            purchaserTable.map((item, index) => {
+                if (item != 'undefined') {
+                    return (
+                        `<tr>
+                        <td> ${++i} </td>
                         <td>${item.DocumentPurchaserName}</td>
                         <td>
                         <button type="button" class="edit_purchaser_table btn btn-warning" value="${index}">Edit</button>
                         <button type="button" class="delete_purchaser_table btn btn-danger" value="${index}">Delete</button>
                         </td>
                     </tr>`
-                )
-            }
-            else{return ""}
-        }).join("")
+                    )
+                }
+                else { return "" }
+            }).join("")
         )
     }
+
+    $(".edit_purchaser_table").each(function () {
+        $(this).click(function () {
+            for (let key in purchaserTable[this.value]) {
+                $(`input[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('input')
+                $(`select[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('change')
+            }
+            $(`#second_person_details_${this.value}`).remove()
+            purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
+            setPurchaserTable($("#inputPurchaserType").val())
+            console.log(purchaserTable)
+        })
+    })
+    $(".delete_purchaser_table").each(function () {
+        $(this).click(function () {
+            purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
+            $(`#second_person_details_${this.value}`).remove()
+            setPurchaserTable($("#inputPurchaserType").val())
+            console.log(purchaserTable)
+        })
+    })
 }
 
 function setWitnessTable() {
-    if ('purchasertype == 1') {
-        const text = witnessTable.map((item, index) => {
-            if(item == 'undefined'){return ""}
-            else{
-                return(
-                    `<tr>
+    $("#witnessInfoTable").html(witnessTable.map((item, index) => {
+        if (item == 'undefined') { return "" }
+        else {
+            return (
+                `<tr>
                         <th scope="row">${index + 1}</th>
                         <td>${item.DocumentWitnessName}</td>
                         <td>
@@ -749,27 +789,31 @@ function setWitnessTable() {
                         </td>
                       </tr>
                      `
-                )
+            )
+        }
+    }).join("")
+    )
+
+    $(".edit_witness_table").each(function () {
+        $(this).click(function () {
+            for (let key in witnessTable[this.value]) {
+                $(`input[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('input')
+                $(`select[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('change')
             }
-        }).join("")
-        $("#witnessInfoTable").html(text)
-
-        $(".delete_witness_table").each(function () {
-            $(this).click(function () {
-                witnessTable = witnessTable.filter((item, index) => (index != this.value))
-                console.log(witnessTable, this)
-                setWitnessTable()
-            })
+            $(`#Witness_person_details_${this.value}`).remove()
+            witnessTable = witnessTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
+            setWitnessTable($("#inputWitnessType").val())
+            console.log(witnessTable)
         })
-        $(".edit_witness_table").each(function () {
-            // $(this).click(function () {
-            //     witnessTable[this.value]
-            //     witnessTable[location[0]]['Documentwitnesss'].splice(location[1], 1)
-            //     console.log(witnessTable)
-            // })
+    })
+    $(".delete_witness_table").each(function () {
+        $(this).click(function () {
+            witnessTable = witnessTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
+            $(`#Witness_person_details_${this.value}`).remove()
+            setWitnessTable($("#inputWitnessType").val())
+            console.log(witnessTable)
         })
-
-    }
+    })
 }
 
 function clickEventListner() {
@@ -799,9 +843,9 @@ function clickEventListner() {
         })
 
 
-        vendorTable = vendorTable.filter(item => item!='undefined')
-        purchaserTable = purchaserTable.filter(item => item!='undefined')
-        witnessTable = witnessTable.filter(item => item!='undefined')
+        vendorTable = vendorTable.filter(item => item != 'undefined')
+        purchaserTable = purchaserTable.filter(item => item != 'undefined')
+        witnessTable = witnessTable.filter(item => item != 'undefined')
 
         const details = {
             DocumentTypeID: parseInt(document.getElementById("inputDoucumentType").value),
@@ -888,11 +932,7 @@ function clickEventListner() {
         console.log(companyTableVendor)
     })
     $("#vendorInfoClone").click(function () {
-        vendorIterationCount += 1;
         const vendorTableTemp = {}
-
-
-
         $(".inputVendorInfo select,.inputVendorInfo input").each(function () {
             if ($(this).val() === "") {
                 if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
@@ -913,31 +953,16 @@ function clickEventListner() {
                 }
             }
         })
-        vendorTable[vendorIterationCount-1]=vendorTableTemp
+        vendorIterationCount += 1;
+        console.log(vendorIterationCount)
+
+
+
+        vendorTable[vendorIterationCount - 1] = vendorTableTemp
 
         setVendorTable($("#inputVendorType").val())
+        console.log('vendorinfoclone')
 
-        $(".edit_vendor_table").each(function(){ $(this).click(function(){
-            const vendorIterationCounttemp = vendorIterationCount
-            for(let key in vendorTable[this.value]){
-                $(`input[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('input')
-                $(`select[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('change')
-            }
-            vendorIterationCount = parseInt(this.value)
-            $(`#first_person_details_${this.value}`).remove()
-            vendorTable = vendorTable.map((item,index) => {if(index == this.value){return 'undefined'}else{return item}})
-            setVendorTable($("#inputVendorType").val())
-            console.log(vendorTable)
-            inputEventListner()
-            conjuctionRefresh()
-            vendorIterationCount = vendorIterationCounttemp
-        }) })
-        $(".delete_vendor_table").each(function(){ $(this).click(function(){
-            vendorTable = vendorTable.map((item,index) => {if(index == this.value){return "undefined"}else{return item}})
-            $(`#first_person_details_${this.value}`).remove()
-            setVendorTable($("#inputVendorType").val())
-            console.log(vendorTable)
-        }) })
 
 
         console.log(vendorTable)
@@ -952,8 +977,8 @@ function clickEventListner() {
             this.setAttribute('id', changeid)
         })
         let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;"><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
-        $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount-1}`)
-        $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () {  this.value = "" })
+        $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
+        $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", "") })
@@ -978,7 +1003,6 @@ function clickEventListner() {
         $("#company_info_purchaser input").each(function () { this.value = "" })
     })
     $("#purchaserInfoClone").click(function () {
-        purchaserIterationCount += 1;
         const purchaserTableTemp = {}
 
 
@@ -1003,36 +1027,16 @@ function clickEventListner() {
                 }
             }
         })
+        purchaserIterationCount += 1;
 
 
-        purchaserTable[purchaserIterationCount-1]=purchaserTableTemp
+        purchaserTable[purchaserIterationCount - 1] = purchaserTableTemp
 
 
         console.log(purchaserTable)
 
         setPurchaserTable($("#inputPurchaserType").val())
 
-        $(".edit_purchaser_table").each(function(){ $(this).click(function(){
-            const purchaserIterationCounttemp = purchaserIterationCount
-            for(let key in purchaserTable[this.value]){
-                $(`input[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('input')
-                $(`select[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('change')
-            }
-            purchaserIterationCount = parseInt(this.value)
-            $(`#second_person_details_${this.value}`).remove()
-            purchaserTable = purchaserTable.map((item,index) => {if(index == this.value){return 'undefined'}else{return item}})
-            setPurchaserTable($("#inputPurchaserType").val())
-            console.log(purchaserTable)
-            inputEventListner()
-            conjuctionRefresh()
-            purchaserIterationCount = purchaserIterationCounttemp
-        }) })
-        $(".delete_purchaser_table").each(function(){ $(this).click(function(){
-            purchaserTable = purchaserTable.map((item,index) => {if(index == this.value){return "undefined"}else{return item}})
-            $(`#second_person_details_${this.value}`).remove()
-            setPurchaserTable($("#inputPurchaserType").val())
-            console.log(purchaserTable)
-        }) })
 
 
         console.log(purchaserTable)
@@ -1046,7 +1050,7 @@ function clickEventListner() {
             this.setAttribute('id', changeid)
         })
         let text = `<span id='second_person_details_${purchaserIterationCount}' style="display: none;" ><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
-        $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount-1}`)
+        $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
         $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
@@ -1066,7 +1070,6 @@ function clickEventListner() {
     )
     $("#witnessInfoClone").click(
         function () {
-            witnessIterationCount += 1;
             let witnessTableTemp = {}
 
 
@@ -1080,35 +1083,17 @@ function clickEventListner() {
                 }
             })
 
-            witnessTable[witnessIterationCount-1]=witnessTableTemp
+            witnessIterationCount += 1;
+
+            witnessTable[witnessIterationCount - 1] = witnessTableTemp
 
 
             console.log(witnessTable)
 
             setWitnessTable()
-            $(".edit_witness_table").each(function(){ $(this).click(function(){
-                const witnessIterationCounttemp = witnessIterationCount
-                for(let key in witnessTable[this.value]){
-                    $(`input[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('input')
-                    $(`select[save_id = ${key}]`).val(witnessTable[this.value][key]).trigger('change')
-                }
-                witnessIterationCount = parseInt(this.value)
-                $(`#Witness_person_details_${this.value}`).remove()
-                witnessTable = witnessTable.map((item,index) => {if(index == this.value){return 'undefined'}else{return item}})
-                setWitnessTable($("#inputWitnessType").val())
-                console.log(witnessTable)
-                inputEventListner()
-                conjuctionRefresh()
-                witnessIterationCount = witnessIterationCounttemp
-            }) })
-            $(".delete_witness_table").each(function(){ $(this).click(function(){
-                witnessTable = witnessTable.map((item,index) => {if(index == this.value){return "undefined"}else{return item}})
-                $(`#Witness_person_details_${this.value}`).remove()
-                setWitnessTable($("#inputWitnessType").val())
-                console.log(witnessTable)
-            }) })
-    
-    
+
+
+
             console.log(witnessTable)
 
 
@@ -1120,7 +1105,7 @@ function clickEventListner() {
                 this.setAttribute('id', changeid)
             })
             let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'><span class="witnessConjuction"></span>${$("#hidden_use_element").html()}</span>`
-            $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount-1}`)
+            $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()
             conjuctionRefresh()

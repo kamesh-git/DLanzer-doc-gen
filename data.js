@@ -29,7 +29,7 @@ $("#change_password").submit(function (e) {
     }).then(resp => {
         hide_popup_alert(resp.message)
         $('#exampleModal').modal('hide')
-    }, err => hide_popup_alert(err.message))
+    }, err => hide_popup_alert(err.message,1))
 })
 
 const base_url = 'https://doc.dlanzer.com/laravel/public/'

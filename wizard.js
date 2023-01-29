@@ -15,8 +15,10 @@ storeInput().then(resp => {
         $(this).css({
             'background-color': 'transparent',
             'height': "58px",
-            'padding-top': '20px',
-            'border-radius': '0.5rem'
+            'padding-top': '24px',
+            'padding-left':'17px',
+            'border-radius': '0.5rem',
+            'border': '1px solid #eee'
         })
     })
     $(".bootstrap-select").each(function () {
@@ -501,7 +503,7 @@ function selectEventListner() {
     })
     $("#inputVendorType").change(function () {
         // vendorTable = []
-        let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
+        let text = `<option value="">Designation</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
             }
@@ -533,7 +535,7 @@ function selectEventListner() {
     })
     $("#inputPurchaserType").change(function () {
         // purchaserTable = []
-        let text = `<option value="">Category</option>` + mastersData.CustomerCategory.map(item => {
+        let text = `<option value="">Designation</option>` + mastersData.CustomerCategory.map(item => {
             if (item.CustomerTypeID == this.value) {
                 return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
             }
@@ -577,8 +579,8 @@ function selectEventListner() {
         $(".property_details").each(function () {
             this.addEventListener("input", function () {
                 const text = [];
-                $(".property_details").each(function () {
-                    text.push(this.value)
+                $(".property_details").each(function (index) {
+                    text.push(`<h6>Schedule ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]}</h6>${this.value}`)
                 })
                 document.getElementById("Property_Details").innerHTML = "<p><b>Property Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
             })
@@ -608,31 +610,41 @@ function selectEventListner() {
 
 
 function conjuctionRefresh() {
-    let length = $(".vendorConjuction").length
-    $(".vendorConjuction").each(function (index) {
-        if (index == length - 1) {
-            $(this).text(" and ")
-        }
-        else { $(this).text(", ") }
-    })
+    let length = 0
+    $(".vendorConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
+    if(length>1){
+        $(".vendorPlural").text('VENDORS')
+        $(".vendorConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+    }
+    else{
+        $(".vendorPlural").text('VENDOR')
+        $(".vendorConjuction").each(function (index) {this.innerHTML = ''})
+    }
+
+    
+    
+    length = 0
+    $(".purchaserConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
+    if(length>1){
+        $(".purchaserPlural").text('PURCHASERS')
+        $(".purchaserConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+    }
+    else{
+        $(".purchaserPlural").text('PURCHASER')
+        $(".purchaserConjuction").each(function (index) {this.innerHTML = ''})
+    }
+
+    
+    length = 0
+    $(".witnessConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
+    if(length>1){
+        $(".witnessConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+    }
+    else{
+        $(".witnessConjuction").each(function (index) {this.innerHTML = ''})
+    }
 
 
-    length = $(".purchaserConjuction").length
-    $(".purchaserConjuction").each(function (index) {
-        if (index == length - 1) {
-            $(this).text(" and ")
-        }
-        else { $(this).text(", ") }
-    })
-
-
-    length = $(".witnessConjuction").length
-    $(".witnessConjuction").each(function (index) {
-        if (index == length - 1) {
-            $(this).text(" and ")
-        }
-        else { $(this).text(", ") }
-    })
 }
 
 
@@ -697,6 +709,7 @@ function setVendorTable(type) {
             vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setVendorTable($("#inputVendorType").val())
             console.log(vendorTable)
+            conjuctionRefresh()
         })
     })
     $(".delete_vendor_table").each(function () {
@@ -705,6 +718,7 @@ function setVendorTable(type) {
             $(`#first_person_details_${this.value}`).remove()
             setVendorTable($("#inputVendorType").val())
             console.log(vendorTable)
+            conjuctionRefresh()
         })
     })
 }
@@ -763,6 +777,7 @@ function setPurchaserTable(type) {
             purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setPurchaserTable($("#inputPurchaserType").val())
             console.log(purchaserTable)
+            conjuctionRefresh()
         })
     })
     $(".delete_purchaser_table").each(function () {
@@ -771,6 +786,7 @@ function setPurchaserTable(type) {
             $(`#second_person_details_${this.value}`).remove()
             setPurchaserTable($("#inputPurchaserType").val())
             console.log(purchaserTable)
+            conjuctionRefresh()
         })
     })
 }
@@ -804,6 +820,7 @@ function setWitnessTable() {
             witnessTable = witnessTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setWitnessTable($("#inputWitnessType").val())
             console.log(witnessTable)
+            conjuctionRefresh()
         })
     })
     $(".delete_witness_table").each(function () {
@@ -812,6 +829,7 @@ function setWitnessTable() {
             $(`#Witness_person_details_${this.value}`).remove()
             setWitnessTable($("#inputWitnessType").val())
             console.log(witnessTable)
+            conjuctionRefresh()
         })
     })
 }
@@ -928,6 +946,18 @@ function clickEventListner() {
         companyTableVendor.push(companyTableVendorTemp)
         $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
         $("#inputVendorMultiCompany").selectpicker('refresh')
+        $("#inputVendorMultiCompany").change(function(){
+            const length = $("#inputVendorMultiCompany").val().length
+            if(length){
+                $("#deed_body #vendorCompanyDetails").html(
+                    $("#inputVendorMultiCompany").val().map((item,index) => {
+                        item=parseInt(item)
+                            return(`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']}${index==length-1 ? '' : index == length-2 ?' and ' : ','} `)
+                    })
+                )
+            }
+            else{$("#deed_body #vendorCompanyDetails").html('')}
+        })
         $("#company_info_vendor input").each(function () { this.value = "" })
         console.log(companyTableVendor)
     })
@@ -976,12 +1006,12 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
             this.setAttribute('id', changeid)
         })
-        let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;"><span class="vendorConjuction"></span>${$("#hidden_use_element").html()}</span>`
+        let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
         $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", "") })
+        $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", "");conjuctionRefresh() })
 
 
 
@@ -1000,6 +1030,18 @@ function clickEventListner() {
         companyTablePurchaser.push(companyTablePurchaserTemp)
         $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
         $("#inputPurchaserMultiCompany").selectpicker('refresh')
+        $("#inputPurchaserMultiCompany").change(function(){
+            const length = $("#inputPurchaserMultiCompany").val().length
+            if(length){
+                $("#deed_body #purchaserCompanyDetails").html(
+                    $("#inputPurchaserMultiCompany").val().map((item,index) => {
+                        item=parseInt(item)
+                            return(`${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}, Reg No ${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}, ${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}${index==length-1 ? '' : index == length-2 ?' and ' : ','} `)
+                    })
+                )
+            }
+            else{$("#deed_body #purchaserCompanyDetails").html('')}
+        })
         $("#company_info_purchaser input").each(function () { this.value = "" })
     })
     $("#purchaserInfoClone").click(function () {
@@ -1054,7 +1096,7 @@ function clickEventListner() {
         $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", "") })
+        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", "");conjuctionRefresh() })
 
     }
     )
@@ -1109,7 +1151,7 @@ function clickEventListner() {
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()
             conjuctionRefresh()
-            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", "") })
+            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", "");conjuctionRefresh() })
         }
     )
     $("#witnessInfoRemoveClone").click(

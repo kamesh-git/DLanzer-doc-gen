@@ -255,7 +255,7 @@
             </div> <!-- Nav Header Component End -->
             <!--Nav End-->
         </div>
-        <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="conatiner-fluid content-inner mt-n5 py-0 pe-0">
             <div id="table_display" class="row">
                 <div class="col-sm-12 col-lg-12">
                     <div class="card">
@@ -341,7 +341,7 @@
             </div>
             <div id="new_document_entry" class="row d-none">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-7">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="card row align-items-center overflow-hidden">
                             <div style="left:10px" class="card-header col-sm-12 row justify-content-between">
                                 <div class="header-title col">
@@ -1032,6 +1032,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
+                                                    <div class="form-floating" id="inputSchedulePropDiv">
+                                                        <select class="form-select" name="" id="inputScheduleProp">
+                                                            <option value="">ScheduleProp Type</option>
+                                                        </select>
+                                                        <label for="inputScheduleProp">ScheduleProp</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
                                                     <div class="row ps-3 pe-3">
                                                         <div class="form-floating col-md p-0 pe-2" id="inputPropertyPriceDiv">
                                                             <input class="form-control" name="" id="inputPropertyPrice"
@@ -1060,16 +1068,13 @@
                                                             <h6 class="card-title text-start">Property Details</h6>
                                                         </div>
                                                         <div class="col-md-8 float-md-end">
-                                                            <button type="button"
-                                                                onclick="removecloneform('PropertyDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
                                                             <button id="clonePropertyDetailsFormInput" type="button"
-                                                                onclick="cloneform('PropertyDetailsFormInput','PropertyDetailsFormClone')"
-                                                                class="btn btn-primary float-md-end">Add</button>
+                                                            clone_id="Property"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
                                                             <button id="removeClonePropertyDetailsFormInput"
                                                                 type="button"
-                                                                onclick="removecloneform('PropertyDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
+                                                                clone_id="Property"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1093,16 +1098,13 @@
                                                             <h6 class="card-title text-start">Transfer Details</h6>
                                                         </div>
                                                         <div class="col-md-8 float-md-end">
-                                                            <button type="button"
-                                                                onclick="removecloneform('TransferDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
                                                             <button id="cloneTransferDetailsFormInput" type="button"
-                                                                onclick="cloneform('TransferDetailsFormInput','TransferDetailsFormClone')"
-                                                                class="btn btn-primary float-md-end">Add</button>
+                                                            clone_id="Transfer"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
                                                             <button id="removeCloneTransferDetailsFormInput"
-                                                                type="button"
-                                                                onclick="removecloneform('TransferDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
+                                                                type="button" clas
+                                                                clone_id="Transfer"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1126,16 +1128,13 @@
                                                             <h6 class="card-title text-start">Payment Details</h6>
                                                         </div>
                                                         <div class="col-md-8 float-md-end">
-                                                            <button type="button"
-                                                                onclick="removecloneform('PaymentDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-sm-none">Remove</button>
                                                             <button id="clonePaymentDetailsFormInput" type="button"
-                                                                onclick="cloneform('PaymentDetailsFormInput','PaymentDetailsFormClone')"
-                                                                class="btn btn-primary float-md-end">Add</button>
+                                                                clone_id="Payment"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
                                                             <button id="removeClonePaymentDetailsFormInput"
                                                                 type="button"
-                                                                onclick="removecloneform('PaymentDetailsFormInputClone')"
-                                                                class="btn btn-dark float-md-end me-1 d-none d-md-block">Remove</button>
+                                                                clone_id="Payment"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1155,7 +1154,7 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-7">
-                                                    <h3 class="mb-4 text-start">Witness Details:</h3>
+                                                    <h3 class="mb-4 text-start">Witness Details</h3>
                                                 </div>
                                                 <div class="col-md-5">
                                                     <button type="button" class="btn btn-primary float-md-end d-none"
@@ -1325,7 +1324,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-5">
+                    <div class="col-sm-12 col-lg-6 pe-0">
                         <div class="card max-height-vh-70">
                             <div class="card-header pb-0 px-3 d-flex align-items-center justify-content-center">
                                 <h3>DEED</h3>
@@ -1706,70 +1705,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script>
-        function cloneform(formcss, formclonecss) {
-            $("." + formcss).clone().removeClass(formcss).addClass(formcss + "Clone").appendTo("." + formclonecss).find('textarea').val("");
-            $(".property_details").each(function () {
-                this.addEventListener("input", function () {
-                    const text = [];
-                    $(".property_details").each(function (index) {
-                        text.push(`<h6>Schedule ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]}</h6>${this.value}`)
-                    })
-                    document.getElementById("Property_Details").innerHTML = "<p><b>Property Details:</b></p>" + "<p>" + text.join("<br><br>") + "</p>"
-                })
-            })
-            $(".transfer_details").each(function () {
-                this.addEventListener("input", function () {
-                    const text = [];
-                    $(".transfer_details").each(function () {
-                        text.push(this.value)
-                    })
-                    document.getElementById("transfer_details").innerHTML = "<p><b>Transfer Details:</b></p>" + "<p>" + text.join("<br><br>") + "</p>"
-                })
-            })
-            $(".payment_details").each(function () {
-                this.addEventListener("input", function () {
-                    const text = [];
-                    $(".payment_details").each(function () {
-                        text.push(this.value)
-                    })
-                    document.getElementById("payment_Details").innerHTML = "<p><b>Payment Details:</b></p>" + "<p>" + text.join("<br><br>") + "</p>"
-                })
-            })
-            $('textarea').each(function () {
-                $(this).on('input', function () {
-                    this.style.height = 0;
-                    this.style.height = (this.scrollHeight) + "px";
-                })
-            });
-        }
-        function removecloneform(removeformcss) {
-            var count = $("." + removeformcss).length;
-            $("." + removeformcss).eq(count - 1).remove();
-            $(".property_details").each(function () {
-                const text = [];
-                $(".property_details").each(function (index) {
-                    text.push(`<h6>Schedule ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]}</h6>${this.value}`)
-                })
-                document.getElementById("Property_Details").innerHTML = "<p><b>Property Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-            $(".transfer_details").each(function () {
-                const text = [];
-                $(".transfer_details").each(function () {
-                    text.push(this.value)
-                })
-                document.getElementById("transfer_details").innerHTML = "<p><b>Transfer Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-            $(".payment_details").each(function () {
-                const text = [];
-                $(".payment_details").each(function () {
-                    text.push(this.value)
-                })
-                document.getElementById("payment_Details").innerHTML = "<p><b>Payment Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-            // $("." + removeformcss).each(function () {
-            //     // $(this).html("Found this one");
-            // });
-        }
     </script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/aadel112/googoose@master/jquery.googoose.js"></script>

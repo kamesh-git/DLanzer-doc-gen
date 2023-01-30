@@ -16,7 +16,7 @@ storeInput().then(resp => {
             'background-color': 'transparent',
             'height': "58px",
             'padding-top': '24px',
-            'padding-left':'17px',
+            'padding-left': '17px',
             'border-radius': '0.5rem',
             'border': '1px solid #eee'
         })
@@ -166,7 +166,7 @@ function tableReset() {
     $(".PaymentDetailsFormClone").empty()
 
     $("#deed_body").html("")
-    $("#save_button").text("Add").attr('api', "POST")
+    $("#save_button").text("Submit").attr('api', "POST")
 
 
 
@@ -465,7 +465,7 @@ function inputEventListner() {
 
 
 
-
+    // text area input listeners
 
     $('textarea').each(function () {
         $(this).on('input', function () {
@@ -473,6 +473,26 @@ function inputEventListner() {
             this.style.height = (this.scrollHeight) + "px";
         })
     });
+
+
+    $(".cloneDetailsFormInput").each(function () {
+        $(this).click(function () {
+            let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
+            let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
+            $("." + formcss).clone().removeClass(formcss).addClass(formcss + "Clone").appendTo("." + formclonecss).find('textarea').val("");
+            cloneformEventList()
+        })
+    })
+
+    $(".removeCloneDetailsFormInput").each(function () {
+        $(this).click(function () {
+            let removeformcss = this.getAttribute('clone_id') + 'DetailsFormInputClone'
+            var count = $("." + removeformcss).length;
+            $("." + removeformcss).eq(count - 1).remove();
+            cloneformEventList()
+            $(".property_details,.transfer_details,.payment_details").each(function () { console.log(this); $(this).trigger('input') })
+        })
+    })
 
 }
 
@@ -576,33 +596,12 @@ function selectEventListner() {
         deed_content = deed_content.replace("#Doucument_Type", deed_doucument_Type)
         deed_content = deed_content.replace("Apllication Number", "")
         $("#deed_body").html(deed_content)
-        $(".property_details").each(function () {
-            this.addEventListener("input", function () {
-                const text = [];
-                $(".property_details").each(function (index) {
-                    text.push(`<h6>Schedule ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]}</h6>${this.value}`)
-                })
-                document.getElementById("Property_Details").innerHTML = "<p><b>Property Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-        })
-        $(".transfer_details").each(function () {
-            this.addEventListener("input", function () {
-                const text = [];
-                $(".transfer_details").each(function () {
-                    text.push(this.value)
-                })
-                document.getElementById("transfer_details").innerHTML = "<p><b>Transfer Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-        })
-        $(".payment_details").each(function () {
-            this.addEventListener("input", function () {
-                const text = [];
-                $(".payment_details").each(function () {
-                    text.push(this.value)
-                })
-                document.getElementById("payment_Details").innerHTML = "<p><b>Payment Details:</b></p>" + "<p>" + text.join("<br>") + "</p>"
-            })
-        })
+        cloneformEventList()
+    })
+    
+    $("#inputScheduleProp").change(function () {
+        $("#deed_body #DocumentScheduleProp").text(this.value)
+        $("#deed_body #DocumentSchedulePropType").text($("#inputScheduleProp option:selected").text())
     })
 }
 
@@ -611,37 +610,37 @@ function selectEventListner() {
 
 function conjuctionRefresh() {
     let length = 0
-    $(".vendorConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
-    if(length>1){
+    $(".vendorConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    if (length > 1) {
         $(".vendorPlural").text('VENDORS')
-        $(".vendorConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+        $(".vendorConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
     }
-    else{
+    else {
         $(".vendorPlural").text('VENDOR')
-        $(".vendorConjuction").each(function (index) {this.innerHTML = ''})
+        $(".vendorConjuction").each(function (index) { this.innerHTML = '' })
     }
 
-    
-    
+
+
     length = 0
-    $(".purchaserConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
-    if(length>1){
+    $(".purchaserConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
-        $(".purchaserConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+        $(".purchaserConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
     }
-    else{
+    else {
         $(".purchaserPlural").text('PURCHASER')
-        $(".purchaserConjuction").each(function (index) {this.innerHTML = ''})
+        $(".purchaserConjuction").each(function (index) { this.innerHTML = '' })
     }
 
-    
+
     length = 0
-    $(".witnessConjuction").each(function(){if($(this).parent().css('display') != 'none'){length++}})
-    if(length>1){
-        $(".witnessConjuction").each(function (index) {this.innerHTML = `<br>${index+1}.`})
+    $(".witnessConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    if (length > 1) {
+        $(".witnessConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
     }
-    else{
-        $(".witnessConjuction").each(function (index) {this.innerHTML = ''})
+    else {
+        $(".witnessConjuction").each(function (index) { this.innerHTML = '' })
     }
 
 
@@ -946,17 +945,17 @@ function clickEventListner() {
         companyTableVendor.push(companyTableVendorTemp)
         $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
         $("#inputVendorMultiCompany").selectpicker('refresh')
-        $("#inputVendorMultiCompany").change(function(){
+        $("#inputVendorMultiCompany").change(function () {
             const length = $("#inputVendorMultiCompany").val().length
-            if(length){
+            if (length) {
                 $("#deed_body #vendorCompanyDetails").html(
-                    $("#inputVendorMultiCompany").val().map((item,index) => {
-                        item=parseInt(item)
-                            return(`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']}${index==length-1 ? '' : index == length-2 ?' and ' : ','} `)
+                    $("#inputVendorMultiCompany").val().map((item, index) => {
+                        item = parseInt(item)
+                        return (`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']}${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
                     })
                 )
             }
-            else{$("#deed_body #vendorCompanyDetails").html('')}
+            else { $("#deed_body #vendorCompanyDetails").html('') }
         })
         $("#company_info_vendor input").each(function () { this.value = "" })
         console.log(companyTableVendor)
@@ -1011,7 +1010,7 @@ function clickEventListner() {
         $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", "");conjuctionRefresh() })
+        $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
 
 
 
@@ -1030,17 +1029,17 @@ function clickEventListner() {
         companyTablePurchaser.push(companyTablePurchaserTemp)
         $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
         $("#inputPurchaserMultiCompany").selectpicker('refresh')
-        $("#inputPurchaserMultiCompany").change(function(){
+        $("#inputPurchaserMultiCompany").change(function () {
             const length = $("#inputPurchaserMultiCompany").val().length
-            if(length){
+            if (length) {
                 $("#deed_body #purchaserCompanyDetails").html(
-                    $("#inputPurchaserMultiCompany").val().map((item,index) => {
-                        item=parseInt(item)
-                            return(`${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}, Reg No ${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}, ${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}${index==length-1 ? '' : index == length-2 ?' and ' : ','} `)
+                    $("#inputPurchaserMultiCompany").val().map((item, index) => {
+                        item = parseInt(item)
+                        return (`${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}, Reg No ${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}, ${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
                     })
                 )
             }
-            else{$("#deed_body #purchaserCompanyDetails").html('')}
+            else { $("#deed_body #purchaserCompanyDetails").html('') }
         })
         $("#company_info_purchaser input").each(function () { this.value = "" })
     })
@@ -1096,7 +1095,7 @@ function clickEventListner() {
         $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", "");conjuctionRefresh() })
+        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })
 
     }
     )
@@ -1151,7 +1150,7 @@ function clickEventListner() {
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()
             conjuctionRefresh()
-            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", "");conjuctionRefresh() })
+            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", ""); conjuctionRefresh() })
         }
     )
     $("#witnessInfoRemoveClone").click(
@@ -1166,3 +1165,47 @@ function clickEventListner() {
     )
 
 }
+
+function cloneformEventList() {
+    $(".property_details").each(function () {
+        $(this).on('input', function () {
+            const text = [];
+            const length = $(".property_details").length
+            $(".property_details").each(function (index) {
+                text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index] : 'of Property'}</h6>${this.value}`)
+            })
+            document.getElementById("Property_Details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+            const inputScheduleProp = []
+            $(".property_details").each((index, item) => {
+                inputScheduleProp.push(`<option value="${item.value}">Schedule ${length > 1 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index] : 'of Property'}</option>`)
+            })
+            $("#inputScheduleProp").html(inputScheduleProp.join(''))
+            $("#inputScheduleProp").trigger('change')
+        })
+    })
+    $(".transfer_details").each(function () {
+        $(this).on('input', function () {
+            const text = [];
+            $(".transfer_details").each(function () {
+                text.push(this.value)
+            })
+            document.getElementById("transfer_details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+        })
+    })
+    $(".payment_details").each(function () {
+        $(this).on('input', function () {
+            const text = [];
+            $(".payment_details").each(function () {
+                text.push(this.value)
+            })
+            document.getElementById("payment_Details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+        })
+    })
+    $('textarea').each(function () {
+        $(this).on('input', function () {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight) + "px";
+        })
+    });
+}
+

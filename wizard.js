@@ -475,24 +475,7 @@ function inputEventListner() {
     });
 
 
-    $(".cloneDetailsFormInput").each(function () {
-        $(this).click(function () {
-            let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
-            let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
-            $("." + formcss).clone().removeClass(formcss).addClass(formcss + "Clone").appendTo("." + formclonecss).find('textarea').val("");
-            cloneformEventList()
-        })
-    })
-
-    $(".removeCloneDetailsFormInput").each(function () {
-        $(this).click(function () {
-            let removeformcss = this.getAttribute('clone_id') + 'DetailsFormInputClone'
-            var count = $("." + removeformcss).length;
-            $("." + removeformcss).eq(count - 1).remove();
-            cloneformEventList()
-            $(".property_details,.transfer_details,.payment_details").each(function () { console.log(this); $(this).trigger('input') })
-        })
-    })
+    
 
 }
 
@@ -948,17 +931,18 @@ function clickEventListner() {
         $("#inputVendorMultiCompany").change(function () {
             const length = $("#inputVendorMultiCompany").val().length
             if (length) {
-                $("#deed_body #vendorCompanyDetails").html(
+                $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html(
                     $("#inputVendorMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
-                        return (`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']}${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
-                    })
+                        return (`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']} ${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}`)
+                    }).join('') + 'by, '
                 )
             }
-            else { $("#deed_body #vendorCompanyDetails").html('') }
+            else { $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html('') }
         })
         $("#company_info_vendor input").each(function () { this.value = "" })
         console.log(companyTableVendor)
+        $("#inputVendorMultiCompany").selectpicker('refresh')
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
@@ -1164,6 +1148,25 @@ function clickEventListner() {
         }
     )
 
+    $(".cloneDetailsFormInput").each(function () {
+        $(this).click(function () {
+            let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
+            let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
+            $("." + formcss).clone().removeClass(formcss).addClass(formcss + "Clone").appendTo("." + formclonecss).find('textarea').val("");
+            cloneformEventList()
+        })
+    })
+
+    $(".removeCloneDetailsFormInput").each(function () {
+        $(this).click(function () {
+            let removeformcss = this.getAttribute('clone_id') + 'DetailsFormInputClone'
+            var count = $("." + removeformcss).length;
+            $("." + removeformcss).eq(count - 1).remove();
+            cloneformEventList()
+            $(".property_details,.transfer_details,.payment_details").each(function () { console.log(this); $(this).trigger('input') })
+        })
+    })
+
 }
 
 function cloneformEventList() {
@@ -1208,4 +1211,3 @@ function cloneformEventList() {
         })
     });
 }
-

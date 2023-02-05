@@ -1016,14 +1016,14 @@ function clickEventListner() {
         $("#inputPurchaserMultiCompany").change(function () {
             const length = $("#inputPurchaserMultiCompany").val().length
             if (length) {
-                $("#deed_body #purchaserCompanyDetails").html(
+                $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html(
                     $("#inputPurchaserMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
                         return (`${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}, Reg No ${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}, ${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
                     })
                 )
             }
-            else { $("#deed_body #purchaserCompanyDetails").html('') }
+            else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }
         })
         $("#company_info_purchaser input").each(function () { this.value = "" })
     })
@@ -1074,7 +1074,7 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
             this.setAttribute('id', changeid)
         })
-        let text = `<span id='second_person_details_${purchaserIterationCount}' style="display: none;" ><span class="purchaserConjuction"></span>${$("#hidden_use_element").html()}</span>`
+        let text = `<span id='second_person_details_${purchaserIterationCount}' style="display: none;">${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
         $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { this.value = "" })
         inputEventListner()

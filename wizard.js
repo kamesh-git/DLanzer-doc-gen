@@ -410,6 +410,7 @@ function inputEventListner() {
     })
 
     $(".inputWitnessInfo select[id!=inputWitnessMultiCompany]").on("change", function () {
+        $("#Witness_person_details_0").parent().removeClass('d-none')
         $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
 
@@ -1129,7 +1130,7 @@ function clickEventListner() {
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
                 this.setAttribute('id', changeid)
             })
-            let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'><span class="witnessConjuction"></span>${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'>${$("#hidden_use_element").html()}</span>`
             $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
             $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
             inputEventListner()

@@ -52,9 +52,16 @@ function apirequest(method, endpoint, Body = {}) {
                     resp.json().then(data => { resolve(data) })
                 }
                 else {
+                    if(resp.status == 401){
+                        localStorage.clear();
+                        location.reload()
+                    };
                     resp.json().then(data => { reject(data) })
                 }
-            }).catch(err => { reject(err) })
+            }).catch(err => { 
+                console.log(err)
+                reject(err) 
+            })
         }
 
         else if (method === "POST" || method === "PUT") {

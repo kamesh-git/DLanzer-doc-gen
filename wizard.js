@@ -934,7 +934,7 @@ function clickEventListner() {
                     $("#inputVendorMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
                         return (`${companyTableVendor[item]['DocumentVendorCompanyName']}, Reg No ${companyTableVendor[item]['DocumentVendorCompanyRegNo']}, ${companyTableVendor[item]['DocumentVendorCompanyAddress']} ${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}`)
-                    }).join('') + 'by, '
+                    }).join('') + 'represented by, '
                 )
             }
             else { $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html('') }
@@ -1019,7 +1019,7 @@ function clickEventListner() {
                     $("#inputPurchaserMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
                         return (`${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}, Reg No ${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}, ${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
-                    })
+                    }).join('') + 'represented by, '
                 )
             }
             else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }

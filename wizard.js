@@ -372,7 +372,6 @@ function inputEventListner() {
     })
 
     // vendor
-    console.log(vendorIterationCount)
     $("#new_document_entry .inputVendorInfo input").on("input", function () {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.value)

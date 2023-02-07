@@ -990,11 +990,11 @@ function clickEventListner() {
         })
         let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
-        $("#append_vendor_clone input,#append_vendor_clone select[id!=inputVendorMultiCompany]").each(function () { this.value = "" })
+        $("#append_vendor_clone input,#append_vendor_clone select").each(function () { this.value = "" })
+        $("#inputVendorMultiCompany").selectpicker('refresh')
         inputEventListner()
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
-
 
 
 
@@ -1075,7 +1075,8 @@ function clickEventListner() {
         })
         let text = `<span id='second_person_details_${purchaserIterationCount}' style="display: none;">${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
-        $("#append_purchaser_clone input,#append_purchaser_clone select[id!=inputPurchaserMultiCompany]").each(function () { this.value = "" })
+        $("#append_purchaser_clone input,#append_purchaser_clone select").each(function () { this.value = "" })
+        $("#inputPurchaserMultiCompany").selectpicker('refresh')
         inputEventListner()
         conjuctionRefresh()
         $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })

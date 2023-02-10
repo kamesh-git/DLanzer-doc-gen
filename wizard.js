@@ -314,9 +314,11 @@ function setdocFields() {
 
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputVendorTitle").html(text)
+    $("#inputVendorRepresenterTitle").html(text)
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputVendorRelationship").html(text)
+    $("#inputVendorRepresenterRelationship").html(text)
 
 
 
@@ -327,9 +329,12 @@ function setdocFields() {
 
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputPurchaserTitle").html(text)
+    $("#inputPurchaserRepresenterTitle").html(text)
+
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputPurchaserRelationship").html(text)
+    $("#inputPurchaserRepresenterRelationship").html(text)
 
     // set witness type
 
@@ -404,8 +409,18 @@ function inputEventListner() {
             $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(new_date.toShortFormat())
         }
     })
-
+    $("#new_document_entry .inputPurchaserRepresenterInfo input").on("input", function () {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.value)
+        if (this.getAttribute('type') == 'date') {
+            let new_date = new Date(this.value)
+            $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(new_date.toShortFormat())
+        }
+    })
     $(".inputPurchaserInfo select[id!=inputPurchaserMultiCompany]").on("change", function () {
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+    })
+    $(".inputPurchaserRepresenterInfo select").on("change", function () {
         $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
     })
 
@@ -524,8 +539,8 @@ function selectEventListner() {
         }).join("")
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
         if (this.value == 2) {
-            $("#toggleRepresenter").parent().removeClass("d-none")
-            $("#showCompanyToggler").addClass("d-none")
+            $("#toggleVendorRepresenter").parent().removeClass("d-none")
+            $("#showVendorCompanyToggler").addClass("d-none")
             $("#vendorInfoTable_individual").removeClass("d-none")
             $("#vendorInfoTable_company").addClass("d-none")
             $("#inputVendorCategory").parent().parent().addClass('d-none')
@@ -536,8 +551,10 @@ function selectEventListner() {
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
-            $("#toggleRepresenter").parent().addClass("d-none")
-            $("#showCompanyToggler").removeClass("d-none")
+            $(`#first_person_representer_details_${vendorIterationCount}`).addClass('d-none')
+            $(".inputVendorRepresenterInfo").addClass('d-none')    
+            $("#toggleVendorRepresenter").prop('checked', false).parent().addClass("d-none")
+            $("#showVendorCompanyToggler").removeClass("d-none")
             $("#vendorInfoTable_individual").addClass("d-none")
             $("#vendorInfoTable_company").removeClass("d-none")
             $("#inputVendorCategory").parent().parent().removeClass('d-none')
@@ -562,6 +579,9 @@ function selectEventListner() {
         }).join("")
         $("[id=inputPurchaserCategory]").each(function () { $(this).html(text) })
         if (this.value == 2) {
+            $("#togglePurchaserRepresenter").parent().removeClass("d-none")
+            $("#showPurchaserCompanyToggler").addClass("d-none")
+            $(".inputPurchaserInfo").removeClass('d-none')
             $("#purchaserInfoTable_individual").removeClass("d-none")
             $("#purchaserInfoTable_company").addClass("d-none")
             $("#inputPurchaserCategory").parent().parent().addClass('d-none')
@@ -571,6 +591,11 @@ function selectEventListner() {
             $(".inputPurchaserInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
+            $(`#second_person_representer_details_${purchaserIterationCount}`).addClass('d-none')
+            $(".inputPurchaserRepresenterInfo").addClass('d-none')    
+            $("#togglePurchaserRepresenter").prop('checked', false).parent().addClass("d-none")
+            $("#showPurchaserCompanyToggler").removeClass("d-none")
+            $(".inputPurchaserInfo").addClass('d-none')
             $("#purchaserInfoTable_individual").addClass("d-none")
             $("#purchaserInfoTable_company").removeClass("d-none")
             $("#inputPurchaserCategory").parent().parent().removeClass('d-none')
@@ -1195,19 +1220,33 @@ function clickEventListner() {
         })
     })
 
-    $("#show_company_details").click(function(){
+    $("#showVendorCompanyToggler #show_company_details").click(function(){
         $(".inputVendorInfo").addClass('d-none')
         $("#company_info_vendor").removeClass('d-none')
 
     })
-    $("#show_vendor_details").click(function(){
+    $("#showVendorCompanyToggler #show_vendor_details").click(function(){
         $(".inputVendorInfo").removeClass('d-none')
         $("#company_info_vendor").addClass('d-none')
 
     })
-    $("#toggleRepresenter").change(function(){
+    $("#toggleVendorRepresenter").change(function(){
         $(`#first_person_representer_details_${vendorIterationCount}`).toggleClass('d-none')
         $(".inputVendorRepresenterInfo").toggleClass('d-none')
+})
+    $("#showPurchaserCompanyToggler #show_company_details").click(function(){
+        $(".inputPurchaserInfo").addClass('d-none')
+        $("#company_info_purchaser").removeClass('d-none')
+
+    })
+    $("#showPurchaserCompanyToggler #show_purchaser_details").click(function(){
+        $(".inputPurchaserInfo").removeClass('d-none')
+        $("#company_info_purchaser").addClass('d-none')
+
+    })
+    $("#togglePurchaserRepresenter").change(function(){
+        $(`#second_person_representer_details_${purchaserIterationCount}`).toggleClass('d-none')
+        $(".inputPurchaserRepresenterInfo").toggleClass('d-none')
 })
 
 }
@@ -1217,13 +1256,14 @@ function cloneformEventList() {
         $(this).on('input', function () {
             const text = [];
             const length = $(".property_details").length
+            const schedule_title = ['of property',...'BCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')]
             $(".property_details").each(function (index) {
-                text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index] : 'of Property'}</h6>${this.value}`)
+                text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</h6>${this.value}`)
             })
             document.getElementById("Property_Details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
             const inputScheduleProp = []
             $(".property_details").each((index, item) => {
-                inputScheduleProp.push(`<option value="${item.value}">Schedule ${length > 1 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index] : 'of Property'}</option>`)
+                inputScheduleProp.push(`<option value="${item.value}">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</option>`)
             })
             $("#inputScheduleProp").html(inputScheduleProp.join(''))
             $("#inputScheduleProp").trigger('change')

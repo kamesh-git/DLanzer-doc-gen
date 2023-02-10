@@ -312,7 +312,7 @@ function setdocFields() {
     $("#inputVendorType").html(text)
 
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputVendorTitle").html(text)
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
@@ -325,7 +325,7 @@ function setdocFields() {
     text = `<option value="">Purchaser type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputPurchaserType").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputPurchaserTitle").html(text)
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
@@ -336,7 +336,7 @@ function setdocFields() {
     text = `<option value="">Witness type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputWitnessType").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token=${item.CustomerGenderValue}>${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputWitnessTitle").html(text)
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
@@ -380,9 +380,19 @@ function inputEventListner() {
             $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(new_date.toShortFormat())
         }
     })
-
+    $("#new_document_entry .inputVendorRepresenterInfo input").on("input", function () {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.value)
+        if (this.getAttribute('type') == 'date') {
+            let new_date = new Date(this.value)
+            $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(new_date.toShortFormat())
+        }
+    }) 
     $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+    })
+    $(".inputVendorRepresenterInfo select").on("change", function () {
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
     })
 
     // purchaser
@@ -396,7 +406,7 @@ function inputEventListner() {
     })
 
     $(".inputPurchaserInfo select[id!=inputPurchaserMultiCompany]").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
     })
 
     // witness
@@ -411,7 +421,7 @@ function inputEventListner() {
 
     $(".inputWitnessInfo select[id!=inputWitnessMultiCompany]").on("change", function () {
         $("#Witness_person_details_0").parent().removeClass('d-none')
-        $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
     })
 
 
@@ -514,19 +524,25 @@ function selectEventListner() {
         }).join("")
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
         if (this.value == 2) {
+            $("#toggleRepresenter").parent().removeClass("d-none")
+            $("#showCompanyToggler").addClass("d-none")
             $("#vendorInfoTable_individual").removeClass("d-none")
             $("#vendorInfoTable_company").addClass("d-none")
             $("#inputVendorCategory").parent().parent().addClass('d-none')
             $("#append_vendor_clone").removeClass("d-none")
+            $(".inputVendorInfo").removeClass('d-none')
             console.log($(".inputVendorInfo input[id*='Company'],.inputVendorInfo select[id*='Company']"))
             $("#company_info_vendor").addClass('d-none')
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
+            $("#toggleRepresenter").parent().addClass("d-none")
+            $("#showCompanyToggler").removeClass("d-none")
             $("#vendorInfoTable_individual").addClass("d-none")
             $("#vendorInfoTable_company").removeClass("d-none")
             $("#inputVendorCategory").parent().parent().removeClass('d-none')
             $("#append_vendor_clone").removeClass("d-none")
+            $(".inputVendorInfo").addClass('d-none')
             console.log($(".inputVendorInfo input[id*='Company'],.inputVendorInfo select[id*='Company']"))
             $("#company_info_vendor").removeClass('d-none')
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().removeClass('d-none') })
@@ -941,8 +957,12 @@ function clickEventListner() {
             else { $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html('') }
         })
         $("#company_info_vendor input").each(function () { this.value = "" })
-        console.log(companyTableVendor)
         $("#inputVendorMultiCompany").selectpicker('refresh')
+        $("#vendorCompanyTable tbody").html(companyTableVendor.map((item,index) => `<tr> <td>${index+1}</td>
+        ${Object.values(item).map(item1 => (
+            `<td> ${item1} </td>`
+        ))}
+         </tr>`))
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
@@ -996,7 +1016,7 @@ function clickEventListner() {
         inputEventListner()
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
-
+        
 
 
     }
@@ -1025,6 +1045,13 @@ function clickEventListner() {
             }
             else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }
         })
+
+        $("#purchaserCompanyTable tbody").html(companyTablePurchaser.map((item,index) => `<tr> <td>${index+1}</td>
+        ${Object.values(item).map(item1 => (
+            `<td> ${item1} </td>`
+        ))}
+         </tr>`))
+
         $("#company_info_purchaser input").each(function () { this.value = "" })
     })
     $("#purchaserInfoClone").click(function () {
@@ -1167,6 +1194,21 @@ function clickEventListner() {
             $(".property_details,.transfer_details,.payment_details").each(function () { console.log(this); $(this).trigger('input') })
         })
     })
+
+    $("#show_company_details").click(function(){
+        $(".inputVendorInfo").addClass('d-none')
+        $("#company_info_vendor").removeClass('d-none')
+
+    })
+    $("#show_vendor_details").click(function(){
+        $(".inputVendorInfo").removeClass('d-none')
+        $("#company_info_vendor").addClass('d-none')
+
+    })
+    $("#toggleRepresenter").change(function(){
+        $(`#first_person_representer_details_${vendorIterationCount}`).toggleClass('d-none')
+        $(".inputVendorRepresenterInfo").toggleClass('d-none')
+})
 
 }
 

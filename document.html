@@ -459,7 +459,7 @@
                                                 <div class="form-floating">
                                                     <input type="date" class="form-control" name=""
                                                         id="inputSaleDeedExecution" deed_id="deed_execution"
-                                                        max="2222-05-26" placeholder="dd-mm-yyyy" />
+                                                        placeholder="dd-mm-yyyy" />
                                                     <label style="font-size: smaller;" for="inputSaleDeedExecution">Deed
                                                         Execution</label>
                                                 </div>
@@ -709,11 +709,22 @@
                                                     </div>
                                                     <div class="col-md-12 mb-3 row inputVendorRepresenterInfo d-none">
                                                         <div class="col-md-4 mb-3">
+                                                            <div class="form-floating" id="inputVendorRepresenterTypeDiv">
+                                                                <select deed_id="documentFirstPersonRepresenterType"
+                                                                    save_id="DocumentVendorGenderID" class="form-select"
+                                                                    name="" id="inputVendorRepresenterType">
+                                                                    <option value="">Title</option>
+                                                                </select>
+                                                                <label for="inputVendorTitle">Title</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
                                                             <div class="form-floating" id="inputVendorTitleDiv">
                                                                 <select deed_id="documentFirstPersonRepresenterTitle"
                                                                     save_id="DocumentVendorGenderID" class="form-select"
                                                                     name="" id="inputVendorRepresenterTitle">
                                                                     <option value="">Title</option>
+                                                                    <option value="Guardian">Guardian</option>
                                                                 </select>
                                                                 <label for="inputVendorTitle">Title</label>
                                                             </div>
@@ -1149,6 +1160,19 @@
                                                     </div>
                                                     <div
                                                         class="col-md-12 mb-3 row inputPurchaserRepresenterInfo d-none">
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="form-floating"
+                                                                id="inputPurchaserRepresenterTypeDiv">
+                                                                <select deed_id="documentSecondPersonRepresenterType"
+                                                                    class="form-select" name=""
+                                                                    save_id="DocumentPurchaserGenderID"
+                                                                    id="inputPurchaserRepresenterTypeTitle">
+                                                                    <option value="">Title</option>
+                                                                    <option value="Guardian">Guardian</option>
+                                                                </select>
+                                                                <label for="inputPurchaserTitle">Title</label>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating"
                                                                 id="inputPurchaserRepresenterTitleDiv">

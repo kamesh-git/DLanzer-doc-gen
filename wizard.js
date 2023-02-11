@@ -2,14 +2,22 @@ import { mastersData, storeInput, apirequest, document_details } from './data.js
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
 
 // main function starts
-
+let today;
 storeInput().then(resp => {
     setdocFields();
     inputEventListner();
     selectEventListner();
     clickEventListner();  //should be called only once
     setTable()
-
+    var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    today = now.getFullYear() + '-' + month + '-' + day;
+    console.log(today)
     // select picker styles
     $("[data-id='inputVendorMultiCompany'],[data-id='inputPurchaserMultiCompany']").each(function () {
         $(this).css({
@@ -167,7 +175,7 @@ function tableReset() {
 
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")
-
+    document.getElementById('inputSaleDeedExecution').value = today
 
 
 }
@@ -312,7 +320,7 @@ function setdocFields() {
     $("#inputVendorType").html(text)
 
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputVendorTitle").html(text)
     $("#inputVendorRepresenterTitle").html(text)
 
@@ -327,7 +335,7 @@ function setdocFields() {
     text = `<option value="">Purchaser type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputPurchaserType").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputPurchaserTitle").html(text)
     $("#inputPurchaserRepresenterTitle").html(text)
 
@@ -341,7 +349,7 @@ function setdocFields() {
     text = `<option value="">Witness type</option>` + mastersData.CustomerType.map(item => (`<option value=${item.CustomerTypeID} data-token=${item.CustomerTypeTitle}>${item.CustomerTypeTitle}</option>`)).join("")
     $("#inputWitnessType").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle} ${item.CustomerGenderValue}">${item.CustomerGenderValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputWitnessTitle").html(text)
 
     text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
@@ -395,10 +403,10 @@ function inputEventListner() {
         }
     }) 
     $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $(".inputVendorRepresenterInfo select").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
 
     // purchaser
@@ -419,10 +427,10 @@ function inputEventListner() {
         }
     })
     $(".inputPurchaserInfo select[id!=inputPurchaserMultiCompany]").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $(".inputPurchaserRepresenterInfo select").on("change", function () {
-        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${purchaserIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
 
     // witness
@@ -437,7 +445,7 @@ function inputEventListner() {
 
     $(".inputWitnessInfo select[id!=inputWitnessMultiCompany]").on("change", function () {
         $("#Witness_person_details_0").parent().removeClass('d-none')
-        $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].getAttribute('data-token') || this.options[this.selectedIndex].innerHTML)
+        $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
 
 
@@ -622,6 +630,7 @@ function selectEventListner() {
         deed_content = deed_content.replace("Apllication Number", "")
         $("#deed_body").html(deed_content)
         cloneformEventList()
+        $("#inputSaleDeedExecution").trigger('input')
     })
     
     $("#inputScheduleProp").change(function () {

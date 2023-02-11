@@ -495,6 +495,30 @@ function inputEventListner() {
             $("#inputWitnessRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
         }
     })
+    $("#inputVendorRepresenterTitle").change(function () {
+        if (this.value == 2) {
+            $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
+            $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
+        }
+        if (this.value == 1) {
+            $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
+            $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
+        }
+    })
+    $("#inputPurchaserRepresenterTitle").change(function () {
+        if (this.value == 2) {
+            $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
+            $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
+        }
+        if (this.value == 1) {
+            $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
+            $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
+        }
+    })
+
+    $("#inputVendorTitle").change(function(){
+        $(this.getAttribute('data-token')+" ").insertBefore(`#documentFirstPersonRelationshipTitle_${vendorIterationCount}`)
+    })
 
 
 

@@ -365,6 +365,7 @@ function inputEventListner() {
 
     }
     $("#new_document_entry input").on("input", function () {
+        console.log(this.value)
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
         if (this.getAttribute('type') == 'date') {

@@ -551,7 +551,7 @@ function selectEventListner() {
             $(".inputVendorInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
-            $(`#first_person_representer_details_${vendorIterationCount}`).addClass('d-none')
+            $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).addClass('d-none')
             $(".inputVendorRepresenterInfo").addClass('d-none')    
             $("#toggleVendorRepresenter").prop('checked', false).parent().addClass("d-none")
             $("#showVendorCompanyToggler").removeClass("d-none")
@@ -591,7 +591,7 @@ function selectEventListner() {
             $(".inputPurchaserInfo select[id*='Company']").each(function () { $(this).parent().parent().parent().addClass('d-none') })
         }
         else if (this.value == 1) {
-            $(`#second_person_representer_details_${purchaserIterationCount}`).addClass('d-none')
+            $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).addClass('d-none')
             $(".inputPurchaserRepresenterInfo").addClass('d-none')    
             $("#togglePurchaserRepresenter").prop('checked', false).parent().addClass("d-none")
             $("#showPurchaserCompanyToggler").removeClass("d-none")
@@ -991,7 +991,7 @@ function clickEventListner() {
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
-        $(".inputVendorInfo select,.inputVendorInfo input").each(function () {
+        $(".inputVendorInfo select:not(.inputVendorRepresenterInfo select),.inputVendorInfo input:not(.inputVendorRepresenterInfo input)[type!=checkbox]").each(function () {
             if ($(this).val() === "") {
                 if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
@@ -1084,7 +1084,7 @@ function clickEventListner() {
 
 
 
-        $(".inputPurchaserInfo select,.inputPurchaserInfo input").each(function () {
+        $(".inputPurchaserInfo select:not(.inputPurchaserRepresenterInfo select),.inputPurchaserInfo input:not(.inputPurchaserRepresenterInfo input)[type!=checkbox]").each(function () {
             if ($(this).val() === "") {
                 if (!($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
@@ -1231,7 +1231,7 @@ function clickEventListner() {
 
     })
     $("#toggleVendorRepresenter").change(function(){
-        $(`#first_person_representer_details_${vendorIterationCount}`).toggleClass('d-none')
+        $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).toggleClass('d-none')
         $(".inputVendorRepresenterInfo").toggleClass('d-none')
 })
     $("#showPurchaserCompanyToggler #show_company_details").click(function(){
@@ -1245,7 +1245,7 @@ function clickEventListner() {
 
     })
     $("#togglePurchaserRepresenter").change(function(){
-        $(`#second_person_representer_details_${purchaserIterationCount}`).toggleClass('d-none')
+        $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).toggleClass('d-none')
         $(".inputPurchaserRepresenterInfo").toggleClass('d-none')
 })
 

@@ -1103,7 +1103,7 @@ function clickEventListner() {
         inputEventListner()
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
-        $("#toggleVendorRepresenter").prop('checked', false)
+        $("#toggleVendorRepresenter").prop('checked', false).trigger('change')
         $("#inputVendorType").parent().parent().addClass('d-none')
 
     }
@@ -1224,7 +1224,7 @@ function clickEventListner() {
         inputEventListner()
         conjuctionRefresh()
         $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })
-        $("#togglePurchaserRepresenter").prop('checked', false)
+        $("#togglePurchaserRepresenter").prop('checked', false).trigger('change')
         $("#inputPurchaserType").parent().parent().addClass('d-none')
 
     }

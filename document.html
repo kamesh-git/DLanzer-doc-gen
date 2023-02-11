@@ -490,14 +490,18 @@
                                                     class="mb-3 d-flex justify-content-around ">
                                                     <button id="show_company_details" class="btn btn-primary">Company
                                                         Details</button>
-                                                    <button id="show_vendor_details" class="btn btn-primary"> Vendor
+                                                    <button id="show_vendor_details" class="btn btn-outline-primary"
+                                                        disabled> Vendor
                                                         Details </button>
                                                 </div>
                                                 <div id="company_info_vendor" class="row">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <h3>Company Information</h3>
                                                         <div class="form-floating" id="DocumentVendorAddCompany">
-                                                            <button type="button" class="btn btn-primary">Done</button>
+                                                            <button type="button"
+                                                                class="clear btn btn-dark me-2">Clear</button>
+                                                            <button type="button"
+                                                                class="add btn btn-primary">Add</button>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
@@ -544,7 +548,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="row inputVendorInfo d-none">
-                                                    <h3 class="mb-4">Vendor Information:</h3>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <button type="button" id="vendorInfoCloneClear"
+                                                            class="btn btn-dark me-2">Clear</button>
+                                                            <button type="button" id="vendorInfoClone"
+                                                            class="btn btn-primary me-1">Add</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-4 mb-3">
                                                         <div class="form-floating" id="inputVendorMultiCompanyDiv">
                                                             <select deed_id="dummy" title="Company"
@@ -709,20 +720,11 @@
                                                     </div>
                                                     <div class="col-md-12 mb-3 row inputVendorRepresenterInfo d-none">
                                                         <div class="col-md-4 mb-3">
-                                                            <div class="form-floating" id="inputVendorRepresenterTypeDiv">
+                                                            <div class="form-floating"
+                                                                id="inputVendorRepresenterTypeDiv">
                                                                 <select deed_id="documentFirstPersonRepresenterType"
-                                                                    save_id="DocumentVendorGenderID" class="form-select"
+                                                                    save_id="DocumentVendorRepresenterGenderID" class="form-select"
                                                                     name="" id="inputVendorRepresenterType">
-                                                                    <option value="">Title</option>
-                                                                </select>
-                                                                <label for="inputVendorTitle">Title</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-3">
-                                                            <div class="form-floating" id="inputVendorTitleDiv">
-                                                                <select deed_id="documentFirstPersonRepresenterTitle"
-                                                                    save_id="DocumentVendorGenderID" class="form-select"
-                                                                    name="" id="inputVendorRepresenterTitle">
                                                                     <option value="">Title</option>
                                                                     <option value="Guardian">Guardian</option>
                                                                 </select>
@@ -730,9 +732,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mb-3">
+                                                            <div class="form-floating" id="inputVendorTitleDiv">
+                                                                <select deed_id="documentFirstPersonRepresenterTitle"
+                                                                    save_id="DocumentVendorRepresenterGenderID" class="form-select"
+                                                                    name="" id="inputVendorRepresenterTitle">
+                                                                    <option value="">Title</option>
+                                                                </select>
+                                                                <label for="inputVendorTitle">Title</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentFirstPersonRepresenterName"
-                                                                    type="text" save_id="DocumentVendorName"
+                                                                    type="text" save_id="DocumentVendorRepresenterName"
                                                                     class="form-control" name="" id="inputVendorName"
                                                                     placeholder="Enter Name" />
                                                                 <label for="inputVendorName">Name</label>
@@ -741,7 +753,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentFirstPersonRepresenterDOB"
-                                                                    type="date" save_id="DocumentVendorDateOfBirth"
+                                                                    type="date" save_id="DocumentVendorRepresenterDateOfBirth"
                                                                     class="form-control" name="" id="inputVendorDOB"
                                                                     placeholder="Enter D.O.B" />
                                                                 <label for="inputVendorDOB">D.O.B</label>
@@ -750,7 +762,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentFirstPersonRepresenterAge"
-                                                                    type="number" save_id="DocumentVendorAge"
+                                                                    type="number" save_id="DocumentVendorRepresenterAge"
                                                                     class="form-control" maxlength="3" name=""
                                                                     id="inputVendorAge" placeholder="Enter Age"
                                                                     disabled />
@@ -760,7 +772,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentFirstPersonRepresenterPAN"
-                                                                    type="text" save_id="DocumentVendorPAN"
+                                                                    type="text" save_id="DocumentVendorRepresenterPAN"
                                                                     class="form-control" name="" id="inputVendorPan"
                                                                     placeholder="Enter Pan" />
                                                                 <label for="inputVendorPan">Pan</label>
@@ -770,7 +782,7 @@
                                                             <div class="form-floating" id="inputVendorRelationshipDiv">
                                                                 <select
                                                                     deed_id="documentFirstPersonRepresenterRelationshipTitle"
-                                                                    save_id="DocumentVendorRelationshipID"
+                                                                    save_id="DocumentVendorRepresenterRelationshipID"
                                                                     class="form-select" name=""
                                                                     id="inputVendorRepresenterRelationship">
                                                                     <option value="">
@@ -786,7 +798,7 @@
                                                                 <input
                                                                     deed_id="documentFirstPersonRepresenterRelationshipName"
                                                                     type="text" class="form-control" name=""
-                                                                    save_id="DocumentVendorRelationName"
+                                                                    save_id="DocumentVendorRepresenterRelationName"
                                                                     id="inputVendorRelationName"
                                                                     placeholder="Relation Name" />
                                                                 <label for="inputVendorRelationName">Relation
@@ -797,7 +809,7 @@
                                                             <div class="form-floating">
                                                                 <input type="number"
                                                                     deed_id="documentFirstPersonRepresenterAadhar"
-                                                                    save_id="DocumentVendorAadharNumber"
+                                                                    save_id="DocumentVendorRepresenterAadharNumber"
                                                                     class="form-control" name="" id="inputVendorAadhar"
                                                                     placeholder="Aadhar No" />
                                                                 <label for="inputVendorAadhar">Aadhar No</label>
@@ -806,7 +818,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number" class="form-control" name=""
-                                                                    save_id="DocumentVendorPhoneNumber" maxlength="10"
+                                                                    save_id="DocumentVendorRepresenterPhoneNumber" maxlength="10"
                                                                     deed_id="documentFirstPersonRepresenterPhone"
                                                                     id="inputVendorPhone" placeholder="Phone No" />
                                                                 <label for="inputVendorPhone">Phone No</label>
@@ -815,7 +827,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="text" class="form-control" name=""
-                                                                    save_id="DocumentVendorAddress"
+                                                                    save_id="DocumentVendorRepresenterAddress"
                                                                     id="inputVendorDoorNo"
                                                                     deed_id="documentFirstPersonRepresenterAddress"
                                                                     placeholder="Address" />
@@ -827,7 +839,7 @@
                                                                 <input type="text"
                                                                     deed_id="documentFirstPersonRepresenterTaluk"
                                                                     class="form-control" name="" id="inputVendorTaluk"
-                                                                    save_id="DocumentVendorTaluk" placeholder="Taluk" />
+                                                                    save_id="DocumentVendorRepresenterTaluk" placeholder="Taluk" />
                                                                 <label for="inputVendorTaluk">Taluk</label>
                                                             </div>
                                                         </div>
@@ -835,7 +847,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentFirstPersonRepresenterDistrict"
-                                                                    save_id="DocumentVendorDistrict"
+                                                                    save_id="DocumentVendorRepresenterDistrict"
                                                                     class="form-control" name=""
                                                                     id="inputVendorDistrict" placeholder="District" />
                                                                 <label for="inputVendorDistrict">District</label>
@@ -845,7 +857,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentFirstPersonRepresenterCity"
-                                                                    save_id="DocumentVendorCity" class="form-control"
+                                                                    save_id="DocumentVendorRepresenterCity" class="form-control"
                                                                     name="" id="inputVendorCity" placeholder="City" />
                                                                 <label for="inputVendorCity">City</label>
                                                             </div>
@@ -854,7 +866,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentFirstPersonRepresenterState"
-                                                                    save_id="DocumentVendorState" class="form-control"
+                                                                    save_id="DocumentVendorRepresenterState" class="form-control"
                                                                     name="" id="inputVendorState" placeholder="State" />
                                                                 <label for="inputVendorState">State</label>
                                                             </div>
@@ -862,7 +874,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number" class="form-control" name=""
-                                                                    save_id="DocumentVendorPinCode"
+                                                                    save_id="DocumentVendorRepresenterPinCode"
                                                                     id="inputVendorPincode"
                                                                     deed_id="documentFirstPersonRepresenterPincode"
                                                                     placeholder="Pincode" />
@@ -900,10 +912,6 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" id="vendorInfoCloneTrigger"
-                                                class="btn btn-primary float-end me-1 d-none">Add Another</button>
-                                            <button type="button" id="vendorInfoClone"
-                                                class="btn btn-primary float-end me-1">Add</button>
                                             <button type="button" name="previous"
                                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                                 value="Previous">Previous</button>
@@ -934,15 +942,19 @@
                                                     class="mb-3 d-flex justify-content-around ">
                                                     <button id="show_company_details" class="btn btn-primary">Company
                                                         Details</button>
-                                                    <button id="show_purchaser_details" class="btn btn-primary">
+                                                    <button id="show_purchaser_details" class="btn btn-outline-primary"
+                                                        disabled>
                                                         Purchaser Details </button>
                                                 </div>
                                                 <div id="company_info_purchaser" class="row">
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <h3>Company Information</h3>
                                                         <div class="form-floating" id="DocumentPurchaserAddCompany">
-                                                            <button type="button" class="btn btn-primary">Done</button>
-                                                        </div>
+                                                            <button type="button"
+                                                                class="clear btn btn-dark me-2">Clear</button>
+                                                            <button type="button"
+                                                                class="add btn btn-primary">Add</button>
+                                                            </div>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <div class="form-floating" id="inputPurchaserCompanyNameDiv">
@@ -989,7 +1001,14 @@
 
                                                 </div>
                                                 <div class="row inputPurchaserInfo">
-                                                    <h3 class="mb-4">Purchaser Information:</h3>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <button type="button" id="purchaserInfoCloneClear"
+                                                            class="btn btn-dark me-2">Clear</button>
+                                                            <button type="button" id="purchaserInfoClone"
+                                                            class="btn btn-primary me-1">Add</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-4 mb-3">
                                                         <div class="form-floating" id="inputPurchaserMultiCompanyDiv">
                                                             <select deed_id="dummy" title="Company"
@@ -1165,7 +1184,7 @@
                                                                 id="inputPurchaserRepresenterTypeDiv">
                                                                 <select deed_id="documentSecondPersonRepresenterType"
                                                                     class="form-select" name=""
-                                                                    save_id="DocumentPurchaserGenderID"
+                                                                    save_id="DocumentPurchaserRepresenterType"
                                                                     id="inputPurchaserRepresenterTypeTitle">
                                                                     <option value="">Title</option>
                                                                     <option value="Guardian">Guardian</option>
@@ -1178,7 +1197,7 @@
                                                                 id="inputPurchaserRepresenterTitleDiv">
                                                                 <select deed_id="documentSecondPersonRepresenterTitle"
                                                                     class="form-select" name=""
-                                                                    save_id="DocumentPurchaserGenderID"
+                                                                    save_id="DocumentPurchaserRepresenterGenderID"
                                                                     id="inputPurchaserRepresenterTitle">
                                                                     <option value="">Title</option>
                                                                 </select>
@@ -1188,7 +1207,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentSecondPersonRepresenterName"
-                                                                    type="text" save_id="DocumentPurchaserName"
+                                                                    type="text" save_id="DocumentPurchaserRepresenterName"
                                                                     class="form-control" name="" id="inputPurchaserName"
                                                                     placeholder="Enter Name" />
                                                                 <label for="inputPurchaserName">Name</label>
@@ -1197,7 +1216,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentSecondPersonRepresenterDOB"
-                                                                    type="date" save_id="DocumentPurchaserDateOfBirth"
+                                                                    type="date" save_id="DocumentPurchaserRepresenterDateOfBirth"
                                                                     class="form-control" name="" id="inputPurchaserDOB"
                                                                     placeholder="Enter D.O.B" />
                                                                 <label for="inputPurchaserDOB">D.O.B</label>
@@ -1206,7 +1225,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentSecondPersonRepresenterAge"
-                                                                    type="number" save_id="DocumentPurchaserAge"
+                                                                    type="number" save_id="DocumentPurchaserRepresenterAge"
                                                                     class="form-control" maxlength="3" name=""
                                                                     id="inputPurchaserAge" placeholder="Enter Age"
                                                                     disabled />
@@ -1216,7 +1235,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentSecondPersonRepresenterPAN"
-                                                                    type="text" save_id="DocumentPurchaserPAN"
+                                                                    type="text" save_id="DocumentPurchaserRepresenterPAN"
                                                                     class="form-control" name="" id="inputPurchaserPan"
                                                                     placeholder="Enter Pan" />
                                                                 <label for="inputPurchaserPan">Pan</label>
@@ -1227,7 +1246,7 @@
                                                                 id="inputPurchaserRelationshipDiv">
                                                                 <select
                                                                     deed_id="documentSecondPersonRepresenterRelationshipTitle"
-                                                                    save_id="DocumentPurchaserRelationshipID"
+                                                                    save_id="DocumentPurchaserRepresenterRelationshipID"
                                                                     class="form-select" name=""
                                                                     id="inputPurchaserRelationship">
                                                                     <option value="">RelationShip
@@ -1242,7 +1261,7 @@
                                                                 <input
                                                                     deed_id="documentSecondPersonRepresenterRelationshipName"
                                                                     type="text" class="form-control" name=""
-                                                                    save_id="DocumentPurchaserRelationName"
+                                                                    save_id="DocumentPurchaserRepresenterRelationName"
                                                                     id="inputPurchaserRelationName"
                                                                     placeholder="Relation Name" />
                                                                 <label for="inputPurchaserRelationName">Relation
@@ -1252,7 +1271,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number"
-                                                                    save_id="DocumentPurchaserAadharNumber"
+                                                                    save_id="DocumentPurchaserRepresenterAadharNumber"
                                                                     deed_id="documentSecondPersonRepresenterAadhar"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserAadhar" placeholder="Aadhar No" />
@@ -1262,7 +1281,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input deed_id="documentSecondPersonRepresenterPhone"
-                                                                    save_id="DocumentPurchaserPhoneNumber" type="number"
+                                                                    save_id="DocumentPurchaserRepresenterPhoneNumber" type="number"
                                                                     maxlength="10" class="form-control" name=""
                                                                     id="inputPurchaserPhone" placeholder="Phone No" />
                                                                 <label for="inputPurchaserPhone">Phone No</label>
@@ -1271,7 +1290,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="text" class="form-control" name=""
-                                                                    save_id="DocumentPurchaserAddress"
+                                                                    save_id="DocumentPurchaserRepresenterAddress"
                                                                     id="inputPurchaserAddress"
                                                                     deed_id="documentSecondPersonRepresenterAddress"
                                                                     placeholder="Address" />
@@ -1282,7 +1301,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentSecondPersonRepresenterTaluk"
-                                                                    save_id="DocumentPurchaserTaluk"
+                                                                    save_id="DocumentPurchaserRepresenterTaluk"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserTaluk" placeholder="Taluk" />
                                                                 <label for="inputPurchaserTaluk">Taluk</label>
@@ -1290,7 +1309,7 @@
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
-                                                                <input type="text" save_id="DocumentPurchaserDistrict"
+                                                                <input type="text" save_id="DocumentPurchaserRepresenterDistrict"
                                                                     deed_id="documentSecondPersonRepresenterDistrict"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserDistrict"
@@ -1302,7 +1321,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentSecondPersonRepresenterCity"
-                                                                    save_id="DocumentPurchaserCity" class="form-control"
+                                                                    save_id="DocumentPurchaserRepresenterCity" class="form-control"
                                                                     name="" id="inputPurchaserCity"
                                                                     placeholder="City" />
                                                                 <label for="inputPurchaserCity">City</label>
@@ -1312,7 +1331,7 @@
                                                             <div class="form-floating">
                                                                 <input type="text"
                                                                     deed_id="documentSecondPersonRepresenterState"
-                                                                    save_id="DocumentPurchaserState"
+                                                                    save_id="DocumentPurchaserRepresenterState"
                                                                     class="form-control" name=""
                                                                     id="inputPurchaserState" placeholder="State" />
                                                                 <label for="inputPurchaserState">State</label>
@@ -1321,7 +1340,7 @@
                                                         <div class="col-md-4 mb-3">
                                                             <div class="form-floating">
                                                                 <input type="number" class="form-control" name=""
-                                                                    save_id="DocumentPurchaserPinCode"
+                                                                    save_id="DocumentPurchaserRepresenterPinCode"
                                                                     id="inputPurchaserPincode"
                                                                     deed_id="documentSecondPersonRepresenterPincode"
                                                                     placeholder="Pincode" />
@@ -1330,7 +1349,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div id="" class="col overflow-auto">
+                                                    <div id="" class="col-md-12 overflow-auto">
                                                         <table id="purchaserInfoTable_company" class="table d-none">
                                                             <thead>
                                                                 <tr>
@@ -1379,7 +1398,7 @@
                                             <button type="button"
                                                 class="btn btn-warning schedule-part">schedule-part</button>
                                             <button type="button"
-                                                class="btn btn-warning witness-part">witness-part</button>
+                                                class="btn btn-outline-warning witness-part">witness-part</button>
                                         </div>
                                         <div class="row schedule-part">
                                             <div class="col-md-12 row">
@@ -1452,7 +1471,7 @@
                                         </div>
                                         <div class="row witness-part d-none">
                                             <div class="col-md-12 row">
-                                                <div>
+                                                <div class="mb-3">
                                                     <div class="form-floating col-md" id="inputPropertyPriceDiv">
                                                         <input class="form-control" deed_id="" name=""
                                                             id="inputPropertyPrice" type="number" placeholder="Price" />
@@ -2076,11 +2095,15 @@
     <script>
         console.log('click')
         $("button.schedule-part").click(function () {
+            $(this).addClass('btn-warning').removeClass('btn-outline-warning')
+            $('button.witness-part').removeClass('btn-warning').addClass('btn-outline-warning')
             console.log('click')
             $("div.schedule-part").removeClass('d-none');
             $("div.witness-part").addClass('d-none');
         })
         $("button.witness-part").click(function () {
+            $(this).addClass('btn-warning').removeClass('btn-outline-warning')
+            $('button.schedule-part').removeClass('btn-warning').addClass('btn-outline-warning')
             console.log('click')
             $("div.schedule-part").addClass('d-none');
             $("div.witness-part").removeClass('d-none');

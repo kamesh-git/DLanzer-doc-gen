@@ -10,11 +10,11 @@ storeInput().then(resp => {
     clickEventListner();  //should be called only once
     setTable()
     var now = new Date();
-    var month = (now.getMonth() + 1);               
+    var month = (now.getMonth() + 1);
     var day = now.getDate();
-    if (month < 10) 
+    if (month < 10)
         month = "0" + month;
-    if (day < 10) 
+    if (day < 10)
         day = "0" + day;
     today = now.getFullYear() + '-' + month + '-' + day;
     console.log(today)
@@ -401,8 +401,9 @@ function inputEventListner() {
             let new_date = new Date(this.value)
             $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(new_date.toShortFormat())
         }
-    }) 
+    })
     $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
+        console.log(`${this.getAttribute("deed_id")}_${vendorIterationCount}`)
         $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $(".inputVendorRepresenterInfo select").on("change", function () {
@@ -516,8 +517,8 @@ function inputEventListner() {
         }
     })
 
-    $("#inputVendorTitle").change(function(){
-        $(this.getAttribute('data-token')+" ").insertBefore(`#documentFirstPersonRelationshipTitle_${vendorIterationCount}`)
+    $("#inputVendorTitle").change(function () {
+        $(this.getAttribute('data-token') + " ").insertBefore(`#documentFirstPersonRelationshipTitle_${vendorIterationCount}`)
     })
 
 
@@ -533,7 +534,7 @@ function inputEventListner() {
     });
 
 
-    
+
 
 }
 
@@ -585,7 +586,7 @@ function selectEventListner() {
         }
         else if (this.value == 1) {
             $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).addClass('d-none')
-            $(".inputVendorRepresenterInfo").addClass('d-none')    
+            $(".inputVendorRepresenterInfo").addClass('d-none')
             $("#toggleVendorRepresenter").prop('checked', false).parent().addClass("d-none")
             $("#showVendorCompanyToggler").removeClass("d-none")
             $("#vendorInfoTable_individual").addClass("d-none")
@@ -625,7 +626,7 @@ function selectEventListner() {
         }
         else if (this.value == 1) {
             $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).addClass('d-none')
-            $(".inputPurchaserRepresenterInfo").addClass('d-none')    
+            $(".inputPurchaserRepresenterInfo").addClass('d-none')
             $("#togglePurchaserRepresenter").prop('checked', false).parent().addClass("d-none")
             $("#showPurchaserCompanyToggler").removeClass("d-none")
             $(".inputPurchaserInfo").addClass('d-none')
@@ -656,7 +657,7 @@ function selectEventListner() {
         cloneformEventList()
         $("#inputSaleDeedExecution").trigger('input')
     })
-    
+
     $("#inputScheduleProp").change(function () {
         $("#deed_body #DocumentScheduleProp").text(this.value)
         $("#deed_body #DocumentSchedulePropType").text($("#inputScheduleProp option:selected").text())
@@ -991,7 +992,8 @@ function clickEventListner() {
             // })
         }
     })
-    $("#DocumentVendorAddCompany").click(function () {
+    $("#DocumentVendorAddCompany .clear").click(function () { $("#company_info_vendor input").val('') })
+    $("#DocumentVendorAddCompany .add").click(function () {
         let companyTableVendorTemp = {}
         $("#company_info_vendor input").each(function () {
             if (this.value == "") {
@@ -1017,11 +1019,37 @@ function clickEventListner() {
         })
         $("#company_info_vendor input").each(function () { this.value = "" })
         $("#inputVendorMultiCompany").selectpicker('refresh')
-        $("#vendorCompanyTable tbody").html(companyTableVendor.map((item,index) => `<tr> <td>${index+1}</td>
+        $("#vendorCompanyTable tbody").html(companyTableVendor.map((item, index) => `<tr> <td>${index + 1}</td>
         ${Object.values(item).map(item1 => (
             `<td> ${item1} </td>`
         ))}
          </tr>`))
+        $("#show_vendor_details").prop('disabled', false)
+    })
+    $("#vendorInfoCloneClear").click(function () {
+        if (vendorTable.length == 0) {
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            $(`#deed_body #first_person_details_${vendorIterationCount}`).html($("#hidden_use_element").html())
+        }
+        else {
+            $(`#deed_body #first_person_details_${vendorIterationCount}`).remove()
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
+        }
+        $("#append_vendor_clone input,#append_vendor_clone select").each(function () { this.value = "" })
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
@@ -1075,12 +1103,13 @@ function clickEventListner() {
         inputEventListner()
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
-        
-
+        $("#toggleVendorRepresenter").prop('checked', false)
+        $("#inputVendorType").parent().parent().addClass('d-none')
 
     }
     )
-    $("#DocumentPurchaserAddCompany").click(function () {
+    $("#DocumentPurchaserAddCompany .clear").click(function () { $("#company_info_purchaser input").val('') })
+    $("#DocumentPurchaserAddCompany .add").click(function () {
         let companyTablePurchaserTemp = {}
         $("#company_info_purchaser input").each(function () {
             if (this.value == "") {
@@ -1105,13 +1134,41 @@ function clickEventListner() {
             else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }
         })
 
-        $("#purchaserCompanyTable tbody").html(companyTablePurchaser.map((item,index) => `<tr> <td>${index+1}</td>
+        $("#purchaserCompanyTable tbody").html(companyTablePurchaser.map((item, index) => `<tr> <td>${index + 1}</td>
         ${Object.values(item).map(item1 => (
             `<td> ${item1} </td>`
         ))}
          </tr>`))
 
         $("#company_info_purchaser input").each(function () { this.value = "" })
+        $("#show_purchaser_details").prop('disabled', false)
+
+    })
+    $("#purchaserInfoCloneClear").click(function () {
+        
+        if (purchaserTable.length == 0) {
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #second_person_details_0').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            $(`#deed_body #second_person_details_${purchaserIterationCount}`).html($("#hidden_use_element").html())
+        }
+        else {
+            $(`#deed_body #second_person_details_${purchaserIterationCount}`).remove()
+            $('#hidden_use_element').html(deed_content)
+            $('#hidden_use_element').html($('#hidden_use_element #second_person_details_0').html())
+            $("#hidden_use_element span").each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
+                this.setAttribute('id', changeid)
+            })
+            let text = `<span id='second_person_details_${purchaserIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
+        }
+        $("#append_purchaser_clone input,#append_purchaser_clone select").each(function () { this.value = "" })
     })
     $("#purchaserInfoClone").click(function () {
         const purchaserTableTemp = {}
@@ -1167,6 +1224,8 @@ function clickEventListner() {
         inputEventListner()
         conjuctionRefresh()
         $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })
+        $("#togglePurchaserRepresenter").prop('checked', false)
+        $("#inputPurchaserType").parent().parent().addClass('d-none')
 
     }
     )
@@ -1254,34 +1313,42 @@ function clickEventListner() {
         })
     })
 
-    $("#showVendorCompanyToggler #show_company_details").click(function(){
+    $("#showVendorCompanyToggler #show_company_details").click(function () {
+        $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
+        $('#showVendorCompanyToggler #show_vendor_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputVendorInfo").addClass('d-none')
         $("#company_info_vendor").removeClass('d-none')
 
     })
-    $("#showVendorCompanyToggler #show_vendor_details").click(function(){
+    $("#showVendorCompanyToggler #show_vendor_details").click(function () {
+        $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
+        $('#showVendorCompanyToggler #show_company_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputVendorInfo").removeClass('d-none')
         $("#company_info_vendor").addClass('d-none')
 
     })
-    $("#toggleVendorRepresenter").change(function(){
+    $("#toggleVendorRepresenter").change(function () {
         $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).toggleClass('d-none')
         $(".inputVendorRepresenterInfo").toggleClass('d-none')
-})
-    $("#showPurchaserCompanyToggler #show_company_details").click(function(){
+    })
+    $("#showPurchaserCompanyToggler #show_company_details").click(function () {
+        $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
+        $('#showPurchaserCompanyToggler #show_purchaser_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputPurchaserInfo").addClass('d-none')
         $("#company_info_purchaser").removeClass('d-none')
 
     })
-    $("#showPurchaserCompanyToggler #show_purchaser_details").click(function(){
+    $("#showPurchaserCompanyToggler #show_purchaser_details").click(function () {
+        $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
+        $('#showPurchaserCompanyToggler #show_company_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputPurchaserInfo").removeClass('d-none')
         $("#company_info_purchaser").addClass('d-none')
 
     })
-    $("#togglePurchaserRepresenter").change(function(){
+    $("#togglePurchaserRepresenter").change(function () {
         $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).toggleClass('d-none')
         $(".inputPurchaserRepresenterInfo").toggleClass('d-none')
-})
+    })
 
 }
 
@@ -1290,7 +1357,7 @@ function cloneformEventList() {
         $(this).on('input', function () {
             const text = [];
             const length = $(".property_details").length
-            const schedule_title = ['of property',...'BCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')]
+            const schedule_title = ['of property', ...'BCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')]
             $(".property_details").each(function (index) {
                 text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</h6>${this.value}`)
             })

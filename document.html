@@ -458,8 +458,8 @@
                                             <div class="col-md-4 mb-3">
                                                 <div class="form-floating">
                                                     <input type="date" class="form-control" name=""
-                                                        id="inputSaleDeedExecution" deed_id="deed_execution" max="2222-05-26"
-                                                        placeholder="dd-mm-yyyy" />
+                                                        id="inputSaleDeedExecution" deed_id="deed_execution"
+                                                        max="2222-05-26" placeholder="dd-mm-yyyy" />
                                                     <label style="font-size: smaller;" for="inputSaleDeedExecution">Deed
                                                         Execution</label>
                                                 </div>
@@ -1351,295 +1351,309 @@
                                 </fieldset>
                                 <fieldset style="color:black">
                                     <div class="form-card">
-                                        <div class="row">
-                                            <h3 class="mb-4 text-start">Property Details:</h3>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="form-floating" id="inputPropertyTypeDiv">
-                                                    <select class="form-select" name="" id="inputPropertyType">
-                                                        <option value="">Property Type</option>
-                                                    </select>
-                                                    <label for="inputPropertyType">Property</label>
+                                        <div class="d-flex justify-content-around mb-3">
+                                            <button type="button"
+                                                class="btn btn-warning schedule-part">schedule-part</button>
+                                            <button type="button"
+                                                class="btn btn-warning witness-part">witness-part</button>
+                                        </div>
+                                        <div class="row schedule-part">
+                                            <div class="col-md-12 row">
+                                                <h3 class="mb-4 text-start">Property Details:</h3>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="form-floating" id="inputPropertyTypeDiv">
+                                                        <select class="form-select" name="" id="inputPropertyType">
+                                                            <option value="">Property Type</option>
+                                                        </select>
+                                                        <label for="inputPropertyType">Property</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row ps-3 pe-3">
+                                                        <div class="form-floating col-md p-0 pe-2"
+                                                            id="inputPropertyTaxNoDiv">
+                                                            <input class="form-control mt-2 mb-2 m-md-0" name=""
+                                                                id="inputPropertyTaxNo" type="number"
+                                                                placeholder="Property Tax no" />
+                                                            <label for="inputPropertyTaxNo">Property Tax no</label>
+                                                        </div>
+                                                        <div class="form-floating col-md p-0 pe-2"
+                                                            id="inputElecServiceNo">
+                                                            <input class="form-control" name="" id="inputElecServiceNo"
+                                                                type="number" placeholder="Electricity Service No" />
+                                                            <label for="inputElecServiceNo">Electricity Service
+                                                                No</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row ps-3 pe-3">
-                                                    <div class="form-floating col-md p-0 pe-2"
-                                                        id="inputPropertyPriceDiv">
+                                            <br>
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-4 mb-3">
+                                                            <h6 class="card-title text-start">Schedule Details</h6>
+                                                        </div>
+                                                        <div class="col-md-8 float-md-end">
+                                                            <button id="clonePropertyDetailsFormInput" type="button"
+                                                                clone_id="Property"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
+                                                            <button id="removeClonePropertyDetailsFormInput"
+                                                                type="button" clone_id="Property"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class=" mb-3 PropertyDetailsFormInput">
+                                                        <div class="form-floating">
+                                                            <textarea class="property_details form-control"
+                                                                name="inputPropertyDetails[]" id="" cols="30"
+                                                                rows="10"></textarea>
+                                                            <label for="inputPropertyDetails">Schedule Details</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Clone Form -->
+                                                <div class="PropertyDetailsFormClone"></div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="form-floating" id="inputSchedulePropDiv">
+                                                        <select class="form-select" name="" id="inputScheduleProp">
+                                                            <option value="">ScheduleProp Type</option>
+                                                        </select>
+                                                        <label for="inputScheduleProp">ScheduleProp</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row witness-part d-none">
+                                            <div class="col-md-12 row">
+                                                <div>
+                                                    <div class="form-floating col-md" id="inputPropertyPriceDiv">
                                                         <input class="form-control" deed_id="" name=""
                                                             id="inputPropertyPrice" type="number" placeholder="Price" />
                                                         <label for="inputPropertyPrice">Price</label>
                                                     </div>
-                                                    <div class="form-floating col-md p-0 pe-2"
-                                                        id="inputPropertyTaxNoDiv">
-                                                        <input class="form-control mt-2 mb-2 m-md-0" name=""
-                                                            id="inputPropertyTaxNo" type="number"
-                                                            placeholder="Property Tax no" />
-                                                        <label for="inputPropertyTaxNo">Property Tax no</label>
-                                                    </div>
-                                                    <div class="form-floating col-md p-0 pe-2" id="inputElecServiceNo">
-                                                        <input class="form-control" name="" id="inputElecServiceNo"
-                                                            type="number" placeholder="Electricity Service No" />
-                                                        <label for="inputElecServiceNo">Electricity Service
-                                                            No</label>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-4 mb-3">
+                                                            <h6 class="card-title text-start">Transfer Details</h6>
+                                                        </div>
+                                                        <div class="col-md-8 float-md-end">
+                                                            <button id="cloneTransferDetailsFormInput" type="button"
+                                                                clone_id="Transfer"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
+                                                            <button id="removeCloneTransferDetailsFormInput"
+                                                                type="button" clas clone_id="Transfer"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-md-4 mb-3">
-                                                        <h6 class="card-title text-start">Property Details</h6>
-                                                    </div>
-                                                    <div class="col-md-8 float-md-end">
-                                                        <button id="clonePropertyDetailsFormInput" type="button"
-                                                            clone_id="Property"
-                                                            class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
-                                                        <button id="removeClonePropertyDetailsFormInput" type="button"
-                                                            clone_id="Property"
-                                                            class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
+                                                <div class="col-md-12">
+                                                    <div class="mb-3 TransferDetailsFormInput">
+                                                        <div class="form-floating">
+                                                            <textarea class="transfer_details form-control"
+                                                                name="inputTransferDetails[]" cols="30"
+                                                                rows="10"></textarea>
+                                                            <label for="inputTransferDetails">Transfer Details</label>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <!-- Clone Form -->
+                                                <div class="TransferDetailsFormClone"></div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class=" mb-3 PropertyDetailsFormInput">
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-md-4 mb-3">
+                                                            <h6 class="card-title text-start">Payment Details</h6>
+                                                        </div>
+                                                        <div class="col-md-8 float-md-end">
+                                                            <button id="clonePaymentDetailsFormInput" type="button"
+                                                                clone_id="Payment"
+                                                                class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
+                                                            <button id="removeClonePaymentDetailsFormInput"
+                                                                type="button" clone_id="Payment"
+                                                                class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class=" mb-3 PaymentDetailsFormInput">
+                                                        <div class="form-floating">
+                                                            <textarea class="payment_details form-control"
+                                                                name="inputPaymentDetails[]" cols="30"
+                                                                rows="10"></textarea>
+                                                            <label for="inputPaymentDetails">Payment Details</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Clone Form -->
+                                                <div class="PaymentDetailsFormClone"></div>
+                                            </div>
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-7 d-flex align-items-end">
+                                                    <h3 class="mb-4 text-start">Witness Details</h3><small
+                                                        class="mb-4">(optional)</small>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <button type="button" class="btn btn-primary float-md-end d-none"
+                                                        id="witnessInfoCloneTrigger">Add Another</button>
+                                                    <button type="button" class="btn btn-primary float-md-end"
+                                                        id="witnessInfoClone">Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 row inputWitnessInfo">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating" id="inputWitnessTitleDiv">
+                                                        <select deed_id="documentWitnessPersonTitle"
+                                                            save_id="DocumentWitnessGenderID" class="form-select"
+                                                            name="" id="inputWitnessTitle">
+                                                            <option value="">Title</option>
+                                                        </select>
+                                                        <label for="inputWitnessTitle">Witness title</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
                                                     <div class="form-floating">
-                                                        <textarea class="property_details form-control"
-                                                            name="inputPropertyDetails[]" id="" cols="30"
-                                                            rows="10"></textarea>
-                                                        <label for="inputPropertyDetails">Schedule Details</label>
+                                                        <input deed_id="documentWitnessPersonName" type="text"
+                                                            save_id="DocumentWitnessName" class="form-control" name=""
+                                                            id="inputWitnessName" placeholder="Enter Name" />
+                                                        <label for="inputWitnessName">Name</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- Clone Form -->
-                                            <div class="PropertyDetailsFormClone"></div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="form-floating" id="inputSchedulePropDiv">
-                                                    <select class="form-select" name="" id="inputScheduleProp">
-                                                        <option value="">ScheduleProp Type</option>
-                                                    </select>
-                                                    <label for="inputScheduleProp">ScheduleProp</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-md-4 mb-3">
-                                                        <h6 class="card-title text-start">Transfer Details</h6>
-                                                    </div>
-                                                    <div class="col-md-8 float-md-end">
-                                                        <button id="cloneTransferDetailsFormInput" type="button"
-                                                            clone_id="Transfer"
-                                                            class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
-                                                        <button id="removeCloneTransferDetailsFormInput" type="button"
-                                                            clas clone_id="Transfer"
-                                                            class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="mb-3 TransferDetailsFormInput">
+                                                <div class="col-md-4 mb-3">
                                                     <div class="form-floating">
-                                                        <textarea class="transfer_details form-control"
-                                                            name="inputTransferDetails[]" cols="30"
-                                                            rows="10"></textarea>
-                                                        <label for="inputTransferDetails">Transfer Details</label>
+                                                        <input deed_id="documentWitnessPersonDOB" type="date"
+                                                            save_id="DocumentWitnessDateOfBirth" class="form-control"
+                                                            name="" id="inputWitnessDOB" placeholder="Enter D.O.B" />
+                                                        <label for="inputWitnessDOB">D.O.B</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- Clone Form -->
-                                            <div class="TransferDetailsFormClone"></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-md-4 mb-3">
-                                                        <h6 class="card-title text-start">Payment Details</h6>
-                                                    </div>
-                                                    <div class="col-md-8 float-md-end">
-                                                        <button id="clonePaymentDetailsFormInput" type="button"
-                                                            clone_id="Payment"
-                                                            class="btn btn-primary float-md-end cloneDetailsFormInput">Add</button>
-                                                        <button id="removeClonePaymentDetailsFormInput" type="button"
-                                                            clone_id="Payment"
-                                                            class="btn btn-dark float-md-end me-1 d-block removeCloneDetailsFormInput">Remove</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class=" mb-3 PaymentDetailsFormInput">
+                                                <div class="col-md-4 mb-3">
                                                     <div class="form-floating">
-                                                        <textarea class="payment_details form-control"
-                                                            name="inputPaymentDetails[]" cols="30" rows="10"></textarea>
-                                                        <label for="inputPaymentDetails">Payment Details</label>
+                                                        <input deed_id="documentWitnessPersonAge" type="number"
+                                                            save_id="DocumentWitnessAge" class="form-control" name=""
+                                                            maxlength="3" id="inputWitnessAge" placeholder="Enter Age"
+                                                            disabled />
+                                                        <label for="inputWitnessAge">Age</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input deed_id="documentWitnessPersonPAN" type="text"
+                                                            save_id="DocumentWitnessPAN" class="form-control" name=""
+                                                            id="inputWitnessPan" placeholder="Enter Pan" />
+                                                        <label for="inputWitnessPan">Pan</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating" id="inputWitnessRelationshipDiv">
+                                                        <select deed_id="documentWitnessPersonRelationshipTitle"
+                                                            save_id="DocumentWitnessRelationshipID" class="form-select"
+                                                            name="" id="inputWitnessRelationship">
+                                                            <option value="">RelationShip
+                                                            </option>
+                                                        </select>
+                                                        <label for="inputWitnessRelationship">RelationShip</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input deed_id="documentWitnessPersonRelationshipName"
+                                                            save_id="DocumentWitnessRelationName" type="text"
+                                                            class="form-control" name="" id="inputWitnessRelationName"
+                                                            placeholder="Relation Name" />
+                                                        <label for="inputWitnessRelationName">Relation Name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="number" deed_id="documentWitnessPersonAadhar"
+                                                            save_id="DocumentWitnessAadharNumber" class="form-control"
+                                                            name="" id="inputWitnessAadhar" placeholder="Aadhar No" />
+                                                        <label for="inputWitnessAadhar">Aadhar No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input deed_id="documentWitnessPersonPhone"
+                                                            save_id="DocumentWitnessPhoneNumber" maxlength="10"
+                                                            type="number" deed_id="documentWitnessPersonPhone"
+                                                            class="form-control" name="" id="inputWitnessPhone"
+                                                            placeholder="Phone No" />
+                                                        <label for="inputWitnessPhone">Phone No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" name=""
+                                                            id="inputWitnessDoorNo"
+                                                            deed_id="documentWitnessPersonAddress"
+                                                            save_id="DocumentWitnessAddress" placeholder="Address" />
+                                                        <label for="inputWitnessAddress">Address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="text" deed_id="documentWitnessPersonTaluk"
+                                                            save_id="DocumentWitnessTaluk" class="form-control" name=""
+                                                            id="inputWitnessTaluk" placeholder="Taluk" />
+                                                        <label for="inputWitnessTaluk">Taluk</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="text" deed_id="documentWitnessPersonDistrict"
+                                                            save_id="DocumentWitnessDistrict" class="form-control"
+                                                            name="" id="inputWitnessDistrict" placeholder="District" />
+                                                        <label for="inputWitnessDistrict">District</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="text" deed_id="documentWitnessPersonCity"
+                                                            save_id="DocumentWitnessCity" class="form-control" name=""
+                                                            id="inputWitnessCity" placeholder="City" />
+                                                        <label for="inputWitnessCity">City</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="text" deed_id="documentWitnessPersonState"
+                                                            save_id="DocumentWitnessState" class="form-control" name=""
+                                                            id="inputWitnessState" placeholder="State" />
+                                                        <label for="inputWitnessState">State</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-floating">
+                                                        <input type="number" class="form-control" name=""
+                                                            id="inputWitnessPincode"
+                                                            deed_id="documentWitnessPersonPincode"
+                                                            save_id="DocumentWitnessPinCode" placeholder="Pincode" />
+                                                        <label for="inputWitnessPincode">Pincode</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Clone Form -->
-                                            <div class="PaymentDetailsFormClone"></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-7 d-flex align-items-end">
-                                                <h3 class="mb-4 text-start">Witness Details</h3><small
-                                                    class="mb-4">(optional)</small>
+                                            <br>
+                                            <br>
+                                            <br><br>
+                                            <div id="" class="col-12 overflow-auto">
+                                                <h4 class="text-center">Witness</h4>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="witnessInfoTable">
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <div class="col-md-5">
-                                                <button type="button" class="btn btn-primary float-md-end d-none"
-                                                    id="witnessInfoCloneTrigger">Add Another</button>
-                                                <button type="button" class="btn btn-primary float-md-end"
-                                                    id="witnessInfoClone">Add</button>
-                                            </div>
-                                        </div>
-                                        <div class="row inputWitnessInfo">
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating" id="inputWitnessTitleDiv">
-                                                    <select deed_id="documentWitnessPersonTitle"
-                                                        save_id="DocumentWitnessGenderID" class="form-select" name=""
-                                                        id="inputWitnessTitle">
-                                                        <option value="">Title</option>
-                                                    </select>
-                                                    <label for="inputWitnessTitle">Witness title</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonName" type="text"
-                                                        save_id="DocumentWitnessName" class="form-control" name=""
-                                                        id="inputWitnessName" placeholder="Enter Name" />
-                                                    <label for="inputWitnessName">Name</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonDOB" type="date"
-                                                        save_id="DocumentWitnessDateOfBirth" class="form-control"
-                                                        name="" id="inputWitnessDOB" placeholder="Enter D.O.B" />
-                                                    <label for="inputWitnessDOB">D.O.B</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonAge" type="number"
-                                                        save_id="DocumentWitnessAge" class="form-control" name=""
-                                                        maxlength="3" id="inputWitnessAge" placeholder="Enter Age"
-                                                        disabled />
-                                                    <label for="inputWitnessAge">Age</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonPAN" type="text"
-                                                        save_id="DocumentWitnessPAN" class="form-control" name=""
-                                                        id="inputWitnessPan" placeholder="Enter Pan" />
-                                                    <label for="inputWitnessPan">Pan</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating" id="inputWitnessRelationshipDiv">
-                                                    <select deed_id="documentWitnessPersonRelationshipTitle"
-                                                        save_id="DocumentWitnessRelationshipID" class="form-select"
-                                                        name="" id="inputWitnessRelationship">
-                                                        <option value="">RelationShip
-                                                        </option>
-                                                    </select>
-                                                    <label for="inputWitnessRelationship">RelationShip</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonRelationshipName"
-                                                        save_id="DocumentWitnessRelationName" type="text"
-                                                        class="form-control" name="" id="inputWitnessRelationName"
-                                                        placeholder="Relation Name" />
-                                                    <label for="inputWitnessRelationName">Relation Name</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="number" deed_id="documentWitnessPersonAadhar"
-                                                        save_id="DocumentWitnessAadharNumber" class="form-control"
-                                                        name="" id="inputWitnessAadhar" placeholder="Aadhar No" />
-                                                    <label for="inputWitnessAadhar">Aadhar No</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input deed_id="documentWitnessPersonPhone"
-                                                        save_id="DocumentWitnessPhoneNumber" maxlength="10"
-                                                        type="number" deed_id="documentWitnessPersonPhone"
-                                                        class="form-control" name="" id="inputWitnessPhone"
-                                                        placeholder="Phone No" />
-                                                    <label for="inputWitnessPhone">Phone No</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control" name=""
-                                                        id="inputWitnessDoorNo" deed_id="documentWitnessPersonAddress"
-                                                        save_id="DocumentWitnessAddress" placeholder="Address" />
-                                                    <label for="inputWitnessAddress">Address</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="text" deed_id="documentWitnessPersonTaluk"
-                                                        save_id="DocumentWitnessTaluk" class="form-control" name=""
-                                                        id="inputWitnessTaluk" placeholder="Taluk" />
-                                                    <label for="inputWitnessTaluk">Taluk</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="text" deed_id="documentWitnessPersonDistrict"
-                                                        save_id="DocumentWitnessDistrict" class="form-control" name=""
-                                                        id="inputWitnessDistrict" placeholder="District" />
-                                                    <label for="inputWitnessDistrict">District</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="text" deed_id="documentWitnessPersonCity"
-                                                        save_id="DocumentWitnessCity" class="form-control" name=""
-                                                        id="inputWitnessCity" placeholder="City" />
-                                                    <label for="inputWitnessCity">City</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="text" deed_id="documentWitnessPersonState"
-                                                        save_id="DocumentWitnessState" class="form-control" name=""
-                                                        id="inputWitnessState" placeholder="State" />
-                                                    <label for="inputWitnessState">State</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <div class="form-floating">
-                                                    <input type="number" class="form-control" name=""
-                                                        id="inputWitnessPincode" deed_id="documentWitnessPersonPincode"
-                                                        save_id="DocumentWitnessPinCode" placeholder="Pincode" />
-                                                    <label for="inputWitnessPincode">Pincode</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <br>
-                                        <br>
-                                        <br><br>
-                                        <div id="" class="col overflow-auto">
-                                            <h4 class="text-center">Witness</h4>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="witnessInfoTable">
-                                                </tbody>
-                                            </table>
                                         </div>
                                         <button type="button" name="next" id="save_button"
                                             class="btn btn-primary float-end me-1" value="">Save</button>
@@ -2035,6 +2049,19 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/aadel112/googoose@master/jquery.googoose.js"></script>
     <script type="module" src="wizard.js"></script>
+    <script>
+        console.log('click')
+        $("button.schedule-part").click(function () {
+            console.log('click')
+            $("div.schedule-part").removeClass('d-none');
+            $("div.witness-part").addClass('d-none');
+        })
+        $("button.witness-part").click(function () {
+            console.log('click')
+            $("div.schedule-part").addClass('d-none');
+            $("div.witness-part").removeClass('d-none');
+        })
+    </script>
 
 </body>
 

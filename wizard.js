@@ -763,11 +763,15 @@ function setVendorTable(type) {
                 $(`input[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('input')
                 $(`select[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('change')
             }
+            if (vendorTable[this.value]['DocumentVendorRepresenterGenderID'] != undefined) {
+                $("#toggleVendorRepresenter").prop('checked', true).trigger('change')
+            }
             $(`#first_person_details_${this.value}`).remove()
             vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setVendorTable($("#inputVendorType").val())
-            console.log(vendorTable)
+            if(vendorTable.filter(item => item != 'undefined').length == 0){$("#inputVendorType").prop('disabled',false)}
             conjuctionRefresh()
+            $("#inputVendorMultiCompany").selectpicker('refresh')
         })
     })
     $(".delete_vendor_table").each(function () {
@@ -775,7 +779,7 @@ function setVendorTable(type) {
             vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
             $(`#first_person_details_${this.value}`).remove()
             setVendorTable($("#inputVendorType").val())
-            console.log(vendorTable)
+            if(vendorTable.filter(item => item != 'undefined').length == 0){$("#inputVendorType").prop('disabled',false)}
             conjuctionRefresh()
         })
     })
@@ -831,11 +835,15 @@ function setPurchaserTable(type) {
                 $(`input[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('input')
                 $(`select[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('change')
             }
+            if (purchaserTable[this.value]['DocumentPurchaserRepresenterGenderID'] != undefined) {
+                $("#togglePurchaserRepresenter").prop('checked', true).trigger('change')
+            }
             $(`#second_person_details_${this.value}`).remove()
             purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setPurchaserTable($("#inputPurchaserType").val())
-            console.log(purchaserTable)
+            if(purchaserTable.filter(item => item != 'undefined').length == 0){$("#inputPurchaserType").prop('disabled',false)}
             conjuctionRefresh()
+            $("#inputPurchaserMultiCompany").selectpicker('refresh')
         })
     })
     $(".delete_purchaser_table").each(function () {
@@ -843,7 +851,7 @@ function setPurchaserTable(type) {
             purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
             $(`#second_person_details_${this.value}`).remove()
             setPurchaserTable($("#inputPurchaserType").val())
-            console.log(purchaserTable)
+            if(purchaserTable.filter(item => item != 'undefined').length == 0){$("#inputPurchaserType").prop('disabled',false)}
             conjuctionRefresh()
         })
     })
@@ -937,30 +945,30 @@ function setPurchaserCompanyTable() {
     <button type="button" value="${Object.values(item)[1]}" class="btn btn-danger changePurchaserCompany" action="delete">Delete</button>
     </td>
      </tr>`))
-     $(".changePurchaserCompany").each(function () {
-         $(this).click(function () {
-             const regNo = this.value
-             purchaserTable.forEach((item, index) => {
-                 if (item != 'undefined') {
-                     item['DocumentPurchaserCompany'].forEach((item1, index1) => {
-                         if (item1['DocumentPurchaserCompanyRegNo'] == regNo) {
-                             hide_popup_alert(`Delete Corrensponding Purchaser Details`, 1);
-                             throw new Error(`Delete Corrensponding Purchaser Details`)
-                         }
-                     })
-                 }
-             })
-             if (this.getAttribute('action') == 'edit') {
-                 let doc = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] == regNo)[0]
-                 console.log(doc)
-                 $("#company_info_purchaser #inputPurchaserCompanyName").val(doc['DocumentPurchaserCompanyName'])
-                 $("#company_info_purchaser #inputPurchaserCompanyRegNo").val(doc['DocumentPurchaserCompanyRegNo'])
-                 $("#company_info_purchaser #inputPurchaserCompanyAddress").val(doc['DocumentPurchaserCompanyAddress'])
-             }
-             companyTablePurchaser = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] != regNo)
-             setPurchaserCompanyTable()
-         })
-     })
+    $(".changePurchaserCompany").each(function () {
+        $(this).click(function () {
+            const regNo = this.value
+            purchaserTable.forEach((item, index) => {
+                if (item != 'undefined') {
+                    item['DocumentPurchaserCompany'].forEach((item1, index1) => {
+                        if (item1['DocumentPurchaserCompanyRegNo'] == regNo) {
+                            hide_popup_alert(`Delete Corrensponding Purchaser Details`, 1);
+                            throw new Error(`Delete Corrensponding Purchaser Details`)
+                        }
+                    })
+                }
+            })
+            if (this.getAttribute('action') == 'edit') {
+                let doc = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] == regNo)[0]
+                console.log(doc)
+                $("#company_info_purchaser #inputPurchaserCompanyName").val(doc['DocumentPurchaserCompanyName'])
+                $("#company_info_purchaser #inputPurchaserCompanyRegNo").val(doc['DocumentPurchaserCompanyRegNo'])
+                $("#company_info_purchaser #inputPurchaserCompanyAddress").val(doc['DocumentPurchaserCompanyAddress'])
+            }
+            companyTablePurchaser = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] != regNo)
+            setPurchaserCompanyTable()
+        })
+    })
 }
 
 function clickEventListner() {
@@ -993,13 +1001,13 @@ function clickEventListner() {
         vendorTable = vendorTable.filter(item => item != 'undefined')
         purchaserTable = purchaserTable.filter(item => item != 'undefined')
         witnessTable = witnessTable.filter(item => item != 'undefined')
-        $("[id*=first_person_details_]").each(function(index,elem){
+        $("[id*=first_person_details_]").each(function (index, elem) {
             $(elem).find('span').each(function () {
                 let changeid = this.getAttribute('id')
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
                 this.setAttribute('id', changeid)
             })
-            $(elem).attr('id',`first_person_details_${index}`)
+            $(elem).attr('id', `first_person_details_${index}`)
         })
 
         const details = {
@@ -1112,7 +1120,7 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
             this.setAttribute('id', changeid)
         })
-        if (vendorTable.length == 0) {
+        if (vendorTable.filter(item => item != 'undefined').length == 0) {
             $(`#deed_body #first_person_details_${vendorIterationCount}`).html($("#hidden_use_element").html())
         }
         else {
@@ -1125,7 +1133,7 @@ function clickEventListner() {
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
         $(".inputVendorInfo select,.inputVendorInfo input[type!=checkbox]").each(function () {
-            if ($(this).val() === "" && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked) ) {
+            if ($(this).val() === "" && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked)) {
                 if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
@@ -1134,7 +1142,7 @@ function clickEventListner() {
             else if (this.getAttribute("id") !== 'inputVendorMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked)) {
                 vendorTableTemp[this.getAttribute('save_id')] = $(this).val()
             }
-            else if(this.getAttribute("id") == 'inputVendorMultiCompany') {
+            else if (this.getAttribute("id") == 'inputVendorMultiCompany') {
                 if ($("#inputVendorType").val() == 1) {
                     if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
                     vendorTableTemp['DocumentVendorCompany'] = []
@@ -1216,7 +1224,8 @@ function clickEventListner() {
     })
     $("#purchaserInfoCloneClear").click(function () {
 
-        if (purchaserTable.length == 0) {
+        if (purchaserTable.filter(item => item != 'undefined').length == 0) {
+            console.log(purchaserTable.length)
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #second_person_details_0').html())
             $("#hidden_use_element span").each(function () {
@@ -1227,6 +1236,7 @@ function clickEventListner() {
             $(`#deed_body #second_person_details_${purchaserIterationCount}`).html($("#hidden_use_element").html())
         }
         else {
+            console.log(purchaserTable.length)
             $(`#deed_body #second_person_details_${purchaserIterationCount}`).remove()
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #second_person_details_0').html())
@@ -1255,7 +1265,7 @@ function clickEventListner() {
             else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('togglePurchaserRepresenter').checked)) {
                 purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()
             }
-            else if(this.getAttribute("id") == 'inputPurchaserMultiCompany') {
+            else if (this.getAttribute("id") == 'inputPurchaserMultiCompany') {
                 if ($("#inputPurchaserType").val() == 1) {
                     if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
                     purchaserTableTemp['DocumentPurchaserCompany'] = []
@@ -1420,8 +1430,15 @@ function clickEventListner() {
 
     })
     $("#toggleVendorRepresenter").change(function () {
-        $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).toggleClass('d-none')
-        $(".inputVendorRepresenterInfo").toggleClass('d-none')
+        console.log(this.checked)
+        if (this.checked) {
+            $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).removeClass('d-none')
+            $(".inputVendorRepresenterInfo").removeClass('d-none')
+        }
+        else {
+            $(`#firstPersonRepresenterDetails_${vendorIterationCount}`).addClass('d-none')
+            $(".inputVendorRepresenterInfo").addClass('d-none')
+        }
     })
     $("#showPurchaserCompanyToggler #show_company_details").click(function () {
         $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
@@ -1438,8 +1455,15 @@ function clickEventListner() {
 
     })
     $("#togglePurchaserRepresenter").change(function () {
-        $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).toggleClass('d-none')
-        $(".inputPurchaserRepresenterInfo").toggleClass('d-none')
+        if (this.checked) {
+            $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).removeClass('d-none')
+            $(".inputPurchaserRepresenterInfo").removeClass('d-none')
+        }
+        else {
+            $(`#secondPersonRepresenterDetails_${purchaserIterationCount}`).addClass('d-none')
+            $(".inputPurchaserRepresenterInfo").addClass('d-none')
+
+        }
     })
 
 }

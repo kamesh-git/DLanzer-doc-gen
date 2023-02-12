@@ -993,6 +993,14 @@ function clickEventListner() {
         vendorTable = vendorTable.filter(item => item != 'undefined')
         purchaserTable = purchaserTable.filter(item => item != 'undefined')
         witnessTable = witnessTable.filter(item => item != 'undefined')
+        $("[id*=first_person_details_]").each(function(index,elem){
+            $(elem).find('span').each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
+                this.setAttribute('id', changeid)
+            })
+            $(elem).attr('id',`first_person_details_${index}`)
+        })
 
         const details = {
             DocumentTypeID: parseInt(document.getElementById("inputDoucumentType").value),
@@ -1117,17 +1125,16 @@ function clickEventListner() {
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
         $(".inputVendorInfo select,.inputVendorInfo input[type!=checkbox]").each(function () {
-            console.log($(this).val() === "" , this.getAttribute('id').includes('Representer') , !document.getElementById('toggleVendorRepresenter').checked)
             if ($(this).val() === "" && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked) ) {
                 if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
                 }
             }
-            else if (this.getAttribute("id") !== 'inputVendorMultiCompany') {
+            else if (this.getAttribute("id") !== 'inputVendorMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked)) {
                 vendorTableTemp[this.getAttribute('save_id')] = $(this).val()
             }
-            else {
+            else if(this.getAttribute("id") == 'inputVendorMultiCompany') {
                 if ($("#inputVendorType").val() == 1) {
                     if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
                     vendorTableTemp['DocumentVendorCompany'] = []
@@ -1138,7 +1145,6 @@ function clickEventListner() {
             }
         })
         vendorIterationCount += 1;
-        console.log(vendorIterationCount)
 
 
 
@@ -1246,10 +1252,10 @@ function clickEventListner() {
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
                 }
             }
-            else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany') {
+            else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('togglePurchaserRepresenter').checked)) {
                 purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()
             }
-            else {
+            else if(this.getAttribute("id") == 'inputPurchaserMultiCompany') {
                 if ($("#inputPurchaserType").val() == 1) {
                     if (!$(this).val().length) { hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1); throw new Error(`${this.getAttribute('save_id')} field is required`) }
                     purchaserTableTemp['DocumentPurchaserCompany'] = []
@@ -1265,7 +1271,6 @@ function clickEventListner() {
         purchaserTable[purchaserIterationCount - 1] = purchaserTableTemp
 
 
-        console.log(purchaserTable)
 
         setPurchaserTable($("#inputPurchaserType").val())
 

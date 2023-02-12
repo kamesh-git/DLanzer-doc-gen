@@ -892,6 +892,77 @@ function setWitnessTable() {
     })
 }
 
+function setVendorCompanyTable() {
+    $("#vendorCompanyTable tbody").html(companyTableVendor.map((item, index) => `<tr> <td>${index + 1}</td>
+    ${Object.values(item).map(item1 => (
+        `<td> ${item1} </td>`
+    ))}
+    <td> 
+    <button type="button" value="${Object.values(item)[1]}" class="btn btn-warning changeVendorCompany" action="edit">Edit</button> 
+    <button type="button" value="${Object.values(item)[1]}" class="btn btn-danger changeVendorCompany" action="delete">Delete</button>
+    </td>
+     </tr>`))
+    $(".changeVendorCompany").each(function () {
+        $(this).click(function () {
+            const regNo = this.value
+            vendorTable.forEach((item, index) => {
+                if (item != 'undefined') {
+                    item['DocumentVendorCompany'].forEach((item1, index1) => {
+                        if (item1['DocumentVendorCompanyRegNo'] == regNo) {
+                            hide_popup_alert(`Delete Corrensponding Vendor Details`, 1);
+                            throw new Error(`Delete Corrensponding Vendor Details`)
+                        }
+                    })
+                }
+            })
+            if (this.getAttribute('action') == 'edit') {
+                let doc = companyTableVendor.filter(item => item['DocumentVendorCompanyRegNo'] == regNo)[0]
+                console.log(doc)
+                $("#company_info_vendor #inputVendorCompanyName").val(doc['DocumentVendorCompanyName'])
+                $("#company_info_vendor #inputVendorCompanyRegNo").val(doc['DocumentVendorCompanyRegNo'])
+                $("#company_info_vendor #inputVendorCompanyAddress").val(doc['DocumentVendorCompanyAddress'])
+            }
+            companyTableVendor = companyTableVendor.filter(item => item['DocumentVendorCompanyRegNo'] != regNo)
+            setVendorCompanyTable()
+        })
+    })
+}
+function setPurchaserCompanyTable() {
+    $("#purchaserCompanyTable tbody").html(companyTablePurchaser.map((item, index) => `<tr> <td>${index + 1}</td>
+    ${Object.values(item).map(item1 => (
+        `<td> ${item1} </td>`
+    ))}
+    <td> 
+    <button type="button" value="${Object.values(item)[1]}" class="btn btn-warning changePurchaserCompany" action="edit">Edit</button> 
+    <button type="button" value="${Object.values(item)[1]}" class="btn btn-danger changePurchaserCompany" action="delete">Delete</button>
+    </td>
+     </tr>`))
+     $(".changePurchaserCompany").each(function () {
+         $(this).click(function () {
+             const regNo = this.value
+             purchaserTable.forEach((item, index) => {
+                 if (item != 'undefined') {
+                     item['DocumentPurchaserCompany'].forEach((item1, index1) => {
+                         if (item1['DocumentPurchaserCompanyRegNo'] == regNo) {
+                             hide_popup_alert(`Delete Corrensponding Purchaser Details`, 1);
+                             throw new Error(`Delete Corrensponding Purchaser Details`)
+                         }
+                     })
+                 }
+             })
+             if (this.getAttribute('action') == 'edit') {
+                 let doc = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] == regNo)[0]
+                 console.log(doc)
+                 $("#company_info_purchaser #inputPurchaserCompanyName").val(doc['DocumentPurchaserCompanyName'])
+                 $("#company_info_purchaser #inputPurchaserCompanyRegNo").val(doc['DocumentPurchaserCompanyRegNo'])
+                 $("#company_info_purchaser #inputPurchaserCompanyAddress").val(doc['DocumentPurchaserCompanyAddress'])
+             }
+             companyTablePurchaser = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] != regNo)
+             setPurchaserCompanyTable()
+         })
+     })
+}
+
 function clickEventListner() {
 
     $("#save_button").click(async function () {
@@ -992,6 +1063,9 @@ function clickEventListner() {
             // })
         }
     })
+
+    // vendor
+
     $("#DocumentVendorAddCompany .clear").click(function () { $("#company_info_vendor input").val('') })
     $("#DocumentVendorAddCompany .add").click(function () {
         let companyTableVendorTemp = {}
@@ -1019,33 +1093,22 @@ function clickEventListner() {
         })
         $("#company_info_vendor input").each(function () { this.value = "" })
         $("#inputVendorMultiCompany").selectpicker('refresh')
-        $("#vendorCompanyTable tbody").html(companyTableVendor.map((item, index) => `<tr> <td>${index + 1}</td>
-        ${Object.values(item).map(item1 => (
-            `<td> ${item1} </td>`
-        ))}
-         </tr>`))
+        setVendorCompanyTable()
         $("#show_vendor_details").prop('disabled', false)
     })
     $("#vendorInfoCloneClear").click(function () {
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
+            this.setAttribute('id', changeid)
+        })
         if (vendorTable.length == 0) {
-            $('#hidden_use_element').html(deed_content)
-            $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
-            $("#hidden_use_element span").each(function () {
-                let changeid = this.getAttribute('id')
-                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
-                this.setAttribute('id', changeid)
-            })
             $(`#deed_body #first_person_details_${vendorIterationCount}`).html($("#hidden_use_element").html())
         }
         else {
             $(`#deed_body #first_person_details_${vendorIterationCount}`).remove()
-            $('#hidden_use_element').html(deed_content)
-            $('#hidden_use_element').html($('#hidden_use_element #first_person_details_0').html())
-            $("#hidden_use_element span").each(function () {
-                let changeid = this.getAttribute('id')
-                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${vendorIterationCount}`
-                this.setAttribute('id', changeid)
-            })
             let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
             $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
         }
@@ -1053,8 +1116,9 @@ function clickEventListner() {
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
-        $(".inputVendorInfo select:not(.inputVendorRepresenterInfo select),.inputVendorInfo input:not(.inputVendorRepresenterInfo input)[type!=checkbox]").each(function () {
-            if ($(this).val() === "") {
+        $(".inputVendorInfo select,.inputVendorInfo input[type!=checkbox]").each(function () {
+            console.log($(this).val() === "" , this.getAttribute('id').includes('Representer') , !document.getElementById('toggleVendorRepresenter').checked)
+            if ($(this).val() === "" && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked) ) {
                 if (!($("#inputVendorType").val() == 2 && this.getAttribute('id') == 'inputVendorCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
@@ -1104,11 +1168,15 @@ function clickEventListner() {
         conjuctionRefresh()
         $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).css("display", ""); conjuctionRefresh() })
         $("#toggleVendorRepresenter").prop('checked', false)
-        $(".inputVendorRepresenterInfo").toggleClass('d-none')
-        $("#inputVendorType").prop('disabled',true)
+        $(".inputVendorRepresenterInfo").addClass('d-none')
+        $("#inputVendorType").prop('disabled', true)
 
     }
     )
+
+    // purchaser
+
+
     $("#DocumentPurchaserAddCompany .clear").click(function () { $("#company_info_purchaser input").val('') })
     $("#DocumentPurchaserAddCompany .add").click(function () {
         let companyTablePurchaserTemp = {}
@@ -1134,19 +1202,14 @@ function clickEventListner() {
             }
             else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }
         })
-
-        $("#purchaserCompanyTable tbody").html(companyTablePurchaser.map((item, index) => `<tr> <td>${index + 1}</td>
-        ${Object.values(item).map(item1 => (
-            `<td> ${item1} </td>`
-        ))}
-         </tr>`))
+        setPurchaserCompanyTable()
 
         $("#company_info_purchaser input").each(function () { this.value = "" })
         $("#show_purchaser_details").prop('disabled', false)
 
     })
     $("#purchaserInfoCloneClear").click(function () {
-        
+
         if (purchaserTable.length == 0) {
             $('#hidden_use_element').html(deed_content)
             $('#hidden_use_element').html($('#hidden_use_element #second_person_details_0').html())
@@ -1176,8 +1239,8 @@ function clickEventListner() {
 
 
 
-        $(".inputPurchaserInfo select:not(.inputPurchaserRepresenterInfo select),.inputPurchaserInfo input:not(.inputPurchaserRepresenterInfo input)[type!=checkbox]").each(function () {
-            if ($(this).val() === "") {
+        $(".inputPurchaserInfo select,.inputPurchaserInfo input[type!=checkbox]").each(function () {
+            if ($(this).val() === "" && !(this.getAttribute('id').includes('Representer') && !document.getElementById('togglePurchaserRepresenter').checked)) {
                 if (!($("#inputPurchaserType").val() == 2 && this.getAttribute('id') == 'inputPurchaserCategory')) {
                     hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
                     throw new Error(`${this.getAttribute('save_id')} field is required`)
@@ -1226,8 +1289,8 @@ function clickEventListner() {
         conjuctionRefresh()
         $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })
         $("#togglePurchaserRepresenter").prop('checked', false)
-        $(".inputPurchaserRepresenterInfo").toggleClass('d-none')
-        $("#inputPurchaserType").prop('disabled',true)
+        $(".inputPurchaserRepresenterInfo").addClass('d-none')
+        $("#inputPurchaserType").prop('disabled', true)
 
     }
     )
@@ -1241,49 +1304,70 @@ function clickEventListner() {
             }
         }
     )
-    $("#witnessInfoClone").click(
-        function () {
-            let witnessTableTemp = {}
+
+    // witness
 
 
-            $(".inputWitnessInfo select,.inputWitnessInfo input").each(function () {
-                if ($(this).val() === "") {
-                    hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
-                    throw new Error(`${this.getAttribute('save_id')} field is required`)
-                }
-                else {
-                    witnessTableTemp[this.getAttribute('save_id')] = $(this).val()
-                }
-            })
-
-            witnessIterationCount += 1;
-
-            witnessTable[witnessIterationCount - 1] = witnessTableTemp
-
-
-            console.log(witnessTable)
-
-            setWitnessTable()
-
-
-
-            console.log(witnessTable)
-
-
-            $('#hidden_use_element').html(deed_content)
-            $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details_0').html())
-            $("#hidden_use_element span").each(function () {
-                let changeid = this.getAttribute('id')
-                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
-                this.setAttribute('id', changeid)
-            })
-            let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'>${$("#hidden_use_element").html()}</span>`
-            $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
-            $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
-            inputEventListner()
-            conjuctionRefresh()
-            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", ""); conjuctionRefresh() })
+    $("#witnessInfoCloneClear").click(function () {
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details_0').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        if (vendorTable.length == 0) {
+            $(`#deed_body #Witness_person_details_${witnessIterationCount}`).html($("#hidden_use_element").html())
         }
+        else {
+            $(`#deed_body #Witness_person_details_${witnessIterationCount}`).remove()
+            let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
+        }
+        $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
+    })
+    $("#witnessInfoClone").click(function () {
+        let witnessTableTemp = {}
+
+
+        $(".inputWitnessInfo select,.inputWitnessInfo input").each(function () {
+            if ($(this).val() === "") {
+                hide_popup_alert(`${this.getAttribute('save_id')} field is required`, 1);
+                throw new Error(`${this.getAttribute('save_id')} field is required`)
+            }
+            else {
+                witnessTableTemp[this.getAttribute('save_id')] = $(this).val()
+            }
+        })
+
+        witnessIterationCount += 1;
+
+        witnessTable[witnessIterationCount - 1] = witnessTableTemp
+
+
+        console.log(witnessTable)
+
+        setWitnessTable()
+
+
+
+        console.log(witnessTable)
+
+
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #Witness_person_details_0').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'>${$("#hidden_use_element").html()}</span>`
+        $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
+        $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
+        inputEventListner()
+        conjuctionRefresh()
+        $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", ""); conjuctionRefresh() })
+    }
     )
     $("#witnessInfoRemoveClone").click(
         function () {
@@ -1296,6 +1380,7 @@ function clickEventListner() {
         }
     )
 
+    // others
     $(".cloneDetailsFormInput").each(function () {
         $(this).click(function () {
             let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'

@@ -763,6 +763,12 @@ function setVendorTable(type) {
                 $(`input[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('input')
                 $(`select[save_id = ${key}]`).val(vendorTable[this.value][key]).trigger('change')
             }
+            if (vendorTable[this.value]['DocumentVendorCompany'] != undefined) {
+                vendorTable[this.value]['DocumentVendorCompany'].forEach(item => {
+                    $(`#inputVendorMultiCompany [data-token=${item.DocumentVendorCompanyRegNo}]`).prop('selected',true)
+                })
+            }
+            $("#inputVendorMultiCompany").selectpicker('refresh')
             if (vendorTable[this.value]['DocumentVendorRepresenterGenderID'] != undefined) {
                 $("#toggleVendorRepresenter").prop('checked', true).trigger('change')
             }
@@ -771,7 +777,6 @@ function setVendorTable(type) {
             setVendorTable($("#inputVendorType").val())
             if(vendorTable.filter(item => item != 'undefined').length == 0){$("#inputVendorType").prop('disabled',false)}
             conjuctionRefresh()
-            $("#inputVendorMultiCompany").selectpicker('refresh')
         })
     })
     $(".delete_vendor_table").each(function () {
@@ -834,7 +839,14 @@ function setPurchaserTable(type) {
             for (let key in purchaserTable[this.value]) {
                 $(`input[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('input')
                 $(`select[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('change')
+            }            
+            if (purchaserTable[this.value]['DocumentPurchaserCompany'] != undefined) {
+                purchaserTable[this.value]['DocumentPurchaserCompany'].forEach(item => {
+                    $(`#inputPurchaserMultiCompany [data-token=${item.DocumentPurchaserCompanyRegNo}]`).prop('selected',true)
+                })
             }
+            $("#inputPurchaserMultiCompany").selectpicker('refresh')
+
             if (purchaserTable[this.value]['DocumentPurchaserRepresenterGenderID'] != undefined) {
                 $("#togglePurchaserRepresenter").prop('checked', true).trigger('change')
             }
@@ -1093,7 +1105,7 @@ function clickEventListner() {
             companyTableVendorTemp[this.getAttribute('save_id')] = this.value
         })
         companyTableVendor.push(companyTableVendorTemp)
-        $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
+        $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option data-token="${item.DocumentVendorCompanyRegNo}" value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
         $("#inputVendorMultiCompany").selectpicker('refresh')
         $("#inputVendorMultiCompany").change(function () {
             const length = $("#inputVendorMultiCompany").val().length
@@ -1111,6 +1123,7 @@ function clickEventListner() {
         $("#inputVendorMultiCompany").selectpicker('refresh')
         setVendorCompanyTable()
         $("#show_vendor_details").prop('disabled', false)
+        $(".vendorCompanyTooltip").addClass('d-none')
     })
     $("#vendorInfoCloneClear").click(function () {
         $('#hidden_use_element').html(deed_content)
@@ -1202,7 +1215,7 @@ function clickEventListner() {
             companyTablePurchaserTemp[this.getAttribute('save_id')] = this.value
         })
         companyTablePurchaser.push(companyTablePurchaserTemp)
-        $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
+        $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option data-token="${item.DocumentPurchaserCompanyRegNo}" value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
         $("#inputPurchaserMultiCompany").selectpicker('refresh')
         $("#inputPurchaserMultiCompany").change(function () {
             const length = $("#inputPurchaserMultiCompany").val().length
@@ -1220,6 +1233,7 @@ function clickEventListner() {
 
         $("#company_info_purchaser input").each(function () { this.value = "" })
         $("#show_purchaser_details").prop('disabled', false)
+        $(".purchaserCompanyTooltip").addClass('d-none')
 
     })
     $("#purchaserInfoCloneClear").click(function () {

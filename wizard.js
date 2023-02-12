@@ -1437,6 +1437,10 @@ function clickEventListner() {
 
     })
     $("#showVendorCompanyToggler #show_vendor_details").click(function () {
+        if(companyTableVendor.length == 0){
+            hide_popup_alert(`Please enter company Details`, 1);
+            throw new Error(`Please enter company Details`)
+        }
         $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
         $('#showVendorCompanyToggler #show_company_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputVendorInfo").removeClass('d-none')
@@ -1462,6 +1466,10 @@ function clickEventListner() {
 
     })
     $("#showPurchaserCompanyToggler #show_purchaser_details").click(function () {
+        if(companyTablePurchaser.length == 0){
+            hide_popup_alert(`Please enter company Details`, 1);
+            throw new Error(`Please enter company Details`)
+        }
         $(this).addClass('active').addClass('btn-primary').removeClass('btn-outline-primary')
         $('#showPurchaserCompanyToggler #show_company_details').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary')
         $(".inputPurchaserInfo").removeClass('d-none')

@@ -670,7 +670,7 @@ function conjuctionRefresh() {
     $(".vendorConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
     if (length > 1) {
         $(".vendorPlural").text('VENDORS')
-        $(".vendorConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
+        $(".vendorConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : '<br>'}${index + 1}.` })
     }
     else {
         $(".vendorPlural").text('VENDOR')
@@ -683,7 +683,7 @@ function conjuctionRefresh() {
     $(".purchaserConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
     if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
-        $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br>' : ''}${index + 1}.` })
+        $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
     }
     else {
         $(".purchaserPlural").text('PURCHASER')
@@ -694,7 +694,7 @@ function conjuctionRefresh() {
     length = 0
     $(".witnessConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
     if (length > 1) {
-        $(".witnessConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
+        $(".witnessConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
     }
     else {
         $(".witnessConjuction").each(function (index) { this.innerHTML = '' })

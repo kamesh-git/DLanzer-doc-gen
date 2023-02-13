@@ -199,7 +199,7 @@ function tableEventListeners() {
 
     })
     $("#new_document_entry_toggle").click(function () {
-        tableReset()
+        // tableReset()
         $("#table_display").addClass("d-none")
         $("#document_display").addClass("d-none")
         $("#new_document_entry").removeClass("d-none")

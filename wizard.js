@@ -1,5 +1,6 @@
 import { mastersData, storeInput, apirequest, document_details } from './data.js'
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
+import {priceInWords} from './custom-packages.js'
 
 // main function starts
 let today;
@@ -40,24 +41,7 @@ storeInput().then(resp => {
 
 // table js starts
 
-Date.prototype.toShortFormat = function () {
 
-    const monthNames = ["January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"];
-
-    const day = this.getDate();
-
-    const monthIndex = this.getMonth();
-    const monthName = monthNames[monthIndex];
-
-    const year = this.getFullYear();
-
-    if (day == 1) { return `${day}st ${monthName} ${year}`; }
-    else if (day == 2) { return `${day}nd ${monthName} ${year}`; }
-    else if (day == 3) { return `${day}rd ${monthName} ${year}`; }
-    else { return `${day}th ${monthName} ${year}`; }
-}
 
 
 let table = $("table#document_details_tableBody").DataTable({
@@ -373,8 +357,8 @@ function inputEventListner() {
 
     }
     $("#new_document_entry input").on("input", function () {
-        console.log(this.value)
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+        console.log(this.value)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
         if (this.getAttribute('type') == 'date') {
             let new_date = new Date(this.value)
@@ -533,6 +517,12 @@ function inputEventListner() {
         })
     });
 
+    // price event listner
+    $("#inputPropertyPrice").on('input',function(){
+        const price = priceInWords(this.value)
+        $(".DocumentPriceWords").html(`(${price[0]})`)
+        $(".DocumentPrice").html(`Rs.${price[1]}/-`)
+    })
 
 
 
@@ -685,7 +675,7 @@ function conjuctionRefresh() {
     $(".purchaserConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
     if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
-        $(".purchaserConjuction").each(function (index) { this.innerHTML = `<br>${index + 1}.` })
+        $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index>0 ? '<br>' : ''}${index + 1}.` })
     }
     else {
         $(".purchaserPlural").text('PURCHASER')

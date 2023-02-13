@@ -1,6 +1,6 @@
 import { mastersData, storeInput, apirequest, document_details } from './data.js'
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
-import {priceInWords} from './custom-packages.js'
+import { priceInWords } from './custom-packages.js'
 
 // main function starts
 let today;
@@ -452,20 +452,24 @@ function inputEventListner() {
     // gender based title
     $("#inputVendorTitle").change(function () {
         if (this.value == 2) {
+            $(`#documentFirstPersonGender_${vendorIterationCount}`).html('Female')
             $("#inputVendorRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
             $("#inputVendorRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
         }
         if (this.value == 1) {
+            $(`#documentFirstPersonGender_${vendorIterationCount}`).html('Male')
             $("#inputVendorRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
             $("#inputVendorRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
         }
     })
     $("#inputPurchaserTitle").change(function () {
         if (this.value == 2) {
+            $(`#documentSecondPersonGender_${purchaserIterationCount}`).html('Female')
             $("#inputPurchaserRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
             $("#inputPurchaserRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
         }
         if (this.value == 1) {
+            $(`#documentSecondPersonGender_${purchaserIterationCount}`).html('Male')
             $("#inputPurchaserRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
             $("#inputPurchaserRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
         }
@@ -482,20 +486,24 @@ function inputEventListner() {
     })
     $("#inputVendorRepresenterTitle").change(function () {
         if (this.value == 2) {
+            $(`#documentFirstPersonRepresenterGender_${vendorIterationCount}`).html('Female')
             $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
             $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
         }
         if (this.value == 1) {
+            $(`#documentFirstPersonRepresenterGender_${vendorIterationCount}`).html('Male')
             $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
             $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
         }
     })
     $("#inputPurchaserRepresenterTitle").change(function () {
         if (this.value == 2) {
+            $(`#documentSecondPersonRepresenterGender_${purchaserIterationCount}`).html('Female')
             $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
             $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
         }
         if (this.value == 1) {
+            $(`#documentSecondPersonRepresenterGender_${purchaserIterationCount}`).html('Male')
             $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
             $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
         }
@@ -518,7 +526,7 @@ function inputEventListner() {
     });
 
     // price event listner
-    $("#inputPropertyPrice").on('input',function(){
+    $("#inputPropertyPrice").on('input', function () {
         const price = priceInWords(this.value)
         $(".DocumentPriceWords").html(`(${price[0]})`)
         $(".DocumentPrice").html(`Rs.${price[1]}/-`)
@@ -675,7 +683,7 @@ function conjuctionRefresh() {
     $(".purchaserConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
     if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
-        $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index>0 ? '<br>' : ''}${index + 1}.` })
+        $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br>' : ''}${index + 1}.` })
     }
     else {
         $(".purchaserPlural").text('PURCHASER')
@@ -755,7 +763,7 @@ function setVendorTable(type) {
             }
             if (vendorTable[this.value]['DocumentVendorCompany'] != undefined) {
                 vendorTable[this.value]['DocumentVendorCompany'].forEach(item => {
-                    $(`#inputVendorMultiCompany [data-token=${item.DocumentVendorCompanyRegNo}]`).prop('selected',true)
+                    $(`#inputVendorMultiCompany [data-token=${item.DocumentVendorCompanyRegNo}]`).prop('selected', true)
                 })
             }
             $("#inputVendorMultiCompany").selectpicker('refresh')
@@ -765,7 +773,7 @@ function setVendorTable(type) {
             $(`#first_person_details_${this.value}`).remove()
             vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setVendorTable($("#inputVendorType").val())
-            if(vendorTable.filter(item => item != 'undefined').length == 0){$("#inputVendorType").prop('disabled',false)}
+            if (vendorTable.filter(item => item != 'undefined').length == 0) { $("#inputVendorType").prop('disabled', false) }
             conjuctionRefresh()
         })
     })
@@ -774,7 +782,7 @@ function setVendorTable(type) {
             vendorTable = vendorTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
             $(`#first_person_details_${this.value}`).remove()
             setVendorTable($("#inputVendorType").val())
-            if(vendorTable.filter(item => item != 'undefined').length == 0){$("#inputVendorType").prop('disabled',false)}
+            if (vendorTable.filter(item => item != 'undefined').length == 0) { $("#inputVendorType").prop('disabled', false) }
             conjuctionRefresh()
         })
     })
@@ -829,10 +837,10 @@ function setPurchaserTable(type) {
             for (let key in purchaserTable[this.value]) {
                 $(`input[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('input')
                 $(`select[save_id = ${key}]`).val(purchaserTable[this.value][key]).trigger('change')
-            }            
+            }
             if (purchaserTable[this.value]['DocumentPurchaserCompany'] != undefined) {
                 purchaserTable[this.value]['DocumentPurchaserCompany'].forEach(item => {
-                    $(`#inputPurchaserMultiCompany [data-token=${item.DocumentPurchaserCompanyRegNo}]`).prop('selected',true)
+                    $(`#inputPurchaserMultiCompany [data-token=${item.DocumentPurchaserCompanyRegNo}]`).prop('selected', true)
                 })
             }
             $("#inputPurchaserMultiCompany").selectpicker('refresh')
@@ -843,7 +851,7 @@ function setPurchaserTable(type) {
             $(`#second_person_details_${this.value}`).remove()
             purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setPurchaserTable($("#inputPurchaserType").val())
-            if(purchaserTable.filter(item => item != 'undefined').length == 0){$("#inputPurchaserType").prop('disabled',false)}
+            if (purchaserTable.filter(item => item != 'undefined').length == 0) { $("#inputPurchaserType").prop('disabled', false) }
             conjuctionRefresh()
             $("#inputPurchaserMultiCompany").selectpicker('refresh')
         })
@@ -853,7 +861,7 @@ function setPurchaserTable(type) {
             purchaserTable = purchaserTable.map((item, index) => { if (index == this.value) { return "undefined" } else { return item } })
             $(`#second_person_details_${this.value}`).remove()
             setPurchaserTable($("#inputPurchaserType").val())
-            if(purchaserTable.filter(item => item != 'undefined').length == 0){$("#inputPurchaserType").prop('disabled',false)}
+            if (purchaserTable.filter(item => item != 'undefined').length == 0) { $("#inputPurchaserType").prop('disabled', false) }
             conjuctionRefresh()
         })
     })
@@ -1028,7 +1036,7 @@ function clickEventListner() {
             })
             $(elem).attr('id', `Witness_person_details_${index}`)
         })
-        
+
 
         const details = {
             DocumentTypeID: parseInt(document.getElementById("inputDoucumentType").value),
@@ -1445,7 +1453,7 @@ function clickEventListner() {
 
     })
     $("#showVendorCompanyToggler #show_vendor_details").click(function () {
-        if(companyTableVendor.length == 0){
+        if (companyTableVendor.length == 0) {
             hide_popup_alert(`Please enter company Details`, 1);
             throw new Error(`Please enter company Details`)
         }
@@ -1474,7 +1482,7 @@ function clickEventListner() {
 
     })
     $("#showPurchaserCompanyToggler #show_purchaser_details").click(function () {
-        if(companyTablePurchaser.length == 0){
+        if (companyTablePurchaser.length == 0) {
             hide_popup_alert(`Please enter company Details`, 1);
             throw new Error(`Please enter company Details`)
         }

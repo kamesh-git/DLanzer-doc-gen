@@ -9,6 +9,7 @@ storeInput().then(resp => {
     selectEventListner();
     clickEventListner();  //should be called only once
     setTable()
+    // getting today's date
     var now = new Date();
     var month = (now.getMonth() + 1);
     var day = now.getDate();
@@ -17,7 +18,7 @@ storeInput().then(resp => {
     if (day < 10)
         day = "0" + day;
     today = now.getFullYear() + '-' + month + '-' + day;
-    console.log(today)
+    document.getElementById('inputSaleDeedExecution').value = today
     // select picker styles
     $("[data-id='inputVendorMultiCompany'],[data-id='inputPurchaserMultiCompany']").each(function () {
         $(this).css({
@@ -175,7 +176,6 @@ function tableReset() {
 
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")
-    document.getElementById('inputSaleDeedExecution').value = today
 
 
 }

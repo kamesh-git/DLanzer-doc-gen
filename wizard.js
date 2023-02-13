@@ -1011,6 +1011,24 @@ function clickEventListner() {
             })
             $(elem).attr('id', `first_person_details_${index}`)
         })
+        $("[id*=second_person_details_]").each(function (index, elem) {
+            $(elem).find('span').each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
+                this.setAttribute('id', changeid)
+            })
+            $(elem).attr('id', `second_person_details_${index}`)
+        })
+
+        $("[id*=Witness_person_details_]").each(function (index, elem) {
+            $(elem).find('span').each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
+                this.setAttribute('id', changeid)
+            })
+            $(elem).attr('id', `Witness_person_details_${index}`)
+        })
+        
 
         const details = {
             DocumentTypeID: parseInt(document.getElementById("inputDoucumentType").value),

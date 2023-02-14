@@ -34,4 +34,14 @@ function priceInWords (num) {
     return [str,parseInt(number).toLocaleString('en-IN')];
 }
 
-export {priceInWords}
+var newline = function () {
+    return [{
+        type: 'lang',
+        filter: function(text) {
+            return text.replace(/^( *(\d+\.  {1,4}|[\w\<\'\">\-*+])[^\n]*)\n{1}(?!\n| *\d+\. {1,4}| *[-*+] +|#|$)/gm, function(e) {
+                return e.trim() + "  \n";
+            })
+        }
+    }];
+};
+export {priceInWords,newline}

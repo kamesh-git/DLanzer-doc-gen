@@ -1,6 +1,6 @@
 import { mastersData, storeInput, apirequest, document_details } from './data.js'
 import { hide_popup_alert, show_popup_alert } from './popup_alert.js'
-import { priceInWords } from './custom-packages.js'
+import { newline, priceInWords } from './custom-packages.js'
 
 // main function starts
 let today;
@@ -1534,10 +1534,15 @@ function cloneformEventList() {
         })
     })
     $(".payment_details").each(function () {
+        window.showdown.extensions.newline = newline
+        var converter = new showdown.Converter();
         $(this).on('input', function () {
+            var convText = this.value,
+            html = converter.makeHtml(convText);
+            console.log(html)
             const text = [];
             $(".payment_details").each(function () {
-                text.push(this.value)
+                text.push(html)
             })
             document.getElementById("payment_Details").innerHTML = "<span>" + text.join("<br>") + "</span>"
         })

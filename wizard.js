@@ -1530,7 +1530,7 @@ function cloneformEventList() {
             $(".transfer_details").each(function () {
                 text.push(this.value)
             })
-            document.getElementById("transfer_details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+            document.getElementById("transfer_details").innerHTML = "<span>" + text.join("<br><br>") + "</span>"
         })
     })
     $(".payment_details").each(function () {
@@ -1539,7 +1539,7 @@ function cloneformEventList() {
             $(".payment_details").each(function () {
                 text.push(this.value)
             })
-            document.getElementById("payment_Details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+            document.getElementById("payment_Details").innerHTML = "<span>" + text.join("<br>") + "</span>"
         })
     })
     $('textarea').each(function () {

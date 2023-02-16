@@ -44,6 +44,11 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/showdown@2.1.0/dist/showdown.min.js"></script>
+    <style>
+        .form-control,.form-control:focus{
+            color: black;
+        }
+    </style>
 </head>
 
 <body class="  ">
@@ -410,7 +415,7 @@
                                     </li>
                                 </ul>
                                 <!-- fieldsets -->
-                                <fieldset style="color:black">
+                                <fieldset>
                                     <div class="form-card text-start">
                                         <div class="row">
                                             <div class="col-7">
@@ -470,7 +475,7 @@
                                     <button type="button" name="next"
                                         class="btn btn-primary next action-button float-end" value="Next">Next</button>
                                 </fieldset>
-                                <fieldset style="color:black">
+                                <fieldset>
                                     <div class="form-card text-start">
                                         <div class="row">
                                             <div class="col-md-7">
@@ -955,7 +960,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <fieldset style="color:black">
+                                <fieldset>
                                     <div class="form-card text-start">
                                         <div class="row">
                                             <div class="col-md-7">
@@ -1453,7 +1458,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <fieldset style="color:black">
+                                <fieldset>
                                     <div class="form-card">
                                         <div class="d-flex justify-content-around mb-3">
                                             <button type="button"
@@ -1464,10 +1469,19 @@
                                         <div class="row schedule-part">
                                             <div class="col-md-12">
                                                 <div class="row">
-                                                    <h3 class="mb-4 text-start">Property Details:</h3>
+                                                    <div class="d-flex justify-content-between">
+                                                        <h3 class="mb-4 text-start">Property Details</h3>
+                                                        <div id="addPropertyDetails">
+                                                            <button type="button"
+                                                                class="btn btn-dark clear">Clear</button>
+                                                            <button type="button"
+                                                                class="btn btn-primary add">Add</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-floating" id="inputPropertyTypeDiv">
-                                                            <select class="form-select" name="" id="inputPropertyType">
+                                                            <select class="form-select" name="" deed_id="documentPropertyType"
+                                                                save_id="DocumentPropertyType" id="inputPropertyType">
                                                                 <option value="">Property Type</option>
                                                             </select>
                                                             <label for="inputPropertyType">Property</label>
@@ -1478,6 +1492,15 @@
                                             <br>
                                             <div class="col-md-12">
                                                 <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="form-floating" id="inputSchedulePropDiv">
+                                                            <select save_id="DocumentSchedulePropID" class="form-select"
+                                                                name="" id="inputScheduleProp">
+                                                                <option value="">Select Schedule</option>
+                                                            </select>
+                                                            <label for="inputScheduleProp">Select Schedule</label>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="row">
                                                             <div class="col-md-4 mb-3">
@@ -1494,25 +1517,91 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <div class=" mb-3 PropertyDetailsFormInput">
-                                                            <div class="form-floating">
-                                                                <textarea class="property_details form-control"
+                                                        <div class="PropertyDetailsFormClone row">
+                                                            <div
+                                                                class="form-floating order-2 mb-3 col-md-12 PropertyDetailsFormInput">
+                                                                <textarea save_id="DocumentPropertyDetails"
+                                                                    class="property_details form-control"
                                                                     name="inputPropertyDetails[]" id="" cols="30"
                                                                     rows="10"></textarea>
                                                                 <label for="inputPropertyDetails">Schedule
-                                                                    Details</label>
+                                                                    of property</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Clone Form -->
-                                                    <div class="PropertyDetailsFormClone"></div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <div class="form-floating" id="inputSchedulePropDiv">
-                                                            <select class="form-select" name="" id="inputScheduleProp">
-                                                                <option value="">Select Schedule</option>
-                                                            </select>
-                                                            <label for="inputScheduleProp">Select Schedule</label>
-                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="row ps-3 pe-3">
+                                                    <h6>Bounded on the: -</h6>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentBoundedNorthBy"
+                                                        deed_id="documentBoundedNorthBy"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputBoundedNorthBy" type="text"
+                                                            placeholder="North By" />
+                                                        <label for="inputBoundedNorthBy">North By</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentBoundedSouthBy"
+                                                        deed_id="documentBoundedSouthBy"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputBoundedSouthBy" type="text"
+                                                            placeholder="South By" />
+                                                        <label for="inputBoundedSouthBy">South By</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentBoundedEastBy"
+                                                        deed_id="documentBoundedEastBy"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputBoundedEastBy" type="text"
+                                                            placeholder="East By" />
+                                                        <label for="inputBoundedEastBy">East By</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentBoundedWestBy"
+                                                        deed_id="documentBoundedWestBy"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputBoundedWestBy" type="text"
+                                                            placeholder="West By" />
+                                                        <label for="inputBoundedWestBy">West By</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="row ps-3 pe-3">
+                                                    <h6>Measuring: -</h6>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentMeasuringEWN"
+                                                        deed_id="documentMeasuringEWN"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputMeasuringEWN" type="text"
+                                                            placeholder="East to West on the Northern side" />
+                                                        <label for="inputMeasuringEWN">East to West on the Northern side</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentMeasuringEWS"
+                                                        deed_id="documentMeasuringEWS"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputMeasuringEWS" type="text"
+                                                            placeholder="East to West on the Southern side" />
+                                                        <label for="inputMeasuringEWS">East to West on the Southern side</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentMeasuringNSE"
+                                                        deed_id="documentMeasuringNSE"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputMeasuringNSE" type="text"
+                                                            placeholder="North to South on the Eastern side" />
+                                                        <label for="inputMeasuringNSE">North to South on the Eastern side</label>
+                                                    </div>
+                                                    <div class="form-floating col-md-6 p-0 pe-2">
+                                                        <input save_id="DocumentMeasuringNSW"
+                                                        deed_id="documentMeasuringNSW"
+                                                            class="form-control mt-2 mb-2 m-md-0"
+                                                            id="inputMeasuringNSW" type="text"
+                                                            placeholder="North to South on the Western side" />
+                                                        <label for="inputMeasuringNSW">North to South on the Western side</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1520,18 +1609,35 @@
                                                 <div class="row ps-3 pe-3">
                                                     <div class="form-floating col-md p-0 pe-2"
                                                         id="inputPropertyTaxNoDiv">
-                                                        <input class="form-control mt-2 mb-2 m-md-0" name=""
+                                                        <input save_id="DocumentPropertyTaxNo"
+                                                        deed_id="documentPropertyTaxNo"
+                                                            class="form-control mt-2 mb-2 m-md-0" name=""
                                                             id="inputPropertyTaxNo" type="number"
                                                             placeholder="Property Tax no" />
                                                         <label for="inputPropertyTaxNo">Property Tax no</label>
                                                     </div>
                                                     <div class="form-floating col-md p-0" id="inputElecServiceNo">
-                                                        <input class="form-control" name="" id="inputElecServiceNo"
-                                                            type="number" placeholder="Electricity Service No" />
+                                                        <input save_id="DocumentElecServiceNo" class="form-control"
+                                                        deed_id="documentElecServiceNo" name="" id="inputElecServiceNo" type="number"
+                                                            placeholder="Electricity Service No" />
                                                         <label for="inputElecServiceNo">Electricity Service
                                                             No</label>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <table class="table" id="schedule_property_table">
+                                                    <thead>
+                                                        <th>#</th>
+                                                        <th>Property type</th>
+                                                        <th>Tax No</th>
+                                                        <th>Service No</th>
+                                                        <th>Actions</th>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
                                             </div>
                                             <div>
                                                 <button type="button" name="previous"

@@ -289,6 +289,7 @@ function tableEventListeners() {
 let vendorIterationCount = 0
 let purchaserIterationCount = 0
 let witnessIterationCount = 0
+let propertyIterationCount = 0
 let deed_documentTemplateid, deed_content;
 
 function setdocFields() {
@@ -427,20 +428,15 @@ function inputEventListner() {
             $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(new_date.toShortFormat())
         }
     })
-
     $(".inputWitnessInfo select[id!=inputWitnessMultiCompany]").on("change", function () {
         $("#Witness_person_details_0").parent().removeClass('d-none')
         $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
-
-
     $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function () {
         $(this).on("input", function () {
             this.value = this.value.slice(0, this.getAttribute('maxlength'))
         })
     })
-
-
     $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function () {
         $(this).on("input", function () {
             this.value = this.value.toUpperCase()
@@ -448,6 +444,14 @@ function inputEventListner() {
         })
     })
 
+    // property
+    $("#new_document_entry .schedule-part input").on("input", function () {
+        $(`#${this.getAttribute("deed_id")}_${propertyIterationCount}`).html(this.value)
+    })
+    $("#new_document_entry .schedule-part select").on("change", function () {
+        console.log(this,$(this).find('option:selected').text(),$(`#${this.getAttribute("deed_id")}_${propertyIterationCount}`))
+        $(`#${this.getAttribute("deed_id")}_${propertyIterationCount}`).html($(this).find('option:selected').text())
+    })
 
     // gender based title
     $("#inputVendorTitle").change(function () {
@@ -657,8 +661,10 @@ function selectEventListner() {
     })
 
     $("#inputScheduleProp").change(function () {
-        $("#deed_body #DocumentScheduleProp").text(this.value)
+        $("#deed_body #DocumentScheduleProp").text($(`.PropertyDetailsFormClone textarea:eq(${this.value})`).val())
         $("#deed_body #DocumentSchedulePropType").text($("#inputScheduleProp option:selected").text())
+        $(".PropertyDetailsFormClone div.order-1").removeClass('order-1').addClass('order-2')
+        $($(".PropertyDetailsFormClone div")[this.value]).removeClass('order-2').addClass('order-1')
     })
 }
 
@@ -709,6 +715,7 @@ let companyTableVendor = []
 let purchaserTable = []
 let companyTablePurchaser = []
 let witnessTable = []
+let propertyTable = []
 
 
 function setVendorTable(type) {
@@ -977,6 +984,43 @@ function setPurchaserCompanyTable() {
             }
             companyTablePurchaser = companyTablePurchaser.filter(item => item['DocumentPurchaserCompanyRegNo'] != regNo)
             setPurchaserCompanyTable()
+        })
+    })
+}
+function setPropertyTable(){
+    const list = propertyTable.map((item,index) => {
+        if(item != 'undefined'){
+            return (`
+            <tr>
+            <td>${index+1}</td>
+            <td>${mastersData.PropertyTypes.filter(item1 => item1.PropertyTypeID == item.DocumentPropertyType)[0].PropertyTypeTitle}</td>
+            <td>${item.DocumentPropertyTaxNo}</td>
+            <td>${item.DocumentElecServiceNo}</td>
+            <td>
+            <button type="button" class="btn btn-warning edit_property_table" value="${index}">Edit</button>
+            <button type="button" class="btn btn-danger delete_property_table" value="${index}">Delete</button>
+            </td>
+            </tr>
+            `)
+        }
+    })
+    $("#schedule_property_table tbody").html(list.join(''))
+    $(".edit_property_table").each(function(){
+        $(this).click(function(){
+            for(let key in propertyTable[this.value]){
+                $(`.schedule-part input[save_id=${key}]`).val(propertyTable[this.value][key]).trigger('input')
+                $(`.schedule-part select[save_id=${key}]`).val(propertyTable[this.value][key]).trigger('change')
+            }
+            $(`#schedule_property_details_${this.value}`).remove()
+            propertyTable = propertyTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
+            setPropertyTable()
+        })
+    })
+    $(".delete_property_table").each(function(){
+        $(this).click(function(){
+            $(`#schedule_property_details_${this.value}`).remove()
+            propertyTable = propertyTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
+            setPropertyTable()
         })
     })
 }
@@ -1425,12 +1469,66 @@ function clickEventListner() {
         }
     )
 
+    // property details
+    $("#addPropertyDetails .add").click(function () {
+        const schedule_part = {}
+        $(".schedule-part input,.schedule-part select,.schedule-part textarea").each(function () {
+            if (this.value == "") {
+                hide_popup_alert(`${this.getAttribute('save_id')} has null values`, 1)
+                throw new Error(`${this.getAttribute('save_id')} has null values`)
+            }
+        })
+        $(".schedule-part input,.schedule-part select").each(function () {
+            schedule_part[this.getAttribute('save_id')] = this.value
+        })
+        schedule_part['property_detail'] = []
+        $(".schedule-part textarea").each(function () {
+            schedule_part['property_detail'].push(this.value)
+        })
+        propertyTable[propertyIterationCount] = schedule_part
+        setPropertyTable()
+        
+        propertyIterationCount++;
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            console.log(this)
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        let text = `<span id='schedule_property_details_${propertyIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+        $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
+        $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
+        $(".PropertyDetailsFormInputClone").remove()
+        $("#inputPropertyType").change(function(){$(`#schedule_property_details_${propertyIterationCount}`).css('display','')})
+
+
+    })
+
     // others
     $(".cloneDetailsFormInput").each(function () {
         $(this).click(function () {
             let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
             let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
-            $("." + formcss).clone().removeClass(formcss).addClass(formcss + "Clone").appendTo("." + formclonecss).find('textarea').val("");
+            const clone = $("." + formcss).clone()
+            clone.removeClass(formcss).addClass(formcss + "Clone").find('textarea').val("")
+            if (this.getAttribute('clone_id') == "Property") {
+                clone.removeClass('order-1').addClass('order-2')
+                const schedule_title = ['of property', ...'BCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')]
+                const length = $(`.${formclonecss} textarea`).length
+                const label = 'Schedule ' + schedule_title[length]
+                clone.find('label').text(label);
+                clone.appendTo("." + formclonecss)
+                const inputScheduleProp = []
+                $(".property_details").each((index, item) => {
+                    inputScheduleProp.push(`<option nof_id='${index}' value="${index}">Schedule ${schedule_title[index]}</option>`)
+                })
+                $("#inputScheduleProp").html(inputScheduleProp.join(''))
+            }
+            else{
+                clone.appendTo("." + formclonecss)
+            }
             cloneformEventList()
         })
     })
@@ -1515,13 +1613,9 @@ function cloneformEventList() {
             $(".property_details").each(function (index) {
                 text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</h6>${this.value}`)
             })
-            document.getElementById("Property_Details").innerHTML = "<p>" + text.join("<br><br>") + "</p>"
-            const inputScheduleProp = []
-            $(".property_details").each((index, item) => {
-                inputScheduleProp.push(`<option value="${item.value}">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</option>`)
-            })
-            $("#inputScheduleProp").html(inputScheduleProp.join(''))
             $("#inputScheduleProp").trigger('change')
+
+            document.getElementById(`documentScheduleDetails_${propertyIterationCount}`).innerHTML = "<p>" + text.join("<br><br>") + "</p>"
         })
     })
     $(".transfer_details").each(function () {
@@ -1538,7 +1632,7 @@ function cloneformEventList() {
         var converter = new showdown.Converter();
         $(this).on('input', function () {
             var convText = this.value,
-            html = converter.makeHtml(convText);
+                html = converter.makeHtml(convText);
             console.log(html)
             const text = [];
             $(".payment_details").each(function () {

@@ -988,11 +988,12 @@ function setPurchaserCompanyTable() {
     })
 }
 function setPropertyTable(){
+    let i =1
     const list = propertyTable.map((item,index) => {
         if(item != 'undefined'){
             return (`
             <tr>
-            <td>${index+1}</td>
+            <td>${i++}</td>
             <td>${mastersData.PropertyTypes.filter(item1 => item1.PropertyTypeID == item.DocumentPropertyType)[0].PropertyTypeTitle}</td>
             <td>${item.DocumentPropertyTaxNo}</td>
             <td>${item.DocumentElecServiceNo}</td>
@@ -1007,6 +1008,9 @@ function setPropertyTable(){
     $("#schedule_property_table tbody").html(list.join(''))
     $(".edit_property_table").each(function(){
         $(this).click(function(){
+            const doc = propertyTable[this.value]
+            for(let i=0;i<doc['property_detail'].length-1;i++)$("#clonePropertyDetailsFormInput").trigger('click');
+            $("textarea.property_details").each(function(index,item){$(this).val(doc.property_detail[index])})
             for(let key in propertyTable[this.value]){
                 $(`.schedule-part input[save_id=${key}]`).val(propertyTable[this.value][key]).trigger('input')
                 $(`.schedule-part select[save_id=${key}]`).val(propertyTable[this.value][key]).trigger('change')
@@ -1018,9 +1022,8 @@ function setPropertyTable(){
     })
     $(".delete_property_table").each(function(){
         $(this).click(function(){
-            $(`#schedule_property_details_${this.value}`).remove()
-            propertyTable = propertyTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
-            setPropertyTable()
+            $(this).parent().find('button.edit_property_table').trigger('click')
+            $("#addPropertyDetails .clear").trigger('click')
         })
     })
 }
@@ -1485,6 +1488,7 @@ function clickEventListner() {
         $(".schedule-part textarea").each(function () {
             schedule_part['property_detail'].push(this.value)
         })
+        console.log(schedule_part)
         propertyTable[propertyIterationCount] = schedule_part
         setPropertyTable()
         

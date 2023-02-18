@@ -661,8 +661,8 @@ function selectEventListner() {
     })
 
     $("#inputScheduleProp").change(function () {
-        $("#deed_body #DocumentScheduleProp").text($(`.PropertyDetailsFormClone textarea:eq(${this.value})`).val())
-        $("#deed_body #DocumentSchedulePropType").text($("#inputScheduleProp option:selected").text())
+        $(`#deed_body #DocumentScheduleProp_${propertyIterationCount}`).text($(`.PropertyDetailsFormClone textarea:eq(${this.value})`).val())
+        $(`#deed_body #DocumentSchedulePropType_${propertyIterationCount}`).text($("#inputScheduleProp option:selected").text())
         $(".PropertyDetailsFormClone div.order-1").removeClass('order-1').addClass('order-2')
         $($(".PropertyDetailsFormClone div")[this.value]).removeClass('order-2').addClass('order-1')
     })
@@ -1491,7 +1491,7 @@ function clickEventListner() {
         propertyIterationCount++;
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
-        $("#hidden_use_element span").each(function () {
+        $("#hidden_use_element span,#hidden_use_element p[id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
@@ -1501,7 +1501,19 @@ function clickEventListner() {
         $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
         $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
         $(".PropertyDetailsFormInputClone").remove()
-        $("#inputPropertyType").change(function(){$(`#schedule_property_details_${propertyIterationCount}`).css('display','')})
+        
+        
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0').html())
+        $("#hidden_use_element span[class!=vendorPlural]").each(function () {
+            let changeid = this.getAttribute('id')
+            console.log(this)
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        text = `<p class='p-2 pt-0 pb-2 mb-0 ' id='documentPropertySchedule_${propertyIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</p class='p-2 pt-0 pb-2 mb-0 '>`
+        $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
+        $("#inputPropertyType").change(function(){$(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).css('display','')})
 
 
     })

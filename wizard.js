@@ -1505,6 +1505,26 @@ function clickEventListner() {
 
 
     })
+    $("#addPropertyDetails .clear").click(function(){
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
+        $("#hidden_use_element span").each(function () {
+            let changeid = this.getAttribute('id')
+            console.log(this)
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        if (propertyTable.filter(item => item != 'undefined').length == 0) {
+            $(`#deed_body #schedule_property_details_${propertyIterationCount}`).html($("#hidden_use_element").html())
+        }
+        else{
+            $(".PropertyDetailsFormInputClone").remove()
+            let text = `<span id='schedule_property_details_${propertyIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
+        }
+        $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
+
+    })
 
     // others
     $(".cloneDetailsFormInput").each(function () {

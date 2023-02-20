@@ -5,12 +5,6 @@ import { newline, priceInWords } from './custom-packages.js'
 // main function starts
 let today;
 storeInput().then(resp => {
-    setdocFields();
-    inputEventListner();
-    selectEventListner();
-    clickEventListner();  //should be called only once
-    setTable()
-    // getting today's date
     var now = new Date();
     var month = (now.getMonth() + 1);
     var day = now.getDate();
@@ -19,6 +13,12 @@ storeInput().then(resp => {
     if (day < 10)
         day = "0" + day;
     today = now.getFullYear() + '-' + month + '-' + day;
+    setdocFields();
+    inputEventListner();
+    selectEventListner();
+    clickEventListner();  //should be called only once
+    setTable()
+    // getting today's date
     document.getElementById('inputSaleDeedExecution').value = today
     // select picker styles
     $("[data-id='inputVendorMultiCompany'],[data-id='inputPurchaserMultiCompany']").each(function () {
@@ -350,11 +350,10 @@ function setdocFields() {
 
 function inputEventListner() {
     function diff_years(dt2, dt1) {
-
         var diff = (dt1.getTime() - dt2.getTime()) / 1000;
         diff /= (60 * 60 * 24);
         console.log(diff)
-        return Math.floor(Math.abs(diff / 365.25));
+        return Math.floor(diff / 365.25);
 
     }
     $("#new_document_entry input").on("input", function () {
@@ -437,7 +436,7 @@ function inputEventListner() {
             this.value = this.value.slice(0, this.getAttribute('maxlength'))
         })
     })
-    $("#inputVendorPan,#inputPurchaserPan,#inputWitnessPan").each(function () {
+    $("input[deed_id*=PAN]").each(function () {
         $(this).on("input", function () {
             this.value = this.value.toUpperCase()
             $(`#${this.getAttribute("deed_id")}`).html(this.value)
@@ -518,7 +517,15 @@ function inputEventListner() {
     })
 
 
-
+    // inputSaleDeedExecution date
+    $("input[type=date]").on('input',function(){
+        let new_date = new Date(this.value)
+        const age = diff_years(new_date, new Date())
+        if(age<0){
+            this.value = today;
+            $(this).trigger('input')
+        }
+    }).attr('max',today)
 
     // text area input listeners
 
@@ -1016,6 +1023,7 @@ function setPropertyTable(){
                 $(`.schedule-part select[save_id=${key}]`).val(propertyTable[this.value][key]).trigger('change')
             }
             $(`#schedule_property_details_${this.value}`).remove()
+            $(`#documentPropertySchedule_${this.value}`).remove()
             propertyTable = propertyTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setPropertyTable()
         })

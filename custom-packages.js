@@ -11,9 +11,9 @@ Date.prototype.toShortFormat = function () {
 
     const year = this.getFullYear();
 
-    if (day == 1) { return `${day}st ${monthName} ${year}`; }
-    else if (day == 2) { return `${day}nd ${monthName} ${year}`; }
-    else if (day == 3) { return `${day}rd ${monthName} ${year}`; }
+    if (day == 1 || day == 21 || day == 31) { return `${day}st ${monthName} ${year}`; }
+    else if (day == 2 || day == 22) { return `${day}nd ${monthName} ${year}`; }
+    else if (day == 3 || day == 23) { return `${day}rd ${monthName} ${year}`; }
     else { return `${day}th ${monthName} ${year}`; }
 }
 

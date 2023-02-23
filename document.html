@@ -45,7 +45,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/showdown@2.1.0/dist/showdown.min.js"></script>
     <style>
-        .form-control,.form-control:focus,.form-select,.form-select:focus{
+        .form-control,
+        .form-control:focus,
+        .form-select,
+        .form-select:focus {
             color: black;
         }
     </style>
@@ -745,7 +748,7 @@
                                                                 <div class="form-floating" id="inputVendorTitleDiv">
                                                                     <select
                                                                         deed_id="documentFirstPersonRepresenterTitle"
-                                                                        save_id="DocumentVendorRepresenterGenderID"
+                                                                        save_id="documentFirstPersonRepresenterTitle"
                                                                         class="form-select" name=""
                                                                         id="inputVendorRepresenterTitle">
                                                                         <option value="">Title</option>
@@ -1063,7 +1066,7 @@
                                                     <div class="col-md-4 mb-3">
                                                         <div class="form-floating" id="inputPurchaserCategoryDiv">
                                                             <select class="form-select"
-                                                                save_id="DocumentPurchaserCategoryID"
+                                                                save_id="documentSecondPersonCategory"
                                                                 deed_id="documentSecondPersonCategory" name=""
                                                                 id="inputPurchaserCategory">
                                                                 <option value="">Designation
@@ -1076,7 +1079,7 @@
                                                         <div class="form-floating" id="inputPurchaserTitleDiv">
                                                             <select deed_id="documentSecondPersonTitle"
                                                                 class="form-select" name=""
-                                                                save_id="DocumentPurchaserGenderID"
+                                                                save_id="documentSecondPersonTitle"
                                                                 id="inputPurchaserTitle">
                                                                 <option value="">Title</option>
                                                             </select>
@@ -1239,7 +1242,7 @@
                                                                     <select
                                                                         deed_id="documentSecondPersonRepresenterTitle"
                                                                         class="form-select" name=""
-                                                                        save_id="DocumentPurchaserRepresenterGenderID"
+                                                                        save_id="documentSecondPersonRepresenterTitle"
                                                                         id="inputPurchaserRepresenterTitle">
                                                                         <option value="">Title</option>
                                                                     </select>
@@ -1480,8 +1483,9 @@
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-floating" id="inputPropertyTypeDiv">
-                                                            <select class="form-select" name="" deed_id="documentPropertyType"
-                                                                save_id="DocumentPropertyType" id="inputPropertyType">
+                                                            <select class="form-select" name=""
+                                                                deed_id="documentPropertyType"
+                                                                save_id="documentPropertyType" id="inputPropertyType">
                                                                 <option value="">Property Type</option>
                                                             </select>
                                                             <label for="inputPropertyType">Property</label>
@@ -1517,7 +1521,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <div class="PropertyDetailsFormClone d-flex flex-column flex-wrap">
+                                                        <div
+                                                            class="PropertyDetailsFormClone d-flex flex-column flex-wrap">
                                                             <div
                                                                 class="form-floating order-2 mb-3 col-md-12 PropertyDetailsFormInput">
                                                                 <textarea save_id="DocumentPropertyDetails"
@@ -1536,7 +1541,7 @@
                                                     <h6 class="text-start">Bounded on the: -</h6>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentBoundedNorthBy"
-                                                        deed_id="documentBoundedNorthBy"
+                                                            deed_id="documentBoundedNorthBy"
                                                             class="form-control mt-2 mb-2 m-md-0"
                                                             id="inputBoundedNorthBy" type="text"
                                                             placeholder="North By" />
@@ -1544,7 +1549,7 @@
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentBoundedSouthBy"
-                                                        deed_id="documentBoundedSouthBy"
+                                                            deed_id="documentBoundedSouthBy"
                                                             class="form-control mt-2 mb-2 m-md-0"
                                                             id="inputBoundedSouthBy" type="text"
                                                             placeholder="South By" />
@@ -1552,18 +1557,16 @@
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentBoundedEastBy"
-                                                        deed_id="documentBoundedEastBy"
+                                                            deed_id="documentBoundedEastBy"
                                                             class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputBoundedEastBy" type="text"
-                                                            placeholder="East By" />
+                                                            id="inputBoundedEastBy" type="text" placeholder="East By" />
                                                         <label for="inputBoundedEastBy">East By</label>
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentBoundedWestBy"
-                                                        deed_id="documentBoundedWestBy"
+                                                            deed_id="documentBoundedWestBy"
                                                             class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputBoundedWestBy" type="text"
-                                                            placeholder="West By" />
+                                                            id="inputBoundedWestBy" type="text" placeholder="West By" />
                                                         <label for="inputBoundedWestBy">West By</label>
                                                     </div>
                                                 </div>
@@ -1573,35 +1576,39 @@
                                                     <h6 class="text-start">Measuring: -</h6>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentMeasuringEWN"
-                                                        deed_id="documentMeasuringEWN"
-                                                            class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputMeasuringEWN" type="text"
+                                                            deed_id="documentMeasuringEWN"
+                                                            class="form-control mt-2 mb-2 m-md-0" id="inputMeasuringEWN"
+                                                            type="text"
                                                             placeholder="East to West on the Northern side" />
-                                                        <label for="inputMeasuringEWN">East to West on the Northern side</label>
+                                                        <label for="inputMeasuringEWN">East to West on the Northern
+                                                            side</label>
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentMeasuringEWS"
-                                                        deed_id="documentMeasuringEWS"
-                                                            class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputMeasuringEWS" type="text"
+                                                            deed_id="documentMeasuringEWS"
+                                                            class="form-control mt-2 mb-2 m-md-0" id="inputMeasuringEWS"
+                                                            type="text"
                                                             placeholder="East to West on the Southern side" />
-                                                        <label for="inputMeasuringEWS">East to West on the Southern side</label>
+                                                        <label for="inputMeasuringEWS">East to West on the Southern
+                                                            side</label>
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentMeasuringNSE"
-                                                        deed_id="documentMeasuringNSE"
-                                                            class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputMeasuringNSE" type="text"
+                                                            deed_id="documentMeasuringNSE"
+                                                            class="form-control mt-2 mb-2 m-md-0" id="inputMeasuringNSE"
+                                                            type="text"
                                                             placeholder="North to South on the Eastern side" />
-                                                        <label for="inputMeasuringNSE">North to South on the Eastern side</label>
+                                                        <label for="inputMeasuringNSE">North to South on the Eastern
+                                                            side</label>
                                                     </div>
                                                     <div class="form-floating col-md-6 p-0 pe-2">
                                                         <input save_id="DocumentMeasuringNSW"
-                                                        deed_id="documentMeasuringNSW"
-                                                            class="form-control mt-2 mb-2 m-md-0"
-                                                            id="inputMeasuringNSW" type="text"
+                                                            deed_id="documentMeasuringNSW"
+                                                            class="form-control mt-2 mb-2 m-md-0" id="inputMeasuringNSW"
+                                                            type="text"
                                                             placeholder="North to South on the Western side" />
-                                                        <label for="inputMeasuringNSW">North to South on the Western side</label>
+                                                        <label for="inputMeasuringNSW">North to South on the Western
+                                                            side</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1610,7 +1617,7 @@
                                                     <div class="form-floating col-md p-0 pe-2"
                                                         id="inputPropertyTaxNoDiv">
                                                         <input save_id="DocumentPropertyTaxNo"
-                                                        deed_id="documentPropertyTaxNo"
+                                                            deed_id="documentPropertyTaxNo"
                                                             class="form-control mt-2 mb-2 m-md-0" name=""
                                                             id="inputPropertyTaxNo" type="number"
                                                             placeholder="Property Tax no" />
@@ -1618,7 +1625,8 @@
                                                     </div>
                                                     <div class="form-floating col-md p-0" id="inputElecServiceNo">
                                                         <input save_id="DocumentElecServiceNo" class="form-control"
-                                                        deed_id="documentElecServiceNo" name="" id="inputElecServiceNo" type="number"
+                                                            deed_id="documentElecServiceNo" name=""
+                                                            id="inputElecServiceNo" type="number"
                                                             placeholder="Electricity Service No" />
                                                         <label for="inputElecServiceNo">Electricity Service
                                                             No</label>

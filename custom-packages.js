@@ -16,6 +16,17 @@ Date.prototype.toShortFormat = function () {
     else if (day == 3 || day == 23) { return `${day}rd ${monthName} ${year}`; }
     else { return `${day}th ${monthName} ${year}`; }
 }
+const DatetoOriginalFormat = function (obj) {
+    let [date,month,year] = obj.split(" ")
+    date = date.replace('th','').replace('st','').replace('nd','').replace('rd','')
+    const monthNames = ["January", "February", "March", "April",
+        "May", "June", "July", "August",
+        "September", "October", "November", "December"];
+
+    month = String(monthNames.indexOf(month))
+    month = month.padStart(2,0)
+     return `${year}-${month}-${date}`;
+}
 
 const a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
 const b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
@@ -44,4 +55,4 @@ var newline = function () {
         }
     }];
 };
-export {priceInWords,newline}
+export {priceInWords,newline,DatetoOriginalFormat}

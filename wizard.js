@@ -187,6 +187,7 @@ function tableEventListeners() {
         $("#table_display").addClass("d-none")
         $("#document_display").addClass("d-none")
         $("#new_document_entry").removeClass("d-none")
+        $("#save_button").attr('api','POST').text('Save')
     })
 
 
@@ -194,6 +195,7 @@ function tableEventListeners() {
         $(this).click(function () {
             $("#new_document_entry_toggle").trigger('click')
             const doc = document_details.Documents.filter(item => item.DocumentID == this.value)[0]
+            console.log(doc)
             // $("#hidden_use_element").html(doc.DocumentTemplateHTML)
             // wizard 1
             $("#inputDoucumentType").val(doc.DocumentTypeID).trigger('change')
@@ -353,6 +355,7 @@ function tableEventListeners() {
                         inputpropertyTemp['property_detail'].push($(item2).text())
                     })
                 })
+                console.log(inputpropertyTemp)
                 inputpropertyTemp.documentPropertyType = mastersData.PropertyTypes.filter(item => item.PropertyTypeTitle == inputpropertyTemp.documentPropertyType)[0].PropertyTypeID
                 inputpropertyTemp['property_detail'].forEach((item3, index3) => {
                     if (item3 == $(`#DocumentScheduleProp_${index}`).text()) {
@@ -395,12 +398,12 @@ function tableEventListeners() {
             witnessIterationCount = witnessTable.length
             propertyIterationCount = propertyTable.length
             // console.log(vendorTable, vendorIterationCount)
-            console.log(witnessTable)
+            console.log(propertyTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
-
-
+            $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
+            $("#save_button").attr('api','PUT').val(this.value).text('Update')
         })
     })
 }
@@ -511,7 +514,7 @@ function inputEventListner() {
         }
     })
     $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
-        console.log(`${this.getAttribute("deed_id")}_${vendorIterationCount}`)
+        console.log(`${this.getAttribute("deed_id")}_${vendorIterationCount}`,this.options[this.selectedIndex])
         $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $(".inputVendorRepresenterInfo select").on("change", function () {
@@ -1165,6 +1168,7 @@ function clickEventListner() {
 
     $("#save_button").click(async function () {
 
+        $("#vendorInfoCloneClear,#DocumentPurchaserAddCompany .clear,#addPropertyDetails .clear,#witnessInfoCloneClear").trigger('click')
         const payment_detail = []
         $(".payment_details").each(async function () {
             payment_detail.push({
@@ -1240,7 +1244,6 @@ function clickEventListner() {
             document_purchaser: purchaserTable,
             document_witness: witnessTable,
             payment_details: payment_detail,
-            property_details: property_detai,
             transfer_details: transfer_detail
         }
 
@@ -1266,31 +1269,35 @@ function clickEventListner() {
             else if (details[key] === undefined || details[key] === null || !(!isNaN(details[key]) || typeof details[key] === 'string') || details[key] === "") { hide_popup_alert(`${key} field is required`, 1, 5000); throw new Error("Null values are present") }
         }
 
-
+        const upload_detail = {
+            DocumentTypeID: details.DocumentTypeID,
+            DocumentLanguageID: details.DocumentLanguageID,
+            DocumentTemplateID: details.DocumentTemplateID,
+            DocumentApplicationNo: details.DocumentApplicationNo,
+            DocumentExecutionPlace: details.DocumentExecutionPlace,
+            DocumentExecutionDate: details.DocumentExecutionDate,
+            DocumentTemplateHTML: details.DocumentTemplateHTML,
+        }
         show_popup_alert()
         if (this.getAttribute('api') == 'POST') {
-            // apirequest("POST", "api/Document", details).then(resp => {
-            //     hide_popup_alert(resp.message)
-            //     setTimeout(() => {
-            //         location.reload()
-            //     }, 2000);
-            // }, error => {
-            //     hide_popup_alert(error.message)
-            // })
+            apirequest("POST", "api/Document", upload_detail).then(resp => {
+                hide_popup_alert(resp.message)
+                setTimeout(() => {
+                    location.reload()
+                }, 2000);
+            }, error => {
+                hide_popup_alert(error.message)
+            })
         }
         else {
-            // apirequest("POST", "api/Document", details).then(resp => {
-            //     apirequest("DELETE", `api/Document/${this.getAttribute('api')}`).then(() => {
-            //         hide_popup_alert("Document updated successfully")
-            //         setTimeout(() => {
-            //             location.reload()
-            //         }, 2000);
-            //     }, error => {
-            //         hide_popup_alert(error.message)
-            //     })
-            // }, err => {
-            //     hide_popup_alert(err.message)
-            // })
+            apirequest("PUT", `api/Document/${this.value}`, upload_detail).then(resp => {
+                hide_popup_alert(resp.message)
+                setTimeout(() => {
+                    location.reload()
+                }, 2000);
+            }, error => {
+                hide_popup_alert(error.message)
+            })
         }
     })
 
@@ -1654,9 +1661,9 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
-        text = `<p class='p-2 pt-0 pb-2 mb-0 ' id='documentPropertySchedule_${propertyIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</p class='p-2 pt-0 pb-2 mb-0 '>`
+        text = `<p class='p-2 pt-0 pb-2 mb-0 d-none' id='documentPropertySchedule_${propertyIterationCount}' >${$("#hidden_use_element").html()}</p class='p-2 pt-0 pb-2 mb-0 '>`
         $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
-        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).css('display', '') })
+        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
 
 
     })

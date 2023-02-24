@@ -197,7 +197,7 @@ function tableEventListeners() {
             // $("#hidden_use_element").html(doc.DocumentTemplateHTML)
             // wizard 1
             $("#inputDoucumentType").val(doc.DocumentTypeID).trigger('change')
-            $("#inputDoucumentLanguage").val(doc.DocumentLanguageID)
+            $("#inputDoucumentLanguage").val(doc.DocumentLanguageID).trigger('change')
             $("#inputApplicationNo").val(doc.DocumentApplicationNo)
             $("#inputExcutionPlace").val(doc.DocumentExecutionPlace)
             $("#inputSaleDeedExecution").val(doc.DocumentExecutionDate)
@@ -228,7 +228,21 @@ function tableEventListeners() {
                             }
                             inputvendorTemp.documentFirstPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputvendorTemp.documentFirstPersonCategory)[0].CustomerCategoryID
                             inputvendorTemp.DocumentVendorCompany.push(DocumentVendorCompanyTemp)
-                            setVendorCompanyTable()
+                        })
+                        setVendorCompanyTable()
+                        $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option data-token="${item.DocumentVendorCompanyRegNo}" value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
+                        $("#inputVendorMultiCompany").selectpicker('refresh')
+                        $("#inputVendorMultiCompany").change(function () {
+                            const length = $("#inputVendorMultiCompany").val().length
+                            if (length) {
+                                $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html(
+                                    $("#inputVendorMultiCompany").val().map((item, index) => {
+                                        item = parseInt(item)
+                                        return (`<span class="vendorCompany"><span class="vendorCompanyName">${companyTableVendor[item]['DocumentVendorCompanyName']}</span>, Reg No <span class="vendorCompanyRegNo">${companyTableVendor[item]['DocumentVendorCompanyRegNo']}</span>, <span class="vendorCompanyAddress">${companyTableVendor[item]['DocumentVendorCompanyAddress']}</span> ${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}</span>`)
+                                    }).join('') + 'represented by, '
+                                )
+                            }
+                            else { $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html('') }
                         })
                     }
                 })
@@ -275,7 +289,21 @@ function tableEventListeners() {
                             }
                             inputpurchaserTemp.documentSecondPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputpurchaserTemp.documentSecondPersonCategory)[0].CustomerCategoryID
                             inputpurchaserTemp.DocumentPurchaserCompany.push(DocumentPurchaserCompanyTemp)
-                            setPurchaserCompanyTable()
+                        })
+                        setPurchaserCompanyTable()
+                        $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option data-token="${item.DocumentPurchaserCompanyRegNo}" value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
+                        $("#inputPurchaserMultiCompany").selectpicker('refresh')
+                        $("#inputPurchaserMultiCompany").change(function () {
+                            const length = $("#inputPurchaserMultiCompany").val().length
+                            if (length) {
+                                $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html(
+                                    $("#inputPurchaserMultiCompany").val().map((item, index) => {
+                                        item = parseInt(item)
+                                        return (`<span class="purchaserCompany"><span class="purchaserCompanyName">${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}</span>, Reg No <span class="purchaserCompanyRegNo">${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}</span>, <span class="purchaserCompanyAddress">${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}</span>${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
+                                    }).join('') + 'represented by, '
+                                )
+                            }
+                            else { $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html('') }
                         })
                     }
                 })
@@ -286,11 +314,11 @@ function tableEventListeners() {
                         const id = item2.id.slice(0, item2.id.indexOf('_'))
                         inputpurchaserTemp[id] = item2.innerHTML
                     })
-                    inputpurchaserTemp.documentSecondPersonRepresenterDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonRepresenterDOB)                    
+                    inputpurchaserTemp.documentSecondPersonRepresenterDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonRepresenterDOB)
                     inputpurchaserTemp.documentSecondPersonRepresenterTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputpurchaserTemp.documentSecondPersonRepresenterTitle)[0].CustomerGenderID
                     inputpurchaserTemp.documentSecondPersonRepresenterRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputpurchaserTemp.documentSecondPersonRepresenterRelationshipTitle)[0].CustomerRelationshipID
                 })
-                inputpurchaserTemp.documentSecondPersonDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonDOB)                    
+                inputpurchaserTemp.documentSecondPersonDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonDOB)
                 inputpurchaserTemp.documentSecondPersonTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputpurchaserTemp.documentSecondPersonTitle)[0].CustomerGenderID
                 inputpurchaserTemp.documentSecondPersonRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputpurchaserTemp.documentSecondPersonRelationshipTitle)[0].CustomerRelationshipID
                 purchaserTable.push(inputpurchaserTemp)
@@ -304,7 +332,9 @@ function tableEventListeners() {
                     const id = item1.id.slice(0, item1.id.indexOf('_'))
                     inputwitnessTemp[id] = item1.innerHTML
                 })
-                inputwitnessTemp.documentWitnessPersonDOB = DatetoOriginalFormat(inputwitnessTemp.documentWitnessPersonDOB)                    
+                inputwitnessTemp.documentWitnessPersonDOB = DatetoOriginalFormat(inputwitnessTemp.documentWitnessPersonDOB)
+                inputwitnessTemp.documentWitnessPersonTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputwitnessTemp.documentWitnessPersonTitle)[0].CustomerGenderID
+                inputwitnessTemp.documentWitnessPersonRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputwitnessTemp.documentWitnessPersonRelationshipTitle)[0].CustomerRelationshipID
                 witnessTable.push(inputwitnessTemp)
             })
 
@@ -324,6 +354,11 @@ function tableEventListeners() {
                     })
                 })
                 inputpropertyTemp.documentPropertyType = mastersData.PropertyTypes.filter(item => item.PropertyTypeTitle == inputpropertyTemp.documentPropertyType)[0].PropertyTypeID
+                inputpropertyTemp['property_detail'].forEach((item3, index3) => {
+                    if (item3 == $(`#DocumentScheduleProp_${index}`).text()) {
+                        inputpropertyTemp.DocumentSchedulePropID = index3
+                    }
+                })
                 propertyTable.push(inputpropertyTemp)
             })
 
@@ -359,7 +394,8 @@ function tableEventListeners() {
             purchaserIterationCount = purchaserTable.length
             witnessIterationCount = witnessTable.length
             propertyIterationCount = propertyTable.length
-            console.log(vendorTable, vendorIterationCount)
+            // console.log(vendorTable, vendorIterationCount)
+            console.log(witnessTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
@@ -865,7 +901,7 @@ function setVendorTable(type) {
             }
             if (vendorTable[this.value]['DocumentVendorCompany'] != undefined) {
                 vendorTable[this.value]['DocumentVendorCompany'].forEach(item => {
-                    $(`#inputVendorMultiCompany [data-token=${item.DocumentVendorCompanyRegNo}]`).prop('selected', true)
+                    $(`#inputVendorMultiCompany [data-token=${item.DocumentVendorCompanyRegNo}]`).prop('selected', true).trigger('change')
                 })
             }
             $("#inputVendorMultiCompany").selectpicker('refresh')
@@ -943,7 +979,7 @@ function setPurchaserTable(type) {
             }
             if (purchaserTable[this.value]['DocumentPurchaserCompany'] != undefined) {
                 purchaserTable[this.value]['DocumentPurchaserCompany'].forEach(item => {
-                    $(`#inputPurchaserMultiCompany [data-token=${item.DocumentPurchaserCompanyRegNo}]`).prop('selected', true)
+                    $(`#inputPurchaserMultiCompany [data-token=${item.DocumentPurchaserCompanyRegNo}]`).prop('selected', true).trigger('change')
                 })
             }
             $("#inputPurchaserMultiCompany").selectpicker('refresh')
@@ -1156,7 +1192,7 @@ function clickEventListner() {
         purchaserTable = purchaserTable.filter(item => item != 'undefined')
         witnessTable = witnessTable.filter(item => item != 'undefined')
         $("[id*=first_person_details_]").each(function (index, elem) {
-            $(elem).find('span').each(function () {
+            $(elem).find('span[id*=_]').each(function () {
                 let changeid = this.getAttribute('id')
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
                 this.setAttribute('id', changeid)
@@ -1164,7 +1200,7 @@ function clickEventListner() {
             $(elem).attr('id', `first_person_details_${index}`)
         })
         $("[id*=second_person_details_]").each(function (index, elem) {
-            $(elem).find('span').each(function () {
+            $(elem).find('span[id*=_]').each(function () {
                 let changeid = this.getAttribute('id')
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
                 this.setAttribute('id', changeid)
@@ -1173,12 +1209,20 @@ function clickEventListner() {
         })
 
         $("[id*=Witness_person_details_]").each(function (index, elem) {
-            $(elem).find('span').each(function () {
+            $(elem).find('span[id*=_]').each(function () {
                 let changeid = this.getAttribute('id')
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
                 this.setAttribute('id', changeid)
             })
             $(elem).attr('id', `Witness_person_details_${index}`)
+        })
+        $("[id*=schedule_property_details_]").each(function (index, elem) {
+            $(elem).find('[id*=_]').each(function () {
+                let changeid = this.getAttribute('id')
+                changeid = changeid.slice(0, changeid.indexOf('_')) + `_${index}`
+                this.setAttribute('id', changeid)
+            })
+            $(elem).attr('id', `schedule_property_details_${index}`)
         })
 
 
@@ -1188,7 +1232,6 @@ function clickEventListner() {
             DocumentTemplateID: parseInt(deed_documentTemplateid),
             DocumentVendorTypeID: parseInt(document.getElementById("inputVendorType").value),
             DocumentPurchaserTypeID: parseInt(document.getElementById("inputPurchaserType").value),
-            DocumentPropertyTypeID: parseInt(document.getElementById("inputPropertyType").value),
             DocumentApplicationNo: document.getElementById("inputApplicationNo").value,
             DocumentExecutionPlace: document.getElementById("inputExcutionPlace").value,
             DocumentExecutionDate: document.getElementById("inputSaleDeedExecution").value,
@@ -1200,7 +1243,6 @@ function clickEventListner() {
             property_details: property_detai,
             transfer_details: transfer_detail
         }
-        console.log(details)
 
         function validateObject(obj) {
             if (obj instanceof Array) {
@@ -1298,7 +1340,7 @@ function clickEventListner() {
         }
         else {
             $(`#deed_body #first_person_details_${vendorIterationCount}`).remove()
-            let text = `<span id='first_person_details_${vendorIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='first_person_details_${vendorIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
             $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
         }
         $("#append_vendor_clone input,#append_vendor_clone select").each(function () { this.value = "" })
@@ -1313,7 +1355,7 @@ function clickEventListner() {
                 }
             }
             else if (this.getAttribute("id") !== 'inputVendorMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('toggleVendorRepresenter').checked)) {
-                vendorTableTemp[this.getAttribute('save_id')] = $(this).val()
+                vendorTableTemp[this.getAttribute('deed_id')] = $(this).val()
             }
             else if (this.getAttribute("id") == 'inputVendorMultiCompany') {
                 if ($("#inputVendorType").val() == 1) {
@@ -1419,7 +1461,7 @@ function clickEventListner() {
                 changeid = changeid.slice(0, changeid.indexOf('_')) + `_${purchaserIterationCount}`
                 this.setAttribute('id', changeid)
             })
-            let text = `<span id='second_person_details_${purchaserIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='second_person_details_${purchaserIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
             $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
         }
         $("#append_purchaser_clone input,#append_purchaser_clone select").each(function () { this.value = "" })
@@ -1437,7 +1479,7 @@ function clickEventListner() {
                 }
             }
             else if (this.getAttribute("id") !== 'inputPurchaserMultiCompany' && !(this.getAttribute('id').includes('Representer') && !document.getElementById('togglePurchaserRepresenter').checked)) {
-                purchaserTableTemp[this.getAttribute('save_id')] = $(this).val()
+                purchaserTableTemp[this.getAttribute('deed_id')] = $(this).val()
             }
             else if (this.getAttribute("id") == 'inputPurchaserMultiCompany') {
                 if ($("#inputPurchaserType").val() == 1) {
@@ -1476,7 +1518,7 @@ function clickEventListner() {
         $("#inputPurchaserMultiCompany").selectpicker('refresh')
         inputEventListner()
         conjuctionRefresh()
-        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).css("display", ""); conjuctionRefresh() })
+        $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
         $("#togglePurchaserRepresenter").prop('checked', false)
         $(".inputPurchaserRepresenterInfo").addClass('d-none')
         $("#inputPurchaserType").prop('disabled', true)
@@ -1525,7 +1567,7 @@ function clickEventListner() {
                 throw new Error(`${this.getAttribute('save_id')} field is required`)
             }
             else {
-                witnessTableTemp[this.getAttribute('save_id')] = $(this).val()
+                witnessTableTemp[this.getAttribute('deed_id')] = $(this).val()
             }
         })
 
@@ -1550,12 +1592,12 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
             this.setAttribute('id', changeid)
         })
-        let text = `<span id='Witness_person_details_${witnessIterationCount}' style="display:none;"'>${$("#hidden_use_element").html()}</span>`
+        let text = `<span id='Witness_person_details_${witnessIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
         $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
         inputEventListner()
         conjuctionRefresh()
-        $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).css("display", ""); conjuctionRefresh() })
+        $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
     }
     )
     $("#witnessInfoRemoveClone").click(
@@ -1579,7 +1621,7 @@ function clickEventListner() {
             }
         })
         $(".schedule-part input,.schedule-part select").each(function () {
-            schedule_part[this.getAttribute('save_id')] = this.value
+            schedule_part[this.getAttribute('deed_id')] = this.value
         })
         schedule_part['property_detail'] = []
         $(".schedule-part textarea").each(function () {

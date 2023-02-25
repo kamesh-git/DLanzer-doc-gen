@@ -981,11 +981,12 @@ function setPurchaserTable(type) {
 
 function setWitnessTable() {
     $("#witnessInfoTable").html(witnessTable.map((item, index) => {
+        let i=0
         if (item == 'undefined') { return "" }
         else {
             return (
                 `<tr>
-                        <th scope="row">${index + 1}</th>
+                        <th scope="row">${++i}</th>
                         <td>${item.documentWitnessPersonName}</td>
                         <td>
                             <button type="button" class="edit_witness_table btn btn-warning" value="${index}">Edit</button>

@@ -95,6 +95,8 @@ async function setTable() {
     $(".download_DOC").each(function () {
         $(this).click(function () {
             $("#deed_body_view .d-none").remove()
+            $('#deed_body_view .d-block').css('display','block')
+            $("#deed_body_view h5,h6").css('font-size','20px')
             var o = {
                 filename: 'test.doc'
             };

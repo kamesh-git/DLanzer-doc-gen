@@ -24,7 +24,8 @@ async function set_document_details_tableBody() {
     content = []
     mastersData.CustomerRelationships.map(item => {
         indexValue++;
-        content.push([indexValue, item.CustomerRelationshipTitle, item.CustomerRelationshipValue, `<button style="margin: 0 20px ;"   masterType="CustomerRelationships" itemValue="${item.CustomerRelationshipValue}" itemTitle="${item.CustomerRelationshipTitle}" value="${item.CustomerRelationshipID}" class="document_edit btn btn-secondary">Edit</button><button  class="document_delete btn btn-danger" masterType="CustomerRelationships" value=${item.CustomerRelationshipID}>Delete</button>`])
+        const gender = mastersData.CustomerGenders.filter(item1 => item1.CustomerGenderID == item.CustomerGenderID)[0]
+        content.push([indexValue, item.CustomerRelationshipTitle, item.CustomerRelationshipValue,gender.CustomerGenderTitle, `<button style="margin: 0 20px ;"   masterType="CustomerRelationships" itemGender="${gender.CustomerGenderID}" itemValue="${item.CustomerRelationshipValue}" itemTitle="${item.CustomerRelationshipTitle}" value="${item.CustomerRelationshipID}" class="document_edit btn btn-secondary">Edit</button><button  class="document_delete btn btn-danger" masterType="CustomerRelationships" value=${item.CustomerRelationshipID}>Delete</button>`])
     })
     table.rows.add(content).draw()
 
@@ -69,7 +70,11 @@ function eventListeners() {
             if (this.getAttribute("masterType") == 'CustomerRelationships') {
                 putID = this.value
                 putAPI = "CustomerRelationships"
-                const text = `<input type="text" value="${this.getAttribute('itemTitle')}" dataKey="CustomerRelationshipTitle" class="putData form-control col-sm" name="" id=""
+                const customerGenderID = this.getAttribute("itemGender")
+                const text = `<select type="text" dataKey="CustomerGenderID" class="putData form-select col-sm" name="" id=""
+                placeholder="Customer Category"><option value="">Select</option>
+                ${mastersData.CustomerGenders.map(item => (`<option value="${item.CustomerGenderID}" ${item.CustomerGenderID == customerGenderID ? "selected" : ""}>${item.CustomerGenderTitle}</option>`))}
+                </select><input type="text" value="${this.getAttribute('itemTitle')}" dataKey="CustomerRelationshipTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Relationship Title" /><input dataKey="CustomerRelationshipValue" type="text" class="putData form-control col-sm" name="" id=""
                 placeholder="Relationship Value" value="${this.getAttribute('itemValue')}" />`
                 $(".update_fields_CustomerRelationships").html(text)
@@ -110,6 +115,7 @@ function eventListeners() {
                 apirequest('PUT', `api/${putAPI}/${putID}`, putData).then(resp => {
                     hide_popup_alert(resp.message)
                     set_document_details_tableBody()
+                    $(".new_data_fields").trigger('click')
                 }).catch(err => { hide_popup_alert(err.message, 1, 3000) })
                 // 
 
@@ -128,7 +134,6 @@ function eventListeners() {
             })
         })
     })
-
     $(".new_data_fields").each(function () {
         $(this).click(function () {
             $(".add_fields input").each(function () { $(this).val('') })
@@ -137,8 +142,10 @@ function eventListeners() {
             window.scrollTo(0, 0);
         })
     })
-    const text = '<option value="">Select Type</option>' + mastersData.CustomerType.map(item => (`<option value="${item.CustomerTypeID}">${item.CustomerTypeTitle}</option>`)).join("")
+    let text = '<option value="">Select Type</option>' + mastersData.CustomerType.map(item => (`<option value="${item.CustomerTypeID}">${item.CustomerTypeTitle}</option>`)).join("")
     $(".add_fields_CustomerCategory select").html(text)
+    text = '<option value="">Select Type</option>' + mastersData.CustomerGenders.map(item => (`<option value="${item.CustomerGenderID}">${item.CustomerGenderTitle}</option>`)).join("")
+    $(".add_fields_CustomerRelationships select").html(text)
 
 
 }
@@ -157,8 +164,8 @@ $(".addData").each(function () {
         apirequest('POST', `api/${postAPI}`, postData).then(resp => {
             set_document_details_tableBody()
             hide_popup_alert(resp.message)
+            $(".new_data_fields").trigger('click')
         }).catch(err => { hide_popup_alert(err.message, 1, 3000) })
-
 
     })
 })

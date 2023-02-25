@@ -94,6 +94,7 @@ async function setTable() {
 
     $(".download_DOC").each(function () {
         $(this).click(function () {
+            $("#deed_body_view .d-none").remove()
             var o = {
                 filename: 'test.doc'
             };
@@ -435,7 +436,7 @@ function setdocFields() {
     $("#inputVendorTitle").html(text)
     $("#inputVendorRepresenterTitle").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerGenderID}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputVendorRelationship").html(text)
     $("#inputVendorRepresenterRelationship").html(text)
 
@@ -451,7 +452,7 @@ function setdocFields() {
     $("#inputPurchaserRepresenterTitle").html(text)
 
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerGenderID}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputPurchaserRelationship").html(text)
     $("#inputPurchaserRepresenterRelationship").html(text)
 
@@ -463,7 +464,7 @@ function setdocFields() {
     text = `<option value="">Title</option>` + mastersData.CustomerGenders.map(item => (`<option value=${item.CustomerGenderID} data-token="${item.CustomerGenderTitle}">${item.CustomerGenderValue}</option>`)).join("")
     $("#inputWitnessTitle").html(text)
 
-    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerRelationshipValue}>${item.CustomerRelationshipValue}</option>`)).join("")
+    text = `<option value="">Title</option>` + mastersData.CustomerRelationships.map(item => (`<option value=${item.CustomerRelationshipID} data-token=${item.CustomerGenderID}>${item.CustomerRelationshipValue}</option>`)).join("")
     $("#inputWitnessRelationship").html(text)
 
 
@@ -581,66 +582,33 @@ function inputEventListner() {
 
     // gender based title
     $("#inputVendorTitle").change(function () {
-        if (this.value == 2) {
-            $(`#documentFirstPersonGender_${vendorIterationCount}`).html('Female')
-            $("#inputVendorRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
-            $("#inputVendorRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
-        }
-        if (this.value == 1) {
-            $(`#documentFirstPersonGender_${vendorIterationCount}`).html('Male')
-            $("#inputVendorRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
-            $("#inputVendorRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
-        }
+        $(`#documentFirstPersonGender_${vendorIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
+        $(`#inputVendorRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
+        $(`#inputVendorRelationship option[data-token=${this.value}],#inputVendorRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
+        $('#inputVendorRelationship').val("")
     })
     $("#inputPurchaserTitle").change(function () {
-        if (this.value == 2) {
-            $(`#documentSecondPersonGender_${purchaserIterationCount}`).html('Female')
-            $("#inputPurchaserRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
-            $("#inputPurchaserRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
-        }
-        if (this.value == 1) {
-            $(`#documentSecondPersonGender_${purchaserIterationCount}`).html('Male')
-            $("#inputPurchaserRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
-            $("#inputPurchaserRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
-        }
+        $(`#documentSecondPersonGender_${purchaserIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
+        $(`#inputPurchaserRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
+        $(`#inputPurchaserRelationship option[data-token=${this.value}],#inputPurchaserRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
+        $('#inputPurchaserRelationship').val("")    
     })
     $("#inputWitnessTitle").change(function () {
-        if (this.value == 2) {
-            $("#inputWitnessRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
-            $("#inputWitnessRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
-        }
-        if (this.value == 1) {
-            $("#inputWitnessRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
-            $("#inputWitnessRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
-        }
+        $(`#inputWitnessRelationship option:not([data-token=${this.value}])`).each(function () { $(this).removeClass('d-none') })
+        $(`#inputWitnessRelationship option[data-token=${this.value}],#inputWitnessRelationship option:eq(0)`).each(function () { $(this).addClass('d-none') })
+        $('#inputWitnessRelationship').val("")
     })
     $("#inputVendorRepresenterTitle").change(function () {
-        if (this.value == 2) {
-            $(`#documentFirstPersonRepresenterGender_${vendorIterationCount}`).html('Female')
-            $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
-            $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
-        }
-        if (this.value == 1) {
-            $(`#documentFirstPersonRepresenterGender_${vendorIterationCount}`).html('Male')
-            $("#inputVendorRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
-            $("#inputVendorRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
-        }
+        $(`#documentFirstPersonRepresenterGender_${vendorIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
+        $(`#inputVendorRepresenterRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
+        $(`#inputVendorRepresenterRelationship option[data-token=${this.value}],#inputVendorRepresenterRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
+        $('#inputVendorRepresenterRelationship').val("")
     })
     $("#inputPurchaserRepresenterTitle").change(function () {
-        if (this.value == 2) {
-            $(`#documentSecondPersonRepresenterGender_${purchaserIterationCount}`).html('Female')
-            $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).removeClass('d-none') })
-            $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).addClass('d-none') })
-        }
-        if (this.value == 1) {
-            $(`#documentSecondPersonRepresenterGender_${purchaserIterationCount}`).html('Male')
-            $("#inputPurchaserRepresenterRelationship option[data-token]:odd").each(function () { $(this).addClass('d-none') })
-            $("#inputPurchaserRepresenterRelationship option[data-token]:even").each(function () { $(this).removeClass('d-none') })
-        }
-    })
-
-    $("#inputVendorTitle").change(function () {
-        $(this.getAttribute('data-token') + " ").insertBefore(`#documentFirstPersonRelationshipTitle_${vendorIterationCount}`)
+        $(`#documentSecondPersonRepresenterGender_${purchaserIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
+        $(`#inputPurchaserRepresenterRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
+        $(`#inputPurchaserRepresenterRelationship option[data-token=${this.value}],#inputPurchaserRepresenterRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
+        $('#inputPurchaserRepresenterRelationship').val("")
     })
 
 

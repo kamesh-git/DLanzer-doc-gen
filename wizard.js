@@ -1321,6 +1321,7 @@ function clickEventListner() {
             $(text).insertAfter(`#deed_body #first_person_details_${vendorIterationCount - 1}`)
         }
         $("#append_vendor_clone input,#append_vendor_clone select").each(function () { this.value = "" })
+        conjuctionRefresh()
     })
     $("#vendorInfoClone").click(function () {
         const vendorTableTemp = {}
@@ -1442,6 +1443,7 @@ function clickEventListner() {
             $(text).insertAfter(`#deed_body #second_person_details_${purchaserIterationCount - 1}`)
         }
         $("#append_purchaser_clone input,#append_purchaser_clone select").each(function () { this.value = "" })
+        conjuctionRefresh()
     })
     $("#purchaserInfoClone").click(function () {
         const purchaserTableTemp = {}
@@ -1533,6 +1535,7 @@ function clickEventListner() {
             $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
         }
         $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
+        conjuctionRefresh()
     })
     $("#witnessInfoClone").click(function () {
         let witnessTableTemp = {}

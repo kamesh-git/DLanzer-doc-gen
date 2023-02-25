@@ -1647,7 +1647,7 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
-        let text = `<span id='schedule_property_details_${propertyIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
+        let text = `<div id='schedule_property_details_${propertyIterationCount}' class="d-none">${$("#hidden_use_element").html()}</div>`
         $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
         $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
         $(".PropertyDetailsFormInputClone").remove()
@@ -1681,7 +1681,7 @@ function clickEventListner() {
         }
         else {
             $(".PropertyDetailsFormInputClone").remove()
-            let text = `<span id='schedule_property_details_${propertyIterationCount}' style="display:none;">${$("#hidden_use_element").html()}</span>`
+            let text = `<div id='schedule_property_details_${propertyIterationCount}' class="d-none">${$("#hidden_use_element").html()}</div>`
             $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
         }
         $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')

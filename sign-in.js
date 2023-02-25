@@ -1,5 +1,5 @@
 import { show_popup_alert, hide_popup_alert } from './popup_alert.js'
-const base_url = 'https://doc.dlanzer.com/laravel/public/'
+const base_url = 'https://doc.dlanzer.com/laravel/v1/public/'
 
 if (localStorage.getItem("token")) {
     window.location.href = location.href.slice(0, location.href.lastIndexOf('/')) + '/document.html'

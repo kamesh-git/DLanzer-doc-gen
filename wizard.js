@@ -73,8 +73,8 @@ async function setTable() {
     // table.draw()
     $(".document_view").each(function () {
         $(this).addClass('document_display_toggle')
-        $("#document_display .document_edit").val(this.value)
         $(this).click(function () {
+            $("#document_display .document_edit").val(this.value)
             document_details.Documents.forEach(item => {
                 if (item.DocumentID == this.value) {
                     document.getElementById("deed_body_view").innerHTML = item.DocumentTemplateHTML
@@ -196,6 +196,8 @@ function tableEventListeners() {
 
     $(".document_edit").each(function () {
         $(this).click(function () {
+            $("#deed_body_view").html("")
+            console.log(this)
             $("#new_document_entry_toggle").trigger('click')
             const doc = document_details.Documents.filter(item => item.DocumentID == this.value)[0]
             console.log(doc)
@@ -401,10 +403,10 @@ function tableEventListeners() {
             witnessIterationCount = witnessTable.length
             propertyIterationCount = propertyTable.length
             // console.log(vendorTable, vendorIterationCount)
-            console.log(propertyTable)
+            console.log(purchaserTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
-            $("#inputPurchaserTitle").change(function () { $(`#second_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
-            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
+            $("#inputPurchaserTitle").change(function () { console.log($(`#second_person_details_${purchaserIterationCount}`));$(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
+            $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
             $("#save_button").attr('api','PUT').val(this.value).text('Update')
         })
@@ -481,13 +483,11 @@ function inputEventListner() {
     function diff_years(dt2, dt1) {
         var diff = (dt1.getTime() - dt2.getTime()) / 1000;
         diff /= (60 * 60 * 24);
-        console.log(diff)
         return Math.floor(diff / 365.25);
 
     }
     $("#new_document_entry input").on("input", function () {
         this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)
-        console.log(this.value)
         $(`#${this.getAttribute("deed_id")}`).html(this.value)
         if (this.getAttribute('type') == 'date') {
             let new_date = new Date(this.value)
@@ -777,7 +777,7 @@ function selectEventListner() {
 
 function conjuctionRefresh() {
     let length = 0
-    $(".vendorConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    $(".vendorConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".vendorPlural").text('VENDORS')
         $(".vendorConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : '<br>'}${index + 1}.` })
@@ -790,7 +790,7 @@ function conjuctionRefresh() {
 
 
     length = 0
-    $(".purchaserConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    $(".purchaserConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
         $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
@@ -802,7 +802,7 @@ function conjuctionRefresh() {
 
 
     length = 0
-    $(".witnessConjuction").each(function () { if ($(this).parent().css('display') != 'none') { length++ } })
+    $(".witnessConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".witnessConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
     }

@@ -175,6 +175,7 @@ function tableEventListeners() {
 
     $(".document_edit").each(function () {
         $(this).click(function () {
+            tableReset()
             $("#deed_body_view").html("")
             console.log(this)
             $("#new_document_entry_toggle").trigger('click')

@@ -135,35 +135,10 @@ async function setTable() {
 function tableReset() {
 
     $("button[name=previous]").trigger("click")
-
-
-
-    for (let i = vendorIterationCount; i > 0; i--) {
-        $("#vendorInfoRemoveClone").trigger("click")
-    }
-    for (let i = purchaserIterationCount; i > 0; i--) {
-        $("#purchaserInfoRemoveClone").trigger("click")
-    }
-    for (let i = witnessIterationCount; i > 0; i--) {
-        $("#witnessInfoRemoveClone").trigger("click")
-    }
-
-    $("#new_document_entry input").each(function () {
-        this.value = ""
-    })
-    $("#new_document_entry select").each(function () {
-        try {
-            $(this).val("").change()
-        }
-        catch { }
-    })
-    $("#new_document_entry textarea").each(function () {
-        $(this).val("")
-    })
-    $(".PropertyDetailsFormClone").empty()
-    $(".TransferDetailsFormClone").empty()
-    $(".PaymentDetailsFormClone").empty()
-
+    $("input,select,textarea").val("")
+    $("select.selectpicker").html('<option val="">Select</option>').selectpicker('refresh')
+    $("#inputVendorType,#inputPurchaserType").trigger("change")
+    $("#new_document_entry tbody").html("")
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")
 
@@ -174,6 +149,7 @@ function tableEventListeners() {
 
     $(".table_display_toggle").each(function () {
         $(this).click(function () {
+            tableReset()
             $("#table_display").removeClass("d-none")
             $("#document_display").addClass("d-none")
             $("#new_document_entry").addClass("d-none")

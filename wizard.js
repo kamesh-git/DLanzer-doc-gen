@@ -576,8 +576,8 @@ function inputEventListner() {
         $('#inputPurchaserRelationship').val("")    
     })
     $("#inputWitnessTitle").change(function () {
-        $(`#inputWitnessRelationship option:not([data-token=${this.value}])`).each(function () { $(this).removeClass('d-none') })
-        $(`#inputWitnessRelationship option[data-token=${this.value}],#inputWitnessRelationship option:eq(0)`).each(function () { $(this).addClass('d-none') })
+        $(`#inputWitnessRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
+        $(`#inputWitnessRelationship option[data-token=${this.value}],#inputWitnessRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
         $('#inputWitnessRelationship').val("")
     })
     $("#inputVendorRepresenterTitle").change(function () {
@@ -1507,12 +1507,12 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
             this.setAttribute('id', changeid)
         })
-        if (vendorTable.length == 0) {
+        if (witnessTable.length == 0) {
             $(`#deed_body #Witness_person_details_${witnessIterationCount}`).html($("#hidden_use_element").html())
         }
         else {
             $(`#deed_body #Witness_person_details_${witnessIterationCount}`).remove()
-            let text = `<span id='Witness_person_details_${witnessIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
+            let text = `<span id='Witness_person_details_${witnessIterationCount}' class="d-none"><br>${$("#hidden_use_element").html()}</span>`
             $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
         }
         $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
@@ -1553,7 +1553,7 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${witnessIterationCount}`
             this.setAttribute('id', changeid)
         })
-        let text = `<span id='Witness_person_details_${witnessIterationCount}' class="d-none">${$("#hidden_use_element").html()}</span>`
+        let text = `<span id='Witness_person_details_${witnessIterationCount}' class="d-none"><br>${$("#hidden_use_element").html()}</span>`
         $(text).insertAfter(`#deed_body #Witness_person_details_${witnessIterationCount - 1}`)
         $(".inputWitnessInfo input,.inputWitnessInfo select").each(function () { console.log(this); this.value = "" })
         inputEventListner()

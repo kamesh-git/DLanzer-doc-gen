@@ -69,6 +69,7 @@ async function setTable() {
     else {
         table.clear().draw()
         hide_popup_alert("No Data in the table", 1, 5000)
+        $(".dataTables_empty").text('No Data in the table')
     }
     // table.draw()
     $(".document_view").each(function () {
@@ -138,6 +139,7 @@ function tableReset() {
     $("#new_document_entry tbody").html("")
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")
+    document.getElementById('inputSaleDeedExecution').value = today
 
 
 }

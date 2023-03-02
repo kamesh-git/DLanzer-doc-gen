@@ -757,7 +757,7 @@ function selectEventListner() {
 
 function conjuctionRefresh() {
     let length = 0
-    $(".vendorConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
+    $(".vendorConjuction").parent().each(function () { if (!this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".vendorPlural").text('VENDORS')
         $(".vendorConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : '<br>'}${index + 1}.` })
@@ -770,7 +770,7 @@ function conjuctionRefresh() {
 
 
     length = 0
-    $(".purchaserConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
+    $(".purchaserConjuction").parent().each(function () { if (!this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".purchaserPlural").text('PURCHASERS')
         $(".purchaserConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
@@ -782,7 +782,7 @@ function conjuctionRefresh() {
 
 
     length = 0
-    $(".witnessConjuction").each(function () { if (this.classList.contains("d-none")) { length++ } })
+    $(".witnessConjuction").parent().each(function () { if (!this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
         $(".witnessConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
     }

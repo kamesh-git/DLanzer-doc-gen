@@ -141,7 +141,6 @@ function tableReset() {
     $("#save_button").text("Submit").attr('api', "POST")
     document.getElementById('inputSaleDeedExecution').value = today
 
-
 }
 
 function tableEventListeners() {
@@ -169,6 +168,8 @@ function tableEventListeners() {
         $("#document_display").addClass("d-none")
         $("#new_document_entry").removeClass("d-none")
         $("#save_button").attr('api','POST').text('Save')
+        $(".PropertyDetailsFormInputClone").remove()
+        $("#clonePropertyDetailsFormInput").trigger('click')
     })
 
 
@@ -1279,7 +1280,7 @@ function clickEventListner() {
                 $(`#deed_body #DocumentVendorCompanyDetails_${vendorIterationCount}`).html(
                     $("#inputVendorMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
-                        return (`<span class="vendorCompany"><span class="vendorCompanyName">${companyTableVendor[item]['DocumentVendorCompanyName']}</span>, Reg No <span class="vendorCompanyRegNo">${companyTableVendor[item]['DocumentVendorCompanyRegNo']}</span>, <span class="vendorCompanyAddress">${companyTableVendor[item]['DocumentVendorCompanyAddress']}</span> ${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}</span>`)
+                        return (`<span class="vendorCompany"><span class="vendorCompanyName">${companyTableVendor[item]['DocumentVendorCompanyName']}</span>, Reg No <span class="vendorCompanyRegNo">${companyTableVendor[item]['DocumentVendorCompanyRegNo']}</span>,located at <span class="vendorCompanyAddress">${companyTableVendor[item]['DocumentVendorCompanyAddress']}</span> ${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}</span>`)
                     }).join('') + 'represented by, '
                 )
             }
@@ -1390,7 +1391,7 @@ function clickEventListner() {
                 $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html(
                     $("#inputPurchaserMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
-                        return (`<span class="purchaserCompany"><span class="purchaserCompanyName">${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}</span>, Reg No <span class="purchaserCompanyRegNo">${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}</span>, <span class="purchaserCompanyAddress">${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}</span>${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
+                        return (`<span class="purchaserCompany"><span class="purchaserCompanyName">${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}</span>, Reg No <span class="purchaserCompanyRegNo">${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}</span>,located at <span class="purchaserCompanyAddress">${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}</span>${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
                     }).join('') + 'represented by, '
                 )
             }
@@ -1651,6 +1652,7 @@ function clickEventListner() {
     // others
     $(".cloneDetailsFormInput").each(function () {
         $(this).click(function () {
+            console.log('clicked propr')
             let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
             let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
             const clone = $("." + formcss).clone()
@@ -1662,11 +1664,10 @@ function clickEventListner() {
                 const label = 'Schedule ' + schedule_title[length]
                 clone.find('label').text(label);
                 clone.appendTo("." + formclonecss)
-                const inputScheduleProp = []
-                $(".property_details").each((index, item) => {
-                    inputScheduleProp.push(`<option nof_id='${index}' value="${index}">Schedule ${schedule_title[index]}</option>`)
-                })
-                $("#inputScheduleProp").html(inputScheduleProp.join(''))
+                // const inputScheduleProp = []
+                // $(".property_details").each((index, item) => {
+                //     inputScheduleProp.push(`<option nof_id='${index}' value="${index}">Schedule ${schedule_title[index]}</option>`)
+                // })
             }
             else {
                 clone.appendTo("." + formclonecss)

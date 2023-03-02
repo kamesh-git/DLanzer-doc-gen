@@ -596,7 +596,7 @@ function inputEventListner() {
 
 
     // inputSaleDeedExecution date
-    $("input[type=date]").on('input', function () {
+    $("input[type=date]:not(#inputSaleDeedExecution)").on('input', function () {
         let new_date = new Date(this.value)
         const age = diff_years(new_date, new Date())
         if (age < 0) {
@@ -604,6 +604,14 @@ function inputEventListner() {
             $(this).trigger('input')
         }
     }).attr('max', today)
+    $("#inputSaleDeedExecution").on('input', function () {
+        let new_date = new Date(this.value)
+        const age = diff_years(new_date, new Date())
+        if (age < 0) {
+            this.value = today;
+            $(this).trigger('input')
+        }
+    }).attr('min', today)
 
     // text area input listeners
 

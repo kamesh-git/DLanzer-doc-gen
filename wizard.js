@@ -94,7 +94,6 @@ async function setTable() {
 
     $(".download_DOC").each(function () {
         $(this).click(function () {
-            $("#deed_body_view *:eq(0)").css('margin-top','500px')
             $("#deed_body_view .d-none").remove()
             $('#deed_body_view .d-block').css('display','block')
             $("#deed_body_view h5,h6").css('font-size','20px')
@@ -102,8 +101,6 @@ async function setTable() {
                 filename: 'test.doc'
             };
             $(document).googoose(o);
-            $("#deed_body_view *:eq(0)").css('margin-top','0px')
-            // $("#deed_body_view *:eq(1)").css('margin-top','0px')
         })
     })
     $(".download_PDF").each(function () {
@@ -576,6 +573,7 @@ function inputEventListner() {
         $('#inputPurchaserRelationship').val("")    
     })
     $("#inputWitnessTitle").change(function () {
+        $(`#documentWitnessPersonGender_${witnessIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
         $(`#inputWitnessRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
         $(`#inputWitnessRelationship option[data-token=${this.value}],#inputWitnessRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
         $('#inputWitnessRelationship').val("")
@@ -1116,6 +1114,12 @@ function setPropertyTable() {
 }
 
 function clickEventListner() {
+
+    // top margin
+    $("#inputTopmargin").on('input',function(){
+        console.log('input')
+        $("#deed_body_view *:eq(0)").css('margin-top',`${this.value}px`)
+    })
 
     $("#save_button").click(async function () {
 

@@ -607,10 +607,6 @@ function inputEventListner() {
     $("#inputSaleDeedExecution").on('input', function () {
         let new_date = new Date(this.value)
         const age = diff_years(new_date, new Date())
-        if (age < 0) {
-            this.value = today;
-            $(this).trigger('input')
-        }
     }).attr('min', today)
 
     // text area input listeners

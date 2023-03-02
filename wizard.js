@@ -4,6 +4,7 @@ import { DatetoOriginalFormat, newline, priceInWords } from './custom-packages.j
 
 // main function starts
 let today;
+let appFileName;
 storeInput().then(resp => {
     var now = new Date();
     var month = (now.getMonth() + 1);
@@ -79,6 +80,7 @@ async function setTable() {
             document_details.Documents.forEach(item => {
                 if (item.DocumentID == this.value) {
                     document.getElementById("deed_body_view").innerHTML = item.DocumentTemplateHTML
+                    appFileName = item.DocumentApplicationNo
                 }
             })
         })
@@ -99,7 +101,7 @@ async function setTable() {
             $('#deed_body_view .d-block').css('display','block')
             $("#deed_body_view h5,h6").css('font-size','20px')
             var o = {
-                filename: 'test.doc'
+                filename: `${appFileName}.doc`
             };
             $(document).googoose(o);
         })
@@ -180,7 +182,6 @@ function tableEventListeners() {
             console.log(this)
             $("#new_document_entry_toggle").trigger('click')
             const doc = document_details.Documents.filter(item => item.DocumentID == this.value)[0]
-            console.log(doc)
             // $("#hidden_use_element").html(doc.DocumentTemplateHTML)
             // wizard 1
             $("#inputDoucumentType").val(doc.DocumentTypeID).trigger('change')
@@ -663,6 +664,13 @@ function selectEventListner() {
             else { return "" }
         }).join("")
         $("[id=inputVendorCategory]").each(function () { $(this).html(text) })
+        text = `<option value="">Select</option>` + mastersData.CustomerCategory.map(item => {
+            if (item.CustomerTypeID == this.value) {
+                return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
+            }
+            else { return "" }
+        }).join("")
+        $("[id=inputVendorRepresenterType]").each(function () { $(this).html(text) })
         if (this.value == 2) {
             $("#toggleVendorRepresenter").parent().removeClass("d-none")
             $("#showVendorCompanyToggler").addClass("d-none")
@@ -703,6 +711,13 @@ function selectEventListner() {
             else { return "" }
         }).join("")
         $("[id=inputPurchaserCategory]").each(function () { $(this).html(text) })
+        text = `<option value="">Select</option>` + mastersData.CustomerCategory.map(item => {
+            if (item.CustomerTypeID == this.value) {
+                return (`<option value=${item.CustomerCategoryID} data-token=${item.CustomerCategoryTitle}>${item.CustomerCategoryTitle}</option>`)
+            }
+            else { return "" }
+        }).join("")
+        $("[id=inputPurchaserRepresenterType]").each(function () { $(this).html(text) })
         if (this.value == 2) {
             $("#togglePurchaserRepresenter").parent().removeClass("d-none")
             $("#showPurchaserCompanyToggler").addClass("d-none")
@@ -1586,7 +1601,7 @@ function clickEventListner() {
     // property details
     $("#addPropertyDetails .add").click(function () {
         const schedule_part = {}
-        $(".schedule-part input,.schedule-part select,.schedule-part textarea").each(function () {
+        $("#inputPropertyType,#inputScheduleProp").each(function () {
             if (this.value == "") {
                 hide_popup_alert(`${this.getAttribute('save_id')} has null values`, 1)
                 throw new Error(`${this.getAttribute('save_id')} has null values`)
@@ -1620,7 +1635,7 @@ function clickEventListner() {
 
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0').html())
-        $("#hidden_use_element span[class!=vendorPlural]").each(function () {
+        $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
@@ -1629,6 +1644,7 @@ function clickEventListner() {
         text = `<p class='p-2 pt-0 pb-2 mb-0 d-none' id='documentPropertySchedule_${propertyIterationCount}' >${$("#hidden_use_element").html()}</p class='p-2 pt-0 pb-2 mb-0 '>`
         $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
         $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
+        $(`#documentPropertyTypeCount_${propertyIterationCount}`).text(`Property No ${propertyIterationCount+1}`)
 
 
     })

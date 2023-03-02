@@ -137,7 +137,7 @@ function tableReset() {
     $("button[name=previous]").trigger("click")
     $("input,select,textarea").val("")
     $("select.selectpicker").html('<option val="">Select</option>').selectpicker('refresh')
-    $("#inputVendorType,#inputPurchaserType").trigger("change")
+    $("#inputVendorType,#inputPurchaserType").prop('disabled',false).trigger("change")
     $("#new_document_entry tbody").html("")
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")

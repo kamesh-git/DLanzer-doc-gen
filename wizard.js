@@ -636,8 +636,8 @@ function inputEventListner() {
 
     // property type terms and conditions
     $("#inputPropertyType").change(function(){
-        mastersData.PropertyTypes[2].terms = true
-        mastersData.PropertyTypes[3].terms = true    
+        mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 2)[0].terms = true
+        mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 3)[0].terms = true
         console.log(mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0],$(`#termsnconditions_${propertyIterationCount}`))
         if (mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0].terms) { $(`#termsnconditions_${propertyIterationCount}`).removeClass('d-none') }
         else{$(`#termsnconditions_${propertyIterationCount}`).addClass('d-none')}

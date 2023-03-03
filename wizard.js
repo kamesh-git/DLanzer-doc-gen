@@ -98,8 +98,8 @@ async function setTable() {
     $(".download_DOC").each(function () {
         $(this).click(function () {
             $("#deed_body_view .d-none").remove()
-            $('#deed_body_view .d-block').css('display','block')
-            $("#deed_body_view h5,h6").css('font-size','20px')
+            $('#deed_body_view .d-block').css('display', 'block')
+            $("#deed_body_view h5,h6").css('font-size', '20px')
             var o = {
                 filename: `${appFileName}.doc`
             };
@@ -137,7 +137,7 @@ function tableReset() {
     $("button[name=previous]").trigger("click")
     $("input,select,textarea").val("")
     $("select.selectpicker").html('<option val="">Select</option>').selectpicker('refresh')
-    $("#inputVendorType,#inputPurchaserType").prop('disabled',false).trigger("change")
+    $("#inputVendorType,#inputPurchaserType").prop('disabled', false).trigger("change")
     $("#new_document_entry tbody").html("")
     $("#deed_body").html("")
     $("#save_button").text("Submit").attr('api', "POST")
@@ -169,7 +169,7 @@ function tableEventListeners() {
         $("#table_display").addClass("d-none")
         $("#document_display").addClass("d-none")
         $("#new_document_entry").removeClass("d-none")
-        $("#save_button").attr('api','POST').text('Save')
+        $("#save_button").attr('api', 'POST').text('Save')
         $(".PropertyDetailsFormInputClone").remove()
         $("#clonePropertyDetailsFormInput").trigger('click')
     })
@@ -386,10 +386,10 @@ function tableEventListeners() {
             // console.log(vendorTable, vendorIterationCount)
             console.log(purchaserTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
-            $("#inputPurchaserTitle").change(function () { console.log($(`#second_person_details_${purchaserIterationCount}`));$(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
+            $("#inputPurchaserTitle").change(function () { console.log($(`#second_person_details_${purchaserIterationCount}`)); $(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
-            $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
-            $("#save_button").attr('api','PUT').val(this.value).text('Update')
+            $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_0`).removeClass('d-none') })
+            $("#save_button").attr('api', 'PUT').val(this.value).text('Update')
         })
     })
 }
@@ -498,7 +498,7 @@ function inputEventListner() {
         }
     })
     $(".inputVendorInfo select[id!=inputVendorMultiCompany]").on("change", function () {
-        console.log(`${this.getAttribute("deed_id")}_${vendorIterationCount}`,this.options[this.selectedIndex])
+        console.log(`${this.getAttribute("deed_id")}_${vendorIterationCount}`, this.options[this.selectedIndex])
         $(`#${this.getAttribute("deed_id")}_${vendorIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $(".inputVendorRepresenterInfo select").on("change", function () {
@@ -574,7 +574,7 @@ function inputEventListner() {
         $(`#documentSecondPersonGender_${purchaserIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
         $(`#inputPurchaserRelationship option:not([data-token=${this.value}])`).each(function () { $(this).addClass('d-none') })
         $(`#inputPurchaserRelationship option[data-token=${this.value}],#inputPurchaserRelationship option:eq(0)`).each(function () { $(this).removeClass('d-none') })
-        $('#inputPurchaserRelationship').val("")    
+        $('#inputPurchaserRelationship').val("")
     })
     $("#inputWitnessTitle").change(function () {
         $(`#documentWitnessPersonGender_${witnessIterationCount}`).html(mastersData.CustomerGenders.filter(item => item.CustomerGenderID == this.value)[0].CustomerGenderTitle)
@@ -611,7 +611,6 @@ function inputEventListner() {
     }).attr('min', today)
 
     // text area input listeners
-
     $('textarea').each(function () {
         $(this).on('input', function () {
             this.style.height = 0;
@@ -626,6 +625,24 @@ function inputEventListner() {
         $(".DocumentPrice").html(`Rs.${price[1]}/-`)
     })
 
+    // aadhar number decorstion
+    $("input[id*=Aadhar]").on('input', function () {
+        let value = String(this.value)
+        value = value.slice(0, 4) + " " + value.slice(4, 8) + " " + value.slice(8)
+        Array([vendorIterationCount, purchaserIterationCount, witnessIterationCount]).forEach(item => {
+            $(`#${this.getAttribute("deed_id")}_${item}`).html(value)
+        })
+    })
+
+    // property type terms and conditions
+    $("#inputPropertyType").change(function(){
+        mastersData.PropertyTypes[2].terms = true
+        mastersData.PropertyTypes[3].terms = true    
+        console.log(mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0],$(`#termsnconditions_${propertyIterationCount}`))
+        if (mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0].terms) { $(`#termsnconditions_${propertyIterationCount}`).removeClass('d-none') }
+        else{$(`#termsnconditions_${propertyIterationCount}`).addClass('d-none')}
+
+    })
 
 
 }
@@ -766,7 +783,7 @@ function selectEventListner() {
 
     $("#inputScheduleProp").change(function () {
         $(`#deed_body #DocumentScheduleProp_${propertyIterationCount}`).text($(`.PropertyDetailsFormClone textarea:eq(${this.value})`).val())
-        $(`#deed_body #DocumentSchedulePropType_${propertyIterationCount}`).text($("#inputScheduleProp option:selected").text())
+        $(`#deed_body [id=DocumentSchedulePropType_${propertyIterationCount}]`).text($("#inputScheduleProp option:selected").text())
         $(".PropertyDetailsFormClone div.order-1").removeClass('order-1').addClass('order-2')
         $($(".PropertyDetailsFormClone div")[this.value]).removeClass('order-2').addClass('order-1')
     })
@@ -804,12 +821,19 @@ function conjuctionRefresh() {
     length = 0
     $(".witnessConjuction").parent().each(function () { if (!this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
-        $(".witnessConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.` })
+        $(".witnessConjuction").each(function (index) { this.innerHTML = `${index > 0 ? '<br><br>' : ''}${index + 1}.<br><br>` })
     }
     else {
         $(".witnessConjuction").each(function (index) { this.innerHTML = '' })
     }
 
+    length = $(".propertyScheduleConjuction").length
+    $(".propertyScheduleConjuction").each(function (index, item) {
+        if (length == index + 1) {
+            $(this).html(' and')
+        }
+        else { $(this).html(',') }
+    })
 
 }
 
@@ -981,7 +1005,7 @@ function setPurchaserTable(type) {
 
 function setWitnessTable() {
     $("#witnessInfoTable").html(witnessTable.map((item, index) => {
-        let i=0
+        let i = 0
         if (item == 'undefined') { return "" }
         else {
             return (
@@ -1122,7 +1146,7 @@ function setPropertyTable() {
                 $(`.schedule-part select[deed_id=${key}]`).val(propertyTable[this.value][key]).trigger('change')
             }
             $(`#schedule_property_details_${this.value}`).remove()
-            $(`#documentPropertySchedule_${this.value}`).remove()
+            $(`#documentPropertySchedule_0`).remove()
             propertyTable = propertyTable.map((item, index) => { if (index == this.value) { return 'undefined' } else { return item } })
             setPropertyTable()
         })
@@ -1138,9 +1162,9 @@ function setPropertyTable() {
 function clickEventListner() {
 
     // top margin
-    $("#inputTopmargin").on('input',function(){
+    $("#inputTopmargin").on('input', function () {
         console.log('input')
-        $("#deed_body_view *:eq(0)").css('margin-top',`${this.value}px`)
+        $("#deed_body_view *:eq(0)").css('margin-top', `${this.value}px`)
     })
 
     $("#save_button").click(async function () {
@@ -1621,7 +1645,7 @@ function clickEventListner() {
         propertyIterationCount++;
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
-        $("#hidden_use_element span,#hidden_use_element p[id*=_]").each(function () {
+        $("#hidden_use_element span,#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
@@ -1641,10 +1665,10 @@ function clickEventListner() {
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
-        text = `<p class='p-2 pt-0 pb-2 mb-0 d-none' id='documentPropertySchedule_${propertyIterationCount}' >${$("#hidden_use_element").html()}</p class='p-2 pt-0 pb-2 mb-0 '>`
-        $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
-        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none') })
-        $(`#documentPropertyTypeCount_${propertyIterationCount}`).text(`Property No ${propertyIterationCount+1}`)
+        text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
+        $(text).appendTo(`#deed_body #documentPropertySchedule_0`)
+        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_0`).removeClass('d-none') })
+        $(`#documentPropertyTypeCount_${propertyIterationCount}`).text(`Property No ${propertyIterationCount + 1}`)
 
 
     })
@@ -1774,11 +1798,12 @@ function cloneformEventList() {
             const length = $(".property_details").length
             const schedule_title = ['of property', ...'BCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')]
             $(".property_details").each(function (index) {
-                text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</h6><span class="scheduleDetails">${this.value}</span>`)
+                text.push(`<h6 style="text-align:center;">Schedule ${length > 1 ? schedule_title[index] : 'of Property'}</h6><span class="scheduleDetails">${$("#inputScheduleProp").val() == index ? "All that piece of parcel" : ''} ${this.value}</span>`)
             })
             $("#inputScheduleProp").trigger('change')
 
             document.getElementById(`documentScheduleDetails_${propertyIterationCount}`).innerHTML = "<p>" + text.join("<br><br>") + "</p>"
+            conjuctionRefresh()
         })
     })
     $(".transfer_details").each(function () {

@@ -595,6 +595,42 @@ function inputEventListner() {
         $('#inputPurchaserRepresenterRelationship').val("")
     })
 
+    // pincode based state
+    $("input[id*=Pincode]:not([id*=RepresenterPincode])").on('input', function () {
+        const elem = this
+        console.log(this.value.length, this.value)
+        if (this.value.length == 6) {
+            show_popup_alert('Pincode loading...')
+            $.get(`https://api.postalpincode.in/pincode/${this.value}`, function (data, status) {
+                if (data[0].Status != 'Error') {
+                    const state = data[0].PostOffice[0].State
+                    $(elem).parent().parent().parent().find('input[id*=State]:not([id*=RepresenterState])').val(state).trigger('change')
+                    hide_popup_alert('Pincode Loaded Successfully!')
+                }
+                else {
+                    hide_popup_alert('Invalid Pincode!', 1, 5000)
+                }
+            });
+        }
+    })
+    $("input[id*=RepresenterPincode]").on('input', function () {
+        const elem = this
+        console.log(this.value.length, this.value)
+        if (this.value.length == 6) {
+            show_popup_alert()
+            $.get(`https://api.postalpincode.in/pincode/${this.value}`, function (data, status) {
+                if (data[0].Status != 'Error') {
+                    const state = data[0].PostOffice[0].State
+                    $(elem).parent().parent().parent().find('input[id*=RepresenterState]').val(state).trigger('change')
+                    hide_popup_alert('Pincode Loaded Successfully!', 1, 5000)
+                }
+                else {
+                    hide_popup_alert('Invalid Pincode!', 1, 5000)
+                }
+            });
+        }
+    })
+
 
     // inputSaleDeedExecution date
     $("input[type=date]:not(#inputSaleDeedExecution)").on('input', function () {
@@ -635,12 +671,12 @@ function inputEventListner() {
     })
 
     // property type terms and conditions
-    $("#inputPropertyType").change(function(){
+    $("#inputPropertyType").change(function () {
         mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 2)[0].terms = true
         mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 3)[0].terms = true
-        console.log(mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0],$(`#termsnconditions_${propertyIterationCount}`))
+        console.log(mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0], $(`#termsnconditions_${propertyIterationCount}`))
         if (mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0].terms) { $(`#termsnconditions_${propertyIterationCount}`).removeClass('d-none') }
-        else{$(`#termsnconditions_${propertyIterationCount}`).addClass('d-none')}
+        else { $(`#termsnconditions_${propertyIterationCount}`).addClass('d-none') }
 
     })
 

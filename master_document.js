@@ -93,7 +93,13 @@ function eventListeners() {
             if (this.getAttribute("masterType") == 'PropertyTypes') {
                 putID = this.value
                 putAPI = "PropertyType"
-                const text = `<input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control col-sm" name="" id=""
+                const text = `<div class="col-sm">
+                <input class="form-check-input putData" type="checkbox" value=""
+                    id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Terms and Conditions
+                </label>
+            </div><input value="${this.getAttribute('itemTitle')}" type="text" dataKey="PropertyTypeTitle" class="putData form-control col-sm" name="" id=""
                 placeholder="Customer Type Title" />`
                 $(".update_fields_PropertyType").html(text)
                 $(updateDataButton).appendTo(".update_fields_PropertyType")
@@ -104,8 +110,8 @@ function eventListeners() {
             $("#updateData").click(function () {
                 show_popup_alert()
                 putData = {}
+                if($(this).parent()[0].classList.contains('update_fields_PropertyType')){putData.terms = $("input.putData[type=checkbox]").prop('checked')}
                 $(".putData").each(function () {
-                    console.log(this)
                     const attr = this.getAttribute('dataKey')
                     const data = JSON.parse(`{"${attr}":"${this.value}"}`)
                     putData = { ...putData, ...data }
@@ -147,7 +153,8 @@ function eventListeners() {
 $(".addData").each(function () {
     $(this).click(function () {
         postAPI = this.getAttribute('postAPI')
-        postData = {} //put
+        postData = {} 
+        if($(this).attr('postAPI') == 'PropertyType'){postData.terms = $("input.postData[type=checkbox]").prop('checked')}
         $(`.add_fields_${postAPI} input.postData`).each(function () {
             const attr = this.getAttribute('dataKey')
             const data = JSON.parse(`{"${attr}":"${this.value}"}`)

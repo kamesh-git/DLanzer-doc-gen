@@ -89,6 +89,7 @@ function apirequest(method, endpoint, Body = {}) {
 let mastersData, document_details;
 
 function storeInput() {
+    console.log('store input called')
     return new Promise(async function (resolve, reject) {
         mastersData = await apirequest("GET", "api/master").then(resp => resp, err => { hide_popup_alert(err.message, 1, 5000) })
         document_details = await apirequest("GET", "api/Document").then(resp => resp, err => { hide_popup_alert(err.message, 1, 5000) })

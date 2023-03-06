@@ -54,8 +54,6 @@ let table = $("table#document_details_tableBody").DataTable({
 
 async function setTable() {
 
-    await storeInput()
-
     $('table#document_details_tableBody').DataTable().clear().draw()
     const data = document_details.Documents.map(item => {
 
@@ -88,7 +86,8 @@ async function setTable() {
     $(".document_delete").each(function () {
         $(this).click(function () {
             show_popup_alert()
-            apirequest("DELETE", `api/Document/${this.value}`).then(resp => {
+            apirequest("DELETE", `api/Document/${this.value}`).then(async resp => {
+                await storeInput()
                 setTable()
                 hide_popup_alert(resp.message, 0, 5000)
             })
@@ -243,6 +242,7 @@ function tableEventListeners() {
                     })
                     inputvendorTemp.documentFirstPersonRepresenterDOB = DatetoOriginalFormat(inputvendorTemp.documentFirstPersonRepresenterDOB)
                     inputvendorTemp.documentFirstPersonRepresenterTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputvendorTemp.documentFirstPersonRepresenterTitle)[0].CustomerGenderID
+                    inputvendorTemp.documentFirstPersonRepresenterType = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputvendorTemp.documentFirstPersonRepresenterType)[0].CustomerCategoryID
                     inputvendorTemp.documentFirstPersonRepresenterRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputvendorTemp.documentFirstPersonRepresenterRelationshipTitle)[0].CustomerRelationshipID
                 })
 
@@ -320,6 +320,7 @@ function tableEventListeners() {
                     const id = item1.id.slice(0, item1.id.indexOf('_'))
                     inputwitnessTemp[id] = item1.innerHTML
                 })
+                console.log(inputwitnessTemp)
                 inputwitnessTemp.documentWitnessPersonDOB = DatetoOriginalFormat(inputwitnessTemp.documentWitnessPersonDOB)
                 inputwitnessTemp.documentWitnessPersonTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputwitnessTemp.documentWitnessPersonTitle)[0].CustomerGenderID
                 inputwitnessTemp.documentWitnessPersonRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputwitnessTemp.documentWitnessPersonRelationshipTitle)[0].CustomerRelationshipID
@@ -384,7 +385,7 @@ function tableEventListeners() {
             witnessIterationCount = witnessTable.length
             propertyIterationCount = propertyTable.length
             // console.log(vendorTable, vendorIterationCount)
-            console.log(purchaserTable)
+            console.log(vendorTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputPurchaserTitle").change(function () { console.log($(`#second_person_details_${purchaserIterationCount}`)); $(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
@@ -539,7 +540,7 @@ function inputEventListner() {
         }
     })
     $(".inputWitnessInfo select[id!=inputWitnessMultiCompany]").on("change", function () {
-        $("#Witness_person_details_0").parent().removeClass('d-none')
+        $("#Witness_person_details_0").removeClass('d-none').parent().removeClass('d-none')
         $(`#${this.getAttribute("deed_id")}_${witnessIterationCount}`).html(this.options[this.selectedIndex].innerHTML)
     })
     $("#new_document_entry input[deed_id*='Age'], #new_document_entry input[deed_id*='Phone']").each(function () {
@@ -869,6 +870,10 @@ function conjuctionRefresh() {
             $(this).html(' and')
         }
         else { $(this).html(',') }
+    })
+
+    $(`[id*=documentPropertyTypeCount_]`).each(function(index,item){
+        $(this).text(`Property No ${index + 1}`)
     })
 
 }
@@ -1316,6 +1321,7 @@ function clickEventListner() {
             DocumentTemplateHTML: details.DocumentTemplateHTML,
         }
         show_popup_alert()
+        alert('save document')
         if (this.getAttribute('api') == 'POST') {
             apirequest("POST", "api/Document", upload_detail).then(resp => {
                 hide_popup_alert(resp.message)
@@ -1681,7 +1687,7 @@ function clickEventListner() {
         propertyIterationCount++;
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
-        $("#hidden_use_element span,#hidden_use_element [id*=_]").each(function () {
+        $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
@@ -1704,14 +1710,14 @@ function clickEventListner() {
         text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
         $(text).appendTo(`#deed_body #documentPropertySchedule_0`)
         $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_0`).removeClass('d-none') })
-        $(`#documentPropertyTypeCount_${propertyIterationCount}`).text(`Property No ${propertyIterationCount + 1}`)
+        conjuctionRefresh()
 
 
     })
     $("#addPropertyDetails .clear").click(function () {
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
-        $("#hidden_use_element span").each(function () {
+        $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
@@ -1723,10 +1729,11 @@ function clickEventListner() {
         else {
             $(".PropertyDetailsFormInputClone").remove()
             let text = `<div id='schedule_property_details_${propertyIterationCount}' class="d-none">${$("#hidden_use_element").html()}</div>`
+            $(`#deed_body #schedule_property_details_${propertyIterationCount}`).remove()
             $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
         }
         $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
-
+        conjuctionRefresh()
     })
 
     // others

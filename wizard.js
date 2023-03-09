@@ -100,7 +100,8 @@ async function setTable() {
             $('#deed_body_view .d-block').css('display', 'block')
             $("#deed_body_view h5,h6").css('font-size', '20px')
             var o = {
-                filename: `${appFileName}.doc`
+                filename: `${appFileName}.doc`,
+                margins: '0.0in',
             };
             $(document).googoose(o);
         })
@@ -133,6 +134,8 @@ async function setTable() {
 
 function tableReset() {
 
+    vendorIterationCount = purchaserIterationCount = witnessIterationCount = propertyIterationCount = 0
+    companyTableVendor = companyTablePurchaser = witnessTable = propertyTable = purchaserTable = vendorTable = []
     $("button[name=previous]").trigger("click")
     $("input,select,textarea").val("")
     $("select.selectpicker").html('<option val="">Select</option>').selectpicker('refresh')
@@ -170,7 +173,6 @@ function tableEventListeners() {
         $("#new_document_entry").removeClass("d-none")
         $("#save_button").attr('api', 'POST').text('Save')
         $(".PropertyDetailsFormInputClone").remove()
-        $("#clonePropertyDetailsFormInput").trigger('click')
     })
 
 
@@ -210,12 +212,12 @@ function tableEventListeners() {
                             DocumentVendorCompanyTemp.DocumentVendorCompanyName = $(item2).find('.vendorCompanyName').text()
                             DocumentVendorCompanyTemp.DocumentVendorCompanyRegNo = $(item2).find('.vendorCompanyRegNo').text()
                             DocumentVendorCompanyTemp.DocumentVendorCompanyAddress = $(item2).find('.vendorCompanyAddress').text()
-                            if (companyTableVendor == 0 || companyTableVendor.filter(item3 => item3.DocumentVendorCompanyName != DocumentVendorCompanyTemp.DocumentVendorCompanyName || item3.DocumentVendorCompanyRegNo != DocumentVendorCompanyTemp.DocumentVendorCompanyRegNo || item3.DocumentVendorCompanyAddress != DocumentVendorCompanyTemp.DocumentVendorCompanyAddress)[0]) {
+                            if (companyTableVendor == 0 || !companyTableVendor.filter(item3 => item3.DocumentVendorCompanyName == DocumentVendorCompanyTemp.DocumentVendorCompanyName && item3.DocumentVendorCompanyRegNo == DocumentVendorCompanyTemp.DocumentVendorCompanyRegNo && item3.DocumentVendorCompanyAddress == DocumentVendorCompanyTemp.DocumentVendorCompanyAddress)[0]) {
                                 companyTableVendor.push(DocumentVendorCompanyTemp)
                             }
-                            inputvendorTemp.documentFirstPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputvendorTemp.documentFirstPersonCategory)[0].CustomerCategoryID
                             inputvendorTemp.DocumentVendorCompany.push(DocumentVendorCompanyTemp)
                         })
+                        inputvendorTemp.documentFirstPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputvendorTemp.documentFirstPersonCategory)[0].CustomerCategoryID
                         setVendorCompanyTable()
                         $("#inputVendorMultiCompany").html(companyTableVendor.map((item, index) => (`<option data-token="${item.DocumentVendorCompanyRegNo}" value="${index}">${item.DocumentVendorCompanyName}</option>`)).join(''))
                         $("#inputVendorMultiCompany").selectpicker('refresh')
@@ -244,11 +246,13 @@ function tableEventListeners() {
                     inputvendorTemp.documentFirstPersonRepresenterTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputvendorTemp.documentFirstPersonRepresenterTitle)[0].CustomerGenderID
                     inputvendorTemp.documentFirstPersonRepresenterType = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputvendorTemp.documentFirstPersonRepresenterType)[0].CustomerCategoryID
                     inputvendorTemp.documentFirstPersonRepresenterRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputvendorTemp.documentFirstPersonRepresenterRelationshipTitle)[0].CustomerRelationshipID
+                    inputvendorTemp.documentFirstPersonRepresenterAadhar = inputvendorTemp.documentFirstPersonRepresenterAadhar.replaceAll(" ", "")
                 })
 
                 inputvendorTemp.documentFirstPersonTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputvendorTemp.documentFirstPersonTitle)[0].CustomerGenderID
                 inputvendorTemp.documentFirstPersonRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputvendorTemp.documentFirstPersonRelationshipTitle)[0].CustomerRelationshipID
                 inputvendorTemp.documentFirstPersonDOB = DatetoOriginalFormat(inputvendorTemp.documentFirstPersonDOB)
+                inputvendorTemp.documentFirstPersonAadhar = inputvendorTemp.documentFirstPersonAadhar.replaceAll(" ", "")
                 vendorTable.push(inputvendorTemp)
             })
 
@@ -256,7 +260,7 @@ function tableEventListeners() {
             purchaserTable = []
             companyTablePurchaser = []
             $("#deed_body [id*=second_person_details_]:not(.d-none)").each(function (index, item) {
-                $("#inputPurchaserType").val('2').trigger('change')
+                $("#inputPurchaserType").val('2').trigger('change').prop('disabled', true)
                 let inputpurchaserTemp = {}
                 $(item).find('span:not([id*=Representer]):not([class*=Company]):not([id*=Company]):not([id*=Conjuction])').each(function (index1, item1) {
                     const id = item1.id.slice(0, item1.id.indexOf('_'))
@@ -272,12 +276,13 @@ function tableEventListeners() {
                             DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyName = $(item2).find('.purchaserCompanyName').text()
                             DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyRegNo = $(item2).find('.purchaserCompanyRegNo').text()
                             DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyAddress = $(item2).find('.purchaserCompanyAddress').text()
-                            if (companyTablePurchaser == 0 || companyTablePurchaser.filter(item3 => item3.DocumentPurchaserCompanyName != DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyName || item3.DocumentPurchaserCompanyRegNo != DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyRegNo || item3.DocumentPurchaserCompanyAddress != DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyAddress)[0]) {
+                            console.log(DocumentPurchaserCompanyTemp, companyTablePurchaser.filter(item3 => item3.DocumentPurchaserCompanyName == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyName && item3.DocumentPurchaserCompanyRegNo == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyRegNo && item3.DocumentPurchaserCompanyAddress == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyAddress)[0])
+                            if (companyTablePurchaser == 0 || !companyTablePurchaser.filter(item3 => item3.DocumentPurchaserCompanyName == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyName && item3.DocumentPurchaserCompanyRegNo == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyRegNo && item3.DocumentPurchaserCompanyAddress == DocumentPurchaserCompanyTemp.DocumentPurchaserCompanyAddress)[0]) {
                                 companyTablePurchaser.push(DocumentPurchaserCompanyTemp)
                             }
-                            inputpurchaserTemp.documentSecondPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputpurchaserTemp.documentSecondPersonCategory)[0].CustomerCategoryID
                             inputpurchaserTemp.DocumentPurchaserCompany.push(DocumentPurchaserCompanyTemp)
                         })
+                        inputpurchaserTemp.documentSecondPersonCategory = mastersData.CustomerCategory.filter(item => item.CustomerCategoryTitle == inputpurchaserTemp.documentSecondPersonCategory)[0].CustomerCategoryID
                         setPurchaserCompanyTable()
                         $("#inputPurchaserMultiCompany").html(companyTablePurchaser.map((item, index) => (`<option data-token="${item.DocumentPurchaserCompanyRegNo}" value="${index}">${item.DocumentPurchaserCompanyName}</option>`)).join(''))
                         $("#inputPurchaserMultiCompany").selectpicker('refresh')
@@ -305,10 +310,13 @@ function tableEventListeners() {
                     inputpurchaserTemp.documentSecondPersonRepresenterDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonRepresenterDOB)
                     inputpurchaserTemp.documentSecondPersonRepresenterTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputpurchaserTemp.documentSecondPersonRepresenterTitle)[0].CustomerGenderID
                     inputpurchaserTemp.documentSecondPersonRepresenterRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputpurchaserTemp.documentSecondPersonRepresenterRelationshipTitle)[0].CustomerRelationshipID
+                    inputpurchaserTemp.documentSecondPersonRepresenterAadhar = inputpurchaserTemp.documentSecondPersonRepresenterAadhar.replaceAll(" ", "")
                 })
                 inputpurchaserTemp.documentSecondPersonDOB = DatetoOriginalFormat(inputpurchaserTemp.documentSecondPersonDOB)
                 inputpurchaserTemp.documentSecondPersonTitle = mastersData.CustomerGenders.filter(item => item.CustomerGenderValue == inputpurchaserTemp.documentSecondPersonTitle)[0].CustomerGenderID
                 inputpurchaserTemp.documentSecondPersonRelationshipTitle = mastersData.CustomerRelationships.filter(item => item.CustomerRelationshipValue == inputpurchaserTemp.documentSecondPersonRelationshipTitle)[0].CustomerRelationshipID
+                inputpurchaserTemp.documentSecondPersonAadhar = inputpurchaserTemp.documentSecondPersonAadhar.replaceAll(" ", "")
+
                 purchaserTable.push(inputpurchaserTemp)
             })
 
@@ -872,7 +880,7 @@ function conjuctionRefresh() {
         else { $(this).html(',') }
     })
 
-    $(`[id*=documentPropertyTypeCount_]`).each(function(index,item){
+    $(`[id*=documentPropertyTypeCount_]`).each(function (index, item) {
         $(this).text(`Property No ${index + 1}`)
     })
 
@@ -1476,7 +1484,7 @@ function clickEventListner() {
                 $(`#deed_body #DocumentPurchaserCompanyDetails_${purchaserIterationCount}`).html(
                     $("#inputPurchaserMultiCompany").val().map((item, index) => {
                         item = parseInt(item)
-                        return (`<span class="purchaserCompany"><span class="purchaserCompanyName">${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}</span>, Reg No <span class="purchaserCompanyRegNo">${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}</span>,located at <span class="purchaserCompanyAddress">${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}</span>${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','} `)
+                        return (`<span class="purchaserCompany"><span class="purchaserCompanyName">${companyTablePurchaser[item]['DocumentPurchaserCompanyName']}</span>, Reg No <span class="purchaserCompanyRegNo">${companyTablePurchaser[item]['DocumentPurchaserCompanyRegNo']}</span>,located at <span class="purchaserCompanyAddress">${companyTablePurchaser[item]['DocumentPurchaserCompanyAddress']}</span>${index == length - 1 ? '' : index == length - 2 ? ' and ' : ','}</span> `)
                     }).join('') + 'represented by, '
                 )
             }
@@ -1700,7 +1708,7 @@ function clickEventListner() {
 
 
         $('#hidden_use_element').html(deed_content)
-        $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0').html())
+        $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0'))
         $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
@@ -1708,7 +1716,7 @@ function clickEventListner() {
             this.setAttribute('id', changeid)
         })
         text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
-        $(text).appendTo(`#deed_body #documentPropertySchedule_0`)
+        $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
         $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_0`).removeClass('d-none') })
         conjuctionRefresh()
 
@@ -1719,7 +1727,6 @@ function clickEventListner() {
         $('#hidden_use_element').html($('#hidden_use_element #schedule_property_details_0').html())
         $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
-            console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
@@ -1731,7 +1738,23 @@ function clickEventListner() {
             let text = `<div id='schedule_property_details_${propertyIterationCount}' class="d-none">${$("#hidden_use_element").html()}</div>`
             $(`#deed_body #schedule_property_details_${propertyIterationCount}`).remove()
             $(text).insertAfter(`#deed_body #schedule_property_details_${propertyIterationCount - 1}`)
+            $(`#documentPropertySchedule_${propertyIterationCount}`).prev().remove()
+            $(`#documentPropertySchedule_${propertyIterationCount}`).remove()
         }
+        $('#hidden_use_element').html(deed_content)
+        $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0'))
+        $("#hidden_use_element [id*=_]").each(function () {
+            let changeid = this.getAttribute('id')
+            console.log(this)
+            changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
+            this.setAttribute('id', changeid)
+        })
+        console.log(`<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`)
+        let text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
+        $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
+
+
+
         $(".schedule-part input,.schedule-part select,.schedule-part textarea").val('')
         conjuctionRefresh()
     })
@@ -1742,7 +1765,8 @@ function clickEventListner() {
             console.log('clicked propr')
             let formcss = this.getAttribute('clone_id') + 'DetailsFormInput'
             let formclonecss = this.getAttribute('clone_id') + 'DetailsFormClone'
-            const clone = $("." + formcss).clone()
+            const clone = $($("." + formcss)[0]).clone()
+            console.log(clone)
             clone.removeClass(formcss).addClass(formcss + "Clone").find('textarea').val("")
             if (this.getAttribute('clone_id') == "Property") {
                 clone.removeClass('order-1').addClass('order-2')
@@ -1750,11 +1774,7 @@ function clickEventListner() {
                 const length = $(`.${formclonecss} textarea`).length
                 const label = 'Schedule ' + schedule_title[length]
                 clone.find('label').text(label);
-                clone.appendTo("." + formclonecss)
-                // const inputScheduleProp = []
-                // $(".property_details").each((index, item) => {
-                //     inputScheduleProp.push(`<option nof_id='${index}' value="${index}">Schedule ${schedule_title[index]}</option>`)
-                // })
+                clone.appendTo($("." + formclonecss).last())
             }
             else {
                 clone.appendTo("." + formclonecss)

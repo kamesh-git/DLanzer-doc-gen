@@ -889,7 +889,7 @@ function conjuctionRefresh() {
     $(`[id*=documentPropertyTypeCount_]`).each(function (index, item) {
         $(this).text(`Property No ${index + 1}`)
     })
-    if($(`[id*=documentPropertyTypeCount_]:not(.d-none)`).length>1){$(`[id*=documentPropertyTypeCount_]`).removeClass('d-none')}
+    if($(`[id*=schedule_property_details_]:not(.d-none)`).length>1){$(`[id*=documentPropertyTypeCount_]`).removeClass('d-none')}
     else{$(`[id*=documentPropertyTypeCount_]`).addClass('d-none')}
 
 }

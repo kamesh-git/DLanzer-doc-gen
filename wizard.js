@@ -685,8 +685,8 @@ function inputEventListner() {
         mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 2)[0].terms = true
         mastersData.PropertyTypes.filter(item => item.PropertyTypeID == 3)[0].terms = true
         console.log(mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0], $(`#termsnconditions_${propertyIterationCount}`))
-        if (mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0].terms) { $(`#termsnconditions_${propertyIterationCount}`).removeClass('d-none') }
-        else { $(`#termsnconditions_${propertyIterationCount}`).addClass('d-none') }
+        if (mastersData.PropertyTypes.filter(item => item.PropertyTypeID == this.value)[0].terms) { $(`#termsnconditions_${propertyIterationCount},#propTaxEbInfo_${propertyIterationCount}`).removeClass('d-none') }
+        else { $(`#termsnconditions_${propertyIterationCount},#propTaxEbInfo_${propertyIterationCount}`).addClass('d-none') }
 
     })
 
@@ -889,6 +889,8 @@ function conjuctionRefresh() {
     $(`[id*=documentPropertyTypeCount_]`).each(function (index, item) {
         $(this).text(`Property No ${index + 1}`)
     })
+    if($(`[id*=documentPropertyTypeCount_]:not(.d-none)`).length>1){$(`[id*=documentPropertyTypeCount_]`).removeClass('d-none')}
+    else{$(`[id*=documentPropertyTypeCount_]`).addClass('d-none')}
 
 }
 

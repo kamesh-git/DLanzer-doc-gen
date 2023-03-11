@@ -136,6 +136,7 @@ function tableReset() {
 
     vendorIterationCount = purchaserIterationCount = witnessIterationCount = propertyIterationCount = 0
     companyTableVendor = companyTablePurchaser = witnessTable = propertyTable = purchaserTable = vendorTable = []
+    console.log(vendorIterationCount)
     $("button[name=previous]").trigger("click")
     $("input,select,textarea").val("")
     $("select.selectpicker").html('<option val="">Select</option>').selectpicker('refresh')
@@ -393,7 +394,7 @@ function tableEventListeners() {
             witnessIterationCount = witnessTable.length
             propertyIterationCount = propertyTable.length
             // console.log(vendorTable, vendorIterationCount)
-            console.log(vendorTable)
+            console.log(purchaserTable)
             $("#inputVendorTitle").change(function () { $(`#first_person_details_${vendorIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputPurchaserTitle").change(function () { console.log($(`#second_person_details_${purchaserIterationCount}`)); $(`#second_person_details_${purchaserIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
             $("#inputWitnessTitle").change(function () { $(`#Witness_person_details_${witnessIterationCount}`).removeClass("d-none"); conjuctionRefresh() })
@@ -838,6 +839,7 @@ function selectEventListner() {
 
 
 function conjuctionRefresh() {
+    $("#hidden_use_element").html("")
     let length = 0
     $(".vendorConjuction").parent().each(function () { if (!this.classList.contains("d-none")) { length++ } })
     if (length > 1) {
@@ -872,9 +874,13 @@ function conjuctionRefresh() {
         $(".witnessConjuction").each(function (index) { this.innerHTML = '' })
     }
 
-    length = $(".propertyScheduleConjuction").length
+    length = $("[id*=documentPropertySchedule_]:not(.d-none)").length
     $(".propertyScheduleConjuction").each(function (index, item) {
-        if (length == index + 1) {
+        console.log(index,length)
+        if(index == 0){
+            $(this).html('')
+        }
+        else if (index == length-1) {
             $(this).html(' and')
         }
         else { $(this).html(',') }
@@ -1709,15 +1715,16 @@ function clickEventListner() {
 
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0'))
+        $('#hidden_use_element #documentPropertySchedule_0').addClass('d-none')
         $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
-        text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
+        text = `${$("#hidden_use_element").html()}`
         $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
-        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_0`).removeClass('d-none') })
+        $("#inputPropertyType").change(function () { $(`#schedule_property_details_${propertyIterationCount},#documentPropertySchedule_${propertyIterationCount}`).removeClass('d-none');conjuctionRefresh()})
         conjuctionRefresh()
 
 
@@ -1743,14 +1750,14 @@ function clickEventListner() {
         }
         $('#hidden_use_element').html(deed_content)
         $('#hidden_use_element').html($('#hidden_use_element #documentPropertySchedule_0'))
+        $('#hidden_use_element #documentPropertySchedule_0').addClass('d-none')
         $("#hidden_use_element [id*=_]").each(function () {
             let changeid = this.getAttribute('id')
             console.log(this)
             changeid = changeid.slice(0, changeid.indexOf('_')) + `_${propertyIterationCount}`
             this.setAttribute('id', changeid)
         })
-        console.log(`<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`)
-        let text = `<span class='propertyScheduleConjuction'></span> ${$("#hidden_use_element").html()}`
+        let text = `${$("#hidden_use_element").html()}`
         $(text).insertAfter(`#deed_body #documentPropertySchedule_${propertyIterationCount - 1}`)
 
 
